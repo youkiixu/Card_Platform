@@ -64,6 +64,7 @@
 
 </view>
 
+
 <view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
 <view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
         <view class="wux-dialog__hd">

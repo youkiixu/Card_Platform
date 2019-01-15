@@ -1,0 +1,144 @@
+<!--super_card/pages/release/release.wxml-->
+<view class='contains'>
+  <form>
+    <view class='top'>
+      <view class='top-type'>
+        <view class='type-l'>
+          <text>选择类型</text>
+          <text class='iconfont icon-jiaxing'></text>
+        </view>
+        <view class='type-r' bindtap='showTypesSelection'>
+          <input disabled='true' placeholder='选择类型' type='text' value='{{ typeKey }}' placeholder-style="color: {{ themeColor }}"></input>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </view>
+      <view class='top-tag' wx:if="{{ labels.length > 0 }}">
+        <view class='type-l'>
+          <text>选择标签</text>
+          <!--text class='iconfont icon-jiaxing'></text-->
+        </view>
+        <view class='tag-r'>
+          <checkbox-group class='free-radios' bindchange="checkChange">
+            <label wx:for="{{labels}}" wx:key="lables" class="free-radio {{item.checked?'is_checked':''}}" style="border-color:{{item.checked ? themeColor:''}};color:{{item.checked ? themeColor:''}};">
+              <checkbox value="{{item.id}}" name="{{item.label}}" 
+              checked="{{item.checked}}" hidden='true'></checkbox>
+              <label class="free-text">{{item.label}}</label>
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+    </view>
+    <view class='content'>
+      <textarea bindblur="setPostContent" bindinput="setPostContent" bindconfirm='setPostContent' adjust-position="true" class='con-t' maxlength='800' placeholder='尽可能详细描述您的需求（20 ~ 500字）' auto-height></textarea>
+      <view class='content-imgs'>
+        <view wx:for="{{ pics }}" wx:key="pics" wx:for-index="idx" class='content-img'>
+          <image mode='aspectFill' src='{{ item }}'></image>
+          <text data-index="{{ idx }}" bindtap='removePic' class='delete iconfont icon-plus'></text>
+        </view>
+        <view wx:if="{{ pics.length < 9 }}" bindtap='uploadPostPic' class='content-plus'>
+          <text class='cp-icon iconfont icon-plus'></text>
+        </view>
+      </view>
+    </view>
+
+    
+    <!-- 选择前 -->
+    <!--view class='info-choice'>
+      <view class='choice-ah' bindtap='openCardSelect'>
+        <text class='iconfont icon-plus' style='background-color:{{ themeColor }};filter:drop-shadow(0px 0px 2px {{ themeColor }});' ></text>
+        <text class='choice-ahead'>选择名片</text>
+      </view>
+    </view-->
+    <!-- 选择后 -->
+    <view wx:if="{{ card !== false }}" class='info-choice'>
+      <image  class='info-img' src='{{ card.picture }}'></image>
+      <view class='info-card'>
+        <text class='card-name'>{{ card.name }} {{ card.title }}</text>
+        <text class='card-phone'>{{ card.mobile }}</text>
+        <text class='card-company'>{{ card.company }}</text>
+      </view>
+      <!--view wx:if="{{ userCards.length > 1 }}" class='card-change' bindtap='openCardSelect'>
+        <text style="background-color:{{ themeColor }};">换个名片</text>
+      </view-->
+    </view>
+
+    
+    <view class='top-adress'>
+      <view class='top-adress-l'>
+        <text>选择位置</text>
+        <text class='top-adress-info'>{{ address }}</text>
+      </view>
+      <view bindtap='getCurrentLocation' class='top-adress-r' style='color:{{ themeColorV }};'>
+        <text class='iconfont icon-dingwei1'></text>
+        <text>定位</text>
+      </view>
+    </view>
+
+    <!-- 我要置顶 -->
+    <view class='isstick' wx:if="{{ pay_square_top == 1 }}">
+      <view>付费置顶</view>
+      <switch bindchange="topSwitch" checked="{{ top_square_checked }}" />
+    </view>
+
+
+    <view class='protocol'>
+      <checkbox-group>
+        <label class="checkbox">
+          <checkbox value="" checked="true"/>
+        </label>
+        <text class='protocol-word'>我已阅读并同意</text>
+        <text style='color:{{ themeColor }};' bindtap='toProtocolPage'>用户协议</text>
+      </checkbox-group>
+    </view>
+    <view class='btn-submit'>
+      <form report-submit='true' bindsubmit="postSquareInfo">
+      <button form-type='submit' disabled='{{ postBtnDisabled }}' class='btn-block btn-blue'  style='background:{{ themeColor }};'>发 布</button>
+      </form>
+    </view>
+  </form>
+</view>
+
+
+<!-- 发布弹出层 -->
+<view class='popup-hide' bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view class='popup-content' animation="{{animationData}}"  wx:if="{{showModalStatus}}">
+  <view class='popup-act'>
+    <block  wx:key="{{ index }}" wx:for="{{ types }}" wx:for-index="idx"  wx:for-item="item" wx:if="{{ item.id > 0 }}">
+      <view data-typeid="{{ item.id}}"  data-type="{{ item.type}}" bindtap='goReleaseInfoInterface'>{{ item.type }}</view>
+    </block>
+  </view> 
+  <view class='popup-del' bindtap="hideModal">取消</view>
+</view>
+
+
+<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
+<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">请选择名片</view>
+        </view>
+        <view class="wux-dialog__bd">
+          <scroll-view scroll-y="true">
+            <radio-group class="radio-group" bindchange="cardChange">
+              <block wx:for="{{ userCards }}" wx:key="cards">       
+                <label class="radio">
+                    <view class="info-choices {{card_id == item.id ? 'info-bg-color' : 'info-no-bg-color'}}" style="border-color:{{card_id == item.id ? themeColor : ''}};">
+                      <radio color="{{ themeColor }}" class='radio-t' value="{{ item.id }}" checked="{{card_id == item.id ? true : false}}" />
+                      <view class='info-img'>
+                        <image src="{{ item.picture }}"></image>
+                      </view>
+                      <view class='info-card'>
+                        <text class='card-name'>{{ item.name }} {{ item.title }}</text>
+                        <text class='card-phone'>{{ item.mobile }}</text>
+                        <text class='card-company'>{{ item.company }}</text>
+                      </view>
+                    </view>
+                </label>
+              </block>
+            </radio-group>
+          </scroll-view>
+        </view>
+        <view class="wux-dialog__ft">
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view>
+                <view style="color:{{ themeColor }};" class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmCardSelect">确定</view>
+        </view>
+</view>

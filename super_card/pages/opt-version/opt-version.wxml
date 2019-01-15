@@ -1,0 +1,101 @@
+<!--super_card/pages/opt-version/opt-version.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <!-- 有图片 -->
+    <image class='top-logo' src='{{ wxInfo.avatarUrl }}'></image>
+    <!-- 无图片 -->
+    <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
+    <view class='company-name'>{{ wxInfo.nickName }}</view>
+    <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
+    <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view>
+  </view>
+
+  <view class='ov-content'>
+    <radio-group>
+      <swiper class='ov-swiper' previous-margin="140rpx" next-margin="140rpx" indicator-dots="" autoplay="" current="{{ current }}" bindanimationfinish="choiceSwiper">
+        <block wx:for="{{ vipSet }}"  wx:for-index="idx"  wx:for-item="item" wx:key="{{ index }}">
+        <swiper-item>
+          <view class='act-left' wx:if="{{ idx == 0 }}">
+            <text class='iconfont icon-bhjleftslide'></text>
+            <view class='al-con'>到顶了，请往左滑</view>
+          </view>
+          <view class='act-right' wx:if="{{ radListLtngth-1 == idx }}">
+            <text class='iconfont icon-bhjrigthslide'></text>
+            <view class='ar-con'>到顶了，请往右滑</view>
+          </view>
+          <label>
+            <view  class="act-classify {{ current === idx ? 'act-classify-xz' : ''}}" style="border-color:{{ current === idx ? themeColor : '' }};">
+              <radio name="clause" disabled="" value="{{ item.id }}" checked="{{ current == idx ? 'true' : '' }}"></radio>
+              <view class='act-name'>{{ item.name }}</view>
+              <view class='buttom-info'>
+                <text>——</text>
+                <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text>
+                <text>——</text>
+              </view>
+
+              <view class='act-lm' wx:key="vipdesc" wx:for="{{ item.rules }}" wx:for-index="didx" wx:for-item="desc">
+                <view class='act-item'>○ </view>
+                <block wx:if="{{ didx == 0 }}">
+                  <view class='act-lm-con' ><text style='color:{{ themeColor }};'>{{ desc.rule_name }}</text></view>
+                </block>
+                <block wx:else>
+                  <view class='act-lm-con'>{{ desc.rule_name }}</view>
+                </block>
+              </view>
+              
+            </view>
+          </label>   
+        </swiper-item>
+
+        </block>
+      </swiper>
+    </radio-group>
+    <view class='state-clause'>
+      <checkbox-group>
+        <label>
+            <checkbox name="clause"  value="1" checked="true"></checkbox>
+            <text class='protocol'>开通即表示同意</text><text data-t="service_agreement" class='fwxy'  style='color:{{ themeColor }};' catchtap='toProPage'>服务协议</text>和<text class='fwxy' data-t="legal_declaration" catchtap='toProPage' style='color:{{ themeColor }};'>法律声明</text>
+        </label>   
+      </checkbox-group>
+    </view>
+    <view class='blank'></view>
+
+    <view class='ov-bottom'>
+      <view class='ov-b-left' bindtap='chooseTime'>
+        <view>￥{{ price }}元</view>
+        <view class='ov-b-time' style='color:{{ themeColor }};'>{{ timeYear }}年</view>
+        <text class='trans iconfont icon-jiantouarrow483' style='color:{{ themeColor }};'></text>
+      </view>
+      <form report-submit='true' bindsubmit="confirmPay">
+        <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (alreadyOpen ? '已经开通' : '立即升级') : '立即开通' }}</button>
+      </form>
+    </view>
+  </view>
+
+  <!-- 选择年限 -->
+  <view class='ov-time-bgc' bindtap="cancelTimeChoice" wx:if="{{showModalStatus}}"></view>
+  <view class='ov-time' animation="{{animationData}}" wx:if="{{showModalStatus}}">
+    <view class='ov-time-top'>
+      <view>{{ vipSet[choiceVipLevel - 1].name }}</view>
+      <icon color='rgba(0,0,0,.5)' size='18' type='clear' bindtap='cancelTimeChoice'></icon>
+    </view>
+    <view>
+      <radio-group class="radio-group" bindchange="timeChange">
+          <view class="class-r-g" wx:key="typearr" wx:for-index="tidx" wx:for="{{ time_array }}">
+              <radio id="{{item.time}}" hidden value="{{item.time}}" checked="{{item.checked}}" data-id='item.index'></radio>           
+              <label for="{{item.time}}">
+                <view class='{{item.checked?"checkedt":"normalt"}}' style="color:{{ item.checked? themeColorV : '' }};border-color:{{ item.checked ? themeColorV :'' }};">
+                  <view>{{item.time}}年</view>
+                  <view class='ov-time-price' style='color:{{item.checked ? themeColorV : themeColor }};'>￥{{item.price}}元</view>
+                </view>
+              </label>
+          </view>
+        </radio-group>
+    </view>
+    <view class='btn-ljkt' bindtap='confirmTimeChoice' style='background-color:{{ themeColor }};'>确认选择</view>
+  </view>
+
+</view>
+
+<import src="/super_card/pages/templates/iospay.wxml"/>
+<template is="iosPayWx" data="{{...iosPayDialog}}"/>

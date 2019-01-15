@@ -1,0 +1,435 @@
+<!--super_card/pages/home/home.wxml-->
+<view class='contains'>
+
+  <!-- <view class='demo' style="position:{{ ams }};">
+    <navigator url='../../pagess/partner-index/partner-index'>代理</navigator>
+    <navigator url='../../pagess/agent/agent'>代理中心</navigator>
+    <navigator url='../../pagess/agent-revenue/agent-revenue'>代理收入页面</navigator>
+    <navigator url='../opt-version/opt-version'>开通会员</navigator>
+    <navigator url='../../pagess/member-core/member-core'>会员中心</navigator>
+    <navigator url='../../pagess/team/team'>我的团队</navigator>
+    <navigator url='../../pagess/cash-details/cash-details'>提现明细</navigator>
+  </view> -->
+
+  <block wx:if="{{ isAdmin }}">
+    <form report-submit='true' bindsubmit="toAdminPage">
+      <button form-type='submit' class='ove-btn-home'>
+          <text class='iconfont icon-guanliyuan'></text>
+        </button>
+    </form>
+  </block>
+
+  <block wx:if="{{ home_page_layout == 2 }}">
+    <!-- 新样式 -->
+    <!-- 顶部 -->
+    <view class='top-bg' style='background-color:{{ themeColor }};'></view>
+    <view class='basic-info'>
+      <view class='basic-info-top'>
+        <view class='bit-top'>
+          <!-- <form report-submit='true' bindsubmit="toCertifyPage">
+            <button class='bit-top-left' form-type='submit'>
+              <view class='bt-word' style='border-color:{{ themeColor }};color:{{ themeColor }};'>认证</view>
+              <view class='bt-icon' style='border-color:{{ themeColor }};color:{{ themeColor }};'>
+                <text class='iconfont icon-xinxirenzheng'></text>
+              </view>
+            </button>
+          </form> -->
+          <!-- <view class='bit-top-centre'> -->
+            <image class='btc-img' src='{{ wxInfo.avatarUrl }}'></image>
+          <!-- </view> -->
+          <!-- <form report-submit='true' bindsubmit="toSignInPage">
+            <button class='bit-top-right' form-type='submit'>
+              <view class='bt-icon' style='border-color:{{ themeColor }};color:{{ themeColor }};'>
+                <text class='iconfont icon-qiandao'></text>
+              </view>
+              <view class='bt-word' style='border-color:{{ themeColor }};color:{{ themeColor }};'>签到</view>
+            </button>
+          </form> -->
+        </view>
+        <view class='bit-bot'>
+          <view class='bit-nv'>
+            <view class='bit-name'>{{ wxInfo.nickName }}</view>
+            <!-- 会员 -->
+            <text class="iconfont icon-huiyuan {{ uInfo.vip > 0 ? 'already-open':'' }}" bindtap="toOpenVip"></text>
+            <!-- 个人加V -->
+            <text class="iconfont personal-v {{ is_v == 1 ? 'already-open':'' }}">v</text>
+            <!-- 企业认证 -->
+            <text class="iconfont company-v {{ uInfo.is_company == 1 ? 'already-open':'' }}">企</text>
+          </view>
+          <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }} 将于 {{ uInfo.vip_last_time }} 到期</view>
+          <view class='bit-yx' bindtap='toOpenVip' wx:if="{{ uInfo.vip == 0 }}" style="color:{{ themeColor }};">开通会员 享受至尊服务</view>
+        </view>
+      </view>
+      <view class='basic-info-bot'>
+        <form class='bib-form-bor' report-submit='true' bindsubmit="createNewCard">
+          <button class='bib-act' form-type='submit'>
+            <view class='bib-act-s'>{{ card_num }}</view>
+            <view class='bib-act-w'>名片</view>
+          </button>
+        </form>
+        <form class='bib-form-bor' report-submit='true' bindsubmit="toBalancePage">
+          <button class='bib-act' form-type='submit'>
+            <view class='bib-act-s'>{{ uInfo.money }}</view>
+            <view class='bib-act-w'>余额</view>
+          </button>
+        </form>
+        <view class='bib-act' bindtap='toViewProfit'>
+          <view class='bib-act-s' style="color:{{ themeColorV }};">{{ uInfo.agent_profit }}</view>
+          <view class='bib-act-w'>收益</view>
+        </view>
+      </view>
+    </view>
+    <!-- 基本信息 -->
+    <view class='conter-info'>
+      <form report-submit='true' bindsubmit="toSignInPage">
+        <button class='center-act' form-type='submit'>
+          <text class='iconfont icon-qiandao' style='background-color:#59cbb1;'></text>
+          <view>签到</view>
+        </button>
+      </form>
+      <form report-submit='true' bindsubmit="toMyDemandPage">
+        <button form-type='submit' class='center-act'>
+          <text class='iconfont icon-gongdanliebiao' style='background-color:#00c201;'></text>
+          <view>我发布的</view>
+        </button>
+      </form>
+      <form report-submit='true' bindsubmit="toSeenCardPage">
+        <button form-type='submit' class='center-act'> 
+          <text class='iconfont icon-yanjing' style='background-color:#9245e9;'></text>
+          <view>看过的名片</view>
+        </button>
+      </form>
+      <form report-submit='true' wx:if="{{ show_comeback_option == 1 }}" bindsubmit="toReturnPage">
+        <button form-type='submit' class='center-act'>
+          <text class='iconfont icon-xianghujiaohuan' style='background-color:#89a735;'></text>
+          <view>回传记录</view>
+        </button>
+      </form>
+    </view>
+    <!-- 安全设置 -->
+    <view class='safe-info'>
+      <view class='safe-title' style='border-color:{{ themeColor }};'>高级功能</view>
+      <view class='safe-coin'>
+
+        <form class='func-bor' report-submit='true' bindsubmit="toCertifyPage">
+          <button class='safe-act' form-type='submit'>
+            <view class='safe-act-l'>
+              <text class='iconfont icon-xinxirenzheng' style='background-color:#00CED1;'></text>
+              <view class=''>认证</view>
+            </view>
+            <view class='safe-act-r'>
+              <view class='safe-act-know'>百万曝光</view>
+              <text class='iconfont icon-jiantou'></text>
+            </view>
+          </button>
+        </form>
+
+        <form class='func-bor' report-submit='true' bindsubmit='toMemPage'>
+          <button class='safe-act' form-type='submit'>
+            <view class='safe-act-l'>
+              <text class='iconfont icon-huiyuan' style='background-color:#FF69B4;'></text>
+              <view class=''>会员中心</view>
+            </view>
+            <view class='safe-act-r'>
+              <view class='safe-act-know'>{{ uInfo.vip == 0 ? '您还不是会员' : '' }}</view>
+              <text class='iconfont icon-jiantou'></text>
+            </view>
+          </button>
+        </form>
+
+        <form wx:if="{{ agent_switch == 1 }}" class='func-bor' report-submit='true' bindsubmit='toAgentCenter'>
+          <button class='safe-act' form-type='submit'>
+            <view class='safe-act-l'>
+              <text class='iconfont icon-fuzeren' style='background-color:#C28F5C;'></text>
+              <view class=''>代言人中心</view>
+            </view>
+            <view class='safe-act-r'>
+              <view class='safe-act-know'>代言赚收益</view>
+              <text class='iconfont icon-jiantou'></text>
+            </view>
+          </button>
+        </form>
+        
+      </view>
+    </view>
+    <!-- 其他功能 -->
+    <view class='safe-info'>
+      <view class='safe-title' style='border-color:{{ themeColor }};'>更多...</view>
+      <view class='safe-coin'>
+
+
+        <form report-submit='true' class='func-bor' bindsubmit="toSuggestionPage">
+          <button form-type='submit' class='safe-act'>
+            <view class='safe-act-l'>
+              <text class='iconfont icon-fankuiyijian' style='background-color:#f0613f;'></text>
+              <view>意见/建议</view>
+            </view>
+            <view class='safe-act-r'>
+              <text class='iconfont icon-jiantou'></text>
+            </view>
+          </button>
+        </form>
+        
+        <button class='safe-act func-bor' open-type='openSetting'>
+          <view class='safe-act-l'>
+            <text class='iconfont icon-shezhi' style='background-color:#f08978;'></text>
+            <view class=''>授权设置</view>
+          </view>
+          <view class='safe-act-r'>
+            <view class='safe-act-know'>体验更多精彩</view>
+            <text class='iconfont icon-jiantou'></text>
+          </view>
+        </button>
+
+        <form report-submit='true' class='func-bor' bindsubmit="toUseHelp">
+          <button form-type='submit' class='safe-act'>
+            <view class='safe-act-l'>
+              <text class='iconfont icon-question' style='background-color:#ffc600;'></text>
+              <view>使用帮助</view>
+            </view>
+            <view class='safe-act-r'>
+              <text class='iconfont icon-jiantou'></text>
+            </view>
+          </button>
+        </form>
+        <form report-submit='true' class='func-bor' bindsubmit="toAboutPage">
+          <button form-type='submit' class='safe-act'>
+            <view class='safe-act-l'>
+              <text class='iconfont icon-iconddgantanhao' style='background-color:#4785be;'></text>
+              <view>关于我们</view>
+            </view>
+            <view class='safe-act-r'>
+              <text class='iconfont icon-jiantou'></text>
+            </view>
+          </button>
+        </form>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{ home_page_layout == 1 }}">
+  <view class='card-holder'>
+    <block wx:if="{{ card_num > 0}}">
+      <!--有名片 状态 显示 -->
+      <view class='bor'>
+        <view class="vip-row">
+          <!-- <text class='row-crown iconfont icon-huiyuan' wx:if="{{ uInfo.vip > 0 }}" style="border-color:{{ themeColorV }};color:{{ themeColorV }};"></text> -->
+          <image class='img' src='{{ wxInfo.avatarUrl }}'></image>
+          <!-- <text wx:if="{{ is_v == 1 }}" style="background-color:{{ themeColorV }};" class='rz-v'>V</text> -->
+        </view>
+        <view class='card-info'>
+          <view class='card-name'>
+            <text class='card-name-nick'>{{ wxInfo.nickName }}</text>
+            <view class='card-i-top' wx:if="{{ is_audit === false }}"> 
+              <text class="row-crown iconfont icon-huiyuan {{ uInfo.vip > 0 ? 'already-open':'' }}" bindtap='toOpenVip'></text>
+              <form report-submit='true' bindsubmit="toCertifyPage">
+                <button class='bit-nv-btn' form-type='submit'>
+                  <text class="iconfont bit-nv-iconfont personal-v {{ is_v == 1 ? 'already-open':'' }}">v</text>
+                </button>
+              </form>
+              <form report-submit='true' bindsubmit="toCertifyPage">
+                <button class='bit-nv-btn' form-type='submit'>
+                  <text class="iconfont bit-nv-iconfont company-v {{ uInfo.is_company == 1 ? 'already-open':'' }}">企</text>
+                </button>
+              </form>
+              <!-- <text class='row-dltb' wx:if="{{ uInfo.vip == 0 }}" bindtap='toOpenVip'>点亮图标</text> -->
+            </view>
+          </view>
+          <text class='info'>当前有{{ card_num }}张名片</text>
+          <view class='phone' wx:if="{{ uInfo.vip > 0 }}">{{ vipSet[uInfo.vip - 1].name }}至{{ uInfo.vip_last_time }}到期</view>
+        </view>
+        <form report-submit='true' bindsubmit="createNewCard">
+        <button form-type='submit' class='found' style='background-color:{{ themeColor }};'>
+          <text>创建</text>
+          <text>第{{ (card_num + 1) }}张</text>
+          <text>名片</text>
+        </button>
+        </form>
+      </view>
+    </block>
+    <block wx:else>
+      <!--无名片 状态 隐藏 -->
+      <view class='bor'>
+        <image class='img no-card' src='{{ wxInfo.avatarUrl }}'></image>
+        <!-- <image class='img iconfont icon-fl-renyuan' style='color:#fff;font-size:150rpx;line-height:150rpx;'></image> -->
+        <view class='card-info'>
+          <text class='no-card'>您尚未创建名片</text>
+          <form report-submit='true' bindsubmit="createNewCard">
+          <button form-type='submit' class='go-card' style='background-color:{{ themeColor }};'>
+            <text>现在去创建</text>
+          </button>
+          </form>
+        </view>
+      </view>
+    </block>    
+  </view>
+
+  <view class='card-holder-bottom'> 
+    <form report-submit='true' bindsubmit="toSignInPage">
+      <button class='center-act' form-type='submit'>
+        <text class=' iconfont icon-qiandao' style='color:{{ themeColor }};font-size:50rpx;'></text>
+        <view>签到</view>
+      </button>
+    </form>
+    <form report-submit='true' bindsubmit="toMyDemandPage">
+      <button form-type='submit' class='center-act'>
+        <text class='iconfont icon-gongdanliebiao' style='color:{{ themeColor }};font-size:42rpx;'></text>
+        <view>我发布的</view>
+      </button>
+    </form>
+    <form report-submit='true' bindsubmit="toSeenCardPage">
+      <button form-type='submit' class='center-act'> 
+        <text class='iconfont icon-yanjing' style='color:{{ themeColor }};font-size:60rpx;'></text>
+        <view>看过的名片</view>
+      </button>
+    </form>
+    <form report-submit='true' wx:if="{{ show_comeback_option == 1 }}" bindsubmit="toReturnPage">
+      <button form-type='submit' class='center-act'>
+        <text class='iconfont icon-xianghujiaohuan' style='color:{{ themeColor }};font-size:50rpx;'></text>
+        <view>回传记录</view>
+      </button>
+    </form>
+  </view>
+
+  <image bindtap='toOpenVip' wx:if="{{ is_audit === false && uInfo.vip == 0 && member_entry_pic }}" class='vip-img' src='{{ member_entry_pic }}' mode='widthFix'></image>
+  <view class="piece{{ is_audit !== false || uInfo.vip > 0 || !member_entry_pic ? '' : ' piece-top' }}">
+    <!-- <form report-submit='true' bindsubmit="toSignInPage">
+      <button class='top' form-type='submit'>
+          <text class='cl b50 iconfont icon-qiandao' style='color:{{ themeColor }};'></text>
+          <text class='explain'>每日签到有奖</text>
+          <view class='trans-text'>
+            <text class='trans iconfont icon-jiantouarrow483'></text>
+          </view>
+      </button>
+    </form> -->
+    <form report-submit='true' bindsubmit="toBalancePage">
+      <button class='top' form-type='submit'>
+        <text class='cl b50 iconfont icon-yue' style='color:{{ themeColor }};'></text>
+        <text class='explain'>余额账户</text>
+        <view class='trans-text'>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </button>
+    </form>
+    <form report-submit='true' bindsubmit="toCertifyPage">
+      <button form-type='submit' class='top'>
+        <text class='cl b50 iconfont icon-xinxirenzheng' style='color:{{ themeColor }};'></text>
+        <text class='explain'>认证加V</text>
+        <text class='add-v'>提升个人名片可信度</text>
+        <view class='trans-text'>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </button>
+    </form>
+    <form report-submit='true' bindsubmit="toMemPage">
+      <button form-type='submit' class='top'>
+        <text class='cl b50 iconfont icon-huiyuan1' style='color:{{ themeColor }};'></text>
+        <text class='explain'>会员中心</text>
+        <view class='trans-text'>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </button>
+    </form>
+    <form wx:if="{{ agent_switch == 1 }}" report-submit='true' bindsubmit="toAgentCenter">
+      <button form-type='submit' class='bottom'>
+        <text class='cl b50 iconfont icon-fuzeren' style='color:{{ themeColor }};'></text>
+        <text class='explain'>代言人中心</text>
+        <text class='add-v'>代言赚收益</text>
+        <view class='trans-text'>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </button>
+    </form>
+
+  </view>
+  <!-- <view class='piece'>
+    <form report-submit='true' bindsubmit="toMyDemandPage">
+    <button form-type='submit' class='top'>
+      <text class='cl b50 iconfont icon-gongdanliebiao' style='color:{{ themeColor }};'></text>
+      <text class='explain'>我发布的</text>
+      <text class='add-v'></text>
+      <view class='trans-text'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </button>
+    </form>
+    <form report-submit='true' bindsubmit="toSeenCardPage">
+    <button form-type='submit' class="top {{show_comeback_option == 1?'':'top-no'}}">
+      <text class='cl b50 iconfont icon-yanjing' style='color:{{ themeColor }};'></text>
+      <text class='explain'>我看过的名片</text>
+      <view class='trans-text'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </button>
+    </form>
+     <form wx:if="{{ show_comeback_option == 1 }}" report-submit='true' bindsubmit="toReturnPage">
+      <button form-type='submit' class='bottom'>
+        <text class='cl b50 iconfont icon-xianghujiaohuan' style='color:{{ themeColor }};'></text>
+        <text class='explain'>回传记录</text>
+        <view class='trans-text'>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </button>
+    </form> 
+  </view> -->
+  <view class='piece'>
+    <form report-submit='true' bindsubmit="toSuggestionPage">
+      <button form-type='submit' class='top'>
+        <text class='cl b50 iconfont icon-fankuiyijian' style='color:{{ themeColor }};'></text>
+        <text class='explain'>意见/建议</text>
+        <view class='trans-text'>
+          <text class='trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </button>
+    </form>
+    <!--form report-submit='true' bindsubmit="cardTypeChange">
+    <button form-type="submit" class='top'>
+      <text class='cl b50 iconfont icon-yifupifu' style='color:{{ themeColor }};font-size:44rpx;width:50rpx;'></text>
+      <text class='explain'>风格设置</text>
+      <view class='trans-text'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </button>
+    </form-->
+    <button class='top' open-type='openSetting'>
+      <text class='cl b50 iconfont icon-shezhi' style='color:{{ themeColor }};'></text>
+      <text class='explain'>授权设置</text>
+      <view class='trans-text'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </button>
+    <form report-submit='true' bindsubmit="toUseHelp">
+    <button form-type="submit" class='top'>
+      <text class='cl b50 iconfont icon-question' style='color:{{ themeColor }};'></text>
+      <text class='explain'>使用帮助</text>
+      <view class='trans-text'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </button>
+    </form>
+    <form report-submit='true' bindsubmit="toAboutPage">
+    <button form-type="submit" class='bottom'>
+      <text class='cl b50 iconfont icon-iconddgantanhao' style='color:{{ themeColor }};'></text>
+      <text class='explain'>关于{{ app_name }}</text>
+      <view class='trans-text'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </button>
+    </form>
+  </view>
+  </block>
+
+  <view class='reminder'>
+    <text>温馨提示：</text>
+    <text>1.点击微信菜单"发现" → "小程序" 可以找到"{{ app_name }}" </text>
+    <text>2.在小程序列表中，请将本小程序"标为星标" </text>
+    <text>3.安卓用户，点屏幕右上角图标···，可将本小程序添加到桌面</text>
+  </view>
+  <!--联系我们  -->
+  <button class='touch-kf' open-type='contact'>
+    <text class='iconfont icon-kefu' style='color:{{ themeColorV }};'></text>
+    <text class='touch-word'>联系客服</text>
+  </button>
+</view>
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

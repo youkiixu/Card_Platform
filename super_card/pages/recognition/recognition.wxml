@@ -1,0 +1,104 @@
+<!--super_card/pages/recognition/recognition.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class='contains' bindtap='tapPage'>
+  <view wx:if="{{ show_btn }}" class='act' bindtap='showTakeCard'>
+       <view class='fix' style='border-color:{{ themeColor }};'>
+        <view class='take' style='background-color:{{ themeColor }};'>
+           <text class="iconfont icon-xiangji" style='font-size:60rpx;height:25px;line-height:25px;'></text>  
+          <text>拍下一张</text>
+        </view>
+      </view> 
+      <!-- <view class='fix-tg'>
+        <image src='/super_card/resource/images/pxyz.png'></image>
+      </view> -->
+  </view>
+  <view class='card-info'>
+    <view class='top'>
+      <view class='card-tion'>
+        <view>
+          <text id='card-Tips-name' bindtap='showTips' data-plate='{{ identify_data.name }}'>{{ identify_data.name }}</text>
+        </view>     
+        <text class='job' wx:if="{{ identify_data.title }}" id='card-Tips-title' bindtap='showTips' data-plate='{{ identify_data.title }}'>{{ identify_data.title }}</text>
+        <text class='company' wx:if="{{ identify_data.company }}" id='card-Tips-company' bindtap='showTips' data-plate='{{ identify_data.company }}'>{{ identify_data.company }}</text>
+      </view>
+      <view class='tips' bindtap='toggleCollectStatus'>
+        <view class='tips-img'>
+          <!-- 未收藏 -->
+          <image wx:if="{{ is_collect == false }}" class='b50 iconfont icon-xingxing1'></image>
+          <!-- 收藏 -->
+          <image wx:if="{{ is_collect == true }}" class='b50 iconfont icon-wujiaoxing'></image>
+        </view>
+        <text wx:if="{{ is_collect == false }}">未收藏</text>
+        <text wx:if="{{ is_collect == true }}">已收藏</text>
+      </view>
+      <!-- <image class='img' src='../../resource/icon/group.png'></image> -->
+    </view>
+    <view class='file' wx:if="{{ identify_data.mobile }}">
+      <view>
+        <image class='iconfont icon-shouji'></image>
+      </view>
+      <view class='info-side'><text id='card-Tips-mobile' bindtap='callMobile' bindlongpress='showTips' data-plate='{{ identify_data.mobile }}'>{{ identify_data.mobile }}</text></view>
+    </view>
+    <view class='file' wx:if="{{ identify_data.address }}">
+      <view>
+        <image class='iconfont icon-dingwei'></image>
+      </view>
+      <view class='info-side'><text id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ identify_data.address }}'>{{ identify_data.address }}</text></view>
+    </view>
+    <view class='file' wx:if="{{ identify_data.email }}">
+      <view>邮箱</view>
+      <view class='info-side'><text class='grey' id='card-Tips-email' bindtap='showTips' data-plate='{{ identify_data.email }}'>{{ identify_data.email }}</text></view>
+    </view>
+    <view class='file' wx:if="{{ identify_data.tel }}">
+      <view>
+        <image class='iconfont icon-dianhua'></image>
+      </view>
+      <view class='info-side'><text  id='card-Tips-tel' bindtap='showTips' data-plate='{{ identify_data.tel }}'>{{ identify_data.tel }}</text></view>
+    </view>
+    <view class='file' wx:if="{{ identify_data.fax }}">
+      <view>传真</view>
+      <view class='info-side'><text  id='card-Tips-fax' bindtap='showTips' data-plate='{{ identify_data.fax }}'>{{ identify_data.fax }}</text></view>
+    </view>
+    <view class='file' wx:if="{{ identify_data.www }}">
+      <view>网址</view>
+      <view class='info-side'><text class='grey' id='card-Tips-www' bindtap='showTips' data-plate='{{ identify_data.www }}'>{{ identify_data.www }}</text></view>
+    </view>
+
+  </view>
+  <view class='card'>
+    <image src='{{ identify_data.path }}'  mode="widthFix"></image>
+  </view>
+  <view class='index-menu'>
+    <view class='menu-item' bindtap='addPhoneContact'>
+      <image style="background-color:{{ themeColor }};" class='cw iconfont icon-shujudaochu'></image>
+      <text>存入手机</text>
+    </view>
+    
+    <view class='menu-item'>
+    <navigator url="../../pages/revise/revise?identify_id={{ identify_id }}">
+      <image style="background-color:{{ themeColor }};" class='cw iconfont icon-xiugai'></image>
+      <text>修改名片</text>
+    </navigator>
+    </view>
+
+    <view class='menu-item' bindtap='toggleCollectStatus'>
+      <image style="background-color:{{ themeColor }};" class='cw iconfont icon-xuxianwujiaoxing' wx:if="{{ is_collect == true }}"></image>
+      <text wx:if="{{ is_collect == true }}">取消收藏</text>
+      <image style="background-color:{{ themeColor }};" class='cw iconfont icon-xingxing1' wx:if="{{ is_collect == false }}"></image>
+      <text wx:if="{{ is_collect == false }}">收藏</text>
+    </view>
+  </view>
+
+  <!--tips  -->
+  <view wx:if="{{ showTip }}" class='top-tips' style='position:fixed;top:{{ tipTop }};left:{{ tipLeft }};'>
+    <view class='text-btn'>
+      <text bindtap='copyShare'>复制信息</text>
+      <text wx:if="{{ showTipObj }}" class='text-btn-call' bindtap='{{ showTipObj.tapFun }}'>{{ showTipObj.tapText }}</text> 
+    </view>
+    <image class='tips-bottom' src='/super_card/resource/images/tips-x.png'></image>
+  </view>
+
+</view>
+
+

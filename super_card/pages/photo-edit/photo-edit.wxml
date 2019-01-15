@@ -1,0 +1,49 @@
+<!--super_card/pages/photo-edit/photo-edit.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class='contains'>
+  <block wx:if="{{ pic_name }}">
+  <view class='title'>{{ pic_name }}</view>
+  </block>
+  <view class='content'>
+  <swiper bindchange="changePic" style="height:{{ swiperHeight }}px;" current='{{ currIndex }}'>
+    <block wx:key="{{ pic }}" wx:for-index="idx" wx:for="{{ pics }}">
+      <swiper-item>
+        <image src="{{item.path}}" data-index="{{ idx }}" class='photo' mode="widthFix" bindload="imageLoad"/>
+      </swiper-item>
+    </block>
+  </swiper>
+
+    <!--image class='photo' src='{{ pic_path }}'></image-->
+    <view class='info'>
+      <text class='sum'>{{ currIndex + 1 }}/{{ pics.length }}</text>
+      <view class='act'>
+        <navigator url="../pic-cropper/index?pic_id={{ pic_id }}&path={{ pics[currIndex].path }}">
+        <view class='cut'>
+          <icon class="iconfont icon-bianji" style='font-size:40rpx;'></icon> 
+          <text>裁剪</text>
+        </view>
+        </navigator>
+        <view class='look'>
+          <icon class="iconfont icon-yanjing" style='font-size:40rpx;'></icon> 
+          <text>0</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='btn-submit'>
+    <button class='btn-block btn-blue' bindtap='updatePicName' style='background:{{ themeColor }};'>
+      <block wx:if="{{ pic_name }}">
+        修改标题
+      </block>
+      <block wx:else>
+        添加标题
+      </block>
+      </button>
+  </view>
+  <view class='btn-submit'>
+    <button class='btn-block btn-white' bindtap='delCardPic' style='color:{{ themeColor }};border-color:{{ themeColor }};'>删除该图片</button>
+  </view>
+</view>
+

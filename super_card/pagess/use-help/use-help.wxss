@@ -1,0 +1,48 @@
+/* super_card/pages/use-help/use-help.wxss */
+page{
+  background-color: #fff;
+}
+.act{
+  padding:2rpx 30rpx;
+  letter-spacing: 2rpx;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  border-bottom: 1px solid #eaeaea;
+}
+.uh-act{
+  padding: 16rpx 0rpx;
+  display: flex;
+  align-items: center;  
+  justify-content: space-between;
+}
+.uh-name{
+  font-size: 32rpx;
+  margin-right: 20rpx;
+}
+.uh-act .iconfont{
+  color:#c9c8cd;
+  font-size:40rpx;
+  line-height: 40rpx;
+}
+
+.act-info{
+  font-size: 28rpx;
+  letter-spacing: 0rpx;
+  padding: 10rpx 0 20rpx 0;
+}
+.act-info image{
+  width: 100%;
+}
+.trans{
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+.hiden{
+  display: none !important;
+}
+.imgs-show{
+  width: 46%;
+  padding: 2%;
+  display: inline-block;
+}

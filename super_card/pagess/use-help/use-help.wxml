@@ -1,0 +1,52 @@
+<!--super_card/pages/use-help/use-help.wxml-->
+<view class='contains'>
+  
+  <view class='act' wx:for="{{ list }}" wx:for-index="ldx" wx:key="list">
+    <view class='uh-act' data-reply-Type="{{ ldx }}" bindtap='showcontent'>
+      <view class='uh-name'>{{ ldx + 1 }}.{{ item.title }}</view>
+      <text class="{{ item.show == 2 ? 'trans':'' }} iconfont icon-jiantouarrow483"></text>
+    </view>
+    <view class='act-info'  wx:if="{{ item.show == 2 }}">
+      <text style="display:block;letter-spacing: 2rpx;text-align: justify;" space="ensp" decode="true" selectable="false">{{ item.introduce }}</text>
+      <block wx:for="{{ item.pics }}" wx:key="pics" wx:for-index="pidx" wx:for-item="pic" >
+        <block wx:if="{{ item.pics.length > 1 }}">
+          <view class='imgs-show'>
+            <image bindtap="showPic" data-index="{{ ldx }}" data-pindex="{{ pidx }}" src='{{ pic }}' mode='widthFix'></image>
+          </view>
+        </block>
+        <block wx:else>
+          <image data-idx="{{ pidx }}" src='{{ pic }}' mode='widthFix'></image>
+        </block>
+      </block>
+    </view>
+  </view>
+
+  <!-- <view class='act'>	                                                                        	
+    <view class='uh-act'>
+      <view class='uh-name'>2.客户如何进入名片?</view>
+      <text class='iconfont icon-fanhui-copy'></text>
+    </view>
+    <view class='act-info hiden'>
+      客户共有三种方式进入名片：① 从销售员的名片小程序码进入
+    </view>
+  </view>
+  <view class='act'>
+    <view class='uh-act'>
+      <view class='uh-name'>3.客户如何进入名片?</view>
+      <text class='iconfont icon-fanhui-copy'></text>
+    </view>
+    <view class='act-info hiden'>
+      客户共有三种方式进入名片：① 从销售员的名片小程序码进入
+    </view>
+  </view>
+  <view class='act'>
+    <view class='uh-act'>
+      <view class='uh-name'>4.客户如何进入名片客户如何进入名片客户如何进入名片?</view>
+      <text class='iconfont icon-fanhui-copy'></text>
+    </view>
+    <view class='act-info hiden'>
+      客户共有三种方式进入名片：① 从销售员的名片小程序码进入
+    </view>
+  </view> -->
+  
+</view>

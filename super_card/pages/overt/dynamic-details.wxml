@@ -1,0 +1,25 @@
+<!--super_card/pages/dynamic-details/dynamic-details.wxml-->
+<view class='contains'>
+  <view class='dd-all'>
+    <!--view class='dd-title'>测试测试名称</view-->
+    <view class='dd-info'>
+      <view class='info-name' style='color:{{ themeColor }};'>{{ dynamic.company }}</view>
+      <view class='info-time'>{{ dynamic.create_date2 }}</view>
+    </view>
+    <view class='dd-content'>
+      <view class='con-info'>{{ dynamic.content }}</view>
+      <view class='images-zs'>
+        <image lazy-load="true" wx:key="dypics" wx:for="{{ dynamic.pics }}" src='{{ item }}' mode='widthFix'></image>
+      </view>
+    </view>
+
+    <button class='btn-share' open-type='share'>
+      <text class='iconfont icon-fenxiang1'></text>      
+    </button>
+    
+  </view>
+  <!--view class='ws-logo'>
+    <image class='ws-logo-i' src='/super_card/resource/images/con-1.jpg' mode='widthFix'></image>
+    <view class='ws-logo-link'>www.baidu.com</view>
+  </view-->
+</view>

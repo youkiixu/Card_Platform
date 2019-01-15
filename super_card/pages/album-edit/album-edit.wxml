@@ -1,0 +1,55 @@
+<!--super_card/pages/album-edit/album-edit.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class='contains'>
+  <view class='title'>
+    <view class='title-content'>
+      <text>相册标题</text>
+      <view class='entry'>
+        <block wx:if="{{ album_id == 0 }}">
+        <input type="text" maxlength='12' name="name" placeholder="0~12字符" value="{{ album_name }}" bindblur='setAlbumName'></input>
+        </block>
+        <block wx:if="{{ album_id > 0 }}">
+        <input type="text" maxlength='12' name="name" placeholder="0~12字符" value="{{ album_name }}" bindtap='updateAlbumName' disabled='true'></input>
+        </block>
+      </view>
+    </view>
+    <view class='title-img'>
+      <text class="trans iconfont icon-jiantouarrow483"></text>
+    </view>
+  </view>
+  <text class='ico'>图片<text class='color'>（最多{{ album_pic_limit }}张）</text></text>
+  <view class='pictures' style="position:relative;">
+  
+    <view class='pic' id="picArea" >  
+      <!--添加图片 已添加  -->
+       <view  wx:key="pic" wx:for="{{ pics }}" wx:for-index="idx" style="left:{{start.x}}px; top:{{start.y}}px;" data-index="{{ idx }}" data-main="{{mainx}}" bindtouchstart="moveStart" catchtouchmove="moveIng" bindtouchend="moveEnd" class="lump picList {{mainx === idx ? 'mainmove' : 'mainend'}}"  bindtap="clickPic">
+         <view class='img' wx:if="{{ item.path }}">
+          <image src='{{ item.path }}' mode='aspectFill'></image>
+          <view class='edit'>
+            <text class='iconfont icon-bianji'></text>
+          </view>
+         </view>   
+       </view> 
+
+      <!--添加图片 未添加-->
+      <view class='lump' bindtap='uploadAlbumPic'>
+        <view class='add'>
+          <text class='iconfont icon-plus'></text>
+        </view>
+      </view>
+
+
+    </view>
+  </view>
+  <text class='color'>*可按住图片拉拽，调整图片顺序</text>
+  <view class='btn-submit' wx:if="{{ album_id == 0 }}">
+    <button class='btn-block btn-blue' form-type='submit' bindtap='saveCardAlbum' style='background:{{ themeColor }};'>保 存</button>
+  </view>
+  <view class='btn-submit' wx:if="{{ album_id > 0 }}">
+    <button class='btn-block btn-white' bindtap='delCardAlbum' style='border-color:{{ themeColor }};color:{{ themeColor }};'>删除此相册</button>
+  </view>
+
+</view>
+

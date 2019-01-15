@@ -1,0 +1,164 @@
+<!--super_card/pages/holder/holder.wxml-->
+<view class='contains'>
+  <!--回传列表  -->
+  <view wx:if="{{ comebacks.length > 0 }}" class='revert-convey'>
+    <view class='revert-title'>
+      <text>回传名片</text>
+    </view>
+    <view class='revert-act'>
+      <view wx:key="comebacks" wx:for="{{ comebacks }}" bindtap='toViewComeback' data-card_id = "{{ item.card_id }}">
+        <image src='{{ item.card_info.picture }}'></image>
+        <text>{{ item.card_info.name }}</text>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='holder-top'>
+
+    <view class='holder-search-n' bindtap='setSort' data-name="name">名字</view>
+    <block wx:if="{{ sort == 'name' && sort_mode }}">
+      <text wx:if="{{ sort == 'name' && sort_mode == 'desc' }}" class="iconfont icon-iconset0413" style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }}'></text>
+      <text wx:if="{{ sort == 'name' && sort_mode == 'asc' }}" class="iconfont icon-iconset0414" style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+    </block>
+    <block wx:else>
+      <text class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;'></text>
+    </block>
+    
+    <view class='holder-search-t' bindtap='setSort' data-name="create_time">时间</view>
+    <block wx:if="{{ sort == 'create_time' && sort_mode }}">
+      <text wx:if="{{ sort == 'create_time' && sort_mode == 'desc' }}" class="iconfont icon-iconset0413" style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+      <text wx:if="{{ sort == 'create_time' && sort_mode == 'asc' }}" class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+    </block>
+    <block wx:else>
+      <text class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;'></text>
+    </block>
+    <!--点击之前的样式  -->
+    <button wx:if="{{ show_search === false }}" class='search search-front' bindtap='toggleSearchInput'>
+      <icon type="search" size="16" color='{{ themeColor }}'/>
+      <text>搜索</text>
+    </button>
+    <!--点击之后的样式  -->
+    <view wx:if="{{ show_search }}" class='search search-rear'>
+      <view style='border-color:{{ themeColor }};'>
+        <icon type="search" size="16"/>
+        <input type='search' focus="true" class='holder-search-i' bindconfirm="setSearchKey"></input>
+      </view>
+      <button bindtap='toggleSearchInput' style='color:{{ themeColor }};'>取消</button>
+    </view> 
+  </view>
+<form report-submit='true' bindsubmit="showTakeCard" class='menu-form'>
+  <button form-type='submit' wx:if="{{ identify_card_switch == 1 }}" class="act" animation='{{animationData}}'>
+    <view class='fix' style='border-color:{{ themeColor }};'>
+      <view class='take' style='background-color:{{ themeColor }};'>
+          <text class="iconfont icon-xiangji" style='font-size:60rpx;height:25px;line-height:25px;'></text>  
+        <text>拍名片</text>
+      </view>
+    </view> 
+    <!-- <view class='fix-tg'>
+      <image src='/super_card/resource/images/pmp.png'></image>
+    </view> -->
+  </button>
+</form>
+
+  <view class='cards-holder'>
+
+<!-- searchList--循环体开始-->
+<block wx:if="{{ search_key }}" wx:key="search" wx:for="{{ search_list }}" wx:for-index="idx" wx:for-item="item">
+  <block wx:if="{{ item.identify_id > 0 }}">
+  <navigator url="../../pages/recognition/recognition?identify_id={{ item.identify_id }}&hide_identify_btn=1">
+  <button class='card-holder'>
+      <view class='img-fit'>
+        <text class='text-img' wx:if="{{ !item.avatar }}">{{ item.name }}</text>
+        <image wx:if="{{ item.avatar }}" class='img' src='{{ item.avatar }}'></image>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text>{{ item.name }}</text>
+          <text>{{ item.create_date }}</text>
+        </view>
+        <text class='job'>{{ item.title }}</text>
+        <text class='company'>{{ item.company }}</text>
+      </view>
+      </button>
+    </navigator>
+    </block>
+    <block wx:else>
+    <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+    <button class='card-holder'>
+       <view class='img-fit'>
+        <image class='img' src='{{ item.avatar }}'></image>
+        <text wx:if="{{ item.is_v == 1 }}" class='rz-v' style='background-color:{{ themeColorV }};'>V</text>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text>{{ item.name }}</text>
+          <text>{{ item.create_date }}</text>
+        </view>
+        <text class='job'>{{ item.title }}</text>
+        <text class='company'>{{ item.company }}</text>
+      </view>
+    </button>
+    </navigator>
+    </block>
+</block>
+<!-- searchList--循环体结束-->    
+
+<!-- collectList--循环体开始-->
+<block wx:if="{{ !search_key }}" wx:key="collects" wx:for="{{ collect_list }}" wx:for-index="idx" wx:for-item="collect">
+
+  <block wx:if="{{ collect.identify_id  > 0 }}">
+  <navigator url="../../pages/recognition/recognition?identify_id={{ collect.identify_id }}&hide_identify_btn=1">
+  <button class='card-holder'>
+      <view class='img-fit'>
+        <text class='text-img' wx:if="{{ !collect.avatar }}">{{ collect.name }}</text>
+        <image wx:if="{{ collect.avatar }}" class='img' src='{{ collect.avatar }}'></image>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text>{{ collect.name }}</text>
+          <text>{{ collect.create_date }}</text>
+        </view>
+        <text class='job'>{{ collect.title }}</text>
+        <text class='company'>{{ collect.company }}</text>
+      </view>
+      </button>
+    </navigator>
+  </block>
+
+    <block wx:else>
+    <navigator url="../../pages/overt/overt?card_id={{ collect.card_id }}">
+     <button class='card-holder'>
+       <view class='img-fit'>
+        <image class='img' src='{{ collect.avatar }}'></image>
+        <text wx:if="{{ collect.is_v == 1 }}" class='rz-v' style='background-color:{{ themeColorV }};'>V</text>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text>{{ collect.name }}</text>
+          <text>{{ collect.create_date }}</text>
+        </view>
+        <text class='job'>{{ collect.title }}</text>
+        <text class='company'>{{ collect.company }}</text>
+      </view>
+    </button>
+    </navigator>
+    </block>
+
+</block>
+<!-- collectList--循环体结束-->
+  
+</view>
+
+<view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+  
+  <view class='reminder'>
+    <text>温馨提示：</text>
+    <text>1.点击微信菜单"发现" → "小程序" 可以找到"{{ app_name }}" </text>
+    <text>2.在小程序列表中，请将本小程序"标为星标" </text>
+    <text>3.安卓用户，点屏幕右上角图标···，可将本小程序添加到桌面</text>
+  </view>
+</view>
+
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

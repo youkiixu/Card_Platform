@@ -1,0 +1,37 @@
+<!--super_card/pages/pat-card/pat-card.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <view class='top-bg' style='background:-webkit-radial-gradient(bottom left, ellipse, #fff,{{ themeColorV }}, {{ themeColorV }});'>
+      <text class='top-t top-t-one'>仅此一拍</text>
+      <text class='top-t top-t-two'>你的人脉尽收囊中</text>
+      <view class='top-right'>
+        <text class='t-r-1'>*永久保存名片</text>
+        <text class='t-r-2'>*轻松管理人脉</text>
+        <text class='t-r-3'>*自动更新名片</text>
+        <text class='t-r-4'>*深度了解企业</text>  
+      </view> 
+    </view>
+    <view class='top-bo'>
+      <view style='background-color:{{ themeColorV }};'></view>
+    </view>
+    <image class='top-hand' mode='widthFix' src='{{ paiPic }}'></image>
+  </view>
+
+
+
+  <view class='content'>
+    <text>客户名片随身带，不再担心名片丢失</text>
+    <text></text>
+  </view>
+  <view class='coin'>
+    <view class='btn-submit'>
+    <form report-submit='true' bindsubmit="identifyCard" class='menu-form'>
+      <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>
+        <image class='pat b50 iconfont icon-xiangji'></image>
+        <text>立即拍名片</text>
+      </button>
+      </form>
+    </view>
+  </view>
+</view>
+

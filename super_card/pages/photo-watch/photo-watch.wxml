@@ -1,0 +1,35 @@
+<!--super_card/pages/photo-watch/photo-watch.wxml-->
+<view class='contains'>
+  <view class='title' wx:if="{{ pic_name }}">{{ pic_name }}</view>
+  <view class='content'>
+    <swiper bindchange="changePic" style="height:{{ swiperHeight }}px;" current='{{ currIndex }}'>
+    <block wx:key="{{ pic }}" wx:for-index="idx" wx:for="{{ pics }}">
+      <swiper-item bindtap='showBigWallpaper'>
+        <image src="{{item.path}}" data-index="{{ idx }}" class="photo {{ rotate ? 'trans-a' : '' }}" mode="widthFix" bindload="imageLoad"/>
+      </swiper-item>
+    </block>
+  </swiper>
+    <view class='info'>
+      <view class='sum'>
+          <text>{{ currIndex + 1 }}/{{ pics.length }}</text>
+          <!--image bindtap="toggleRotate" class='trans iconfont icon-xuanzhuan' style='font-size:40rpx;'></image-->
+      </view>
+      <view class='act'>
+        <view class='cut'>
+          <image class='trans iconfont icon-yanjing' style='font-size:50rpx;'></image>
+          <text>{{ pic_views }}</text>
+        </view>
+        <button open-type='share' class='look'>
+          <image class='trans iconfont icon-fenxiang' style='font-size:40rpx;margin-left:0;'></image>
+        </button>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='bottom' wx:if="{{ showBackIndex }}">
+    <view class='btn-submit'>
+      <button class='btn-block btn-white' bindtap='backIndex' style='color:{{ themeColor }};border-color:{{ themeColor }};'>返回首页</button>
+    </view>
+  </view>
+</view>

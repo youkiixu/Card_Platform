@@ -1,0 +1,110 @@
+/* super_card/pages/certify-license/certify-license.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.top{
+  margin: 20rpx;
+}
+.photo{
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  display: -webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:center;
+  margin: 80rpx 0 50rpx 0;
+}
+.bg{
+  border: 2px dashed #dadadd;
+  border-radius: 5px;
+  position: relative;
+}
+.fl{
+  position: absolute;
+  top: 65rpx;
+  left: 130rpx;
+  display:flex;
+  display: -webkit-flex;
+  border-radius: 50%;
+  overflow:hidden;
+  background-color: #00a1e9;
+  box-shadow: 0 0 3rpx 3rpx #00a1e9;
+}
+.fl .fl-img{
+  height: 80rpx;
+  width: 80rpx;
+  margin: 35rpx;
+  font-size: 80rpx;
+  line-height: 80rpx;
+}
+
+.bg image.grey{
+  width: 350rpx;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #dadadd;
+  margin: 30rpx;
+  display: flex;
+  display: -webkit-flex;
+}
+.explain{
+  display: flex;
+  display: -webkit-flex;
+  flex-flow:column;
+  -webkit-flex-flow:column;
+  margin: 10rpx 20rpx 50rpx 20rpx;
+}
+.title{
+  font-weight: 600;
+}
+.con{
+  display: flex;
+  display: -webkit-flex;
+  margin: 15rpx 0;
+  align-items:center;
+}
+.con .bg-bit{
+  background-color: #000;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+}
+.con text{
+  font-size:30rpx;
+  margin-left: 10rpx;
+  flex: 1;
+  -webkit-flex:1;
+}
+.bottom{
+  border-top: 1px solid #ccc;
+  margin: 0 20rpx 100rpx 20rpx;
+}
+.btn-submit{
+  margin:20rpx 0;
+}
+.btn-block{
+  line-height: 90rpx;
+}
+.btn-white{
+  color: #00a1e9;
+  border: 1px solid #f0f0f0;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+button[disabled][type="default"], wx-button[disabled]:not([type]) {
+  color:#fff;
+  background-color:#00a1e9;
+}
+.cler{
+  clear: both;
+}
+.btn-left{
+  width: 47%;
+  float: left;
+}
+.btn-right{
+  width: 47%;
+  float: right;
+}

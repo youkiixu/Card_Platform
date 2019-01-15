@@ -1,0 +1,184 @@
+<!--super_card/pages/edit-goods/edit-goods.wxml-->
+<view class='contains'>
+
+  <view class='banner-add'>
+    <swiper circular indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" interval="{{ interval }}" duration="{{ duration }}">
+      <block wx:key="gpic" wx:for="{{ goods_pics }}" wx:for-index="gpdx">
+        <swiper-item>
+          <image class='add-img' mode='scaleToFill' src='{{ item }}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <navigator url="../edit-page/edit-sizepic?from=goods">
+    <view class='banner-edit'>
+      <text class='iconfont icon-tupianweijihuo'></text>
+      <text class='edit-img'>编辑图片</text>
+    </view>
+    </navigator>
+    <view class='banner-tips'>商品图片尺寸推荐：750*500</view>
+  </view>
+  <view class='shop-infomation'>
+    <view class='si-act'>
+      <input class='si-name' maxlength='10' data-field="goods_name" value="{{ goods_name }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' bindinput='setGoodsInfo' placeholder='输入商品名称'></input>
+      <text class='iconfont icon-fankuiyijian'></text>
+    </view>
+    <view class='si-act'>
+      <input class='si-f-name' maxlength='30' data-field="goods_introduce"  value="{{ goods_introduce }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='输入商品副标题'></input>
+      <text class='iconfont icon-fankuiyijian'></text>
+    </view>
+    <view class='si-act'>
+      <input class='si-act-price' maxlength='10'  data-field="goods_price" style="color:{{ themeColorV }};" type='number' value="{{ goods_price }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='￥输入价格' placeholder-style="color:{{ themeColorV }};"></input>
+      <text class='iconfont icon-fankuiyijian'></text>
+    </view>
+     <view class='si-act'>
+      <input class='si-act-stock' maxlength='10' data-field="goods_stock" type='number' value="{{ goods_stock }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='输入库存'></input>
+      <text class='iconfont icon-fankuiyijian'></text>
+    </view>
+  </view>
+  <view class='buttom-info'>
+    <text>——————</text>
+    <text>商品详情</text>
+    <text>——————</text>
+  </view>
+
+
+    <view class='ed-btn'>
+      <view class='ed-tj' bindtap='jumpList' data-index="top" style='color:{{ themeColor }};border-color:{{ themeColor }};'>
+          <text class='iconfont icon-plus'></text>
+          <view>添加</view>
+      </view>
+    </view>
+
+      <!-- 标题 -->
+    <view class="pageList" wx:for="{{ pageData }}" wx:key="pagedata" wx:for-index="pdx">
+
+
+    <view wx:if="{{ item.type == 'title' }}" class='ed-title'>
+      <view class='vl' style='background-color:{{ themeColorV }};'></view>
+      <view class='title-content'>{{ item.val }}</view>
+    </view>
+
+    <!-- 文本 -->
+    <view class='ed-con' wx:if="{{ item.type == 'content' }}">
+      <text class='content-info' space="ensp" decode="true" selectable="false">{{ item.val }}</text>
+    </view>
+
+    <!-- 网格 开始 -->
+    <view wx:if="{{ item.type == 'grid_pic' }}" class="grid-pics">
+     <!--一行两张-->
+      <view class='img-small'>
+        <!--循环体 class 为 img-small -->
+        <view class='img-total'  wx:for="{{ item.val }}" wx:key="mpic" wx:for-index="mpdx" wx:for-item="pic">
+          <image bindtap='showPics' data-index="{{ mpdx }}" data-pics="{{ item.val }}" class='img-album' src='{{ pic }}' mode='aspectFill'></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 轮播 开始 -->
+    <view wx:if="{{ item.type == 'more_pic' }}">
+      <swiper class='con' indicator-dots='true' autoplay='true' interval='5000' duration='500'>
+       <swiper-item wx:for="{{ item.val }}" wx:key="mpic" wx:for-index="mpdx" wx:for-item="pic">
+          <image bindtap='showPics' data-index="{{ mpdx }}" data-pics="{{ item.val }}" src="{{ pic }}" mode='aspectFill'/>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <!-- 平铺 开始 -->
+    <view wx:if="{{ item.type == 'pic' }}" class='img-pp'>
+      <image bindtap='showPic' data-pic="{{ item.val }}" style="width:100%;" src="{{ item.val }}" mode='widthFix'/>
+    </view>
+    
+    <view class='contactus' wx:if="{{ item.type == 'card' }}">
+    <view class='ct-top'>
+      <view class='ct-l'>
+        <view class='ct-name'>{{ card.name }}</view>
+        <view class='ct-phone'>
+          <view class='ct-p'>电 话:</view>
+          <view bindtap='copyInfo' data-id="card_mobile" data-plate="{{ card.mobile }}">{{ card.mobile }}</view>
+          <view class='ct-dial' bindtap='callMobile'>联系TA</view>
+        </view>
+      </view>
+      <image class='ct-r' src='{{ card.picture }}'></image>
+    </view>
+    <view class='ct-act'>
+      <view class='ct-act-name'>公 司:</view>
+      <view class='ct-act-con' bindtap='copyInfo' data-id="card_company" data-plate="{{ card.company }}">{{ card.company }}</view>
+    </view>
+    <view class='ct-act'>
+      <view class='ct-act-name'>地 址:</view>
+      <view class='ct-act-con' bindtap='copyInfo' data-id="card_address" data-plate="{{ card.province}}{{ card.city }}{{ card.dict }}{{ card.address }}">{{ card.province}}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+    </view>
+   </view>
+
+
+    <block wx:if="{{ item.type == 'map' }}">
+      <map longitude="{{ item.val.longitude }}" markers='{{ [item.val] }}' latitude="{{ item.val.latitude }}" show-location="true" scale="16" show-location style="width: 100%; height: 300px;">
+        <cover-image class='coverimg' src='/super_card/resource/images/del.png' bindtap='delPageData' data-index="{{ pdx }}"></cover-image>
+      </map>
+    </block>
+    
+    
+    <icon class="del-icon" wx:if="{{ item.type !== 'map' }}" bindtap='delPageData' data-index="{{ pdx }}" type="clear" size="18"/>
+    <view class='ed-btn'>
+
+      <view class='ed-tj tj-repeat' data-index="{{ pdx }}" bindtap='jumpList' style='border-color:{{ themeColor }};background-color:{{ themeColor }};'>
+        <text class='iconfont icon-plus'></text>
+        <view>添加</view>
+      </view>
+
+      <view wx:if="{{ item.type != 'card' }}" data-index="{{ pdx }}" bindtap='editPageData' class='ed-tj' style='color:{{ themeColor }};border-color:{{ themeColor }};'>编辑</view>
+
+      <view class='ed-tj' data-index="{{ pdx }}" bindtap='moveList' style='color:{{ themeColor }};border-color:{{ themeColor }};'>移动</view>
+
+    </view>
+
+    </view>
+    <!-- 点击图片出现的选项 -->
+    <view class='display-mode-bot' wx:if="{{ showMode }}" bindtap='delDmb'></view>
+    <view class='display-mode' wx:if="{{ showMode }}">
+      <view class='dm-title'>图片展示方式</view>
+      <view class='dm-act' data-type="pic" bindtap='goChoicePicture'>
+        <text class='tex-img-gs pp-wg  iconfont icon-tupianweijihuo'></text>
+        <!-- <image src='/super_card/resource/images/con-2.jpg' mode='aspectFill'></image> -->
+        <view class='dm-act-pp'>
+          <view>平铺</view>
+          <view>图片纵向排列(最多1张图)</view>
+        </view>
+      </view>
+      <view class='dm-act' data-type="grid_pic" bindtap='goChoicePicture'>
+        <text class='tex-img-gs pp-wg iconfont icon-grid'></text>
+        <!-- <image src='/super_card/resource/images/con-2.jpg' mode='aspectFill'></image> -->
+        <view class='dm-act-pp'>
+          <view>网格</view>
+          <view>图片两列一行，纵向排列(最多8张图)</view>
+        </view>
+      </view>
+      <view class='dm-act' data-type="more_pic"  bindtap='goChoicePicture'>
+        <text class='tex-img-gs iconfont icon-lunboxiaoguo'></text>
+        <!-- <image src='/super_card/resource/images/con-2.jpg' mode='aspectFill'></image> -->
+        <view class='dm-act-pp'>
+          <view>轮播图</view>
+          <view>多图轮播，左右滑动(最多9张图)</view>
+        </view>
+      </view>      
+      <view class='dm-act-del' bindtap='delDmb'>取消</view>
+    </view>
+  
+
+
+  <view class='blank'></view>
+  <view class='sj-bot'>
+    <view class='sj-act' data-act="save" bindtap='saveCardGoods'>
+      <text style="color:{{ themeColorV }};" class='iconfont icon-baocun'></text>
+      <view class='sj-sm'>保存</view>
+    </view>
+    <view class='sj-act' data-act="savepush" bindtap='saveCardGoods'>
+      <text style="color:{{ themeColorV }};" class='iconfont icon-iconfontzhizuobiaozhunbduan31'></text>
+      <view class='sj-sm'>保存并上架</view>
+    </view>
+    <view class='sj-act' data-act="goon" bindtap='saveCardGoods'>
+      <text class='iconfont icon-tianjiashangpin' style='color:{{ themeColorV }};font-size:60rpx;'></text>
+      <view class='sj-sm'>继续添加商品</view>
+    </view>
+  </view>
+</view>

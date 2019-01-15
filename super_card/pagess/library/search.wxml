@@ -1,0 +1,68 @@
+<!--super_card/pagess/library/search.wxml-->
+<view class='contains'>
+
+  <view class='search-rear'>
+    <view class='search-rear-l'>
+      <icon type="search" size="16" color='{{ themeColor }}'/>
+      <input type='text' name="pic" placeholder='搜索' class='search-rear-i' focus="true"  bindfocus='focusInput' bindconfirm="confirmSearchKey" bindinput='setSearchKey' value="{{ searchKey }}"></input>
+      <icon wx:if="{{ showHistory }}" type='clear' size="20" bindtap='cancelSearch' color='{{ themeColor }}'/>
+    </view>
+  </view>
+
+  <view class='history-list' wx:if="{{ showHistory && searchHistory.length > 0 }}">
+    <view class='hi-top'>
+      <view class='hl-title'>历史搜索记录</view>
+      <view class='hl-del' bindtap='truncateHistory'>清空</view>
+    </view>
+    <view wx:key="sh" wx:for="{{ searchHistory }}" wx:for-index="hdx" data-key="{{ item }}" bindtap='chooseSearch' class='hl-list'>{{ item }}</view>
+  </view>
+
+
+  <view class='cards-holder' wx:if="{{ !showHistory }}">
+    <!--循环体  -->
+    <block wx:key="cards" wx:for="{{ cardList }}" wx:for-index="idx" wx:for-item="card">
+    <navigator url="../../pages/overt/overt?card_id={{ card.id }}">
+    <button class='card-holder' >
+      <view class='img-fit'>
+        <image class='img' src='{{ card.picture }}'></image>
+        <text wx:if="{{ card.is_v == 1 }}" class='rz-v' style='background-color:{{ themeColorV }};'>V</text>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text wx:if="{{ card.recommend == 1 }}" class='groom' style="color:{{ themeColor }};border-color:{{ themeColor }};">荐</text>
+          <text>{{card.name}}</text>
+          <view class='job'>{{card.title}}</view>
+        </view>
+        
+        <text class='company'>{{card.company}}</text>
+        <view class='card-zt'>
+          
+          <view class='card-zt-icon'>
+            <text wx:if="{{ card.store > 0 }}" style='color:#ff9593;' class='iconfont icon-icon-test1'></text>
+            <text wx:if="{{ card.dynamic > 0 }}" style='color:##ffc816;'  class='iconfont iconfont icon-pengyouquan'></text>
+            <text wx:if="{{ card.website > 0 }}" style='color:#78caf5;' class='iconfont icon-87'></text>
+          </view>
+
+          <block wx:if="{{ card.distance != 0 }}" >
+          <text class='icon-distance iconfont icon-dingwei1' style='color:{{ themeColor }};'></text>
+          <text class="distance">{{ card.distance }}km</text>
+          </block>
+
+          
+        </view>
+        
+      </view>
+      <view wx:if="{{ card.is_collect }}" class='card-collection'>
+          <view class='card-collection-img'>
+            <text class='cs iconfont icon-wujiaoxing'></text>
+          </view>
+          <text class='store'>已收藏</text>
+      </view>
+    </button>
+    </navigator>
+    </block>
+    </view>
+
+    <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+
+</view>

@@ -1,0 +1,10 @@
+<!--we7/pages/login/login.wxml-->
+
+<view  wx:if="{{canIUse}}" class='sqinfo'>
+  <icon color='' size='60' type='info'></icon>
+  <view class='sq-words'>接受授权</view>
+  <view class='sq-introduce'>为了更好地提供服务，此应用需要您的授权</view>
+  <button class='sq-btn' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录 </button>
+</view>
+
+<view wx:else>请升级微信版本</view>

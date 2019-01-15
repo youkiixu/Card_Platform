@@ -1,0 +1,292 @@
+<!--super_card/pages/square/square.wxml-->
+
+<view wx:if="{{ loadingDone === true }}" class='contains'>
+
+
+  <!-- 注：sw-info代表上下有距离 sw-pad代表无距离 -->
+  <block wx:if="{{ lbpicture.length > 0 }}">
+  <swiper class='sw-pad' circular indicator-dots="true"  autoplay="true" interval="3000" style='height:{{hei}}'>
+    <block wx:key="{{ index }}" wx:for="{{ lbpicture }}" wx:for-item="item">
+      
+      <block wx:if="{{ item.type == 2 }}">
+            <swiper-item>
+            <navigator target="miniProgram" open-type="navigate" app-id="{{ item.appid }}" path="{{ item.value }}" version="release">
+              <view class='s-i'>
+                <image mode="widthFix" class='swiper-lb' src="{{ item.pic }}"></image>
+              </view>
+              </navigator>
+            </swiper-item>
+
+        </block>
+
+        <block wx:else> 
+          <swiper-item>
+              <view data-type="{{ item.type }}" data-appid="{{ item.appid }}" data-value="{{ item.value }}" bindtap='makeLinkWork' class='s-i'>
+                <image mode="widthFix" class='swiper-lb' src="{{ item.pic }}"></image>
+              </view>
+            </swiper-item>
+        </block>
+
+    </block>
+  </swiper>
+  </block>
+  
+  <block wx:if="{{ adCode5 }}" >
+    <ad unit-id="adunit-{{ adCode5 }}"></ad>
+  </block>
+
+  <view class="notice" wx:if="{{ show_square_notice == 1 && msgList.length > 0 }}">
+    <text class="iconfont notice-s icon-xiazai41" style='color:{{ themeColor }};font-size:50rpx;line-height:50rpx;'></text>
+    <swiper class="swiper_container notice-s" vertical="true" autoplay="true" circular="true" interval="2000">
+      <block wx:for="{{msgList}}" wx:key="msg">
+        <navigator url="../../pages/spot-news/spot-news" open-type="navigate">
+          <swiper-item>
+            <view class="swiper_item">公告：{{ item.name }}/{{ item.title }} {{item.content}}</view>
+          </swiper-item>
+        </navigator>
+      </block>
+    </swiper>
+  </view>
+
+
+  <!-- 分类START -->
+  
+  <view class='top'>
+  <block wx:if="{{ typeStyle == 1 }}">
+    <!-- 头部形式变换 -->
+    <swiper class='choice-coin' indicator-dots="">
+      <swiper-item> 
+        <view class='choice-info'>
+
+          <block wx:key="{{ index }}" wx:for="{{ types }}" wx:for-index="idx" wx:for-item="item">
+            <view class='choice-act' data-current="{{ idx }}" data-id="{{ item.id }}" bindtap="switchNav">
+              <image mode="widthFix" class='choice-act-img' wx:if="{{ item.id }}" src="{{ item.icon }}"></image>
+              <view wx:if="{{ !item.id }}" class='choice-act-first' style='background-color:{{ themeColor }};'>
+                <text class='iconfont icon-liebiao'></text>
+              </view>
+              <text style="color:{{currentTab==idx ? themeColor : ''}};" class="{{ currentTab==idx ? 'active': ''}}">{{ item.type }}</text>
+            </view>
+          </block>
+
+        </view>
+      </swiper-item>
+    
+    </swiper>
+
+    <view class='top-bar'>
+      <scroll-view class='scrolls' scroll-x='true' scroll-left='{{ scrollLeft }}' >
+         
+          <view wx:for="{{ sortArr }}" wx:key="sortArr" wx:for-index="sadx" bindtap='swtichListSort' data-index="{{ sadx }}" data-skey="{{ item.skey }}" class="cure {{sort == item.skey ? 'active' : ''}}"><text style="border-bottom-color:{{sort == item.skey ? themeColor:''}};color:{{sort == item.skey ? themeColor:''}};">{{ item.txt }}</text></view>
+
+      </scroll-view>
+    </view>
+
+    </block>
+
+    <block wx:else>
+    <view class='top-bar'>
+      <view class="cure-first active" bindtap='toggleRecommendInfo'>
+        <text class='cure-first-name' style="color:{{ themeColorV }};">{{ sortArr[sortIndex].txt }}</text>
+        <text class="ic-color iconfont icon-caret-right-copy-copy" style="color:{{themeColorV}};"></text>
+      </view>
+
+      <!-- 推荐选项 -->
+      <view class='cf' wx:if="{{ recommendedDisplay === true }}">
+        <block  wx:for="{{ sortArr }}" wx:key="sortArr" wx:for-index="sadx" >
+          <text class="{{sort == item.skey ? on:''}}" data-index="{{ sadx }}" data-skey="{{ item.skey }}" bindtap='swtichListSort'>{{ item.txt }}</text>
+        </block>
+      </view>
+    
+
+      <scroll-view class='scrolls' scroll-x='true' scroll-left='{{ scrollLeft }}' >
+        <block wx:key="{{ index }}" wx:for="{{ types }}" wx:for-index="idx" wx:for-item="item">
+          <view class="cure {{currentTab==idx?'active':''}}" data-current="{{ idx }}" data-id="{{ item.id }}" bindtap="switchNav"><text  style="border-bottom-color:{{currentTab==idx ? themeColor:''}};color:{{currentTab==idx ? themeColor:''}};">{{ item.type }}</text></view>
+        </block>
+      </scroll-view>
+    </view>
+    </block>
+
+  </view>
+  <!-- 分类END -->
+ 
+  <view class='content'>
+  
+      <view class='cf-bot on' wx:if="{{ recommendedDisplay === true }}"></view>
+    <block wx:for="{{ lists }}" wx:key="lists" wx:for-index="idx">
+    <view class='act'>
+      <view class='act-top' data-index="{{ idx }}" data-sid="{{ item.id }}" bindtap='toDetailPage'>
+          <view catchtap="toCardPage" data-card_id="{{ item.card.id }}" class='act-top-info'>
+            <image class='top-img' src='{{ item.card.picture }}'></image>
+            <view class='top-info'>
+              
+              <view>
+                <text class='top-info-name'>{{ item.card.name }}</text>
+                <text class='top-info-stick' style="background:{{ themeColor }};" wx:if="{{ item.recommend == 1 }}">推荐</text>
+                <text class='top-info-stick' style="background:{{ themeColorV }};" wx:if="{{ item.top == 1 }}">置顶</text>
+              </view>
+
+              <view>{{ item.time_str }}</view>
+            </view>
+          </view>
+        <text class='top-lx' catchtap='callPhone' data-mobile="{{ item.card.mobile }}" style='border-color:{{ themeColor }};color:{{ themeColor }};'>联系TA</text>
+      </view>
+
+      <view bindtap='toDetailPage' data-index="{{ idx }}" data-sid="{{ item.id }}" class='act-content'>
+          <view><text style="color:{{ themeColor }};" wx:for="{{ item.label }}" wx:key="labels" wx:for-index="lidx" wx:for-item="label">#{{ label }}#</text> {{ item.content }}</view>
+      </view>
+
+      <view class='act-icon-imgs'>
+        <block wx:for="{{ item.pics }}" wx:key="pics" wx:for-index="pidx" wx:for-item="pic" wx:if="{{ pidx < 3 }}">
+          <view class='act-icon-img'>
+            <image bindtap='previewImage' data-sid="{{ item.id }}" data-idx="{{ pidx }}" mode='aspectFill' src='{{ pic }}'></image>
+             <view wx:if="{{ item.pics.length > 2 && pidx == 2  }}" bindtap='toDetailPage' data-index="{{ idx }}"  data-sid="{{ item.id }}" class='aii-sum'>
+                <text>+{{ item.pics.length - pidx }}</text>
+             </view>
+          </view>
+        </block>
+      </view>
+      <!-- 地址 -->
+      <view class='act-address' wx:if="{{ item.address }}">
+        <text class='iconfont icon-dingwei1' style="color:{{ themeColorV }};"></text>
+        <view>{{ item.address }}</view>
+      </view>
+      <!-- 浏览 分享 发布时间 更多 -->
+      <view class='more-info'>
+        <view class='more-info-l'>{{ item.views }}浏览，{{ item.likes }}赞，{{ item.commentss }}评论</view>
+
+        <text data-index="{{ idx }}" data-id="{{ item.id }}" bindtap='toggleZan' class='iconfont icon-yipinglun' style='font-size:34rpx;line-height:34rpx;color:#999999;'></text>
+        <view class='pos-zpf' wx:if="{{ item.showzan === true }}">
+          <view data-index="{{ idx }}" data-id="{{ item.id }}" class='pos-zpf-act' bindtap='zanSquare'>
+            <text class='iconfont icon-xinheart281'></text>
+            <text>赞</text>
+          </view>
+          <button data-index="{{ idx }}" data-id="{{ item.id }}" class='pos-zpf-act' open-type='share'>
+            <text class='iconfont icon-fenxiang'></text>
+            <text>分享</text>
+          </button>
+          <view data-index="{{ idx }}" data-id="{{ item.id }}" class='pos-zpf-act' bindtap='togglePingModal'>
+            <text class='iconfont icon-xiaoxi' style='font-size:36rpx;line-height:34rpx;'></text>
+            <text>评论</text>
+          </view>
+        </view>
+        
+      </view>
+      <!-- 点赞人 -->
+      <view class='spot-laud' wx:if="{{ item.zans.length > 0 }}">
+        <text class='iconfont icon-xinheart281' style='font-size:30rpx;line-height:40rpx;font-weight:bold;color:{{ themeColorV }};'></text>
+        <view class='spot-laud-name'>
+          <block wx:for="{{ item.zans }}" wx:key="zankey" wx:for-item="zans">
+            {{ zans.nickname }}，
+          </block>
+        </view>
+      </view>
+
+      <!-- 聊天记录 -->
+      <view class='chat-record' wx:if="{{ item.comments.length > 0 }}">
+        <view class='chat-record-act' wx:for="{{ item.comments }}" wx:key="commdx" wx:for-item="comments">
+          <text class='chat-record-name' style='color:{{ themeColor }};'>{{ comments.nickname }}</text>
+          <text class='chat-record-coin'>：{{ comments.comment }}</text>
+        </view>
+        <!--view class='chat-record-act'>
+          <text class='chat-record-name' style='color:{{ themeColor }};'>姓名</text>
+          <text class='chat-record-reply'>回复</text>
+          <text class='chat-record-name' style='color:{{ themeColor }};'>姓名</text>
+          <text class='chat-record-coin'>:测试测试测试测试测试测试测试测试测试测试测试测试测试测试</text>
+        </view-->
+        <view bindtap='toDetailPage' data-index="{{ idx }}"  data-sid="{{ item.id }}" class='chat-record-more'>更多</view>
+      </view>
+    </view>
+    <block wx:if="{{ ((idx + 1) % 10) == 0 && adCode6 }}" >
+       <ad unit-id="adunit-{{ adCode6 }}"></ad>
+    </block>
+    </block>
+
+  </view>
+  <view class='buttom-info'>
+    <text>————</text>
+    <text>我也是有底线的</text>
+    <text>————</text>
+  </view>
+
+  <view class='btn-re'>
+    <view class='btn-release'>
+        <form report-submit='true' bindsubmit="toPostPage">
+        <button form-type='submit' class='b-r-l'>
+          <view class='b-r-c'>
+            <text class='iconfont icon-plus'></text>
+            <text class='release'>发布</text>
+          </view>
+        </button>
+        </form>
+    </view>
+  </view>
+  
+</view>
+
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>
+
+
+
+
+<!-- 评论窗口 -->
+<!-- <view class='fixed-pl'>
+  <input placeholder='请输入评论内容'></input>
+  <text class='pl-send-out'>发送</text>
+</view> -->
+<view class='pl' wx:if="{{ showCommentsModal === true }}">   
+  <view class='pl-wicket'>
+    <view class='pl-top'>
+      <view class='pl-name'>评论：{{ pingName }}</view>
+      <textarea adjust-position="true" maxlength='100' class='pl-content' bindinput="setCommentsContent" value="{{ commentsContent }}" placeholder='请输入评论内容(最多100字)'></textarea>
+    </view>
+    <view class='pl-bot'>
+      <button bindtap='togglePingModal' class='btn-pl'>取消</button>
+      <button bindtap='pingSquare' class='btn-pl' style='color:{{ themeColor }};'>提交</button>
+    </view>
+  </view>
+</view>
+
+<!-- 发布弹出层 -->
+<view class='popup-hide' bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view class='popup-content' animation="{{animationData}}"  wx:if="{{showModalStatus}}">
+  <view class='popup-act'>
+    <block  wx:key="{{ index }}" wx:for="{{ types }}" wx:for-index="idx"  wx:for-item="item" wx:if="{{ item.id > 0 }}">
+      <view data-typeid="{{ item.id }}" bindtap='goReleaseInfoInterface'>{{ item.type }}</view>
+    </block>
+  </view> 
+  <view class='popup-del' bindtap="hideModal">取消</view>
+</view>
+
+
+<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
+<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">请选择名片</view>
+        </view>
+        <view class="wux-dialog__bd">
+          <scroll-view scroll-y="true">
+            <radio-group class="radio-group" bindchange="cardChange">
+              <block wx:for="{{ user_cards }}" wx:key="cards">       
+                <label class="radio">
+                    <view class="info-choices {{card_id == item.id ? 'info-bg-color' : 'info-no-bg-color'}}" style="border-color:{{card_id == item.id ? themeColor : ''}};">
+                      <radio color="{{ themeColor }}" class='radio-t' value="{{ item.id }}" checked="{{card_id == item.id ? true : false}}" />
+                      <view class='info-img'>
+                        <image src="{{ item.picture }}"></image>
+                      </view>
+                      <view class='info-card'>
+                        <text class='card-name'>{{ item.name }} {{ item.title }}</text>
+                        <text class='card-phone'>{{ item.mobile }}</text>
+                        <text class='card-company'>{{ item.company }}</text>
+                      </view>
+                    </view>
+                </label>
+              </block>
+            </radio-group>
+          </scroll-view>
+        </view>
+        <view class="wux-dialog__ft">
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view>
+                <view style="color:{{ themeColor }};" class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmCardSelect">确定</view>
+        </view>
+</view>

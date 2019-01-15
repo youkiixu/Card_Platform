@@ -1,0 +1,76 @@
+<!--super_card/pages/issue-dynamic/manage-dynamic.wxml-->
+<view class='contains'>
+
+  <view class='dy'>   
+    <view class='dy-info' wx:for="{{ dyList }}" wx:key="dylist" wx:for-index="dydx" wx:for-item="dy">
+      <image class='dy-info-img' src='{{ dy.avatar }}'></image>
+      <view class='dy-ir'>
+        <view class='dy-ilt'>
+          <view class='dy-com'>
+            <view class='dy-company-name' style='color:{{ themeColor }};'>{{ dy.company }}</view>
+            <view class='dy-company'>公司</view>  
+          </view>
+          <button class='dy-share' bindtap='delDynamic' data-index="{{dydx}}" data-id="{{dy.id}}">删除动态</button>      
+        </view>
+          <view class='dy-content'>
+            <!-- 单张 -->
+            <view class='img-alone' wx:if="{{ dy.pics.length == 1 && dy.pics[0] != ''}}">
+              <image class='dy-con-img' wx:key="dyPics" wx:for="{{ dy.pics }}" wx:for-index="dypdx" wx:for-item="pic" src='{{ pic }}' mode='widthFix'  data-index="{{dydx}}" data-pic_id='{{ dypdx }}' bindtap='showDynamicPics'></image>
+            </view>            
+            <!-- 多张 -->
+            <view class='img-many' wx:if="{{ dy.pics.length > 1 }}">
+              <image class='dy-con-img' wx:key="dyPics" wx:for="{{ dy.pics }}" wx:for-index="dypdx" wx:for-item="pic" src='{{ pic }}' mode='aspectFill'   data-index="{{dydx}}" data-pic_id='{{ dypdx }}' bindtap='showDynamicPics'></image>
+            </view>
+            <text class='dy-con-in'>{{ dy.content }}</text>
+            <text class='sjx'></text>
+          </view>
+        <!-- </navigator> -->
+        <view class='dy-ckxq'>
+          <view class='dy-ckxq-l'>
+            <view class='dy-ckxq-con'>
+              <view class='dy-ckxq-time'>{{ dy.create_date }}</view>
+            </view>
+          </view>
+        </view>
+        <view class='dy-laud' wx:if="{{ dy.zan_data.length > 0 || dy.comments_data.length > 0 }}">
+          <view class='dy-zan' wx:if="{{ dy.zan_data.length > 0 }}">
+            <text class='dy-xin iconfont icon-xinheart281' style='color:{{ themeColor }};'></text>
+            <text wx:key="zanData" wx:for="{{ dy.zan_data }}" style='color:{{ themeColor }};'>{{ item }} , </text>
+          </view>
+          <view class="dy-pz-line" wx:if="{{ dy.zan_data.length > 0 && dy.comments_data.length > 0 }}"></view>
+          <view class='dy-pl' wx:if="{{ dy.comments_data.length > 0 }}">
+            <view class='dy-pl-list' wx:key="commentsData" wx:for="{{ dy.comments_data }}" wx:for-index="coda">
+              <view>
+                <text class='dy-pl-name' style='color:{{ themeColor }};'>{{ item.uname }}：</text>
+                <text class='dy-pl-content'>{{ item.content }}</text>
+                <text class='del-icon' data-index="{{dydx}}" data-coda='{{ coda }}' data-id="{{dy.id}}" bindtap='delComment'>删除</text>
+              </view>
+              <!-- <icon class="del-icon" data-index="{{dydx}}" data-coda='{{ coda }}' data-id="{{dy.id}}" type="clear" size="14" bindtap='delComment'/> -->
+            </view>
+          </view>
+          <text class='sjx'></text>
+        </view>
+      </view>
+    </view>
+
+
+    <view class='buttom-info'>
+      <text>————</text>
+      <text>没有更多数据了</text>
+      <text>————</text>
+    </view>
+  </view>
+
+  <view class='btn-re'>
+    <view class='btn-release'>
+      <navigator url="../../pages/issue-dynamic/issue-dynamic?card_id={{ card_id }}">
+        <button form-type='submit' class='b-r-l'>
+          <view class='b-r-c'>
+            <text class='iconfont icon-bianji'></text>
+          </view>
+        </button>
+      </navigator>
+    </view>
+  </view>
+
+</view>

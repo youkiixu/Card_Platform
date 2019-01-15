@@ -1,0 +1,19 @@
+<template name="footerWx">
+  <view wx:if="{{ list }}" style="width:100%;height:130rpx;"></view>
+  <view wx:if="{{list}}" class="we7-bottom" style="background-color:{{backgroundColor}};border-color:{{boderStyle}}">
+    <block wx:for="{{list}}" wx:key="{{index}}">
+      <view class="we7-bottom-item" wx:if="{{item.pageUrl == ('/' + thisurl)}}" hover-class="active">
+        <navigator url="{{item.pagePath}}" open-type="{{ item.redirect === true ? 'navigate' : 'switchTab' }}" hover-class="active">
+          <image src="{{item.selectedIconPath}}"  class="item-img"></image>
+          <view class="item-text" style="color: {{selectedColor}};">{{item.text}}</view>
+        </navigator>
+      </view>
+      <view class="we7-bottom-item" wx:else hover-class="active">
+        <navigator url="{{item.pagePath}}" open-type="{{ item.redirect === true ? 'navigate' : 'switchTab' }}" hover-class="active">
+          <image src="{{item.iconPath}}" class="item-img"></image>
+          <view class="item-text" style="color: {{color}}">{{item.text}}</view>
+        </navigator>
+      </view>
+    </block>
+  </view>
+</template>

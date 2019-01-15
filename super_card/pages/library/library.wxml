@@ -1,0 +1,204 @@
+<!--super_card/pages/library/library.wxml-->
+<import src="../../components/picker-city/picker-city.wxml"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+
+<import src="../../components/picker/picker.wxml"/>
+<template is="picker" data="{{ ...$wux.picker.industryList }}"/>
+
+<view class='contains' wx:if="{{ loadDone }}">
+
+  <block wx:if="{{ lbpicture.length > 0 }}">
+    <swiper class='sw-pad' circular indicator-dots=""  autoplay="true" interval="3000" style='height:{{hei}}'>
+      <block wx:key="{{ index }}" wx:for="{{ lbpicture }}" wx:for-item="item">
+        
+        <block wx:if="{{ item.type == 2 }}">
+              <swiper-item>
+              <navigator target="miniProgram" open-type="navigate" app-id="{{ item.appid }}" path="{{ item.value }}" version="release">
+                <view class='s-i'>
+                  <image mode="widthFix" class='swiper-lb' src="{{ item.pic }}"></image>
+                </view>
+                </navigator>
+              </swiper-item>
+          </block>
+
+          <block wx:else> 
+            <swiper-item>
+                <view data-type="{{ item.type }}" data-appid="{{ item.appid }}" data-value="{{ item.value }}" bindtap='makeLinkWork' class='s-i'>
+                  <image mode="widthFix" class='swiper-lb' src="{{ item.pic }}"></image>
+                </view>
+              </swiper-item>
+          </block>
+
+      </block>
+    </swiper>
+  </block>
+
+  <view class="notice" wx:if="{{ noticeList.length > 0 }}">
+    <text class="iconfont notice-s icon-xiazai41" style='color:{{ themeColor }};font-size:50rpx;line-height:50rpx;'></text>
+    <swiper class="swiper_container notice-s" vertical="true" autoplay="true" circular="true" interval="2000">
+      <block wx:for="{{noticeList}}" wx:key="msg">
+        <navigator url="../../pages/spot-news/spot-news" open-type="navigate">
+          <swiper-item>
+            <view class="swiper_item">公告：{{ item.name }}/{{ item.title }} {{item.content}}</view>
+          </swiper-item>
+        </navigator>
+      </block>
+    </swiper>
+  </view>
+
+  <block wx:if="{{ adCode2 }}" >
+    <ad unit-id="adunit-{{ adCode2 }}"></ad>
+  </block>
+
+  <block wx:if="{{ filter_style == false || filter_style == 2 }}">
+  <view class='sticky-in-relative-container' style="font-size:28rpx;" bindtap='toSearchPage'>
+      <view class='pd-lg open-nude'>
+        <view class='open-nude-info'>
+          <icon class='oni-l' type="search" size="16" color='{{ themeColor }}'/>
+          <view class='oni-r'>搜索</view>
+        </view>
+      </view>
+  </view>
+  <swiper class='choice-coin' indicator-dots="false">
+
+      <block wx:key="index" wx:for="{{ industryLists }}" wx:for-index="idx" wx:for-item="items">
+        <swiper-item> 
+          <view class='choice-info'>
+            <block wx:key="{{ index }}" wx:for="{{ items }}" wx:for-index="idx" wx:for-item="item">
+              <view class='choice-act' data-val="{{ item.name }}" bindtap='toFilterPage' data-current="{{ idx }}" data-id="{{ item.id }}" wx:if="{{  idx<10 }}">
+                <block wx:if="{{ item.icon }}">
+                  <image mode="widthFix" class='choice-act-img' wx:if="{{ item.id }}" src="{{ item.icon }}"></image>
+                </block>
+                <block wx:else>
+                  <view class='choice-act-title cabg-color{{ idx }}' style='background-color:{{ themeColor }};'>{{ item.name }}</view>
+                </block>
+                <view wx:if="{{ !item.id }}" class='choice-act-first' style='background-color:{{ themeColor }};'>
+                  <text class='iconfont icon-liebiao'></text>
+                </view>
+                <text>{{ item.name }}</text>
+              </view>
+            </block>
+          </view>
+        </swiper-item>
+      </block>
+
+  </swiper>
+
+  <view class="tab-blank" wx:if="{{ tabfixed == 'tab-fixed' }}"></view>
+  <view class="{{ tabfixed }}">
+  <view class="weui-tab">
+    <view class="weui-navbar" style="border-bottom:{{ tabfixed == 'tab-fixed' ? '1rpx solid #ccc' : 'none' }};">
+        <block wx:for="{{tabs}}" wx:key="ordertabs">
+            <view id="{{index}}" class="weui-navbar__item" bindtap="tabClick">
+              <view class="weui-navbar__title" style="color:{{ activeIndex == index ? themeColor : '' }};">{{item.name}}</view>
+            </view>
+        </block>
+        <view class="weui-navbar__slider" style="width:{{ sliderWidth }}px;background:{{ themeColor }};left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+  </view>
+  </view>
+  </block>
+
+  <block wx:if="{{ filter_style == 1 }}">
+  <view class='holder-top'>
+  
+    <view class='elect' bindtap='showRegionPicker'>
+      <view class='holder-search-n'>{{ regionText }} <text class='iconfont icon-jiantouarrow483'></text></view>
+    </view>
+    <view wx:if="{{ !showSearchInput }}" bindtap='toggleSearchInput' class='search search-front'>
+      <icon type="search" size="16" color='{{ themeColor }}'/>
+      <text>搜索</text>
+    </view>
+    <view wx:if="{{ showSearchInput }}" class='search search-rear'>
+      <view style='border-color:{{ themeColor }};'>
+        <icon type="search" size="16"/>
+        <input type='text'name="pic" focus='true' confirm-type="search" class='holder-search-i' bindconfirm="confirmSearchKey" bindinput='setSearchKey'></input>
+      </view>
+      <text bindtap='toggleSearchInput' style='color:{{ themeColor }};'>取消</text>
+    </view>
+  </view>
+  <view class='holder-top bot'>
+    <view bindtap='showIndustryPick'>
+      <view class='holder-search-n'>{{ industryText }} <text class='iconfont icon-jiantouarrow483'></text></view>
+    </view>
+    <view class='choice'>
+      <radio-group class="radio-group" bindchange="radiogroupBindchange">
+        <view class="radio-view">
+            <label class="radio"><radio checked="{{ sort == 'recommend' ? true : false }}" color="{{ themeColor }}" value="recommend"/>推荐</label>
+            <label class="radio"><radio checked="{{ sort == 'views' ? true : false }}" value="views" color="{{ themeColor }}"/>人气</label>
+            <label class="radio" wx:if="{{ showDistanceSort === true }}"><radio checked="{{ sort == 'distance' ? true : false }}"  color="{{ themeColor }}" value="distance"/>附近</label>
+            <label class="radio"><radio checked="{{ sort == 'create_time' ? true : false }}" color="{{ themeColor }}" value="create_time"/>时间</label>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+  </block>
+  
+
+  <view class='cards-holder'>
+    <!--循环体  -->
+    <block wx:key="cards" wx:for="{{ cardList }}" wx:for-index="idx" wx:for-item="card">
+    <navigator url="../../pages/overt/overt?card_id={{ card.id }}">
+    <button class='card-holder' >
+      <view class='img-fit'>
+        <image class='img' src='{{ card.picture }}'></image>
+        <text wx:if="{{ card.is_v == 1 }}" class='rz-v' style='background-color:{{ themeColorV }};'>V</text>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text wx:if="{{ card.recommend == 1 }}" class='groom' style="color:{{ themeColor }};border-color:{{ themeColor }};">荐</text>
+          <text>{{card.name}}</text>
+          <view class='job'>{{card.title}}</view>
+        </view>
+        
+        <text class='company'>{{card.company}}</text>
+        <view class='card-zt'>
+          
+          <view class='card-zt-icon'>
+            <text wx:if="{{ card.store > 0 }}" style='color:#ff9593;' class='iconfont icon-icon-test1'></text>
+            <text wx:if="{{ card.dynamic > 0 }}" style='color:##ffc816;'  class='iconfont iconfont icon-pengyouquan'></text>
+            <text wx:if="{{ card.website > 0 }}" style='color:#78caf5;' class='iconfont icon-87'></text>
+          </view>
+
+          <block wx:if="{{ card.distance != 0 }}" >
+          <text class='icon-distance iconfont icon-dingwei1' style='color:{{ themeColor }};'></text>
+          <text class="distance">{{ card.distance }}km</text>
+          </block>
+
+          
+        </view>
+        
+      </view>
+      <view wx:if="{{ card.is_collect }}" class='card-collection'>
+          <view class='card-collection-img'>
+            <text class='cs iconfont icon-wujiaoxing'></text>
+          </view>
+          <text class='store'>已收藏</text>
+      </view>
+    </button>
+    </navigator>
+    <block wx:if="{{ ((idx + 1) % 10) == 0 && adCode3 }}" >
+      <ad unit-id="adunit-{{ adCode3 }}"></ad>
+    </block>
+    </block>
+    
+
+   <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+    
+
+    <form report-submit='true' wx:if="{{ showCreateBtn === true }}" bindsubmit="toCreateCard">
+      <button class='icon-creation-prompts' form-type='submit'>
+        <image class='creation-prompts-img iconfont icon-plus'></image>
+      </button>
+    </form>
+
+    <view class='guide' wx:if="{{ showCreateBtn === true && guideHide == false }}" bindtap='goChcangeGuide'>
+      <view class='guide-info'>点此创建名片</view>
+      <image class='guide-img' mode='widthFix' src='/super_card/resource/images/go.png'></image>
+    </view>
+  </view>
+
+</view>
+
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

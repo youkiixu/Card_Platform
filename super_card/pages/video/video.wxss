@@ -1,0 +1,145 @@
+/* super_card/pages/video/video.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.content{
+  margin: 40rpx 0;
+  background-color: #fff;
+  text-align: center;
+  padding: 50rpx 0;
+}
+.video image{
+  width: 100rpx;
+  height: 100rpx;
+  font-size: 80rpx;
+  line-height: 100rpx;
+  color:#999999;
+}
+.video-bg{
+  height:225px;
+  background:black;
+}
+.video2{
+  width: 100%;
+}
+
+.up{
+  color:#999999;
+  font-size: 34rpx;
+  display: block;
+  padding-top: 20rpx;
+}
+.info{
+  color:#999999;
+  font-size: 28rpx;
+  display: block;
+}
+
+.title2{
+  text-align:center;
+  height:100rpx;
+  font-weight:600;
+  line-height: 100rpx;
+  background-color: #fff;
+}
+
+.title{
+  display: flex;
+  display: -webkit-flex;
+  padding: 0 20rpx;
+  margin: 40rpx 0;
+  background-color: #fff;
+}
+.title input{
+  flex:1;
+  -webkit-flex:1;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.btn-submit{
+  margin:40rpx 20rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+.btn-white{
+  color: #00a1e9;
+  border: 1px solid #00a1e9;
+}
+
+.record-option{
+  height: 100rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
+.record-option view{
+  flex: 1;
+  -webkit-flex: 1;
+  margin:0 50rpx;
+  display:flex;
+  display:-webkit-flex;
+  height:70%;
+  align-items:center;
+  justify-content: center;
+  -webkit-align-items:center;
+  -webkit-justify-content: center;
+  border-bottom:2px solid #f5f5f5;
+}
+.record-option .active{
+  color: #f90;
+  border-bottom:2px solid #f90;
+}
+
+
+.branchinfo{
+  display: flex;
+  display: -webkit-flex;
+  padding: 0 20rpx;
+  background-color:#fff;
+  border-top:1px solid #e4e4e4;
+  border-bottom:1px solid #e4e4e4;
+}
+
+.branchinfo text{
+  flex: 1;
+  -webkit-flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.branchinfo input{
+  flex: 3;
+  -webkit-flex: 3;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-right: 20rpx;
+}
+.link-video{
+  display: flex;
+  display: -webkit-flex;
+  padding: 0 20rpx;
+  background-color:#fff;
+  border-top:1px solid #e4e4e4;
+  border-bottom:1px solid #e4e4e4;
+  margin-top: 30rpx;
+}
+.link-video input{
+  flex: 1;
+  -webkit-flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.link-video-textarea{
+  width:100%;
+  font-size:28rpx;
+}

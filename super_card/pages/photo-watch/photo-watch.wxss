@@ -1,0 +1,80 @@
+/* super_card/pages/photo-watch/photo-watch.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.title{
+  text-align:center;
+  height:100rpx;
+  font-weight:600;
+  line-height: 100rpx;
+  background-color: #fff;
+}
+.photo{
+  width: 100%;
+  background-color: #00a1e9;
+  display: flex;
+  display:-webkit-flex;
+}
+.info{
+  display: flex;
+  display: -webkit-flex;
+  padding: 0 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #949494;
+  border-bottom: 1px solid #dfdfdf;
+}
+.info image{
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align:text-top;
+  line-height:50rpx;
+}
+.sum{
+  letter-spacing: 8rpx;
+  flex: 1;
+  -webkit-flex: 1;
+}
+.act{
+  display: flex;
+  align-items:center;
+  display: -webkit-flex;
+  -webkit-align-items:center;
+}
+.act text{
+  padding-left: 10rpx;
+}
+.look{
+  /* padding-left: 50rpx; */
+  background-color:inherit;
+} 
+.trans{
+  margin-left: 30rpx;
+}
+.trans-a{
+  transform:rotate(90deg);
+}
+
+button.look{
+  color:#949494;
+  padding-right: 0;
+}
+button.look::after{
+  border: 0;
+}
+
+.bottom{
+  margin: 20rpx;
+}
+.btn-submit{
+  margin:20rpx 0;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:50rpx;
+}
+.btn-white{
+  background: #fff;
+  color: #00a1e9;
+  border: 1px solid #00a1e9;
+}

@@ -1,0 +1,21 @@
+<!--super_card/pages/test/test.wxml-->
+<!--canvas class="canvas" canvas-id="radarcanvas" disable-scroll="false" /-->
+<view class="contains" style="height:{{ radarBgH }}px;">
+  <view class='top'>
+    <text class='top-img iconfont icon-user-star'></text>
+    <view>在线客源
+        <text class="people-num" style="color:yellow;font-weight:bold;font-size:22px;"> 186598人</text>
+    </view>
+  </view>
+  <view class="radar">
+    <image src='{{ userWxInfo.avatarUrl }}'></image>
+  </view>
+  <view class='btn'>
+    <view>
+      <text class='btn-submit' style='background-color:{{ themeColor }};'>我的名片</text>
+    </view>
+    <view>
+      <text class='btn-submit' style='background-color:{{ themeColor }};'>转发追踪</text>
+    </view>    
+  </view>
+</view>

@@ -1,0 +1,69 @@
+<!--super_card/pages/partner-index/partner-index.wxml-->
+<view class='contains'>
+
+  <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
+    <button form-type='submit' class='ove-btn'>
+      <text class='iconfont icon-daohangshouye' style='color:#4752e8;'></text>
+    </button>
+  </form>
+
+
+
+  <view class='par-top-hb' wx:if="{{ poster }}">
+    <view class='hb-info'>{{ app_name }}代理功能介绍海报，请点击查看！</view>
+    <view class='hb-sc' bindtap='viewPoster'>查看海报</view>
+  </view>
+
+  <view wx:if="{{ open_pic }}" bindtap='{{ poster ? "viewPoster" : "" }}' class='holiday-wishes-img'>
+    <image mode='widthFix' src='{{ open_pic }}'></image>
+  </view>
+
+  <view wx:key="agents" wx:for="{{ agents }}" wx:for-index="adx" class='partner-act'>
+    <view class='partner-top'>
+      <view class='partner-left'>
+        <text wx:if="{{ !item.pic }}" class='iconv iconv-c{{ item.id }} iconfont icon-v{{ item.id }}'></text>
+        <image wx:if="{{ item.pic }}" src="{{ item.pic }}" class="iconv-img"></image>
+        <view>{{ item.name }}</view>
+        <text wx:if="{{ item.agent_explain }}" data-index="{{ adx }}" bindtap='showAgentIntro' class='iconwh iconfont icon-question'></text>
+      </view>
+      <view class='partner-right'>
+        <view class='partner-price'>
+          <view class='partner-price-now'>￥{{ item.price }}</view>
+          <view class='partner-price-del'>原价{{ item.original_price }}</view>
+        </view>
+
+        <block wx:if="{{ currentAgent == 0 }}">
+          <form report-submit='true' bindsubmit="openAgent">
+            <button class='partner-not-dredge' data-index="{{ adx }}" bindtap='openAgent' disabled='{{ btnDis }}'>立即开通</button>
+          </form>
+        </block>
+        <block wx:else>
+             <view wx:if="{{ currentAgent == item.id }}" class='partner-dredge'>已开通</view>
+             <form wx:if="{{ currentAgent < item.id }}" report-submit='true' bindsubmit="openAgent">
+                <button class='partner-not-dredge' data-index="{{ adx }}" bindtap='openAgent' disabled='{{ btnDis }}'>立即升级</button>
+             </form>
+        </block>
+
+      </view>
+    </view>
+    <view class='partner-bot'>一级收益比例{{ item.one_profit }}%<text wx:if="{{ item.two_profit != 0 }}">， 二级收益比例{{ item.two_profit }}%</text><text wx:if="{{ item.three_profit != 0 }}">， 三级收益比例{{ item.three_profit }}%</text></view>
+  </view>
+ 
+  <view class='cash-bot'>
+    <view class='cash-bot-l' bindtap='toProPage' data-t="agent_open_explain">开通说明</view>
+  </view>
+
+<view class="wux-backdrop {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}"></view>
+	<view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">
+    <view class="i-info wux-dialog__bd">
+      <view><text>{{ agent_intro }}</text></view>
+    </view>
+    <view class="wux-dialog__ft">
+          <view class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="hideAgentIntro" style='color:#4752e8;'>我知道了</view>
+    </view>
+</view>
+
+</view>
+
+<import src="/super_card/pages/templates/iospay.wxml"/>
+<template is="iosPayWx" data="{{...iosPayDialog}}"/>

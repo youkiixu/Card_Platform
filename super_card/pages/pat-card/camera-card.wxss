@@ -1,0 +1,170 @@
+/* super_card/pages/pat-card/camera-card.wxss */
+page {
+background-color:#000;
+}
+
+.preview-tips {
+  margin: 20rpx 0;  
+}
+
+.video {
+  margin: 50px auto;
+  width: 100%;
+  height: 300px;
+}
+
+
+.shade1 , .shade2 , .shade3 , .shade4{
+  background-color:rgba(0,0,0,0.6);
+  position: absolute;
+}
+.shade1{
+  top: 0;
+  width:100%;
+  height: 10%;
+}
+.shade2{
+  top:10%;
+  right: 0;
+  width: 10%;
+  height: 80%;
+}
+.shade3{
+  bottom: 0;
+  width:100%;
+  height: 10%;
+}
+.shade4{
+  top: 10%;
+  left: 0;
+  width: 10%;
+  height: 80%;
+}
+
+.imgtop{
+  margin: -1px;
+  background-color: transparent;
+  border:1px solid #00a1e9;
+  position: relative; 
+  top: 10%;
+  left: 10%; 
+  width: 80%; 
+  height: 80%;
+}
+.imgtop cover-view{
+  position: absolute;
+} 
+
+.rect-l-top-a{
+  background-color: #00a1e9;
+  height: 5px;
+  width: 50px;
+  top: 0;
+  left: 0;
+}
+.rect-l-top-b{
+  background-color: #00a1e9;
+  height: 50px;
+  width: 5px;
+  top: 0;
+  left: 0;
+}
+.rect-r-top-a{
+  background-color: #00a1e9;
+  height: 5px;
+  width: 50px;
+  top: 0;
+  right: 0;
+}
+.rect-r-top-b{
+  background-color: #00a1e9;
+  height: 50px;
+  width: 5px;
+  top: 0;
+  right: 0;
+}
+
+.rect-l-bottom-a{
+  background-color: #00a1e9;
+  height: 5px;
+  width: 50px;
+  bottom: 0;
+  left: 0;
+}
+.rect-l-bottom-b{
+  background-color: #00a1e9;
+  height: 50px;
+  width: 5px;
+  bottom: 0;
+  left: 0;
+}
+.rect-r-bottom-a{
+  background-color: #00a1e9;
+  height: 5px;
+  width: 50px;
+  bottom: 0;
+  right: 0;
+}
+.rect-r-bottom-b{
+  background-color: #00a1e9;
+  height: 50px;
+  width: 5px;
+  bottom: 0;
+  right: 0;
+}
+
+.btn-bot{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:70px;
+  background-color:#fff;
+  text-align:center;
+}
+.btn-area{
+  display:inline-block;
+  border:1px solid #000;
+  border-radius:50%;
+  margin-top:9px;
+}
+.btn-area view{
+  padding:5px;
+}
+.btn-area view button{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #00a1e9;
+}
+.rect-middle-info{
+  position: relative;
+  /*top:26%;
+  left:44%; */
+  width:100%;
+  height:100%;
+}
+.rect-middle{
+  position: absolute;
+  width: 40px;
+  border-radius:20rpx;
+  -webkit-border-radius:20rpx;
+  height: initial;
+  top:31%;
+  left:44%;
+}
+.search{
+  font-size:36rpx;
+  position:absolute;
+  top:40rpx;
+}
+.search-xc{
+  left:150rpx;
+}
+.search-fh{
+  right:150rpx;
+}

@@ -1,0 +1,217 @@
+/* super_card/pages/return-record/return-record.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.top{
+  display: flex;
+  display: -webkit-flex;
+  padding: 20rpx;
+  border-bottom: 1px solid #d7d7d9;
+}
+.search{
+  flex: 1;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-justify-content:center;
+  -webkit-align-items:center;
+  font-size: 30rpx;
+  height: 70rpx;
+}
+.search-front{
+  background-color: #fff;
+  color: #aeaeae;
+  border-radius: 6rpx;
+}
+.search text{
+  margin-left: 10rpx;
+}
+.search-rear text{
+  color: #09bb07;
+}
+.search-rear view{
+  flex: 1;
+  display: flex;
+  justify-content:flex-start;
+  align-items:center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-justify-content:flex-start;
+  -webkit-align-items:center;
+  background-color:#fff;
+  border-radius: 6rpx;
+  height:100%;
+  border: 1rpx solid #00a1e9;
+}
+.search-rear icon{
+  margin: 0 15rpx;
+}
+.search-rear input{
+  flex: 1;
+  -webkit-flex: 1;
+}
+
+/* .caption{
+  font-size: 32rpx;
+  border-bottom: 1px solid #d7d7d9;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  height: 100rpx;
+}
+.caption .active{
+  color:#fff;
+  background-color:#00a1e9;
+}
+.caption-send,.caption-receive{
+  flex: 1;
+  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+} */
+.record-option{
+  height: 100rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  background:#fff;
+  position:relative;
+}
+.record-option view{
+  flex: 1;
+  -webkit-flex: 1;
+  margin:0 5vw;
+  display:flex;
+  display:-webkit-flex;
+  height:70%;
+  align-items:center;
+  justify-content: center;
+  -webkit-align-items:center;
+  -webkit-justify-content: center;
+  border-bottom:2px solid #fff;
+}
+/* .record-option .active{
+  color: #f90;
+  border-bottom:2px solid #f90;
+} */
+
+
+.caption-info{
+  border-bottom: 1px solid #d7d7d9;
+  margin-bottom: 50rpx;
+  background-color: #fff;
+}
+.act{
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  border-bottom: 1px solid #d7d7d9;
+}
+.act:last-child{
+  border-bottom: 0;
+}
+.act-img{
+  height: 130rpx;
+  width: 130rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.act-info{
+  margin: 0 20rpx;
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+  -webkit-align-items: center;
+  overflow: hidden;
+}
+.act-talk{
+  font-size: 30rpx;
+  width:100%;
+}
+.act-talk-act{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.act-talk-img{
+  width:50rpx;
+  height:40rpx;
+  line-height:40rpx;  
+  font-size:50rpx;
+  vertical-align:middle;  
+}
+.droptRetract-info{
+  display:inline-flex;
+  width:100%;
+}
+.rotate{
+  transform: rotate(180deg);
+}
+
+.act-time{
+  font-size: 30rpx;
+  width:100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.act-time{
+  color: #999999;
+}
+.act-yeslook,.act-nolook{
+  font-size: 28rpx;
+  padding: 10rpx 24rpx;
+  border-radius: 5px;
+}
+.act-yeslook{
+  color: #999999;
+  border: 1px solid #d7d7d9;
+}
+.act-nolook{
+  color: #00a1e9;
+  border: 1px solid #00a1e9;
+}
+
+.no-con{
+  display: flex;
+  display: -webkit-flex;
+  margin-top: 100rpx;
+  justify-content: center;
+  -webkit-justify-content: center;
+  font-size: 30rpx;
+  color:#7b7b7b;
+}
+
+navigator{
+  position:relative;
+  display: flex;
+  display: -webkit-flex;
+}
+
+.weui-navbar__slider {
+  position: absolute;
+  content: " ";
+  left: 0;
+  bottom: 2px;
+  width: 6em;
+  height:2px !important;
+  background-color: #1aad19;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}

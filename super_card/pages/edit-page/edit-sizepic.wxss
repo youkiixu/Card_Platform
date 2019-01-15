@@ -1,0 +1,109 @@
+/* super_card/pages/edit-picture/edit-picture.wxss */
+
+.con,.imgs{
+  height: 200px;
+  position: relative;
+}
+.con image{
+  width:100%;
+  height:inherit;
+}
+
+.img-min{
+  background-color: #fff;
+  padding-bottom: 30rpx;
+}
+.banner-sum{
+  padding: 30rpx 4.5vw 20rpx 4.5vw;
+  color:#b2b2b2;
+  font-size: 28rpx;
+}
+
+.id-img{
+  padding:0 3.5vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+.dt-img{
+  width: 29vw;
+  height: 29vw;
+  background-color: #f2f2f2;
+  margin: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.dt-img image{
+  width: 29vw;
+  height: 29vw;
+}
+
+.btn-block::after{
+  border: 0;
+}
+.btn-submit{
+  padding:150rpx 4.5vw 50rpx 4.5vw;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+.singlePic{
+  position: relative;
+}
+.edit{
+  position: absolute;
+  bottom:30rpx;
+  right:30rpx;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+.grid-pics{
+  padding:0 30rpx;
+  margin-top:45rpx;
+}
+.img-small{
+  margin: 15rpx 0;
+}
+.img-small .img-album{
+  width: 45vw;
+  height: 45vw;
+}
+.img-small .img-total{
+  width:45vw;
+  display:inline-block;
+  margin: 0 0 2vw 0;
+  position: relative;
+}
+.img-small .img-total:nth-child(even){
+  margin-left: 2vw;
+}
+.del-icon{
+  position:absolute;
+  color:#fff;
+  top:-10px;
+  right:-7px;
+  font-size:10px;
+  line-height:10px;
+  width:18px;
+  height:18px;
+  background-color:rgba(0, 0, 0, 0.5);
+  border-radius:50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+}

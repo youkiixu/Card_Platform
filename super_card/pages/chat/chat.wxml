@@ -1,0 +1,403 @@
+<!--super_card/pages/chat/chat.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view>
+  <scroll-view id="j_page" style="height:{{pageHeight}}px;width: 100%;display: flex;flex-direction: column;margin-top: 0px;" scroll-y="false" scroll-top="{{ scrollTopVal }}" class='contains' bindscrolltoupper="refresh">
+    <view class='chat-blank' wx:if="{{ from == 'radar' }}"></view>
+    <view class='content-time'>
+        <view>{{ first_time }}</view>
+    </view>
+    <block wx:for="{{ msgList }}" wx:key="msgl" wx:for-index="mdx" wx:for-item="msg">
+
+      <block wx:if="{{ msg.myself === true }}">
+
+        
+          <block wx:if="{{ msg.msg == '::sayHi::' }}">
+            <view class='content-time'>
+              <view>您向TA打了招呼</view>
+            </view>
+          </block>
+
+          <block wx:else>
+            <view class='act-r'>
+              <view class='r-content'>
+                <block wx:if="{{ msg.type == 1 }}">
+                  <view class='lt-bingimg-r'>
+                    <image bindtap='showPic' data-pic="{{ msg.msg }}" class="picmsg" mode="aspectFill" src="{{ msg.msg }}"></image>
+                  </view>
+                </block>
+                 <block wx:if="{{ msg.type == 2 }}">
+                     <!-- 递名片 右-->
+                    <view class='word word-c'>
+                      <view class='chat-card-top'>你好，这是我的名片，请惠存</view>
+                      <view class='chat-card-l'>
+                        <image class='chat-card-img' mode='aspectFill' src='{{ my_card_info.picture }}'></image>
+                        <view class='chat-card-info'>
+                          <view class='cci-nt'>
+                            <view class='cci-name'>{{ my_card_info.name }}</view>
+                            <view class='cci-hr' wx:if="{{ my_card_info.title }}"></view>
+                            <view class='cci-tit'>{{ my_card_info.title }}</view>
+                          </view>
+                          <view class='cci-company'>{{ my_card_info.company }}</view>
+                          <button class='cci-tel' style='color:{{ themeColor }};'>
+                            <text class='iconfont icon-dianhua blue'></text>
+                            <view>{{ my_card_info.mobile }}</view>
+                          </button>
+                        </view>
+                      </view>
+                      <view class='chat-card-bottom'>点击查看Ta的名片</view>
+                    </view>
+                    <!-- 递名片 右 -->
+                 </block>
+                 <block wx:if="{{ msg.type == 3 }}">
+                    <!-- 推送产品 右 -->
+                    <view class='word word-cp-r'>
+                      <image class='word-cp-img' mode='aspectFill' src='{{ msg.msg.goods_pic }}'></image>
+                      <view class='word-cp-info'>
+                        <view class='word-cp-icon'>
+                          <view class='word-cp-name'>{{ msg.msg.goods_name }}</view>
+                          <text class='word-cp-price' style='color:{{ themeColorV }};'>￥{{ msg.msg.goods_price }}</text>
+                        </view>
+                        <view class='word-cp-namef'>{{ msg.msg.goods_introduce }}</view>
+                      </view>
+                    </view>
+                    <!-- 推送产品 右 -->
+
+                 </block>
+                <block wx:if="{{ msg.type == 0 }}">
+                  <view class='word word-bg' bindtap="copyMsg" data-msg="{{ msg.o_msg }}">
+                      <block wx:key="nmsg" wx:for="{{ msg.msg }}" wx:for-item="cxt">          
+                        <block wx:if="{{ cxt.type == 'emoji' }}">
+                          <image class="emoji"  src="{{ cxt.url }}"></image>
+                        </block>
+                        <block  wx:if="{{ cxt.type == 'digital' }}">
+                          <text catchtap='digitalFun' class="digital" data-number="{{ cxt.txt }}">{{ cxt.txt }}</text>
+                        </block>
+                        <block wx:else>
+                          <text>{{ cxt.txt }}</text>
+                        </block>
+                      </block>
+                  </view>
+                </block>
+
+            
+                <text class='jt {{ msg.type == 0 ? "word-jt iconfont icon-caret-right-copy-copy" : "" }}'></text>
+                
+              </view>
+              <image class='r-img' src='{{ msg.card_avatar }}'></image>
+            </view>
+          </block>
+
+
+      </block>
+
+      <block wx:else>
+        <view class="act-l">
+          <image class="l-img" src='{{ msg.card_avatar }}'></image>
+          <view class='l-content'>
+
+            <text class='jt {{  msg.type == 0 ? "iconfont icon-caret-right-copy-copy" : "" }}'></text>
+            <block wx:if="{{ msg.msg == '::sayHi::' }}">
+                
+              <view class='l-case'>
+                <text class='l-case-top'>您好！ 我是{{ t_card_info.name }}欢迎进入我的名片，有什么可以帮到您的吗？您可以在这里跟我实时沟通。</text>
+                <text class='l-case-cion'>通过我的名片您还可以:</text>
+                <view class='l-case-link'>
+
+                  <view bindtap='toCardPage' class='l-case-act'>
+                    <view>
+                      <text class='ci iconfont icon-mingpian' style='color:#e99d2f;'></text>
+                      <text class='go-card'>进入我的名片</text>
+                    </view>
+                    <text class='tr iconfont icon-jiantouarrow483'></text>
+                  </view>
+
+                  <button bindtap='callPhone' class='l-case-act'>
+                    <view>
+                      <text class='ci iconfont icon-shouji' style='color:#cc4323;'></text>
+                      <text class='go-card'>拨打我的电话</text>
+                    </view>
+                    <text class='tr iconfont icon-jiantouarrow483'></text>
+                  </button>
+
+                  <view wx:if="{{ !t_card_info.wx }}" bindtap='viewPosition' class='l-case-act'>
+                    <view>
+                      <text class='ci iconfont icon-dingwei' style='color:#8dd651;'></text>
+                      <text class='go-card'>查看我的位置</text>
+                    </view>
+                    <text class='tr iconfont icon-jiantouarrow483'></text>
+                  </view>
+
+                  <view wx:if="{{ t_card_info.wx }}" bindtap='addWxFriend' class='l-case-act'>
+                    <view>
+                      <text class='ci iconfont icon-weixin' style='color:#8dd651;'></text>
+                      <text class='go-card'>添加我的微信</text>
+                    </view>
+                    <text class='tr iconfont icon-jiantouarrow483'></text>
+                  </view>
+
+                </view>
+              </view>
+
+            </block>
+            <block wx:else>
+
+              <block wx:if="{{ msg.type == 1 }}">
+                <view class='lt-bingimg-l'>
+                  <image bindtap='showPic' data-pic="{{ msg.msg }}" class="picmsg" mode="aspectFill" src="{{ msg.msg }}"></image>
+                </view>
+              </block>
+
+              <block wx:if="{{ msg.type == 2 }}">
+                <!-- 递名片 左-->
+                <navigator open-type='redirect' url="../overt/overt?card_id={{ t_card_info.id }}">
+                <view class='word word-c'>
+               
+                  <view class='chat-card-top'>你好，这是我的名片，请惠存</view>
+                  <view class='chat-card-l'>
+                    <image class='chat-card-img' mode='aspectFill' src='{{ t_card_info.picture }}'></image>
+                    <view class='chat-card-info'>
+                      <view class='cci-nt'>
+                        <view class='cci-name'>{{ t_card_info.name }}</view>
+                        <view class='cci-hr' wx:if="{{ t_card_info.title }}"></view>
+                        <view class='cci-tit'>{{ t_card_info.title }}</view>
+                      </view>
+                      <view class='cci-company'>{{ t_card_info.company }}</view>
+                      <button class='cci-tel' style='color:{{ themeColor }};'>
+                        <text class='iconfont icon-dianhua blue'></text>
+                        <view>{{ t_card_info.mobile }}</view>
+                      </button>
+                    </view>
+                  </view>
+                  <view class='chat-card-bottom'>点击查看Ta的名片</view>
+                </view>
+                </navigator>
+
+                <!-- 递名片 左 -->
+              </block>
+
+              <block wx:if="{{ msg.type == 3 }}">
+                  <!-- 推送产品 左 -->
+                  <navigator open-type='redirect' url="../overt/overt?card_id={{ t_card_info.id }}">
+                  <view class='word word-cp-l'>
+                  
+                    <image class='word-cp-img' mode='aspectFill' src='{{ msg.msg.goods_pic}}'></image>
+                    <view class='word-cp-info'>
+                      <view class='word-cp-icon'>
+                        <view class='word-cp-name'>{{ msg.msg.goods_name }}</view>
+                        <text class='word-cp-price' style='color:{{ themeColorV }};'>￥{{ msg.msg.goods_price }}</text>
+                      </view>
+                      <view class='word-cp-namef'>{{ msg.msg.goods_introduce }}</view>
+                    </view>
+                  </view>
+                  </navigator>
+
+                  <!-- 推送产品 左 -->
+              </block>
+
+              <block wx:if="{{ msg.type == 0 }}">
+                <view class='word' bindtap="copyMsg" data-msg="{{ msg.o_msg }}">
+                    <block wx:key="nmsg" wx:for="{{ msg.msg }}" wx:for-item="cxt">
+                      <block wx:if="{{ cxt.type == 'emoji' }}">
+                        <image  class="emoji"  src="{{ cxt.url }}"></image>
+                      </block>
+                      <block  wx:if="{{ cxt.type == 'digital' }}">
+                          <text catchtap='digitalFun' class="digital" data-number="{{ cxt.txt }}">{{ cxt.txt }}</text>
+                      </block>
+                      <block wx:else>
+                        <text>{{ cxt.txt }}</text>
+                      </block>                      
+                    </block>
+                </view>
+
+              </block>
+
+             
+
+            </block>
+
+
+          </view>
+        </view>
+      </block>
+    
+    </block>
+    <view class='blank'></view>
+  </scroll-view>
+
+  <!-- 底部输入框 -->
+  
+  <view class='news-bot'>
+    <view class='news-bot-mt'>
+      <view class='nbm-mt'>我想</view>
+      <!--button bindtap='callPhone' class='nbm'>拨打电话</button>
+      <view bindtap='saveCardQr' class='nbm'>保存名片码</view>
+      <view wx:if="{{ !t_card_info.wx }}" bindtap='viewPosition' class='nbm'>去你那儿</view-->
+      <form report-submit='true' bindsubmit="sendMyCard">
+        <button form-type='submit' class='nbm'>递名片</button>
+      </form>
+      <form report-submit='true' bindsubmit="goPushGoods">
+        <button form-type='submit' class='nbm'>推送商品</button>
+      </form>
+       <form report-submit='true' bindsubmit="goQuickReply">
+      <button form-type='submit' class='nbm'>快捷回复</button>
+      </form>
+    </view>
+    <view class='bot-in'>
+      <!-- <textarea placeholder='和客户说点什么吧' show-confirm-bar="false" class='bot-l' bindinput="setMsgContent" bindconfirm="sendMsg" value="{{ msgContent }}" adjust-position="true"></textarea> -->
+      <input class='bot-l' bindinput="setMsgContent" bindblur="blurInput" bindconfirm="sendMsg" value="{{ msgContent }}" adjust-position="true" placeholder='和TA说点什么吧'></input>
+      <text class="bot-rbq iconfont {{ showEmojiView === true?'icon-jianpan':'icon-xiaolian'  }} " catchtap='toggleShowEmoji'></text>
+      <view class='bot-r' bindtap='choosePic'>
+        <text class='iconfont icon-fl-tupian'></text>
+      </view>
+    </view>
+
+    <view class='expression-manage' wx:if="{{ showEmojiView === true }}">
+      <swiper class='swiper-h' indicator-dots="false" autoplay="">
+
+        <block wx:key="emoji" wx:for="{{ emoji }}" wx:for-index="edx" wx:for-item="emo">
+
+          <swiper-item>
+              <view class='expman'>
+              <text style='visibility:hidden;'></text>
+              <image wx:key="emo" lazy-load='true' bindtap="inputEmoji" data-name="{{ item.name }}" wx:for="{{ emo }}" class="eimg" src="{{ item.url }}.gif"> </image>
+              <text style='visibility:hidden;'></text>
+            </view>
+          </swiper-item>
+      
+        </block>
+
+      </swiper>
+      <text bindtap='delMsgCnt' class='e-del iconfont icon-shanchu'></text>
+      <text class='e-send' bindtap='sendMsg'>发送</text>
+    </view>
+
+
+  </view>
+
+  <!-- 顶部信息 -->
+  <view wx:if="{{ from == 'radar' }}" class='news-top'>
+    <!-- 跳转 -->
+    <block wx:if="{{ is_client > 0 }}">
+     <view class='top-l' bindtap='setClientNote'>
+      <text style='color:{{ themeColor }};' class='iconfont icon-bianjicailiao'></text>
+      <view style='color:{{ themeColor }};'>设置备注</view>
+    </view>
+    <view bindtap='toClientPage' class='top-r'>
+      <text class='iconfont icon-shaixuan' style='color:{{ themeColor }};'></text>
+      <view style='color:{{ themeColor }};'>查看客户</view>
+    </view>
+    </block>
+
+    <!-- 选择客户标签 -->
+    <block wx:if="{{ is_client == false }}">
+    <view class='top-l' bindtap='setNoteTip'>
+      <text class='iconfont icon-bianjicailiao'></text>
+      <view>设置备注</view>
+    </view>
+    <view bindtap="showModal" class='top-r'>
+      <text class='iconfont icon-shaixuan'></text>
+      <view>转为客户</view>
+    </view>
+    </block>
+
+  </view>
+
+  <!-- 选择客户信息 -->
+  <block wx:if="{{ from == 'radar' && is_client == false }}">
+
+  <view class='custom-bg' bindtap="hideModal" wx:if="{{ showModalStatus }}"></view>
+  <view class='turn-custom' animation="{{animationData}}" wx:if="{{ showModalStatus}}">
+    <view class='tc-top'>选择客户标签</view>
+    <view class='tc-act'>
+      <view class='tc-act-l'>客户类型</view>
+      <view class='tc-act-r'>
+        <radio-group class="radio-group" bindchange="typeChange">
+          <view class="class-r-g" wx:key="type" wx:for="{{ type_array }}">
+              <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}" data-id='item.index'></radio>           
+              <label for="{{item.name}}">
+                <text class='{{item.checked?"checkedt":"normalt"}}' style="color:{{ item.checked?themeColor:'' }};">{{item.name}}</text>
+              </label>
+          </view>
+        </radio-group>
+      </view>
+    </view>
+    <view class='tc-act'>
+      <view class='tc-act-l'>客户状态</view>
+      <view class='tc-act-r'>
+        <radio-group class="radio-group" bindchange="stateChange">
+         
+          <view class="class-r-g" wx:key="status" wx:for="{{ state_array }}">
+              <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}" data-id='item.index'></radio>           
+              <label for="{{item.name}}">
+                <text class='{{item.checked?"checkedt":"normalt"}}' style="color:{{ item.checked?themeColor:'' }};">{{item.name}}</text>
+              </label>
+          </view>
+        </radio-group>
+      </view>
+    </view>
+    <view class='tc-act-cjl'>
+      <view class='tc-act-l'>预计成交率</view>
+      <view class='tc-act-r'>
+
+        <radio-group class="radio-group" bindchange="rateChange">
+          <view class="class-r-g" wx:key="rate" wx:for="{{ rate_array }}">
+              <radio id="{{ item.name }}" hidden value="{{item.name}}" checked="{{item.checked}}" data-id='item.index'></radio>           
+              <label for="{{item.name}}">
+                <text class='{{item.checked?"checkedt":"normalt"}}' style="color:{{ item.checked?themeColor:'' }};">{{item.name}}%</text>
+              </label>
+          </view>
+        </radio-group>
+        
+      </view>
+    </view>
+    <view class='btn-submit'>
+      <button bindtap='card2Client' class='btn-block btn-blue' style='background:{{ themeColor }};'>转入客户</button>
+    </view>
+  </view>
+  </block>
+
+  <!-- 快捷回复 -->
+  <view class='quick-reply-bg' bindtap="hideQuickReply" wx:if="{{ showQuickList }}"></view>
+  <view class='quick-reply' animation="{{animationData}}" wx:if="{{ showQuickList }}">
+    <view class='quick-reply-top'>
+      <view class='qrt-left'>快捷回复</view>
+      <view class='qrt-right' bindtap='quickReplyEdit'>
+        <text class='iconfont icon-fankuiyijian'></text>
+        <view class='qrt-right-edit'>编辑</view>
+      </view>
+    </view>
+    <scroll-view class='sv-qrec' scroll-y>
+      <view class='quick-reply-con'>
+        <view class='qrc-msg' bindtap='sendQuickReply' data-index="{{ qrdx }}" wx:key="quckr" wx:for="{{ quick_reply }}" wx:for-index="qrdx">{{ item.msg}}</view>
+      </view>
+    </scroll-view>
+    <view class='quick-reply-hide' bindtap="hideQuickReply" style='color:{{ themeColorV }};'>取消</view>
+  </view>
+
+  <!-- 推送产品 -->
+  <view class='pass-card-bg' bindtap="hidePushGoods" wx:if="{{ showPushProduct }}"></view>
+  <view class='pass-card' animation="{{animationData}}" wx:if="{{ showPushProduct }}">
+    <view class='pass-card-top'>选择推送的商品</view>
+    <scroll-view class='pc-qrec' scroll-y>
+      <view class='pass-card-con'>
+ 
+        <view class='pcc-act' wx:key="cgoods" wx:for="{{ my_card_goods }}" bindtap='sendCardGoods' data-index="{{ cgdx }}" wx:for-index="cgdx">
+          <image class='pcc-img' src='{{ item.goods_pics[0] }}'></image>
+          <view class='pcc-right'>
+            <view class='pcc-name'>{{ item.goods_name }}</view>
+            <view class='pcc-info'>
+              <view class='pcc-info-fbt'>{{ item.goods_introduce }}</view>
+              <view class='pcc-info-hr'>|</view>
+              <view class='pcc-price'><text style='color:{{ themeColorV }};'>{{ item.goods_price }}</text>元</view>
+            </view>
+          </view>
+        </view>
+       
+      </view>
+    </scroll-view>
+    <view class='quick-reply-hide' style='color:{{ themeColorV }};' bindtap="hidePushGoods">取消</view>
+  </view>
+
+</view>

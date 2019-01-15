@@ -1,0 +1,105 @@
+<!--super_card/pages/group-request/group-request.wxml-->
+<view class='contains'>
+    <view class='act'>
+      <view class='imgset'>
+
+        <view class='group-image' wx:key="icons" wx:for="{{ group.icons }}" x:for-index="cIdx" wx:for-item="icon">
+           <block wx:if="{{ icon.picture == 'no' }}">
+              <text class="iconfont icon-fl-renyuan"></text>
+           </block>
+           <block wx:else>
+              <image src='{{ icon.picture }}'></image>
+           </block>
+        </view>
+
+      </view>
+      <view class='group-info'>
+        <text class='name'>{{ group.name }}</text>
+        <view class='info'>
+          <text>名片组隐私设置：</text>
+          <view>
+            <text class="trb iconfont icon-renyuanzengjia1 {{ group.anyone_request == 1 ? 'yes' : ''}}"></text>
+            <text wx:if="{{ group.anyone_request == 1 }}">组员都可邀请</text>
+            <text wx:if="{{ group.anyone_request == 0 }}">仅管理员可邀请新成员</text>
+          </view>
+          <view>
+            <text class="trb iconfont icon-cunkuanlixi {{ group.allow_collect == 1 ? 'yes' : '' }}"></text>
+            <text wx:if="{{ group.allow_collect == 1 }}">允许收藏组内名片</text>
+            <text wx:if="{{ group.allow_collect == 0 }}">不允许直接收藏</text>
+          </view>
+        </view>
+        <view class='genre'>
+          <text>名片组类型：</text>
+          <text>{{ groupTypes[group.type_id].name }}</text>
+        </view>
+      </view>  
+    </view>
+    <view class='btns'>
+      <view class='btn-submit' bindtap='toggleCardPicker'>
+        <button class='btn-block btn-blue' style='background:{{ themeColor }};'>
+          <text>我想加入</text>
+          <text>加入后，可查看组员名片</text>
+        </button>
+      </view>
+      <view class='btn-submit' bindtap='noWantJoin'>
+        <button class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};'>不想加入</button>
+      </view>
+    </view>
+
+    <view class='card-holder'>
+      <view class='img-fit'>
+        <text wx:if="{{ !group.card_list[0].picture }}" class='text-img'>{{ group.card_list[0].name }}</text>
+        <image wx:if="{{ group.card_list[0].picture }}" class='img' src='{{ group.card_list[0].picture }}'></image>
+      </view>
+      <view class='card-info'>
+        <view class='card-name'>
+          <text>{{ group.card_list[0].name }}</text>
+          <text class='iconfont icon-user-star'></text>
+          <text>({{ group.card_list[0].mobile }}*********)</text>
+        </view>
+        <text class='job'>{{ group.card_list[0].title }}</text>
+        <text class='company'>{{ group.card_list[0].company }}</text>
+      </view>
+    </view>
+
+
+  <view class='bottom' wx:if="{{ showBackIndex }}">
+    <view class='btn-submit'>
+      <button class='btn-block btn-white' bindtap='backIndex'>返回首页</button>
+    </view>
+  </view>
+  
+</view>
+
+
+<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
+<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">请选择名片</view>
+        </view>
+        <view class="wux-dialog__bd">
+        <scroll-view scroll-y="true">
+          <radio-group class="radio-group" bindchange="cardChange">
+            <block wx:for="{{ userCards }}" wx:key="cards">       
+              <label class="radio">
+                  <view class="info-choices {{card_id == item.id ? 'info-bg-color' : 'info-no-bg-color'}}">
+                    <radio class='radio-t' value="{{ item.id }}" checked="{{card_id == item.id ? true : false}}" />
+                    <view class='info-img'>
+                      <image src="{{ item.picture }}"></image>
+                    </view>
+                    <view class='info-card'>
+                      <text class='card-name'>{{ item.name }} {{ item.title }}</text>
+                      <text class='card-phone'>{{ item.mobile }}</text>
+                      <text class='card-company'>{{ item.company }}</text>
+                    </view>
+                  </view>
+              </label>
+            </block>
+          </radio-group>
+        </scroll-view>
+        </view>
+        <view class="wux-dialog__ft">
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="toggleCardPicker">取消</view>
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmCardSelect">确定</view>
+        </view>
+</view>

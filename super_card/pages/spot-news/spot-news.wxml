@@ -1,0 +1,12 @@
+<!--super_card/pages/spot-news/spot-news.wxml-->
+<view class='contains'>
+
+  <block wx:for="{{msgList}}"  wx:for-item="item" wx:key="index">
+    <view class='news-act'>
+      <view class='news-l'>{{ item.create_time }}</view>
+      <view class='news-r'>
+        <view>{{ item.name }}/{{ item.title }} {{ item.content }}</view>
+      </view>
+    </view>
+  </block>
+</view>

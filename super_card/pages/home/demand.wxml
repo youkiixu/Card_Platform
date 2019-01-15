@@ -1,0 +1,47 @@
+<!--super_card/pages/demand/demand.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class='contains'>
+  <view class='top' style='color:{{ themeColor }};'>我发布的</view>
+  <view class='content'>
+    <checkbox-group bindchange="dealWithIds">
+
+      <label wx:for="{{ lists }}" wx:key="lists" wx:for-index="idx">
+          <checkbox wx:if="{{deleteShow}}" color="{{ themeColor }}" name="moneyPay" checked="{{ checked }}" value="{{ item.id }}"></checkbox>
+          <view class='check-info'>
+            <text class='check-info-top'>{{ item.content }}</text>
+            <view class='check-eye'>
+              <text class='iconfont icon-yanjing'></text>
+              <text class='icon-sum'>{{ item.views }}</text>
+              <text class='iconfont  icon-xinheart281'></text>
+              <text class='icon-sum'>{{ item.likes }}</text>
+              <text class='iconfont icon-xiaoxi'></text>
+              <text class='icon-sum'>{{ item.comments }}</text>
+              <text wx:if="{{ item.status == 3 }}" class='top-lx' style="border-color:{{ themeColorV }};color:{{ themeColorV }};">审核中</text>
+            </view>
+          </view>
+      </label>
+      
+    </checkbox-group>
+  </view>
+
+  <view bindtap='goDeletedemand' wx:if="{{ lists.length > 0 && !deleteShow }}" class='bottom-r' style="background:{{ themeColorV }};">
+    <text class='iconfont icon-lajitong'></text>
+  </view>
+
+
+  <view class='bottom' wx:if="{{deleteShow}}">
+    <view class='bottom-c'>    
+      <checkbox-group bindchange="selectAll" >
+        <label>
+            <checkbox color="{{ themeColor }}" checked='{{ selectAllChecked }}' name="moneyPay" value="1"></checkbox>
+            <text class='all-c'>全选</text>
+        </label>
+      </checkbox-group>
+    </view>
+    <text bindtap='cancelDel' class='cancel'>取消</text>
+    <text bindtap='deleteChoosen' class='delete' style='background-color:{{ themeColorV }};border-color:{{ themeColorV }};'>删除</text>
+  </view>
+  
+</view>

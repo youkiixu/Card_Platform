@@ -1,0 +1,37 @@
+<!--super_card/pages/balance/balance.wxml-->
+<view class='contains'>
+<view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+  <view class='balance'>
+    <text class='price'>￥{{ money }}</text>
+    <text class='cl iconfont icon-question' bindtap='openCardSelect' style='color:{{ themeColor }};'></text>
+  </view>
+  <view class='detail'>
+    <text class='title'>余额明细:</text>
+
+    <view class='act' wx:key="accounts" wx:for="{{ account_list }}" x:for-index="aIdx" wx:for-item="log">
+      <view class='info'>
+        <text class="change_desc">{{ log.change_desc }}</text>
+        <text>{{ log.create_time }}</text>
+      </view>
+      <view class='money'>{{ log.type == 2 ? '-' : '+' }}{{ log.money }}</view>
+    </view>
+    
+  </view>
+</view>
+
+<view class="wux-backdrop {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}"></view>
+	<view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">
+    <view class="wux-dialog__hd">
+      <view class="wux-dialog__title">如何增长余额</view>
+    </view>
+    <view class="i-info wux-dialog__bd">
+      <view>
+        <text>{{ account_intro }}</text>
+      </view>
+    </view>
+    <view class="wux-dialog__ft">
+        <view class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelSelect" style='color:{{ themeColor }};'>我知道了</view>
+    </view>
+</view>
+
+

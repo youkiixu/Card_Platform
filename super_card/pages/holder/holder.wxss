@@ -1,0 +1,260 @@
+/* super_card/pages/holder/holder.wxss */
+.holder-top{
+  font-size: 36rpx;
+  display: flex;
+  align-items:center;
+  display: -webkit-flex;
+  -webkit-align-items:center;
+  padding: 10rpx 30rpx;
+}
+.holder-search-n,.holder-search-t{
+  font-size:36rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.holder-search-i{
+  margin-right: 15rpx;
+}
+button.search::after{
+  border: 0;
+}
+.search{
+  flex: 1;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-justify-content:center;
+  -webkit-align-items:center;
+  font-size: 28rpx;
+  height: 60rpx;
+}
+.search-front{
+  background-color: #fff;
+  color: #aeaeae;
+  border-radius: 6rpx;
+}
+.search text{
+  margin-left: 10rpx;
+}
+.search-rear text{
+  color: #00a1e9;
+}
+.search-rear view{
+  flex: 1;
+  display: flex;
+  justify-content:flex-start;
+  align-items:center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-justify-content:flex-start;
+  -webkit-align-items:center;
+  background-color:#fff;
+  border-radius: 6rpx; 
+  height: 60rpx;
+  border: 1rpx solid #00a1e9;
+}
+.search-rear icon{
+  margin: 0 15rpx;
+}
+.search-rear button{
+  font-size:30rpx;
+  padding:0;
+  line-height:inherit;
+  margin-left:10rpx;
+}
+.search-rear button::after{
+  border: 0;
+}
+.hide{
+  display: none !important;
+}
+.cards-holder{
+  background-color:#fff;
+  border-bottom:1px solid #e2e2e2;
+  border-top:1px solid #e2e2e2;
+  position: relative;
+}
+.card-holder::after{
+  border: 0;
+}
+.card-holder{
+  background-color: #fff;
+  margin: 0 20rpx;
+  padding: 20rpx 0;
+  display: flex;
+  display: -webkit-flex;
+  border-bottom: 1px solid #e2e2e2;
+  border-radius: 0;
+  line-height: inherit;
+}
+.img-fit{
+  display: flex;
+  display: -webkit-flex;
+}
+.cards-holder navigator:last-child .card-holder{
+  border: 0;
+}
+.img{
+  width: 150rpx;
+  height: 150rpx;
+  /* background-color: #000; */
+  border-radius: 14rpx;
+}
+.text-img{
+  width: 150rpx;
+  height: 150rpx;
+  background-color: #c0c0c0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 80rpx;
+  font-weight: 600;
+  text-align:center;
+  overflow:hidden;
+}
+.card-info{
+  display:flex;
+  flex-flow:column;
+  justify-content:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+  padding-left:30rpx;
+  vertical-align: middle;
+  flex: 1;
+  -webkit-flex: 1;
+}
+.card-info text{
+  display: block;
+}
+.card-name{
+  display: flex;
+  display: -webkit-flex;
+  text-align: right;
+  height:50rpx;
+  line-height: 50rpx;
+}
+.card-name text{
+  display: inline-block;
+}
+.card-name text:nth-child(1){
+  font-size: 36rpx;
+  float: left;
+}
+.card-name text:nth-child(2){
+  font-size:24rpx;
+  color:#999999;
+  flex: 1;
+  -webkit-flex: 1;
+}
+.job{
+  font-size:24rpx;
+  color:#999999;
+  height:50rpx;
+  line-height: 50rpx;
+  text-align:left;
+}
+.company{
+  font-size:30rpx;
+  color:#999999;
+  height:50rpx;
+  line-height: 50rpx;
+  text-align:left;
+}
+.act{
+  line-height:inherit;
+  background-color:transparent;
+  padding:0;
+  position: fixed;
+  top:100rpx;
+  right: 50rpx; 
+  z-index:20186011;
+}
+button.act::after{
+  border: 0;
+}
+
+.fix{
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  display: -webkit-flex;
+  padding: 6rpx;
+  border:6rpx solid #00a1e9;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 50%;
+}
+/*拍名片*/
+.fix-tg{
+  width: 140rpx;
+}
+.fix-tg image{
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.take{
+  flex: 1;
+  -webkit-flex: 1;
+  background-color:#00a1e9;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  flex-flow:column;
+  justify-content:center;
+  align-items:center;
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+  -webkit-align-items:center;
+}
+.take image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.take text{
+  font-size: 26rpx;
+  color: #fff;
+}
+.reminder{
+  font-size:24rpx;
+  color:#999999;
+  display:inline-block;
+  padding:30rpx;
+}
+.reminder text{
+  display:block;
+}
+
+/*回传  */
+.revert-convey{
+  background-color: #fff;
+}
+.revert-title{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-bottom:1px solid #ccc;
+  font-size: 30rpx;
+}
+
+.revert-act view{
+  width: 21vw;
+  padding:2vw;
+  display: inline-flex;
+  flex-flow: column;
+  -webkit-flex-flow: column;
+}
+.revert-act view image{
+  width: 21vw;
+  height: 21vw;
+  background-color: #000;
+  border-radius: 10rpx;
+}
+.revert-act view text{
+  font-size: 28rpx;
+  text-align: center;
+}
+

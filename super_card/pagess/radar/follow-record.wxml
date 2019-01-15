@@ -1,0 +1,11 @@
+<!--super_card/pages/follow-record/follow-record.wxml-->
+<view class='contains'>
+  <view class='fr-word'>
+    <textarea placeholder='请输入客户跟进记录' placeholder-class='fr-textarea' bindinput='length' bindblur='recordfollow' bindconfirm='recordfollow' maxlength='{{ max }}'></textarea>
+    <view class='count'>{{ length }}/{{ max }}</view>
+  </view>
+  <view class='btn-submit'>
+      <button class='btn-block btn-blue' bindtap='recordCardClient' disabled="{{ dis }}" style='background:{{ themeColor }};'>保存</button>
+    </view>
+
+</view>

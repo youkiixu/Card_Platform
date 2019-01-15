@@ -1,0 +1,41 @@
+<!--super_card/pages/style-opt/style-opt.wxml-->
+<view class='contains'>
+
+  <view class='stop'>
+    <view class='stop-tit' style='color:{{ themeColor }};'>选个你喜欢的名片风格吧</view>
+    <swiper class='stop-sw' circular indicator-active-color="#fff" indicator-dots="false" previous-margin="70rpx" next-margin="70rpx" autoplay="" current='{{ currentStyle }}' bindchange='switchStyle'>
+      <swiper-item wx:key="styles" wx:for="{{ styles }}" wx:for-index="sdx">
+        <view class='si-top'>{{item.name}}</view>
+        <view class="si-info {{sdx == currentStyle ? ' active' : ''}}">
+          <image class='si-img' mode='aspectFill'  src='{{item.pic}}'></image>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class='bottom'>
+    
+    <block wx:key="stylesb" wx:for="{{ styles }}" wx:for-index="sdxb" wx:if="{{ currentStyle == sdxb }}">
+      
+          <view wx:if="{{ item.buy == 1 || item.id == 1 }}" class='btn-submit'>
+           <form report-submit='true' bindsubmit="useCardStyle">
+            <button form-type='submit' disabled='{{ card_style == item.id ? true : false }}' class='btn-block btn-blue' style='background-color:{{ themeColor }};'>{{ card_style == item.id ? '使用中' : '使 用' }}</button>
+            </form>
+          </view>
+
+          <view wx:if="{{ item.buy == 0 && item.id != 1 }}" class='btn-submit'>
+           <form report-submit='true' bindsubmit="buyCardStyle">
+            <button form-type='submit' disabled='{{ btnDis }}' class='btn-block btn-blue' style='background-color:{{ themeColor }};'>
+              <view>￥{{ item.price }}元<text wx:if="{{  item.free == 1 }}">（会员免费）</text></view>
+              <view class='go-buy'>购买</view>
+            </button>
+            </form>
+          </view>
+
+    </block>
+
+  </view>
+
+</view>
+
+<import src="/super_card/pages/templates/iospay.wxml"/>
+<template is="iosPayWx" data="{{...iosPayDialog}}"/>

@@ -1,0 +1,144 @@
+<!--super_card/pages/sound-recording/sound-recording.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class='contains'>
+
+    <view wx:if="{{ audioPath != '' }}" class='option-t-content'>
+      <view class='top'>
+        <text class='top-img iconfont icon-msnui-mic'></text>
+        <text class='top-word'>点击试听</text>
+      </view>
+      <view class='sound-content'>
+      <block wx:if="{{showPlayBtn == true }}">
+        <text class='sound-introduce'>点击播放录音</text>
+        <!--播放开始-->
+        <view class='sound-tz'>
+          <view class='sound-btn' bindtap='playRecording' style='border-color:{{ themeColor }};'>
+            <view style='background-color:{{ themeColor }};'>
+              <text class='sound-end iconfont icon-bofang'></text>
+            </view>
+          </view>
+          <view class='sound-cl' bindtap='reRcording' style='border-color:{{ themeColor }};'>重置</view>
+        </view>
+        </block>
+
+        <block wx:if="{{showStopPlayBtn == true }}">
+        <text class='sound-introduce'>点击播放暂停</text>
+        <view class='acoustic'>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+          <text class='acoustic-size'>{{ recordingSec }}s{{ recordingTotal ? '/'+ recordingTotal + 's' : '' }}</text>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+        </view>
+        <!--播放中  -->
+        <view class='sound-dh'>
+          <view class='sound-dh-elastic'>
+            <view class='sound-dh-btn' bindtap='stopPlayRecording' style='border-color:{{ themeColor }};'>
+              <view class="ther-ll" style='background-color:{{ themeColor }};'>
+                <text class='sound-in iconfont icon-tingzhi'></text>
+              </view>
+            </view>
+          </view>
+        </view>   
+  </block>
+ </view>
+  <view wx:if="{{ audioId == 0 }}" class='btn-submit b-s-t'>
+        <button disabled='{{ disabledBtn }}' bindtap='saveCardAudio' class='btn-block btn-blue' style='background:{{ themeColor }};'>保存录音</button>
+  </view>
+  <view wx:if="{{ audioId > 0 }}" class='btn-submit'>
+        <button bindtap='delCardAudio' class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};'>删除语音</button>
+    </view>
+ </view>   
+
+  <view wx:if="{{ audioPath == '' }}" class='record-option'>
+    <view class="{{catalogSelect == 2 ? 'active':''}}" bindtap='selectRecording' style="color:{{catalogSelect == 2 ? themeColor:''}};">语音录制</view>
+    <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectInstall' style="color:{{catalogSelect == 1 ? themeColor:''}};">语音合成</view>
+    <view class="weui-navbar__slider" style="width:40vw;background:{{ themeColor }};left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
+  </view>
+  <!-- 语音设置 声色（4）  音量（9） 语音内容 -->
+  <block wx:if="{{ audioPath == '' && catalogSelect == 1 }}">
+    <view class='option-o-content'>
+      <view class='title'>语音内容</view>
+      <view class='sound-csz'>
+        <view class='introduction'>
+          <textarea bindblur="setAudioTxt" bindinput="setAudioTxt" bindconfirm="setAudioTxt" name="intro_content" rows="20" cols="30" maxlength="512" placeholder="语音内容0~512字(在这里输入文字可以帮您合成为语音)" value=""></textarea>
+        </view>
+      </view>
+      <view class='choice'>
+        <text>音色设置</text>
+        <radio-group bindchange="radioChange" class="radio-group">
+          <view class="radio">
+              <label><radio checked="{{ per == 0 ? true : false }}" color="{{ themeColor }}" value="0"/>普通女声</label>
+              <label><radio checked="{{ per == 4 ? true : false }}" color="{{ themeColor }}" value="4"/>情感女声</label>
+              <label><radio checked="{{ per == 1 ? true : false }}" color="{{ themeColor }}" value="1"/>普通男声</label>
+              <label><radio checked="{{ per == 3 ? true : false }}" color="{{ themeColor }}" value="3"/>情感男声</label>
+          </view>
+        </radio-group>
+      </view>
+
+      <view class='choice'>
+        <text>音量设置</text>
+        <slider step="1" min="0" max="9" value="{{ vol }}" show-value="true" block-color="{{ themeColor }}" activeColor="{{ themeColor }}" bindchange="slider1change" />
+      </view>
+      <view class='choice'>
+        <text>语速设置</text>
+        <slider step="1" min="0" max="9" value="{{ spd }}" show-value="true" block-color="{{ themeColor }}" activeColor="{{ themeColor }}" bindchange="slider2change" />
+      </view>
+      <view class='choice'>
+        <text>音调设置</text>
+        <slider step="1" min="0" max="9" value="{{ pit }}" show-value="true" block-color="{{ themeColor }}" activeColor="{{ themeColor }}" bindchange="slider3change" />
+      </view>
+
+      <view class='btn-submit b-s-t'>
+        <button class='btn-block btn-blue' disabled='{{ disabledBtn }}' bindtap='syntheticAudio' style='background:{{ themeColor }};'>确认合成</button>
+      </view>
+
+    </view>
+  </block>
+  <block wx:if="{{ audioPath == '' && catalogSelect == 2 }}">
+    <view class='option-t-content'>
+      <view class='top'>
+        <text class='top-img iconfont icon-msnui-mic'></text>
+        <text class='top-word'>录音</text>
+      </view>
+      <view class='sound-content'>
+
+        <block wx:if="{{showStartBtn == true }}">
+        <text class='sound-introduce'>点击录制你的介绍</text>
+        <!--录制之前  -->
+        <view class='sound-btn' bindtap='startRecording' style='border-color:{{ themeColor }};'>
+          <view style='background-color:{{ themeColor }};'></view>
+        </view>
+        </block>
+
+        <block wx:if="{{showStopBtn == true }}">
+        <text class='sound-introduce'>录制中，点击按钮停止录音</text>
+        <view class='acoustic'>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+          <text class='acoustic-size'>{{ recordingSec }}s/60s</text>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+          <text class='acoustic-img iconfont icon-app_icons-' style='color:{{ themeColor }};'></text>
+        </view>
+        <!--录制中  -->
+        <view class='sound-dh'>
+          <view class='sound-dh-elastic'>
+            <view class='sound-dh-btn' bindtap='stopRecording' style='border-color:{{ themeColor }};'>
+              <view class="ther-ll" style='background-color:{{ themeColor }};'>
+                <text class='sound-in iconfont icon-tingzhi'></text>
+              </view>
+            </view>
+          </view>
+        </view> 
+        </block>
+        
+      </view>
+      
+    </view>
+  </block>
+
+
+
+</view>

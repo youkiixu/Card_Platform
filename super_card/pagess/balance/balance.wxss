@@ -1,0 +1,92 @@
+/* super_card/pages/balance/balance.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.balance{
+  display:flex;
+  display: -webkit-flex;
+  justify-content:center;
+  -webkit-justify-content:content;
+  align-items:flex-start;
+  -webkit-align-items:flex-start;
+}
+.balance text.price{
+  font-size: 120rpx; 
+}
+.iconfont{
+  margin-top:30rpx;
+}
+.detail{
+  background-color: #fff;
+}
+.title{
+  height:100rpx;
+  line-height: 100rpx;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  display: block;
+  padding: 0 30rpx;
+  font-size:30rpx;
+}
+.act{
+  display:flex;
+  display: -webkit-flex;
+  padding:30rpx;
+  border-bottom:1px solid #e1e1e1; 
+}
+.info{
+  flex: 1;
+  -webkit-flex:1;
+}
+.info text{
+  display:block;
+  line-height: 50rpx;
+  height: 50rpx;
+}
+.info text:first-child{
+  font-size: 26rpx;
+}
+.info text:last-child{
+  font-size: 28rpx;
+  color: #959595;
+}
+.money{
+  line-height: 100rpx;
+}
+
+.i-info{
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column;
+  -webkit-flex-flow:column;
+  align-items: flex-start;
+  -webkit-align-items:flex-start;
+  padding-top: 0.8rem;
+}
+.i-info view{
+  display: flex;
+  display: -webkit-flex;
+  align-items: flex-start;
+  -webkit-align-items:flex-start;
+  justify-content:flex-start;
+  -webkit-justify-content:flex-start;
+  color: #a0a0a0;
+  font-size: 30rpx;
+  margin-bottom:20rpx;
+}
+.i-info view text:last-child{
+  text-align: left;
+  margin-left: 10rpx;
+}
+.i-info view:last-child{
+  margin-bottom:0;
+}
+.i-btn{
+  color: #0ec1ec;
+}
+.wux-dialog__hd{
+  border-bottom:1px solid #D5D5D6;
+  line-height:96rpx;
+  font-size:36rpx;
+  padding:0;
+}

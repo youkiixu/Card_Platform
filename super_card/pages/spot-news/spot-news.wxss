@@ -1,0 +1,37 @@
+/* super_card/pages/spot-news/spot-news.wxss */
+page{
+  background-color: #fff;
+}
+.news-act{
+  padding:0 30rpx;
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
+.news-act:last-child{
+  margin-bottom: 50rpx;
+}
+.news-l{
+  color: #959595;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  width:150rpx;
+  text-align:center;
+  line-height:36rpx;
+}
+.news-r{
+  flex: 1;
+  -webkit-flex: 1;
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  padding: 16rpx;
+}
+.news-r view{
+  font-size: 28rpx;
+  color: #5f5f5f;
+  line-height: 44rpx;
+}

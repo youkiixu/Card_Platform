@@ -1,0 +1,49 @@
+<!--super_card/pages/certify-opt/certify-opt.wxml-->
+<view class='contains'>
+  <view class='tip'>
+    <text>认证就是放心的环境、质量，是信誉的保障</text>
+  </view>
+  <view class='content'>
+    <text class='state'>选择以下任意一种方式，证明你的身份</text>
+    <view class='choice'>
+    
+      <view class='left'>
+          <view class='img-info'>
+            <image src='/super_card/resource/images/cr-1.png' mode='widthFix'></image>
+            <text>身份证</text>
+          </view>
+          <view class='btn-submit'>
+          <form report-submit='true' bindsubmit="checkApplyV">
+            <button form-type='submit' data-type="2" class='btn-block btn-blue' style='background:{{ themeColor }};'>个人认证</button>
+          </form>
+          </view>
+      </view>
+      
+      <view class='right'>
+      
+        <view class='img-info'>
+          <image src='/super_card/resource/images/cr-2.png' mode='widthFix'></image>
+          <text>企业营业执照</text>
+        </view>
+        <view class='btn-submit'>
+          <form report-submit='true' bindsubmit="checkApplyV">
+          <button form-type='submit' data-type="1" class='btn-block btn-blue' style='background:{{ themeColor }};'>企业认证</button>
+          </form>
+        </view>
+        
+      </view>
+     
+    </view>
+  </view>
+  <view class='fit'>
+    <view class='fit-title' style='color:{{ themeColorV }};'>
+      <icon type="warn" size="14" color="{{ themeColorV }}"/>
+      <text>郑重提示</text>
+    </view>
+    <text class='con'>依照《公司法》的相关规定，未经依法登记而冒用公司或分公司的名义将被处以最高10万的罚款，并追究相关刑事责任</text>
+  </view>
+</view>
+
+
+
+

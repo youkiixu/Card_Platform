@@ -1,0 +1,35 @@
+/* super_card/pages/group-fit/group-fit.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.tb{
+  margin:20rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+}
+.tb text{
+  margin-right: 20rpx;
+}
+.tbs{
+  margin:20rpx;
+}
+.act{
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+.tra{
+  color:#4598da;
+}
+.trb{
+  color:#dcdcdc;
+  margin:16rpx;
+  font-size: 40rpx;
+  line-height: 40rpx;
+}
+.yes{
+  color:#00a1e9;
+}

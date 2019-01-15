@@ -1,0 +1,138 @@
+/* super_card/pages/modify/modify.wxss */
+.top{
+  font-size: 34rpx;
+  color: rgb(132, 130, 130);
+  text-align: center;
+}
+.top text{
+  padding: 20rpx 0;
+  display: inline-block;
+}
+.section{
+  overflow:hidden;
+  /*height:100vw;*/
+}
+.section-area{
+  height:100vw;
+  width:100vw; 
+  background: #000;
+}
+.section-view{
+  height:50vw;
+  width: 50vw;
+  background: #fff;
+  margin-top:25vw;
+  margin-left:25vw;
+  background: linear-gradient(to left, #04b00f, #04b00f) left top no-repeat, 
+              linear-gradient(to bottom, #04b00f, #04b00f) left top no-repeat, 
+              linear-gradient(to left, #04b00f, #04b00f) right top no-repeat,
+              linear-gradient(to bottom, #04b00f, #04b00f) right top no-repeat, 
+              linear-gradient(to left, #04b00f, #04b00f) left bottom no-repeat,
+              linear-gradient(to bottom, #04b00f, #04b00f) left bottom no-repeat,
+              linear-gradient(to left, #04b00f, #04b00f) right bottom no-repeat,
+              linear-gradient(to left, #04b00f, #04b00f) right bottom no-repeat;
+  background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px; 
+}
+.controls-top,.controls-bottom{
+  position: relative;
+  top: 0;
+  height: 25vw;
+  display: flex;
+  display: -webkit-flex;
+  background-color: rgba(0, 0, 0, .5);
+}
+.controls-bottom{
+  top: 50vw;
+}
+.controls-left,.controls-right{
+  position: relative;
+  top: -25vw;
+  height: 50vw;
+  width: 25vw;
+  display: flex;
+  display: -webkit-flex;
+  background-color: rgba(0, 0, 0, .5);
+}
+.controls-left{
+  left: 0;
+  float: left;
+}
+.controls-right{
+  right: 0;
+  float: right;
+}
+.rotate{
+  position:relative;
+  right:-85vw;
+  top:-75rpx;
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.btn-submit{
+  margin:40rpx 20rpx;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+.btn-white{
+  background: #fff;
+  color: #00a1e9;
+  border: 1px solid #00a1e9;
+}
+.btn-bottom{
+  margin-bottom: 100rpx;
+}
+
+.cropper-wrapper{
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-diretion:row;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -webkit-align-items: center;
+    /* justify-content: center; */
+    /*height: 100%;*/
+    background-color: #e5e5e5;
+}
+/*we-crop-CSS*/
+.cropper-buttons{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-diretion:row;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -webkit-align-items: center;
+    /* justify-content: center; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+
+.cropper-buttons .upload, .cropper-buttons .getCropperImage{
+    width: 50%;
+    text-align: center;
+}
+.cropper{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cropper-buttons{
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #04b00f;
+}

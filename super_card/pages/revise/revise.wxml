@@ -1,0 +1,70 @@
+<!--super_card/pages/revise/revise.wxml-->
+<view class='contains'>
+  <form bindsubmit='saveIdentify'>
+    <view class='act'>
+      <view class='info'>
+        <view class='tit'>
+          <text>姓名</text>
+          <image class='iconfont icon-jiaxing'></image>
+        </view>
+        <input type='text' name="name" maxlength="30" placeholder="0~30字符" value="{{ identify_data.name }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>手机</text>
+          <image class='iconfont icon-jiaxing'></image>
+        </view>
+        <input type='text' name="mobile" maxlength="20" placeholder="0~20字符" value="{{ identify_data.mobile }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>公司</text>
+        </view>
+        <input type='text' name="company" maxlength="30" placeholder="0~30字符" value="{{ identify_data.company }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>职务</text>
+        </view>
+        <input type='text' name="title" maxlength="30" placeholder="0~30字符" value="{{ identify_data.title }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>地址</text>
+        </view>
+        <input type='text' name="address" maxlength="50" placeholder="0~50字符" value="{{ identify_data.address }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>邮箱</text>
+        </view>
+        <input type='text' name="email" maxlength="30" placeholder="0~30字符" value="{{ identify_data.email }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>电话</text>
+        </view>
+        <input type='text' name="tel" maxlength="30" placeholder="0~30字符" value="{{ identify_data.tel }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>传真</text>
+        </view>
+        <input type='text' name="fax" maxlength="20" placeholder="0~20字符" value="{{ identify_data.fax }}"></input>
+      </view>
+      <view class='info'>
+        <view class='tit'>
+          <text>网址</text>
+        </view>
+        <input type='text' name="www" maxlength="30" placeholder="0~30字符" value="{{ identify_data.www }}"></input>
+      </view>
+    </view>
+    <view class='btn-submit'>
+  
+      <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>保 存</button>
+
+    </view>
+  </form>
+</view>
+
+

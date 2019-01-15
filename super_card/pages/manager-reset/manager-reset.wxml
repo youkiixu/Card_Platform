@@ -1,0 +1,20 @@
+<!--super_card/pages/manager-reset/manager-reset.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class='contains'>
+  <view wx:key="cards" wx:for="{{ card_list }}" class='card-holder' bindtap='changeManager' data-card_id="{{ item.id }}" data-name="{{ item.name }}" data-uid="{{ item.uid }}">
+    <view class='img-fit'>
+      <!--姓  -->
+      <text wx:if="{{ !item.picture }}" class='text-img'>{{ item.name }}</text>
+      <!--图片  -->
+       <image wx:if="{{ item.picture }}" class='img' src='{{ item.picture }}'></image> 
+    </view>
+    <view class='card-info'>
+      <view class='card-name'>
+        <text>{{ item.name }}</text>
+      </view>
+      <text class='job'>{{ item.title }}</text>
+      <text class='company'>{{ item.company }}</text>
+    </view>
+  </view>
+</view>

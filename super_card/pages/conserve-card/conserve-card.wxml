@@ -1,0 +1,58 @@
+<!--super_card/pages/conserve-card/conserve-card.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <view class='title'>
+      <text class='name'>{{ card.name }}</text>
+      <text style="color:{{ themeColor }};">的专属名片小程序码</text>
+    </view>
+    <image class='top-img' src='{{ qrcode }}' bindtap='previewQrcode'></image>
+    <image class='top-img-solid' mode='widthFix' src='/super_card/resource/images/conserve.png'></image>
+    <view class='trg'>
+      <text>此名片码可印刷在</text>
+      <text style="color:{{ themeColor }};">纸质名片、宣传单、海报、易拉宝等宣传册上</text>
+      <text>微信扫一扫名片即可存入通讯录，无需打字</text>
+    </view>
+  </view>
+  <swiper  class='con' circular indicator-dots='true'>
+    <swiper-item wx:key="exPics" wx:for="{{ exPics }}">
+      <view class='content'>
+        <text>{{ item.title }}</text>
+      </view>
+      <image src="{{ item.url }}" mode='widthFix'/>
+    </swiper-item>
+  </swiper>
+  <view class='btn-submit'>
+    <button bindtap="showModal" class='btn-block btn-blue' style='background:{{ themeColor }};'>保存小程序码到手机</button>
+  </view>
+  <!--hide 隐藏  -->
+  <view class='mask' bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <view class='con-b' animation="{{animationData}}" wx:if="{{showModalStatus}}">
+      <view class='bottom-fix'>
+        <text class='bottom-fix-title'>请选择名片码的尺寸</text>
+        <view class='bottom-fix-content'>
+          
+          <view bindtap='setDiffVal' data-val="8cm" class="bottom-fix-info{{diff == '8cm' ? ' tag' : ''}}" style="background-color:{{ diff == '8cm' ? themeColorV : '' }};margin-right:1%;margin-bottom:20rpx;">
+            <text>8cm×8cm</text>
+            <text>适合于纸质名片</text>
+          </view>
+          <view bindtap='setDiffVal' data-val="20cm" class="bottom-fix-info{{diff == '20cm' ? ' tag' : ''}}" style="background-color:{{ diff == '20cm' ? themeColorV : '' }};margin-left:1%;margin-bottom:20rpx;">
+            <text>20cm×20cm</text>
+            <text>宣传单、画册、杂志</text>
+          </view>
+          <view bindtap='setDiffVal' data-val="60cm" class="bottom-fix-info{{diff == '60cm' ? ' tag' : ''}}" style="background-color:{{ diff == '60cm' ? themeColorV : '' }};margin-right:1%;">
+            <text>60cm×60cm</text>
+            <text>适合于海报、易拉宝</text>
+          </view>
+          <view bindtap='setDiffVal' data-val="240cm" class="bottom-fix-info{{diff == '240cm' ? ' tag' : ''}}" style="background-color:{{ diff == '240cm' ? themeColorV : '' }};margin-left:1%;">
+            <text>240cm×240cm</text>
+            <text>户外广告、高速立柱</text>
+          </view>
+
+        </view>
+        <view class='btn-confirm'>
+          <button class='btn-block btn-blue' style='background:{{ themeColor }};' disabled='{{ confirmBtnDisabled }}' bindtap='saveQrcodeToPhotosAlbum'>确认</button>
+        </view>
+      </view>
+  </view>
+
+</view>

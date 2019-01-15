@@ -1,0 +1,64 @@
+<!--super_card/pages/edit-picture/edit-picture.wxml-->
+<view class='contains'>
+  
+    <block wx:if="{{ type == 'more_pic' }}">
+    <view class='imgs'>
+    <swiper class='con' circular indicator-dots='true' autoplay='true' interval='5000' duration='500'>
+      <swiper-item wx:key="mpic" wx:for="{{ pics }}" wx:for-index="mpdx">
+        <image src="{{ item }}" mode='aspectFill'/>
+        <view data-index="{{ mpdx }}" bindtap='editPic' class='edit'>
+          <text class='iconfont icon-bianji'></text>
+        </view>
+      </swiper-item>
+    </swiper>
+    </view>
+    </block>
+
+    <block wx:if="{{ type == 'grid_pic' }}">
+      <view class="grid-pics">
+     <!--一行两张-->
+      <view class='img-small'>
+        <!--循环体 class 为 img-small -->
+        <view class='img-total'  wx:key="mpic" wx:for="{{ pics }}" wx:for-index="mpdx">
+        
+          <image class='img-album' src='{{ item }}' mode='aspectFill'></image>
+          <view data-index="{{ mpdx }}" bindtap='editPic' class='edit'>
+            <text class='iconfont icon-bianji'></text>
+          </view>
+        </view>
+       
+      </view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="singlePic" wx:key="mpic" wx:for="{{ pics }}" wx:for-index="mpdx" wx:if="{{ type == 'pic' }}">
+          <image style='width:100%;' src="{{ item }}" mode='widthFix' />
+          <view data-index="{{ mpdx }}" bindtap='editPic' class='edit'>
+            <text class='iconfont icon-bianji'></text>
+          </view>
+      </view>
+    </block>
+
+  <view class='img-min'>
+    <view class='banner-sum'>{{ pics.length }}/{{ total }}(最多添加{{ total }}张图)</view>
+      <view class='id-img'>
+
+        <view class='dt-img' wx:key="mpic" wx:for="{{ pics }}" wx:for-index="mpdx">
+          <image data-index="{{ mpdx }}" src='{{ item }}'></image>
+          <text class='del-icon iconfont icon-plus' bindtap='removePic' data-index="{{ mpdx }}"></text>
+        </view>
+
+        <view wx:if="{{ pics.length < total }}" bindtap='uploadPostPic' class='dt-img'>
+          <text class='iconfont icon-plus'></text>
+        </view>
+
+      </view>
+  </view>
+
+  <view class='btn-submit'>
+      <form report-submit='true' bindsubmit="savePageData">
+    <button disabled='{{ dis }}' class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>保 存</button>
+    </form>
+  </view>
+</view>

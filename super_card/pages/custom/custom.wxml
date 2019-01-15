@@ -1,0 +1,88 @@
+<!--super_card/pages/custom/custom.wxml-->
+<import src="../../components/we-cropper/we-cropper.wxml"/>
+<import src="../../components/picker/picker.wxml"/>
+<template is="picker" data="{{ ...$wux.picker.colorlist }}"/>
+<view class='contains'>
+  
+  <view class='top'>
+    <block wx:if='{{ showCanvas }}'>
+    <template is="we-cropper" data="{{...cropperOpt}}"/>
+    <cover-view class='card' id="card" style="color:{{ textColor }};">
+      <cover-view class='info'>
+        <cover-view class='info-top'>
+          <cover-view class='info-basic'>
+            <cover-view>{{ card.name }}</cover-view>
+            <cover-view>{{ card.title }}</cover-view>
+            <cover-view>{{ card.company }}</cover-view>
+          </cover-view>
+          <cover-image class='img-icon' src='{{ card.picture }}'></cover-image>
+        </cover-view>
+        <cover-view class='info-bottom'>
+
+          <cover-view class='pa blue' style="color:{{ textColor }};">
+            <cover-view class='pa-tit'>
+              <!-- <cover-image src='../../resource/icon/group.png'></cover-image> -->
+              <cover-view class='iconfont icon-shouji' style='display:flex;align-items:center;color:#696969;'></cover-view>
+            </cover-view>
+            <cover-view class='pa-con ' >{{ card.mobile }}</cover-view>
+          </cover-view>
+
+          <cover-view class='pa blue' style="color:{{ textColor }};">
+            <cover-view class='pa-tit'>
+              <cover-view class='iconfont icon-dingwei' style='display:flex;align-items:center;color:#696969;'></cover-view>
+            </cover-view>
+            <cover-view class='pa-con'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</cover-view>
+          </cover-view>
+
+          <cover-view class='pa blue' wx:if="{{ card.tel }}" style="color:{{ textColor }};">
+            <cover-view class='pa-tit'>
+              <cover-view class='iconfont icon-dianhua' style='display:flex;align-items:center;color:#696969;'></cover-view>
+            </cover-view>
+            <cover-view class='pa-con' style="color:{{ textColor }};">{{ card.tel }}</cover-view>
+          </cover-view>
+
+          <cover-view class='pa' wx:if="{{ card.email }}">
+            <cover-view class='pa-tit'>邮箱</cover-view>
+            <cover-view class='pa-con'>{{ card.email }}</cover-view>
+          </cover-view>
+          <cover-view class='pa' wx:if="{{ card.qq }}">
+            <cover-view class='pa-tit'>QQ</cover-view>
+            <cover-view class='pa-con'>{{ card.qq }}</cover-view>
+          </cover-view>
+          <cover-view class='pa' wx:if="{{ card.fax }}">
+            <cover-view class='pa-tit'>传真</cover-view>
+            <cover-view class='pa-con'>{{ card.fax }}</cover-view>
+          </cover-view>
+          <cover-view class='pa' wx:if="{{ card.www }}">
+            <cover-view class='pa-tit'>网址</cover-view>
+            <cover-view class='pa-con'>{{ card.www }}</cover-view>
+          </cover-view>
+          <cover-view class='pa' wx:if="{{ card.wx }}">
+            <cover-view class='pa-tit'>微信</cover-view>
+            <cover-view class='pa-con'>{{ card.wx }}</cover-view>
+          </cover-view>
+          <cover-view class='pa' wx:if="{{ card.weibo }}">
+            <cover-view class='pa-tit'>微博</cover-view>
+            <cover-view class='pa-con'>{{ card.weibo }}</cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+
+  </block>
+  </view>
+  <view class='bottom' id="bottom">
+    <view class='box' bindtap='chooseBgImg'>
+      <image class='iconfont icon-shujudaochu' style='font-size:50rpx;'></image>
+      <text>上传背景图</text>
+    </view>
+    <view class='box' bindtap='showColorPick'>
+      <image class='iconfont icon-shezhi' style='font-size:50rpx;'></image>
+      <text>字体颜色</text>
+    </view>
+    <view class='box' bindtap='previewCardBg'>
+      <image class='iconfont icon-xinxi' style='font-size:50rpx;'></image>
+      <text>预览</text>
+    </view>
+  </view>
+</view>

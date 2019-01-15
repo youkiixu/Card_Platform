@@ -1,0 +1,12 @@
+<!--super_card/pages/follow-record/follow-record.wxml-->
+<view class='contains'>
+  <view class='fr-word'>
+    <textarea placeholder='请输入标题/内容' placeholder-class='fr-textarea' value="{{ info }}" bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' maxlength='{{ max }}'></textarea>
+    <!--view class='count'>{{ length }}/{{ max }}</view-->
+  </view>
+  <view class='btn-submit'>
+    <form report-submit='true' bindsubmit="savePageData">
+      <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>保存</button>
+      </form>
+  </view>
+</view>

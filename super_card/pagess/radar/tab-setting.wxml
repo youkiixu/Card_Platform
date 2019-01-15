@@ -1,0 +1,37 @@
+<!--super_card/pages/tab-setting/tab-setting.wxml-->
+<view class='contains'>
+
+    <view class='tab-choice'>
+      <view class='tab-tit'>客户类型</view>
+      <view class='tab-key'>
+        
+        <radio-group class="radio-group" bindchange="typeChange">
+          <view class="class-r-g" wx:key="typearr" wx:for="{{ type_array }}">
+              <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}" data-id='item.index'></radio>           
+              <label for="{{item.name}}">
+                <text class='{{item.checked?"checkedt":"normalt"}}' style="color:{{ item.checked?themeColor:'' }};">{{item.name}}</text>
+              </label>
+          </view>
+        </radio-group>
+      </view>
+      <view class='tab-tit'>客户状态</view>
+      <view class='tab-key'>
+        <radio-group class="radio-group" bindchange="stateChange">
+         
+          <view class="class-r-g" wx:key="state_arr" wx:for="{{ state_array }}">
+              <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}" data-id='item.index'></radio>           
+              <label for="{{item.name}}">
+                <text class='{{item.checked?"checkedt":"normalt"}}' style="color:{{ item.checked?themeColor:'' }};">{{item.name}}</text>
+              </label>
+          </view>
+        </radio-group>
+      </view>
+    </view>
+    <view class='tab-btn'>
+      <view class='btn-submit'>
+        <button bindtap='updateClientStuff' class='btn-block btn-blue' disabled='{{ btnDisabled }}' style='background:{{ themeColor }};'>保存设置</button>
+      </view>
+    </view>
+
+
+</view>

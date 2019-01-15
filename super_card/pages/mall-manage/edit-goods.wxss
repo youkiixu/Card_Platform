@@ -1,0 +1,382 @@
+/* super_card/pages/edit-goods/edit-goods.wxss */
+.contains{
+  background-color: #fff;
+}
+
+.banner-add{
+  background-color: #f1f1f1;
+  position: relative;
+}
+.add-img{
+  width: 100vw;
+  height: inherit;
+}
+.banner-add swiper{
+  height: 80vw;
+}
+.banner-edit{
+  position:absolute;
+  left:43vw;
+  top:35vw;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  color: #cccccc;
+}
+.banner-edit .iconfont{
+  font-size: 80rpx;
+  line-height: 80rpx;
+}
+.edit-img{
+  font-size: 24rpx;
+  margin-top:6rpx;
+  letter-spacing:4rpx;
+}
+.banner-tips{
+  font-size: 28rpx;
+  position:absolute;
+  right:30rpx;
+  bottom:50rpx;
+}
+.shop-infomation{
+  background-color: #fff;
+  padding:30rpx 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+.si-act{
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+}
+.si-act input{
+  text-align:center;
+  border-bottom:1px solid #666666;
+}
+.si-act .iconfont{
+  color: #666666;
+}
+.si-act-price{
+  color:#f90;
+  width: 170rpx;
+}
+.si-act-stock{
+  color:#666666;
+  width: 170rpx;
+}
+.si-name{
+  width: 200rpx;
+}
+.si-f-name{
+  width: 230rpx;
+}
+
+.blank{
+  height: 150rpx;
+}
+.sj-bot{
+  background-color: #fff;
+  border-top: 1px solid #cccccc;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+.sj-act{
+  flex: 1;
+  padding: 10rpx 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+.sj-act .iconfont{
+  color: #f90;
+  margin-bottom: 10rpx;
+  font-size: 50rpx;
+  line-height: 50rpx;
+}
+.sj-act .icon-iconfontzhizuobiaozhunbduan31{
+  font-weight: bold;
+}
+.sj-sm{
+  font-size: 28rpx;
+}
+
+.buttom-info {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #888;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+}
+
+.buttom-info text:nth-child(2) {
+  margin: 0 10rpx;
+  color: #000000;
+}
+
+
+.pageList{
+  position: relative;
+  width: 100%;
+}
+
+.pageList .del-icon{
+  position: absolute;
+  top:15rpx;
+  right:15rpx;
+}
+
+.ed-btn{
+  font-size: 26rpx;
+  padding: 30rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ed-tj{
+  border: 1px solid #00a1e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#00a1e9;
+  border-radius: 60rpx;
+  height: 60rpx;
+  width: 150rpx;
+  margin: 0 10rpx;
+}
+.ed-tj .iconfont{
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+.tj-repeat{
+  background-color: #00a1e9;
+  color: #fff;
+}
+.refer-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+}
+.refer-btn .btn-submit{
+  flex: 1;
+  padding: 30rpx;
+}
+.blank{
+  height:200rpx;
+}
+
+.ed-title{
+  padding:20rpx 30rpx;
+  background-color: #eeeeee;
+  display: flex;
+  align-items:center;
+}
+.vl{
+  width: 3px;
+  height: 40rpx;
+  background-color: #00a1e9;
+}
+.title-content{
+  font-size:28rpx;
+  flex: 1;
+  padding: 0 20rpx;
+  word-break:break-all;
+}
+.content-info{
+  font-size:28rpx;
+  margin-right: 20rpx;
+  flex: 1;
+  word-break:break-all;
+}
+.img-pp{
+  display: flex;
+  flex-flow: column;
+}
+.img-pp image{
+  width: 100%;
+}
+.con{
+  height: 200px;
+}
+.con image{
+  width:100%;
+  height:inherit;
+}
+.display-mode-bot{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.6);
+}
+.display-mode{
+  font-size: 28rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 101;
+  width: 100%;
+  background-color: #fff;
+}
+.dm-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+}
+.dm-act{
+  margin: 0rpx 20rpx 20rpx 20rpx;
+  padding: 20rpx;
+  border: 1px solid #cccccc;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+}
+.dm-act image{
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 20rpx;
+}
+.dm-act-pp{
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.dm-act-pp view:last-child{
+  color:#999999;
+  margin-top: 20rpx;
+}
+.dm-act-del{
+  margin-top: 50rpx;
+  border-top: 1px solid #cccccc;
+  color:#999999;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+}
+
+.contactus{
+  color: #333333;
+  font-size: 28rpx;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+.ct-top{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.ct-r{
+  width: 100rpx;
+  height: 100rpx;
+}
+.ct-l{
+  display:flex;
+  flex:1;
+  margin-right:10rpx;
+  flex-flow:column;
+}
+.ct-phone{
+  padding: 16rpx 0;
+  display: flex;
+  align-items: center;
+}
+.ct-dial{
+  color: #f90;
+  border-radius: 10rpx;
+  border: 1px solid #f90;
+  padding: 2px 10px;
+  margin-left: 10rpx;
+}
+.ct-act{
+  padding: 16rpx 0;
+  display: flex;
+  justify-content: flex-start;
+}
+.ct-act-name , .ct-p{
+  margin-right: 20rpx;
+}
+.ct-act-con{
+  flex: 1;
+}
+
+.grid-pics{
+  padding:0 30rpx;
+}
+.img-small{
+  margin: 15rpx 0;
+}
+.img-small .img-album{
+  width: 45vw;
+  height: 45vw;
+}
+.img-small .img-total{
+  width:45vw;
+  display:inline-block;
+  margin: 0 0 2vw 0;
+  position: relative;
+}
+.img-small .img-total:nth-child(even){
+  margin-left: 2vw;
+}
+
+.ed-con{
+  padding:40rpx 30rpx;
+  background-color: #fff;
+  display: flex;
+  align-items:center;
+}
+.content-info{
+  font-size:28rpx;
+  flex: 1;
+  /*text-indent:2em;*/
+  letter-spacing: 2rpx;
+  text-align: justify;
+}
+
+.coverimg{
+  color:#b2b2b2;
+  text-align:right;
+  width:45rpx;
+  height:45rpx;
+  position:absolute;
+  top:15rpx;
+  right:15rpx;
+}
+
+.tex-img-gs{
+  font-size:160rpx;
+  line-height:160rpx;
+  margin-right:20rpx;
+  color:#cccccc;
+  width:160rpx;
+  height:160rpx;
+  border:1px solid #cccccc;
+}
+.pp-wg{
+  font-size:120rpx;
+  text-align:center;
+}

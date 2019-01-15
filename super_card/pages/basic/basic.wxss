@@ -1,0 +1,244 @@
+/* super_card/pages/group/group.wxss */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.card-t{
+  font-size:32rpx;
+  line-height: 32rpx;
+  font-weight:bold;
+  color: #00a1e9;
+}
+.wux-dialog__bd{
+  text-align: left;
+}
+.wux-dialog__scvi{
+  height:50vh;
+}
+.wux-dialog__btn--primary{
+  color:#00a1e9;
+}
+.industry-item{
+  border:1px solid #999;
+  padding:5rpx 10rpx;
+  border-radius:10rpx;
+  display:inline-block;
+  margin:5rpx;
+}
+.wux-dialog__bd .seleted{
+  border:1px solid #00a1e9;
+  color: #00a1e9;
+}
+
+.base{
+  display: flex;
+  display: -webkit-flex;
+}
+.top{
+  display: flex;
+  display: -webkit-flex;
+}
+.base_img{
+  display: inline-block;
+  width:20vw;
+  height:20vw;
+  background-color: #000;
+  margin:3vw;
+  margin-left: 0rpx;
+  border-radius: 5px;
+}
+.base_img image{
+  width:20vw;
+  height:20vw;
+}
+.base_mation{
+  width:69vw;
+  display: inline-block;
+  margin-top:3vw;
+  margin-bottom:3vw;
+}
+ .base_name{
+  border-bottom: 1px solid #e0e0e0;
+}
+.base_name input,.base_phone input{
+  display: inline-block;
+  vertical-align: middle;
+}
+.base_name,.base_phone{
+  line-height: 10vw;
+  display:flex;
+  display: -webkit-flex;
+  align-items:center;
+  -webkit-align-items:center;
+}
+.transfer{
+  position: relative;
+}
+.base image.icon{
+  position:absolute;
+  height:6vw;
+  left:0vw;
+  top:14vw;
+  background:rgba(0,0,0,0.4);
+  color:#fff;
+  font-size:40rpx;
+  line-height:6vw;
+  text-align:center;
+}
+.top .base_mation .base_phone input{
+  /* width: 70%; */
+  flex:1;
+  -webkit-flex:1;
+}
+.basict,.base{
+  background-color: #fff;
+  font-size: 36rpx;
+  padding:0 30rpx;
+  margin: 30rpx 0;
+}
+.base{
+  margin-bottom:0;
+}
+.coin{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkitalign-items:center;
+}
+.coin2{
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  
+}
+.coin2 definition{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.definition{
+  /* display: inline-block; */
+  width: 30%;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  -webkit-justify-content:flex-start;
+  -webkit-align-items:center;
+}
+.definition text:first-child{
+  font-size:36rpx;
+  line-height:36rpx;
+}
+
+.def-xxdz{
+  justify-content:space-between;
+  -webkit-justify-content:space-between;
+}
+/* .coin text,.coin2 text{
+  vertical-align:middle;
+} */
+/* .coin image,.coin2 image{
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align:middle;
+} */
+
+.coin input,.coin2 input{
+  display: flex;
+  display: -webkit-flex;
+  /* vertical-align:middle; */
+}
+.coin input{
+  display:inline-block;
+  padding-right:30rpx;
+}
+.coin2 input{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-right:30rpx;
+  align-items:center;
+  height:inherit;
+  line-height:inherit;
+}
+.add_bto{
+  display:flex;
+  width:70%;
+}
+.add_bto2{
+  display:flex;
+  width:70%;
+  border-bottom: 1px solid #e0e0e0;
+}
+.img_down{
+  float:right;
+  font-size: 70rpx;
+  line-height:70rpx;
+}
+.hide{
+  visibility:hidden;
+}
+.btn-submit{
+  padding:40rpx 20rpx;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+.gain_phone{
+  font-size: 34rpx;
+  text-align: center;
+  background-color: #F8F8F8;
+  color: #000;
+  border:inherit;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0px;
+}
+button::after{
+  border:0;
+}
+.v_codes{
+  display: flex;
+  display: -webkit-flex;
+}
+.v_code{
+  background:#fff;
+  border-top:1px solid #e0e0e0;
+  padding-left: 30rpx;
+  width: 60%;
+}
+.v_code_left{
+  width: 46%;
+}
+.v_code_icon{
+  width: 40%;
+}
+.v_code_right{
+  display: inline-block;
+  text-align: center;
+  width: 40%;
+  background: #00a1e9;
+  color: #fff;
+  line-height: 102rpx;
+  border-radius:0;
+}
+
+/*6.27修复*/
+.coin-company .add_bto{
+  display:flex;
+  display: -webkit-flex;
+  align-items:center;
+}
+
+.definition .icon-dingwei1{
+  /* float:right;
+  margin-top:5rpx; */
+  margin-right:10rpx;
+}

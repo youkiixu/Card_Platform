@@ -1,0 +1,14 @@
+<!--super_card/pages/about/about.wxml-->
+<view class='contains'>
+  <view class='content'>
+    <image src='{{ app_logo }}'></image>
+    <text>{{ app_name }}</text>
+  </view>
+  <view class='present'>
+    <!-- <image src='../../resource/icon/group.png'></image> -->
+    <text decode>{{ app_content }}</text>
+  </view>
+  <view class='bottom'>
+    <text>{{ copyright }}</text>
+  </view>
+</view>

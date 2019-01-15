@@ -1,0 +1,97 @@
+<!--super_card/pages/group-modify/group-modify.wxml-->
+<view class='contains'>
+  <text class='title'>1.请输入名片组名称</text>
+  <view class='info'>
+    <input type='text' name="name" maxlength="30" placeholder="4~30字 如：某某集团通讯录" value="{{ name }}" bindconfirm='setGroupName' bindblur='setGroupName' bindinput='setGroupName'></input>
+  </view>
+  <text class='title'>2.请选择名片组类型</text>
+  <view class='info' bindtap='showTypeSelect'>
+    <input disabled='true' type='text' name="type" placeholder="请选择" value="{{ typeVal }}"></input>
+    <image class='iconfont icon-jiantouarrow483'></image>
+  </view>
+  <text class='title'>3.名片组隐私权限设置</text>
+  <view class='info-rad'>
+    <view class='act'>
+      <text>3.1</text>
+      <radio-group class="radio-group" bindchange="requestChange">
+        <view class="radio">
+            <label><radio color='{{ themeColor }}' name="anyone_request" checked="{{anyone_request == 0 ? true : false}}" value="0"/>仅管理员可邀请新成员</label>
+            <label><radio color='{{ themeColor }}' name="anyone_request" checked="{{anyone_request == 1 ? true : false}}" value="1" />组员都可邀请</label>
+        </view>
+      </radio-group>
+    </view>
+    <view class='act'>
+      <text>3.2</text>
+      <radio-group class="radio-group" bindchange="collectChange">
+        <view class="radio">
+            <label><radio color='{{ themeColor }}' name="allow_collect" checked="{{allow_collect == 1 ? true : false}}" value="1"/>允许收藏组内名片</label>
+            <label><radio color='{{ themeColor }}' name="allow_collect" checked="{{allow_collect == 0 ? true : false}}" value="0" />不允许直接收藏</label>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+
+  <block wx:if="{{ group_id > 0 }}">
+  <text class='title'>4.请输入名片组备注</text>
+  <view class='info'>
+    <textarea placeholder="0~200字，可为空" maxlength="200" value="{{ note }}" name="note" bindconfirm='setGroupNote' bindblur='setGroupNote' bindinput='setGroupNote' />
+  </view>
+  </block>
+  <block wx:else>
+  <text class='title'>4.请确定我在此名片组中显示的名片</text>
+  <view class='info-choice'>
+    <view class='info-img'>
+      <image src="{{ card.picture }}"></image>
+    </view>
+    <view class='info-card'>
+      <text class='card-name'>{{ card.name }} {{ card.title }}</text>
+      <text class='card-phone'>{{ card.mobile }}</text>
+      <text class='card-company'>{{ card.company }}</text>
+    </view>
+    <view wx:if="{{ userCards.length > 1 }}" class='card-change' bindtap='openCardSelect'>
+      <text style="background-color:{{ themeColor }};">换个名片</text>
+    </view>
+  </view>
+  <text class='cue'>注：名片组创建者自动成为该组管理员，管理员角色可以转让</text>
+  </block>
+
+  <view class='btn-submit'>
+    <button class='btn-block btn-blue' bindtap='saveGroup' style='background:{{ themeColor }};'>{{ group_id > 0 ? '保存' : '创建名片组' }}</button>
+  </view>
+  <view class='btn-submit'>
+    <button bindtap='navBack' class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};'>取 消</button>
+  </view>
+
+</view>
+
+<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
+<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">请选择名片</view>
+        </view>
+        <view class="wux-dialog__bd">
+          <scroll-view scroll-y="true">
+            <radio-group class="radio-group" bindchange="cardChange">
+              <block wx:for="{{ userCards }}" wx:key="cards">       
+                <label class="radio">
+                    <view class="info-choices {{card_id == item.id ? 'info-bg-color' : 'info-no-bg-color'}}" style="border-color:{{card_id == item.id ? themeColor : ''}};">
+                      <radio color="{{ themeColor }}" class='radio-t' value="{{ item.id }}" checked="{{card_id == item.id ? true : false}}" />
+                      <view class='info-img'>
+                        <image src="{{ item.picture }}"></image>
+                      </view>
+                      <view class='info-card'>
+                        <text class='card-name'>{{ item.name }} {{ item.title }}</text>
+                        <text class='card-phone'>{{ item.mobile }}</text>
+                        <text class='card-company'>{{ item.company }}</text>
+                      </view>
+                    </view>
+                </label>
+              </block>
+            </radio-group>
+          </scroll-view>
+        </view>
+        <view class="wux-dialog__ft">
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view>
+                <view style="color:{{ themeColor }};" class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmCardSelect">确定</view>
+        </view>
+</view>

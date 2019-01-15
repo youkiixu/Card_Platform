@@ -1,0 +1,119 @@
+<!--super_card/pages/group/group.wxml-->
+<import src="../../components/picker-city/picker-city.wxml"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<form report-submit='true' bindsubmit='saveCard'>
+<view>
+  <view class='base'>
+    <view class='top'>
+      <view class='base_img'>
+      <navigator url="../avatar/avatar?card_id={{card_id}}">
+        <view class='transfer'>
+          <image src='{{ picture }}'></image>
+          <image class='icon iconfont icon-xiangji'></image>
+        </view>
+        </navigator>
+      </view>
+
+    </view>
+    <view class='top'>
+      <view class='base_mation'>
+        <view class='base_name'>
+          <icon class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-right:10rpx;'></icon>
+          <input placeholder="姓名 2~8个字" maxlength="8"  type="text" name="name" value="{{ name }}"/>
+        </view>
+        <view class='base_phone'>
+          <icon class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-right:10rpx;'></icon>
+          <input type="number" maxlength="11" disabled="{{ mobileInputDisable }}" placeholder="{{ mobileInputHolder }}" name="mobile" value="{{ mobile }}" bindinput='setUserMobile' />
+          <text wx:if="{{ showMobileTypeArrow }}" class="cl img_down iconfont icon-caret-right-copy-copy" style='color:{{ themeColor }};' bindtap='showTelType'></text>
+          <!-- <image class='img_down' src='../../resource/icon/group.png' bindtap='showTelType'></image> -->
+        </view>
+      </view>
+    </view>
+  </view> 
+  <view class='v_codes' wx:if="{{ showVcodeInput }}">
+    <view class='coin v_code'>
+      <view class='definition v_code_left'>
+        <text>验证码</text>
+        <icon class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-left:10rpx;'></icon>
+      </view>
+      <view class='add_bto v_code_icon'>
+        <input type="number" name="smscode" placeholder="6位数字" value="{{ smscode }}" maxlength="6" bindblur="setSmscode"/>
+      </view>
+    </view>
+    <button bindtap="sendMobileVcode" disabled="{{ sendBtnDisabled }}" class='v_code_right' style='background-color:{{ themeColor }};'>{{ sendBtnText }}</button>
+  </view>
+  <button wx:if="{{ showWxPhoneBtn }}" class='gain_phone' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击获取微信手机号</button>
+</view> 
+
+<view>
+  <view class='basict'>
+    <view class='coin coin-company'>
+      <view class='definition'>
+        <text>公司</text>
+        <text class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-left:10rpx;'></text>
+      </view>
+      <view class='add_bto'>
+        <input type="text" maxlength="16" name="company" placeholder="4~16个字" value="{{ company }}"/>
+        <text class="cl img_down iconfont icon-caret-right-copy-copy" style='color:{{ themeColor }};' bindtap='getCompanyName'></text>
+      </view>
+    </view>
+    <view class='coin'>
+      <view class='definition'>
+        <text>职务</text>
+        <!--text class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-left:10rpx;'></text-->
+      </view>
+      <view class='add_bto'>
+        <input type="text" maxlength="15" name="title" placeholder="0~15个字" value="{{ title }}"/>
+      </view>
+    </view>
+    <view class='coin'>
+      <view class='definition'>
+        <text>行业</text>
+        <text class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-left:10rpx;'></text>
+      </view>
+      <view class='add_bto'>
+        <input type="text" name="industry" bindtap='showIndustrySelect' disabled="true" placeholder="请选择1~3个行业" value="{{ industry }}"/>
+      </view>
+    </view>
+    <view class='coin2'>
+      <view class='definition'>
+        <text>地址</text>
+        <text class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-left:10rpx;'></text>
+      </view>
+      <view class='add_bto2'>
+        <input type="text" name="pcd" disabled="true" placeholder="(省)-(市)-(区)" value="{{ pcd }}" bindtap='showDictPicker'/>
+      </view>
+    </view>
+    <view class='coin2'>
+      <view class='definition def-xxdz' bindtap='getCurrentLocation'>
+        <text class='hide'>详细地址</text>
+        <text class="card-t iconfont icon-dingwei1" style='color:{{ themeColor }};'></text>
+      </view>
+      <view class='add_bto'>
+        <input type="text" name="address" maxlength="25" placeholder="详细地址 5~25字 可空" value="{{ address }}"/>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='btn-submit'>
+  <button class='btn-block btn-blue'  style='background:{{ themeColor }};' form-type='submit'>保 存</button>
+</view>
+</form>
+
+<view class="wux-backdrop {{ industrySelect.animateCss }}" wx:if="{{ industrySelect.visible }}"></view>
+	<view class="wux-dialog {{ industrySelect.animateCss }}" wx:if="{{ industrySelect.visible }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">请选择1~3个行业</view>
+        </view>
+        <view class="wux-dialog__bd">
+          <scroll-view class='wux-dialog__scvi' scroll-y>
+            <block wx:for="{{ industryList }}" wx:key="industrys">
+                <text class="industry-item {{ item.seleted ? 'seleted' : '' }}" style="color:{{ item.seleted ? themeColorV : '' }};border-color: {{ item.seleted ? themeColorV : '' }};" data-index="{{ index }}" bindtap='toggleIndustryItem'>{{ item.name }}</text>
+            </block>
+          </scroll-view>
+        </view>
+        <view class="wux-dialog__ft">
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelIndustrySelect">取消</view>
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmIndustrySelect" style='color:{{ themeColor }};'>确定</view>
+        </view>
+</view>

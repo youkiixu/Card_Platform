@@ -1,0 +1,89 @@
+<!--super_card/pages/return-record/return-record.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <!--点击之前的样式  -->
+    <view wx:if="{{ show_search === false }}" class='search search-front' bindtap='toggleSearchInput'>
+      <icon type="search" size="16" color='{{ themeColor }}'/>
+      <text>搜索</text>
+    </view>
+    <!--点击之后的样式  -->
+    <view wx:if="{{ show_search }}" class='search search-rear'>
+      <view style='border-color:{{ themeColor }};'>
+        <icon type="search" size="16"/>
+        <input type='text' placeholder='输入昵称' name="pic" focus="true"  confirm-type="search" class='holder-search-i' bindconfirm="setSearchKey"></input>
+      </view>
+      <text bindtap='toggleSearchInput' style='color:{{ themeColor }};'>取消</text>
+    </view> 
+  </view>
+
+  <view class='record-option'>
+    <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectSend' style="color:{{catalogSelect == 1 ? themeColor:''}};">我传给了谁</view>
+    <view class="{{catalogSelect == 2 ? 'active':''}}" bindtap='selectReceive' style="color:{{catalogSelect == 2 ? themeColor:''}};">谁传给了我</view>
+    <view class="weui-navbar__slider" style="width:40vw;background:{{ themeColor }};left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
+  </view>
+  <!--发送记录  -->
+  <block wx:if="{{ catalogSelect == 1 }}">
+    <block wx:if="{{ sendlList.length > 0 }}">
+      <view class='caption-info'>
+        <block wx:key="{{ index }}" wx:for="{{ sendlList }}" wx:for-index="idx"  wx:for-item="item">
+          <view class='act'>
+            <navigator url="../../pages/overt/overt?card_id={{ item.t_card_id }}">
+              <image class='act-img' src='{{ item.card_info.picture }}'></image>
+              <text wx:if="{{ item.is_v == 1 }}" class='rz-v'>V</text>
+            </navigator>
+            <view class='act-info'>
+              <view class='droptRetract-info'>
+                  <view class="act-talk {{item.show_hide === 1 ? 'act-talk-act':''}}">
+                    <text>对<text style='color:#09bb07;'>{{ item.card_info.name }}</text>说：{{ item.msg }}</text>
+                    <image wx:if="{{ item.show_hide === 2 }}" data-reply-Type="{{ idx }}" class='act-talk-img iconfont icon-caret-right-copy-copy' bindtap='droptRetracts'></image>
+                  </view>
+                  <image wx:if="{{ item.show_hide === 1 }}" data-reply-Type="{{ idx }}" class='act-talk-img rotate iconfont icon-caret-right-copy-copy' bindtap='droptRetracts'></image>
+              </view>
+              <text class='act-time'>发送时间：{{ item.create_time }}</text>        
+            </view>
+            <navigator url="../../pages/overt/overt?card_id={{ item.t_card_id }}">
+              <view wx:if="{{ item.status == 1 }}" class='act-yeslook'>已查看</view> 
+              <view wx:if="{{ item.status == 0 }}" class='act-nolook' style='border-color:{{ themeColor }};color:{{ themeColor }};'>未查看</view>
+            </navigator>
+          </view>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <text class='no-con'>目前没有发送名片记录</text>
+    </block>
+  </block>
+  <!--接收记录  -->
+  <block wx:if="{{ catalogSelect == 2 }}">
+    <block wx:if="{{ receiveList.length > 0 }}">
+      <view class='caption-info'>
+        <block wx:key="{{ index }}" wx:for="{{ receiveList }}" wx:for-index="idx"  wx:for-item="item">
+          <view class='act'>
+            <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+              <image class='act-img' src='{{ item.card_info.picture }}'></image>
+              <text wx:if="{{ item.is_v == 1 }}" class='rz-v'>V</text>
+            </navigator>
+            <view class='act-info'>
+              <view class='droptRetract-info'>
+                  <view class="act-talk {{item.show_hide === 1 ? 'act-talk-act':''}}">
+                    <text><text style='color:#09bb07;'>{{ item.card_info.name }}</text>说：{{ item.msg }}</text>
+                    <image wx:if="{{ item.show_hide === 2 }}" data-reply-Type="{{ idx }}" class='act-talk-img iconfont icon-caret-right-copy-copy' bindtap='droptRetract'></image>
+                  </view>
+                  <image wx:if="{{ item.show_hide === 1 }}" data-reply-Type="{{ idx }}" class='act-talk-img rotate iconfont icon-caret-right-copy-copy' bindtap='droptRetract'></image>
+              </view>
+              <text class='act-time'>发送时间：{{ item.create_time }}</text>        
+            </view>
+            <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+              <view wx:if="{{ item.status == 1 }}" class='act-yeslook'>已查看</view> 
+              <view wx:if="{{ item.status == 0 }}" class='act-nolook'  style='border-color:{{ themeColor }};color:{{ themeColor }};'>未查看</view>
+            </navigator>
+          </view>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <text class='no-con'>目前没有接收名片记录</text>
+    </block>
+  </block>
+
+</view>

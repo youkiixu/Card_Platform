@@ -1,0 +1,141 @@
+/* super_card/pages/album-edit/album-edit.wxss */
+.contains{
+  font-size: 18px;
+}
+.title{
+  height:45px;
+  line-height: 45px;
+  background-color: #fff;
+  display: flex;
+  display: -webkit-felx;
+  padding: 0 20rpx;
+  margin:25px 0;
+  font-size:18px;
+}
+.title-content{
+  display: flex;
+  display:-webkit-flex;
+  width: 95vw;
+}
+.title-content text{
+  flex:1;
+  -webkit-flex:1;
+}
+.entry{
+  flex:2;
+  -webkit-flex:2;
+}
+.entry input{
+  text-align:right;
+  height: 45px;
+  line-height: 45px !important;
+  padding-right: 10rpx;
+}
+/* .title image{
+  width:45px;
+  height:45px;
+} */
+.title-img{
+  width:45px;
+  text-align:center;
+}
+.trans{
+  transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  color:#ceced0;
+  display:inline-block;
+}
+.ico{
+  height:22px;
+  padding-left: 20rpx;
+  font-size:18px;
+}
+.color{
+  color:#cdcdcd;
+  padding-left: 20rpx;
+}
+.pictures{
+  background-color: #fff;
+  margin: 20px 0;
+}
+.pic{
+  display: inline-block;
+  /*padding: 10px 0;*/
+  position: relative;
+}
+.mainmove{
+  position: absolute; 
+  opacity: 0.7; 
+  z-index:1;
+}
+.mainend{
+  position: static; 
+  opacity: 1;
+}
+.lump{
+  width: 25vw;
+  height: 25vw;
+  display: inline-flex;
+  float:left;
+}
+.img,.add{
+  border: 1px solid #cdcdcd;
+  height: 20vw;
+  width: 20vw;
+  /* margin: 2vw; */
+  margin:auto;
+  display: inline-block;
+  overflow: hidden;
+  position:relative;
+}
+.img image{
+  height: 20vw;
+  width: 20vw;
+}
+.add text{
+  height: 15vw;
+  width: 15vw;
+  padding: 2.5vw;
+  line-height: 15vw;
+  text-align: center;
+  display:inline-block;
+  font-size: 100rpx;
+  color: #d9d9d9;
+}
+.img .edit{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  background-color: rgba(199, 195, 195, 0.6);
+  color: #fff;
+}
+.btn-submit{
+  margin:40rpx 20rpx;
+}
+.btn-block{
+  line-height: 90rpx;
+  letter-spacing: 2px;
+  border-radius:50rpx;
+}
+.btn-white{
+  color: #00a1e9;
+  border: 1px solid #00a1e9;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+.hidden,.none {
+display:none!important;
+}
+.touchView{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:100;
+  width:100%;
+}

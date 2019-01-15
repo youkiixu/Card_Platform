@@ -1,0 +1,9 @@
+<!--super_card/pages/protocol/protocol.wxml-->
+<view class='contains'>
+  <view class='protocol'>
+    <text>{{ content }}</text>
+  </view>
+  <view class='btn-submit'>
+    <button bindtap='backPage' class='btn-block btn-blue' style='background:{{ themeColor }};'>我已阅读</button>
+  </view>
+</view>

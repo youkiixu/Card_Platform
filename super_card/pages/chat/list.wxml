@@ -1,0 +1,63 @@
+<!--super_card/pages/cose/cose.wxml-->
+<view class='contains'>
+  <!-- <view class='top'>
+    <view>访客</view>
+    <view>聊天</view>
+  </view> -->
+  <view class='cose-chat'>
+    <block  wx:for="{{ list }}" wx:key="clist" wx:for-index="cdx" wx:for-item="chat">
+      
+      <view class='main-items'>
+        <!--movable-area>
+          <movable-view damping="100" out-of-bounds="false" direction="horizontal" data-index='{{ cdx }}' x="{{ chat.x }}" animation="true" catchchange="handleMovableChange" catchtouchend="handleTouchend"-->
+            
+            <navigator url="chat?chat_id={{ chat.chat_id }}&from=list">
+              <view class='cose-act'>
+            
+                  <view class='act-left-info'>
+                    <image class='act-left-img' src='{{ chat.avatar }}'></image>
+                    <view class='act-left-tr' wx:if="{{ chat.num > 0 }}">{{ chat.num }}</view>
+                  </view>
+                  <view class='act-centre'>
+                    <view class='act-centre-top'> 
+                      <view class='act-centre-name'>{{ chat.name }}</view>
+                      <view class='act-right'>{{ chat.time_str }}</view>
+                    </view>
+                    <view class='act-centre-say'>
+                        <text wx:if="{{chat.type == 1}}">[图片]</text>
+                        <text wx:if="{{chat.type == 2}}">[名片]</text>
+                        <text wx:if="{{chat.type == 3}}">[产品]</text>
+                        <text wx:if="{{chat.type == 0}}">{{ chat.msg == '::sayHi::' ? 'Ta向您打了招呼' : chat.msg }}</text>
+                    </view>
+                  </view>
+
+              </view>
+            </navigator>
+          
+          <!--/movable-view>
+        </movable-area-->
+        <!--view class='delete-btn' data-productIndex="{{ cdx }}" catchtap='handleDeleteProduct'>删除</view-->
+
+      </view>
+
+    </block>
+
+
+
+    <!--view class='cose-act'>
+      <view class='act-left'>
+        <view class='act-left-info'>
+          <image class='act-left-img' src='https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIRnEPXb9GCj75gQMzib1kicpRyg2tUMyUlRmrbbciagYZ4fy2v2z8AoM8SDMRFjsvQ06oQ0vv13xWbw/132'></image>
+          <view class='act-left-tr'>2</view>
+        </view>
+        <view class='act-centre'>
+          <view class='act-centre-name'>阿里郎</view>
+          <view class='act-centre-say'>最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息</view>
+        </view>
+      </view>
+      <view class='act-right'>32分钟前</view>
+    </view-->
+
+  </view>
+
+</view>

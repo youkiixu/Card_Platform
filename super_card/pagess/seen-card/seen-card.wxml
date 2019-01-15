@@ -1,0 +1,83 @@
+<!--super_card/pages/seen-card/seen-card.wxml-->
+<view class='contains'>
+  <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+  <view class='top'>
+    <!--点击之前的样式  -->
+    <view wx:if="{{ show_search === false }}" class='search search-front' bindtap='toggleSearchInput'>
+      <icon type="search" size="16" color='{{ themeColor }}'/>
+      <text>搜索</text>
+    </view>
+    <!--点击之后的样式  -->
+    <view wx:if="{{ show_search }}" class='search search-rear'>
+      <view style='border-color:{{ themeColor }};'>
+        <icon type="search" size="16"/>
+        <input type='text' name="pic" focus="true"  confirm-type="search" class='holder-search-i' bindconfirm="setSearchKey"></input>
+      </view>
+      <text bindtap='toggleSearchInput' style='color:{{ themeColor }};'>取消</text>
+    </view>
+  </view>
+  <view class='contant'>
+    <block wx:key="{{ index }}" wx:for="{{ lookList }}" wx:for-index="idx"  wx:for-item="item">
+
+      <view wx:if="{{idx == 0 || item.create_time != lookList[(idx -1)].create_time }}" class='time'>
+        <text>{{ item.create_time }}</text>
+      </view> 
+      <view class='cards'>
+        <!--block wx:key="card_id" wx:for="{{ items }}"  wx:for-item="item"--> 
+
+          <block wx:if="{{ item.identify_id > 0 }}">
+            <navigator url="../../pages/recognition/recognition?identify_id={{ item.identify_id }}&hide_identify_btn=1">
+              <view class='card'>
+                <view class='card-img'>
+                  <text wx:if="{{ !item.avatar }}">{{ item.name }}</text>
+                  <image wx:if="{{ item.avatar }}" src='{{ item.avatar }}'></image>
+                </view> 
+                <view class='card-info'>
+                  <!-- <view class='name-time'> -->
+                    <text>{{item.name}}</text>
+                    <!-- <text>{{item.create_time}}</text>
+                  </view> -->
+                  <text class='card-info-title'>{{item.title}}</text>
+                  <text class='card-info-company'>{{item.company}}</text>
+                </view>
+                <view class='card-collection' wx:if="{{ item.is_collect }}">
+                  <view class='card-collection-img'>
+                    <text class='cs iconfont icon-wujiaoxing'></text>
+                  </view>
+                  <text class='store'>已收藏</text>
+                </view>
+              </view>
+            </navigator>
+          </block>
+          <block wx:else>
+            <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+              <view class='card'>
+                <view class='card-img'>
+                  <text wx:if="{{ !item.avatar }}">{{ item.name }}</text>
+                  <image wx:if="{{ item.avatar }}" src='{{ item.avatar }}' style="position:relative;"><text wx:if="{{ item.is_v == 1 }}" class='rz-v' style='background-color:{{ themeColorV }};'>V</text></image>
+                </view>
+                <view class='card-info'>
+                  <!-- <view class='name-time'> -->
+                    <text>{{item.name}}</text>
+                    <!-- <text>{{item.create_time}}</text>
+                  </view> -->
+                  <text class='card-info-title'>{{item.title}}</text>
+                  <text class='card-info-company'>{{item.company}}</text>
+                </view>
+                <view class='card-collection' wx:if="{{ item.is_collect }}">
+                  <view class='card-collection-img'>
+                    <text class='cs b50 iconfont icon-wujiaoxing'></text>
+                  </view>
+                  <text class='store'>已收藏</text>
+                </view>
+              </view>
+            </navigator>
+          </block>
+
+
+        <!--/block--> 
+      </view>
+    </block> 
+  </view>
+</view>
+

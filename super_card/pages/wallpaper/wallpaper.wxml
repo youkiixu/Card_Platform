@@ -1,0 +1,84 @@
+<!--super_card/pages/wallpaper/wallpaper.wxml-->
+<canvas canvas-id="myCanvas" style="position:absolute;border: 1px solid red; width:{{wp_w}}px;height:{{wp_h}}px;top:-9999px;left:-9999px;"></canvas>
+<view class='contains'>
+  <!--view class='top'>
+    <view class='cards-holder'>
+      <view class='card-holder'>
+        <view class='img-fit'>
+          <image class='img' src='{{ card.picture }}'></image>
+        </view>
+        <view class='card-info'>
+          <view class='card-name'>
+            <text>{{ card.name }}</text>
+          </view>
+          <text class='phone'>{{ card.mobile }}</text>
+          <text class='company'>{{ card.company }}</text>
+        </view>
+        <view class='btn-submit'>
+          <button style="background: {{ themeColor }};" class='btn-block btn-blue' wx:if="{{ userCards.length > 1 }}" bindtap='openCardSelect'>切换名片</button>
+        </view>
+      </view>
+    </view>
+  </view-->
+
+  <block wx:if="{{ bgimg && card }}">
+  <view class='wall-paper'>
+    <image class='wall-img' src='{{ bgimg }}' mode='widthFix'></image>
+    <view class='wall-time'>
+      <view>{{ day }}</view>
+      <view>{{ month }}</view>
+      <view>{{ year }}</view>
+    </view>
+    <view class='wall-next'>
+      <text class='iconfont icon-shuaxin' bindtap='changeBackdrop' style='color:{{ themeColorV }};'></text>
+      <view class='wall-change' bindtap='changeBackdrop' style='color:{{ themeColorV }};'>换一张</view>
+      <view class='paper-bot'>
+        <image class='wall-tx' src='{{ card.picture }}'></image>
+        <view class='wall-name'>{{ card.name }}</view>
+        <view class='wall-dk'>{{ card.company }}</view>
+      </view>
+    </view>
+    <view class='wall-blank'></view>
+  </view>
+  <view class='wall-bc'>保存图片到手机相册，然后发给朋友吧</view>
+  <view class='btn-submit btn-hold'>
+    <button disabled='{{ btnDis }}' bindtap='getPosterPic' class='btn-block btn-blue' style='background:{{ themeColor }};'>保 存</button>
+  </view>
+  </block>
+
+</view>
+
+
+
+
+<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
+<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">请选择名片</view>
+        </view>
+        <view class="wux-dialog__bd">
+          <scroll-view scroll-y="true">
+            <radio-group class="radio-group" bindchange="cardChange">
+              <block wx:for="{{ userCards }}" wx:key="cards">       
+                <label class="radio">
+                    <view class="info-choices {{card_id == item.id ? 'info-bg-color' : 'info-no-bg-color'}}" style="border-color:{{card_id == item.id ? themeColor : ''}};">
+                      <radio color="{{ themeColor }}" class='radio-t' value="{{ item.id }}" checked="{{card_id == item.id ? true : false}}" />
+                      <view class='info-img'>
+                        <image src="{{ item.picture }}"></image>
+                      </view>
+                      <view class='info-card'>
+                        <text class='card-name'>{{ item.name }} {{ item.title }}</text>
+                        <text class='card-phone'>{{ item.mobile }}</text>
+                        <text class='card-company'>{{ item.company }}</text>
+                      </view>
+                    </view>
+                </label>
+              </block>
+            </radio-group>
+          </scroll-view>
+        </view>
+        <view class="wux-dialog__ft">
+                <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view>
+                <view style="color:{{ themeColor }};" class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmCardSelect">确定</view>
+        </view>
+</view>

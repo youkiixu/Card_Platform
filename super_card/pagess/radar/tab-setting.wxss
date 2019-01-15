@@ -1,0 +1,68 @@
+/* super_card/pages/tab-setting/tab-setting.wxss */
+.contains{
+  font-size: 30rpx;
+}
+.tab-choice{
+  background-color: #fff;
+  padding: 0 30rpx;
+}
+.tab-tit{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #888888;
+  height: 80rpx;
+}
+.tab-key{
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.tab-btn{
+  background-color: #fff;
+  border-top:1px solid #e5e5e5;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.btn-block::after{
+  border: 0;
+}
+.btn-submit{
+  padding:30rpx;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:90rpx;
+  font-size: 36rpx;
+  letter-spacing: 6rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+
+.radio-group{
+  padding: 30rpx 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+.class-r-g{
+  margin: 10rpx;
+}
+.checkedt {
+   color: #00a1e9;
+   background-color:#e1f5de;
+   border-radius: 4px;
+   font-size: 28rpx;
+   padding: 6rpx 26rpx;
+}
+.normalt {
+  color:#888888;
+   border-radius: 4px;
+   font-size: 28rpx;
+   padding: 6rpx 26rpx;
+}

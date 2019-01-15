@@ -1,0 +1,25 @@
+<!--super_card/pages/video-watch/video-watch.wxml-->
+<view class='contains'>
+
+  <txv-video wx:if="{{VqqId != 0}}" class="goods-video"  vid="{{VqqId}}" playerid="txv1" ></txv-video>
+  
+  <video wx:if="{{VqqId == 0 && path != '' }}" src="{{ path }}" autoplay="true" muted="{{ muted }}" controls binderror="videoErrorCallback"></video>
+
+  <view class='fit'>
+    <view class='left' bindtap='toggleMuted'>
+      <image class="iconfont {{ muted == false ? 'icon-sound-' : 'icon-sound-1'}}" style='font-size:50rpx;line-height:50rpx;'></image>
+    </view>
+    <view class='right'>
+      <image class="read iconfont icon-yanjing" style='font-size:40rpx;'></image>
+      <text>{{ views }}</text>
+      <button wx:if="{{ forwarding == 1 }}" open-type='share' class='share iconfont icon-fenxiang'></button>
+    </view>
+  </view>
+
+  <view class='bottom' wx:if="{{ showBackIndex }}">
+    <view class='btn-submit'>
+      <button class='btn-block btn-white' bindtap='backIndex'  style='color:{{ themeColor }};border-color:{{ themeColor }};'>返回首页</button>
+    </view>
+  </view>
+</view>
+

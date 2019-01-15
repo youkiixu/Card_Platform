@@ -1,0 +1,83 @@
+<!--super_card/pages/mall/mall.wxml-->
+<view class='contains'>
+  <view class='mall-t'>
+    <swiper class='swiper-img' circular indicator-dots="true" autoplay="true" current="0">
+      <swiper-item wx:for="{{ storeInfo.store_banner }}" wx:key="stpics">
+        <image lazy-load="true" class='mt-img' src='{{ item }}' mode='widthFix'></image>
+      </swiper-item>
+    </swiper>
+  
+    <block wx:if="{{ preview === false }}">
+      <button class='mt-share' open-type='share'>
+        <text class='iconfont icon-fenxiang1'></text>
+      </button>
+
+      <form report-submit='true' bindsubmit="backCard">
+        <button form-type='submit' class='ove-btn'>
+          <text class='iconfont icon-renyuanxinxi' style='color:{{ themeColor }};'></text>
+        </button>
+      </form>
+
+    </block>
+ 
+
+
+    <view class='mt-brief'>
+      <view class='mt-logob'>
+        <image class='mt-logo' src='{{ storeInfo.store_logo }}'></image>
+      </view>
+      <view class='mt-base'>
+        <view class='mt-name'>{{ storeInfo.store_name }}</view>
+        <view class='mt-apt'>
+          <text class='iconfont icon-xinxirenzheng' style='color:{{ themeColor }};'></text>
+          <text>认证企业</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='dh-info'>
+      <view class='dh-act' style='color:{{ themeColorV }};border-color:{{ themeColorV }};'>全部商品</view>
+    </view>
+
+  </view>
+  <view class='m-shpping'>
+
+    <block wx:for="{{ goodsList }}" wx:key="gl" wx:for-index="gldx" wx:for-item="goods">
+      <block wx:if="{{ preview === false }}">
+      <navigator url='../../pages/overt/mall-details?card_id={{ card_id }}&goods_id={{ goods.id }}'> 
+      <view class='ms-act'>
+          <image lazy-load="true" class='act-img' src='{{ goods.goods_pics[0] }}' mode='aspectFill'></image>
+          <view class='act-name'>{{ goods.goods_name }}</view>
+          <view class='act-price' style='color:{{ themeColor }};'>￥{{ goods.goods_price }}</view>
+        </view>
+      </navigator>
+      </block>
+
+      <block wx:else>
+       <navigator url='../../pages/overt/mall-details?goods_index={{ gldx }}'>
+       <view class='ms-act'>
+          <image lazy-load="true" class='act-img' src='{{ goods.goods_pics[0] }}' mode='aspectFill'></image>
+          <view class='act-name'>{{ goods.goods_name }}</view>
+          <view class='act-price' style='color:{{ themeColor }};'>￥{{ goods.goods_price }}</view>
+        </view>
+      </navigator>
+      </block>
+        
+    </block>
+    
+  </view>
+  <view class='buttom-info'>
+    <text>————</text>
+    <text>没有更多数据了</text>
+    <text>————</text>
+  </view>
+
+  <!--view class='ws-logo'>
+    <image class='ws-logo-i' src='/super_card/resource/images/con-1.jpg' mode='widthFix'></image>
+    <view class='ws-logo-link'>www.baidu.com</view>
+  </view-->
+
+</view>
+
+<import src="/super_card/pages/templates/footer.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

@@ -1,0 +1,65 @@
+<!--super_card/pages/more-info/more-info.wxml-->
+<view class='contains'>
+ <form bindsubmit='saveCardMinfo'>
+  <view class='title'>
+    <text>更多信息</text>
+  </view>
+  <view class='content'>
+    <view class='branchinfo'>
+      <text>邮箱</text>
+      <input type='text' name="email" maxlength="40" placeholder="0~40字符" value="{{ minfo.email }}"></input>
+    </view>
+    <view class='branchinfo'>
+      <text>QQ</text>
+      <input type='text' name="qq" maxlength="20" placeholder="0~20字符" value="{{ minfo.qq }}"></input>
+    </view>
+    <view class='branchinfo'>
+      <text>电话</text>
+      <input type='text' name="tel" maxlength="20" placeholder="0~20字符" value="{{ minfo.tel }}"></input>
+    </view>
+    <view class='branchinfo'>
+      <text>传真</text>
+      <input type='text' name="fax" maxlength="20" placeholder="0~20字符" value="{{ minfo.fax }}"></input>
+    </view> 
+    <view class='branchinfo'>
+      <text>网址</text>
+      <input type='text' name="www" maxlength="100" placeholder="0~100字符" value="{{ minfo.www }}"></input>
+    </view>
+    <view class='branchinfo'>
+      <text>微信号</text>
+      <input type='text' name="wx" maxlength="30" placeholder="0~30字符" value="{{ minfo.wx }}"></input>
+    </view>
+    <view class='branchinfo'>
+      <text>微博号</text>
+      <input type='text' name="weibo" maxlength="30" placeholder="0~30字符" value="{{ minfo.weibo }}"></input>
+    </view>
+    <view class='branchinfo'>
+      <text>工号</text>
+      <input type='text' name="job_no" maxlength="10" placeholder="0~10字符" value="{{ minfo.job_no }}"></input>
+    </view> 
+  </view>
+  <view class='title'>
+    <text>介绍标题</text>
+    <!--navigator url="../../pages/sound-recording/sound-recording?card_id={{ card_id }}">
+      <view class='speech-introduction iconfont icon-msnui-mic'>语音介绍</view>
+    </navigator-->
+  </view>
+  <view class='content'>
+    <view class='introduction'>
+      <input type='text' name="intro_title" maxlength="38" placeholder="介绍企业主营产品或者企业定位~" value="{{ minfo.intro_title }}"></input>
+    </view>
+  </view>
+  <view class='title'>
+    <text>公司介绍</text>
+  </view>
+  <view class='content'>
+    <view class='introduction'>
+      <textarea adjust-position="true" name="intro_content" rows="20" cols="30" maxlength="500" placeholder="公司或个人介绍0~500字" value="{{ minfo.intro_content }}"></textarea>
+    </view>
+  </view>
+  <view class='btn-submit'>
+    <button form-type='submit' class='btn-block btn-blue' style='background-color:{{ themeColor }};'>保 存</button>
+  </view>
+  </form>
+</view>
+

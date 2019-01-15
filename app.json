@@ -1,0 +1,146 @@
+{
+  "pages": [
+    "super_card/pages/index/index",
+    "super_card/pages/holder/holder",
+    "super_card/pages/group/group",
+    "super_card/pages/library/library",
+    "super_card/pages/home/home",
+    "super_card/pages/home/demand",
+    "super_card/pages/basic/basic",
+    "super_card/pages/avatar/avatar",
+    "super_card/pages/pic-cropper/index",
+    "super_card/pages/wx-cropper/index",
+    "super_card/pages/more-info/more-info",
+    "super_card/pages/secret-fit/secret-fit",
+    "super_card/pages/album/album",
+    "super_card/pages/album-edit/album-edit",
+    "super_card/pages/video/video",
+    "super_card/pages/video-watch/video-watch",
+    "super_card/pages/photo-edit/photo-edit",
+    "super_card/pages/photo-watch/photo-watch",
+    "super_card/pages/custom/custom",
+    "super_card/pages/preview/preview",
+    "super_card/pages/group-manage/group-manage",
+    "super_card/pages/group-modify/group-modify",
+    "super_card/pages/about/about",
+    "super_card/pages/pat-card/pat-card",
+    "super_card/pages/return-record/return-record",
+    "super_card/pages/recognition/recognition",
+    "super_card/pages/revise/revise",
+    "super_card/pages/wallpaper/wallpaper",
+    "super_card/pages/overt/overt",
+    "super_card/pages/group-fit/group-fit",
+    "super_card/pages/manager-reset/manager-reset",
+    "super_card/pages/group-request/group-request",
+    "super_card/pages/conserve-card/conserve-card",
+    "we7/pages/login/login",
+    "super_card/pages/pat-card/camera-card",
+    "super_card/pages/card-book/card-book",
+    "super_card/pages/sound-recording/sound-recording",
+    "super_card/pages/card-book/web-view",
+    "super_card/pages/card-book/view-video",
+    "super_card/pages/square/square",
+    "super_card/pages/square/release",
+    "super_card/pages/square/details",
+    "super_card/pages/square/protocol",
+    "super_card/pages/chat/chat",
+    "super_card/pages/chat/list",
+    "super_card/pages/spot-news/spot-news",
+    "super_card/pages/overt/website",
+    "super_card/pages/overt/dynamic",
+    "super_card/pages/overt/dynamic-details",
+    "super_card/pages/overt/mall",
+    "super_card/pages/overt/mall-details",
+    "super_card/pages/issue-dynamic/issue-dynamic",
+    "super_card/pages/mall-manage/mall-manage",
+    "super_card/pages/website-edit/website-edit",
+    "super_card/pages/edit-page/edit-picture",
+    "super_card/pages/edit-page/edit-text",
+    "super_card/pages/edit-page/cropper-pic",
+    "super_card/pages/edit-page/edit-sizepic",
+    "super_card/pages/mall-manage/edit-goods",
+    "super_card/pages/opt-version/opt-version",
+    "super_card/pages/issue-dynamic/manage-dynamic"
+  ],
+  "subPackages": [
+    {
+      "root": "super_card/pagess",
+      "pages": [
+        "radar/radar",
+        "rodar/rodar",
+        "radar/tab-setting",
+        "radar/follow-record",
+        "radar/customer-details",
+        "payment/payment",
+        "payment/payment-custom",
+        "payment/payment-album",
+        "payment/payment-video",
+        "payment/payment-audio",
+        "payment/payment-vip",
+        "payment/payment-square",
+        "payment/payment-squaretop",
+        "payment/payment-style",
+        "payment/payment-agent",
+        "style-opt/style-opt",
+        "quick-reply/quick-reply",
+        "quick-editor/quick-editor",
+        "cash/cash",
+        "library/search",
+        "library/filter",
+        "seen-card/seen-card",
+        "use-help/use-help",
+        "agent/agent",
+        "agent-revenue/agent-revenue",
+        "member-core/member-core",
+        "balance/balance",
+        "collect/collect",
+        "team/team",
+        "partner-index/partner-index",
+        "suggestion/suggestion",
+        "report/report",
+        "certify/certify",
+        "certify-opt/certify-opt",
+        "certify-license/certify-license",
+        "agent/protocol",
+        "company-login/company-login",
+        "cash-details/cash-details"
+      ]
+    }
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "super_card/pages/index/index"
+      },
+      {
+        "pagePath": "super_card/pages/card-book/card-book"
+      },
+      {
+        "pagePath": "super_card/pages/library/library"
+      },
+      {
+        "pagePath": "super_card/pages/square/square"
+      },
+      {
+        "pagePath": "super_card/pages/home/home"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "white",
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "plugins": {
+    "tencentVideo": {
+      "version": "1.2.4",
+      "provider": "wxa75efa648b60994b"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

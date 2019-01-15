@@ -1,0 +1,355 @@
+/* super_card/pages/wallpaper/wallpaper.wxss */
+.top{
+  display:flex;
+  display:-webkit-flex;
+  background-color:#fff;
+  margin-bottom: 50rpx;
+}
+.cards-holder{
+  margin: 20rpx;
+  position: relative;
+  background-color: #f2f2f2;
+  border: 1px solid #e2e2e2;
+  border-radius: 10rpx;
+  width:100%;
+}
+.card-holder{
+  padding: 20rpx;
+  display: flex;
+  display: -webkit-flex;
+  border-bottom: 1px solid #e2e2e2;
+  align-items:center;
+  -webkit-align-items:center;
+}
+.img-fit{
+  display: flex;
+  display: -webkit-flex;
+}
+.card-holder:last-of-type{
+  border: 0;
+}
+.img{
+  width: 120rpx;
+  height: 120rpx;
+  background-color: #000;
+  border-radius: 10rpx;
+}
+.text-img{
+  width: 150rpx;
+  height: 150rpx;
+  background-color: #c0c0c0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 80rpx;
+  font-weight: 600;
+  text-align:center;
+  line-height:150rpx;
+}
+.card-info{
+  display:flex;
+  flex-flow:column;
+  justify-content:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+  padding-left:15rpx;
+  padding-right:15rpx;
+  vertical-align: middle;
+  flex: 1;
+  -webkit-flex: 1;
+}
+.card-info text{
+  display: block;
+}
+.card-name{
+  display: flex;
+  display: -webkit-flex;
+  height:40rpx;
+  line-height: 40rpx;
+}
+.card-name text{
+  display: inline-block;
+}
+.card-name text{
+  font-size: 38rpx;
+}
+.phone{
+  font-size:26rpx;
+  color:#999999;
+  height:40rpx;
+  line-height: 40rpx;
+}
+.company{
+  font-size:26rpx;
+  color:#999999;
+  /*height:40rpx;*/
+  line-height: 40rpx;
+}
+.btn-block{
+  line-height:70rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background:#00a1e9;
+  color:#fff;
+  font-size: 30rpx;
+}
+
+.swiper{
+  width: 100%;
+  height: 800rpx;
+  background-color:#fff;
+  text-align:center;
+}
+.swiper image.img-bor{
+  width: 300rpx;
+}
+.img-time{
+  display: flex;
+  display: -webkit-flex;
+  position:absolute;
+  top:54rpx;
+  width:274rpx;
+  left:240rpx;
+  height: 484rpx;
+}
+.img-time image{
+  width:100%;
+  height: 484rpx;
+}
+
+
+
+.reminder{
+  font-size:30rpx;
+  color:#999999;
+  display:inline-block;
+  padding:30rpx;
+}
+.reminder text{
+  display:block;
+}
+
+.info-choice{
+  background-color: #fff;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content:space-between;
+}
+.info-img{
+  display: flex;
+  display: -webkit-flex;
+}
+.info-img image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5px;
+  background-color: #000;
+}
+
+.card-change text{
+  background-color: #00a1e9;
+  border-radius: 4px;
+  color: #fff;
+  padding: 4rpx 14rpx;
+}
+.info-card{
+  flex: 1;
+  display: flex;
+  flex-flow:column;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
+  margin-left:20rpx;
+}
+.card-name{
+  color: #000;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.card-phone,.card-company{
+  color: #9f9f9f;
+  font-size: 28rpx; 
+  height: 50rpx;
+  line-height: 50rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+.card-change{
+  display: flex;
+  display: -webkit-flex;
+}
+.cue{
+  font-size:26rpx;
+  color:#919191;
+  display:flex;
+  display:-webkit-flex;
+  margin-top:40rpx;
+  padding:0 10px;
+}
+.info-choices{
+  background-color:#f2f2f2;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content:space-between;
+  border-radius: 10rpx;
+  margin-bottom: 16rpx;
+}
+.info-choices:last-child{
+  margin-bottom: 0;
+}
+.info-bg-color{
+  border:1px solid #2fb9f8;
+}
+.info-no-bg-color{
+  border:1px solid #f2f2f2;
+}
+.radio-group{text-align:center;}
+.radio-t{
+ padding-left:0rpx; 
+}
+.info-card{
+  align-items: flex-start;
+  -webkit-align-items: flex-start;
+  height:150rpx;
+  overflow:hidden;
+  justify-content:space-between;
+  -webkit-justify-content:space-between;
+}
+.card-company{
+  text-align:left;
+}
+.radio-group{
+  font-size:30rpx;
+}
+.radio{
+  display:inline-block;
+  width:100%;
+}
+radio{
+  padding-left:20rpx;
+}
+/*radio .wx-radio-input-checked{
+  background-color:#00a1e9 !important;
+  border:1px solid #00a1e9 !important;
+}*/
+/*弹框*/
+.wux-dialog__bd scroll-view{
+  max-height: 582rpx;
+}
+
+
+
+/* 2018.10.25 */
+.btn-block::after{
+  border: 0;
+}
+.wall-paper{
+  margin: 20rpx 80rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  overflow: hidden;
+  filter: drop-shadow(0px 0px 15px #ccc);
+  display: flex;
+  flex-flow: column;
+  position: relative;
+}
+.wall-time{
+  position: absolute;
+  top: 30rpx;
+  right: 40rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  color:#fff;
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border: 1px solid #fff;
+}
+.wall-time view{
+  width:60rpx;
+  text-align: center;
+}
+.wall-time view:first-child{
+  border-bottom: 1px solid #fff;
+}
+.wall-img{
+  width: 100%;
+  border-radius:10rpx 10rpx 0 0;
+}
+.wall-next{
+  padding-top: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+.wall-next .iconfont{
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color:#00a1e9;
+}
+.wall-next .wall-change{
+  font-size: 26rpx;
+  color:#00a1e9;
+  margin: 0 20rpx 0 10rpx;
+}
+.wall-tx{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+.paper-bot{
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: center;
+  position:absolute;
+  top:-60rpx;
+  left:30rpx;
+}
+.wall-name{
+  font-size: 30rpx;
+  line-height: 40rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.wall-dk{
+  font-size: 26rpx;
+  color: #949494;
+  margin-left: 10rpx;
+  margin-top:20rpx;
+}
+.wall-dk text{
+  font-size: 60rpx;
+  color: #00a1e9;
+  line-height:60rpx;
+  margin:0 10rpx;
+}
+.wall-blank{
+  height: 150rpx;
+}
+.wall-bc{
+  font-size: 26rpx;
+  color:#666666;
+  padding:0 80rpx 20rpx 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-hold{
+  padding:0 80rpx 50rpx 80rpx;
+}
+.btn-hold .btn-block{
+  line-height: 80rpx;
+}

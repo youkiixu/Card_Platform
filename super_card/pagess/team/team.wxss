@@ -1,0 +1,135 @@
+/* super_card/pagess/agent/agent.wxss */
+
+.team-top{
+  display:flex;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  background-color:#fff;
+  border-bottom:1px solid #e5e5e5;
+  border-top:1px solid #e5e5e5;
+  padding:0 2vw;
+  position:relative;
+}
+.team-title{
+  flex:1;
+  -webkit-flex:1;
+  height:80rpx;
+  line-height:80rpx;
+  font-size:32rpx;
+  text-align:center;
+  border-bottom:2px solid #fff;
+  position:relative;
+}
+.buttom-info {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+}
+.buttom-info text:nth-child(2) {
+  margin: 0 10rpx;
+}
+
+.team-info{
+  margin-top:6rpx;
+}
+.team-act{
+  background-color:#fff;
+  margin-bottom:20rpx;
+  padding:0 20rpx;
+}
+.ta-top{
+  display:-webkit-flex;
+  display:flex;
+  padding:20rpx 0;
+  border-bottom:1px solid #f2f2f2;
+}
+.ta-left{
+  width:100rpx;
+  height:100rpx;
+  margin-right:20rpx;
+}
+.ta-rirht{
+  flex:1;
+  display:flex;
+  flex-flow:column;
+  justify-content:center;
+  -webkit-flex:1;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+}
+.info-t{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:space-between;
+}
+.infot-l{
+  flex: 1;
+  -webkit-flex: 1;
+  display:flex;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+}
+.infot-l-name{
+  height:34rpx;
+  line-height:34rpx;
+  font-size:34rpx;
+  font-weight:600;
+  width:240rpx;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+  word-break:break-all;
+}
+.infot-l-ver{
+  font-size:24rpx;
+  color:#fff;
+  padding:0 6rpx;
+  margin:0 10rpx;
+  border-radius:6rpx;
+}
+.gold-pl{
+  background-color:#f5b31e;
+}
+.silver-pl{
+  background-color:#a7bac9;
+}
+.copper-pl{
+  background-color:#cd8658;
+}
+.dl-block-color{
+  background-color:#fe4356;
+}
+.infot-r{
+  font-size:26rpx;
+  line-height:26rpx;
+  color:#939392;
+}
+.info-b{
+  font-size:28rpx;
+  color:#939392;
+}
+.ta-bot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:space-between;
+  font-size:30rpx;
+  line-height:30rpx;
+  padding:20rpx 0;
+  color:#939392;
+}

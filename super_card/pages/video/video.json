@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "名片视频",
+  "usingComponents": {
+    "txv-video": "plugin://tencentVideo/video"
+  }
+}

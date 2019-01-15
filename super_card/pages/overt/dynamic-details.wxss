@@ -1,0 +1,78 @@
+/* super_card/pages/dynamic-details/dynamic-details.wxss */
+
+.dd-all{
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+}
+.dd-title{
+  font-size: 32rpx;
+}
+.dd-info{
+  font-size: 26rpx;
+  margin-top:20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.info-name{
+  color: #169bd6;
+  margin-right: 20rpx;
+}
+.info-time{
+  color: #9a9a9a;
+}
+.dd-content{
+  margin-top: 50rpx;
+}
+.con-info{
+  font-size:30rpx;
+  color: #333;
+  text-indent: 2em;
+}
+.images-zs{
+  display: flex;
+  flex-flow: column;
+}
+.images-zs image{
+  width: 100%;
+  margin-bottom: 10rpx;
+}
+.btn-share::after{
+  border: 0;
+}
+.btn-share{
+  padding:0;
+  width:70rpx;
+  height:70rpx;
+  border-radius: 50%;  
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:center;
+  color:#fff;
+  background-color:#b3b3b3;
+  position:fixed;
+  top:30rpx;
+  right:30rpx;
+}
+.btn-share .iconfont{
+  font-size:50rpx;
+  line-height:50rpx;
+  margin:4rpx 4rpx 0 0;
+}
+
+.ws-logo{
+  padding: 40rpx 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color:#c3c3c5;
+  font-size: 26rpx;
+}
+.ws-logo-i{
+  width: 300rpx;
+  margin-bottom: 10rpx;
+}

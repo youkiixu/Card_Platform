@@ -1,0 +1,13 @@
+<!--super_card/pages/suggestion/suggestion.wxml-->
+<view class='contsins'>
+  <form bindsubmit='proposeSugMinfo'>
+    <view class='content'>
+      <view class='introduction'>
+        <textarea name="content_info"  maxlength="200" placeholder="感谢您提的宝贵建议，我们会继续努力，谢谢！" value=""></textarea>
+      </view>
+    </view>
+    <view class='btn-submit'>
+      <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>提 交</button>
+    </view>
+  </form>
+</view>

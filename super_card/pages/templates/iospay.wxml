@@ -1,0 +1,15 @@
+<template name="iosPayWx">
+<view wx:if="{{ visible  }}" class="wux-backdrop {{ animateCss }}"></view>
+<view wx:if="{{ visible }}" class="wux-dialog {{ animateCss }}">
+        <view class="wux-dialog__hd">
+        	<view class="wux-dialog__title">系统提示</view>
+        </view>
+        <view class="wux-dialog__bd">
+          因小程序规则限制，暂不支持IOS(苹果)支付，请联系客服进行处理
+        </view>
+        <view class="wux-dialog__ft">
+                <!--view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view-->
+                <button open-type="contact" class='wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary' style="background:#fff;color:#54b536;">联系客服</button>
+        </view>
+</view>
+</template>

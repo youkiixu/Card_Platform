@@ -1,0 +1,54 @@
+/* super_card/pagess/cash-details/cash-details.wxss */
+
+.team-top{
+  display:flex;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  background-color:#fff;
+  border-bottom:1px solid #e5e5e5;
+  border-top:1px solid #e5e5e5;
+  padding:0 2.5vw;
+  position:relative;
+}
+.team-title{
+  flex:1;
+  -webkit-flex:1;
+  height:70rpx;
+  line-height:70rpx;
+  font-size:32rpx;
+  text-align:center;
+  border-bottom:3px solid #fff;
+  position:relative;
+}
+.team-info{
+  margin-top:6rpx;
+  padding:0 2vw;
+  background-color: #fff;
+  display: flex;
+  flex-flow: column;
+}
+
+.cash-act{
+  padding: 2vw 0;
+  border-bottom: 1px solid #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.al-num{
+  font-size:32rpx;
+  line-height:32rpx;
+}
+.al-time{
+  color:#939392;
+  font-size:24rpx;
+  line-height:24rpx;
+  padding-top:20rpx;
+}
+.act-right{
+  font-size: 32rpx;
+  line-height: 32rpx;
+  letter-spacing: 2rpx;
+  color:#4752e8;
+}

@@ -1,0 +1,132 @@
+<!--super_card/pages/details/details.wxml-->
+<view class='contains'>
+
+  <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
+    <button form-type='submit' class='ove-btn'>
+      <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>
+    </button>
+  </form>
+
+  <view class='details' wx:if="{{ info !== false }}">
+    <view class='act'>
+      <view class='act-le'>
+        <image catchtap="toCardPage" data-card_id="{{ info.card.id }}" class='act-le-img' src='{{ info.card.picture }}'></image>
+        <view class='act-le-info'>
+          <text>{{ info.card.name }}</text>
+          <text>{{ info.time_str }}发布</text>
+        </view>
+      </view>
+      <view class='tip-report' bindtap='reportContent'>
+        <icon type="info" size="14" color="#999999"/>
+        <text class='act-ri'>举报</text>
+      </view>
+    </view>
+    <view class='content'>
+      <view><text class="labels" style="color:{{ themeColor }};" wx:for="{{ info.label }}" wx:key="labels" wx:for-index="lidx" wx:for-item="label">#{{ label }}#</text><text>{{ info.content }}</text></view>
+    </view>
+
+    <!-- <image bindtap='previewImage' data-index="{{ pidx }}" wx:for="{{ info.pics }}" wx:key="img" wx:for-index="pidx" wx:for-item="img" src="{{ img }}" mode='widthFix' class='con-img'></image> -->
+
+    <view class='img-num'>
+      <image bindtap='previewImage' mode='aspectFill' data-index="{{ pidx }}" wx:for="{{ info.pics }}" wx:key="img" wx:for-index="pidx" wx:for-item="img" src="{{ img }}"  class='con-img'></image>
+    </view>
+    
+
+    <view class='bottom'>
+      <text class='iconfont icon-yanjing'></text>
+      <text>{{ info.views }}</text>
+      <text bindtap='zanSquare'class='iconfont icon-xinheart281' style="font-weight:bold;color:{{ themeColorV }};"></text>
+      <text>{{ info.likes }}</text>
+      <text class='iconfont icon-xiaoxi'></text>
+      <text>{{ info.commentss }}</text>
+    </view>
+
+    <view class='spot-laud' wx:if="{{ info.zans.length > 0 }}">
+        <text class='iconfont icon-xinheart281' style='font-size:30rpx;line-height:40rpx;font-weight:bold;color:{{ themeColorV }};'></text>
+        <view class='spot-laud-name'>
+          <block wx:for="{{ info.zans }}" wx:key="zankey" wx:for-item="zans">
+            {{ zans.nickname }}，
+          </block>
+        </view>
+    </view>
+
+  </view>
+
+  <!-- 信息 -->
+  <view class='de-lxr'>
+    <view class='lxr-name'>联系人: {{ info.card.name }}</view>
+    <view class='lxr-come' style='color:{{ themeColorV }};'>联系我时,请说是在{{ app_name }}上看到的,谢谢！</view>
+    <view class='lxr-jb'>如遇无效、虚假、诈骗信息、请立即举报！</view>
+  </view>
+
+  
+
+  <!-- 评论 -->
+  <view class='content-pl'>
+    <view class='content-pl-top'>
+      <text>评论</text>
+      <text class='promptly' bindtap='togglePingModal'>立即评论</text>
+    </view>
+    <view class='pl-act-icon'>
+
+      <view class='act-pl' wx:for="{{ info.comments }}" wx:key="commdx" wx:for-item="comments">
+        <image class='pl-img' src='{{ comments.avatar }}'></image>
+        <view class='pl-c'>
+          <view class='pl-c-top'>
+            <view class='pl-name' style='color:{{ themeColor }};'>{{ comments.nickname }}</view>
+            <view class='pl-time'>{{ comments.time_str }}</view>
+          </view>
+          <text class='pl-c-bot'>{{ comments.comment }}</text>
+        </view>
+      </view>
+
+      <!--view class='act-pl'>
+        <image class='pl-img' src='https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIRnEPXb9GCj75gQMzib1kicpRyg2tUMyUlRmrbbciagYZ4fy2v2z8AoM8SDMRFjsvQ06oQ0vv13xWbw/132'></image>
+        <view class='pl-c'>
+          <view class='pl-c-top'>
+            <view class='pl-name' style='color:{{ themeColor }};'>侯志华 回复 侯志华</view>
+            <view class='pl-time'>2018-08-23 11:11:14</view>
+          </view>
+          <text class='pl-c-bot'>很漂亮很漂亮很</text>
+        </view>
+      </view-->
+
+    </view>
+    
+  </view>
+
+  <!-- 评论窗口 -->
+  <!-- <view class='fixed-pl'>
+    <input placeholder='请输入评论内容'></input>
+    <text class='pl-send-out'>发送</text>
+  </view> -->
+  <view class='pl' wx:if="{{ showCommentsModal === true }}">   
+    <view class='pl-wicket'>
+      <view class='pl-top'>
+        <view class='pl-name'>评论：{{ info.card.name }}</view>
+        <textarea adjust-position="true" maxlength='100' class='pl-content' placeholder='请输入评论内容(最多100字)' bindinput="setCommentsContent" value="{{ commentsContent }}"></textarea>
+      </view>
+      <view class='pl-bot'>
+        <button class='btn-pl' catchtap='togglePingModal'>取消</button>
+        <button class='btn-pl' style='color:{{ themeColor }};' bindtap='pingSquare'>提交</button>
+      </view>
+    </view>
+  </view>
+
+  <view class='fixed'>
+    <view class='fixed-l'>
+      <view wx:if="{{ showBackIndex === false }}" bindtap='goBack' class='fixed-info'>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+        <text>返回</text>
+      </view>
+      <button open-type='share' class='fixed-info'>
+        <text class='iconfont icon-fenxiang'></text>
+        <text>分享</text>
+      </button>
+    </view>
+    <view bindtap='callPhone' data-mobile="{{ info.card.mobile }}" style="background-color:{{ themeColor }};" class='fixed-info colour'>
+      <text class='iconfont icon-dianhua'></text>
+      <text>电话联系</text>
+    </view>
+  </view>
+</view>

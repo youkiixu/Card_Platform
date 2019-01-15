@@ -1,0 +1,16 @@
+<!--super_card/pages/collect/collect.wxml-->
+<view class='contains'>
+  <view class='coll-top'>此处仅显示创建名片的用户</view>
+  <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+  <!--循环体  -->
+  <view class='act' wx:key="cards" wx:for="{{ cardList }}">
+    <image src='{{ item.picture }}' style="position:relative;"><text wx:if="{{ item.is_v == 1 }}" class='rz-v' style='background-color:{{ themeColorV }};'>V</text></image>
+    <view class='info'>
+      <view class='con'>
+        <text>{{ item.name }}</text>
+        <text>{{ item.collect_date }}</text>
+      </view>
+      <text class='firm'>{{ item.company }}</text>
+    </view>
+  </view>
+</view>

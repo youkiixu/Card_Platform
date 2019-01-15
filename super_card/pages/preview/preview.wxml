@@ -1,0 +1,87 @@
+<!--super_card/pages/preview/preview.wxml-->
+<view class='contains'>
+  <view class='card' style='background:url({{ tempBgUrl }}) no-repeat center;background-size:cover;color:{{ textColor }};'>
+    <view class='info-top'>
+      <view class='info-basic'>
+        <text>{{ card.name }}</text>
+        <text>{{ card.title }}</text>
+        <text>{{ card.company }}</text>
+      </view>
+      <image class='img-icon' src='{{ card.picture }}'></image>
+    </view>
+    <view class='info-bottom'>
+      <view class='pa blue' style='color:{{ textColor }};'>
+        <view>
+          <image class='iconfont icon-shouji'></image>
+        </view>
+        <text>{{ card.mobile }}</text>
+      </view>
+      <view class='pa blue' style='color:{{ textColor }};'>
+        <view>
+          <image class='iconfont icon-dingwei'></image>
+        </view>
+        <text>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text>
+      </view>
+      <view class='pa blue' wx:if="{{ card.tel }}" style='color:{{ textColor }};'>
+        <view>
+          <image class='iconfont icon-dianhua'></image>
+        </view>
+        <text>{{ card.tel }}</text>
+      </view>
+      <view class='pa' wx:if="{{ card.email }}">
+        <view>
+          <text>邮箱</text>
+        </view>
+        <text>{{ card.email }}</text>
+      </view>
+      <view class='pa' wx:if="{{ card.qq }}">
+        <view>
+          <text>QQ</text>
+        </view>
+        <text>{{ card.qq }}</text>
+      </view>
+       <view class='pa' wx:if="{{ card.fax }}">
+        <view>
+          <text>传真</text>
+        </view>
+        <text>{{ card.fax }}</text>
+      </view>
+      <view class='pa' wx:if="{{ card.www }}">
+        <view>
+          <text>网址</text>
+        </view>
+        <text>{{ card.name }}</text>
+      </view>
+      <view class='pa' wx:if="{{ card.wx }}">
+        <view>
+          <text>微信</text>
+        </view>
+        <text>{{ card.wx }}</text>
+      </view>
+      <view class='pa' wx:if="{{ card.weibo }}">
+        <view>
+          <text>微博</text>
+        </view>
+        <text>{{ card.weibo }}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='content'>
+    <view class='introduction'>
+      <input type='text' name="intro_title" maxlength="12" placeholder="自定义背景名称(0~12字符)" value="" bindblur='setBgName' bindconfirm='setBgName'></input>
+    </view>
+  </view>
+
+  <view class='bottom'>
+    <view class='btn-submit'>
+      <button class='btn-block btn-blue' bindtap='confirmCreateBg' style='background:{{ themeColor }};'>确认生成</button>
+    </view>
+    <view class='btn-submit'>
+      <button class='btn-block btn-white' bindtap='backModify' style='color:{{ themeColor }};border-color:{{ themeColor }};'>返回修改</button>
+    </view>
+  </view>
+
+</view>
+
+

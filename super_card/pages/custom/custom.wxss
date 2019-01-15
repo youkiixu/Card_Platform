@@ -1,0 +1,128 @@
+/* super_card/pages/custom/custom.wxss */
+.contains{
+  font-size: 28rpx;
+  display: flex;
+  flex-flow:column;
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
+  overflow: hidden;
+  height: 100vh;
+}
+.top{
+  flex: 1;
+  display:flex;
+  justify-content:center;
+  -webkit-flex: 1;
+  display:-webkit-flex;
+  -webkit-justify-content:center;
+  background-color: #000;
+  overflow:hidden;
+  position:relative;
+}
+.card{
+  overflow: hidden;
+  color: #616161;
+  position:absolute;
+  top:100rpx;
+  width: 70%;
+}
+.info-top{
+  display: flex;
+  display: -webkit-flex;
+}
+.img-icon{
+  width: 120rpx;
+  height: 120rpx;
+  background-color: #fff;
+  margin-left: 10rpx;
+}
+.info-basic{
+  display: inline-block;
+  flex:1;
+  -webkit-flex:1;
+  overflow:hidden;
+}
+.info-basic cover-view{
+  display: block;
+  overflow:hidden; 
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.info-basic text:nth-child(1){
+  font-size: 36rpx;
+}
+.info-basic text:nth-child(2){
+  font-size: 26rpx;
+}
+.info-basic text:nth-child(3){
+  font-size: 30rpx;
+  text-overflow:ellipsis;
+  white-space:nowrap; 
+}
+.pa{
+  margin: 4rpx 0;
+  display:flex;
+  align-items: center;
+  display:-webkit-flex;
+  -webkit-align-items: center;
+}
+.pa cover-image{
+  height: 50rpx;
+  width: 50rpx;
+  display: inline-block;
+  vertical-align:middle;
+}
+.pa-tit{
+  width: 80rpx;
+}
+.pa-con{
+  flex: 1;
+  -webkit-flex: 1;
+  overflow: hidden;
+  white-space:pre-wrap;
+}
+.pa text{
+  padding-left: 10rpx;
+  vertical-align:middle;
+}
+.info-bottom{
+  padding:0 20rpx 20rpx 20rpx;
+}
+
+.bottom{
+  display: flex;
+  display: -webkit-flex;
+  text-align: center;
+}
+.box{
+  margin: 50rpx;
+  flex: 1;
+  -webkit-flex: 1;
+}
+.box image{
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border: 1px solid #e1e1e1;
+  border-radius: 50%;
+  background-color: #fff;
+  overflow: hidden;
+}
+.box text{
+  display: inline-block;
+}
+
+/*新增*/
+.info-top{
+  display:flex;
+  -webkit-display:flex;
+  padding:20rpx;
+  margin-bottom:0rpx;
+  padding-bottom:0rpx;
+} 
+.blue{
+  color:#2da0e3;
+}
+.info{
+  border:1px solid #fff;
+}

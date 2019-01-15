@@ -1,0 +1,15 @@
+<!--super_card/pagess/quick-editor/quick-editor.wxml-->
+<view class='contains'>
+  <view class='qed-textarea'>
+    <textarea  placeholder='请输入快捷回复内容' value="{{ msg === false ? '' : msg.msg }}" bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' maxlength='{{ max }}'></textarea>
+    <view class='count'>{{ length }}/{{ max }}</view>
+  </view>
+  
+  <view class='btn-submit'>
+    <button bindtap='saveQuickReplay' class='btn-block btn-blue' style='background:{{ themeColor }};'>保存</button>
+  </view>
+  <view class='btn-submit' wx:if="{{ msg !== false }}">
+    <button bindtap='delQuickReplay' class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};'>删除</button>
+  </view>
+
+</view>

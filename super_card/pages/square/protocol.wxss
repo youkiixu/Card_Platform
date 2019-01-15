@@ -1,0 +1,22 @@
+/* super_card/pages/protocol/protocol.wxss */
+
+.protocol{
+  font-size:28rpx;
+  padding: 30rpx;
+  background-color:#fff;
+  line-height:50rpx;
+}
+
+.btn-submit{
+  margin:40rpx 30rpx;
+  margin-bottom:200rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  border-radius:50rpx;
+  letter-spacing: 2rpx;
+}
+.btn-blue{
+  background:#00a1e9;
+  color:#fff;
+}

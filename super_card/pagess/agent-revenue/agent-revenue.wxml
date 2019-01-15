@@ -1,0 +1,23 @@
+<!--super_card/pagess/cash-record/cash-record.wxml-->
+<view class='contains'>
+  <view class='care'>
+    <text>总收益</text>
+    <text>{{ agent_profit }}元</text>
+  </view>
+  <view class='care-mx'>收入明细</view>
+  <view class='care-con'>
+
+    <view class='care-act' wx:key="accounts" wx:for="{{ account_list }}" x:for-index="aIdx" wx:for-item="log">
+      <view class='care-act-l'>
+        <!--text class='care-icon iconfont icon-tubiao_jinbi'></text-->
+        <view class='care-act-conl'>
+          <view class='care-act-lyue'>{{ log.change_desc }}</view>
+          <view class='care-act-time'>{{ log.create_time }}</view>
+        </view>
+      </view>
+      <view class='care-act-r {{ log.type == 2 ? "red" : "green" }}'>{{ log.type == 2 ? '-' : '+' }} {{ log.agent_profit }}</view>
+    </view>
+    
+    
+  </view>
+</view>

@@ -1,0 +1,190 @@
+<!--super_card/pages/radar/radar.wxml-->
+<view class='contains'>
+  <view class='radar-top'>
+    <view class="radar-title {{ itemChioce == 1?'on':'' }}" style="color:{{ itemChioce == 1?themeColor:'' }};" data-reply-Type="1" bindtap='goChangeItemChioce'>访客</view>
+    <view class="radar-title {{ itemChioce == 2?'on':'' }}" style="color:{{ itemChioce == 2?themeColor:'' }};" data-reply-Type="2" bindtap='goChangeItemChioce'>聊天
+      <view class='lt-infonum' wx:if="{{ msgNum > 0 }}">{{ msgNum }}</view>
+    </view>
+    <view class="radar-title {{ itemChioce == 3?'on':'' }}" style="color:{{ itemChioce == 3?themeColor:'' }};" data-reply-Type="3" bindtap='goChangeItemChioce'>客户</view>
+    <view class="weui-navbar__slider" style="width:32vw;background:{{ themeColor }};left: {{sliderLeft}}vw; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
+  </view>
+
+  <!-- 访客 -->
+  <view class='visitor' wx:if="{{ itemChioce == 1 }}">
+    <view class='visitor-top'>
+      <view class="visitor-top-btn {{ isTrajectory == 1?'coin':'' }}" data-reply-Type="1" bindtap='goChangeViewState'>
+        <text style="background-color:{{ isTrajectory == 1?themeColor:'' }};">按轨迹</text>
+      </view>
+      <view class="visitor-top-btn {{ isTrajectory == 2?'coin':'' }}" data-reply-Type="2" bindtap='goChangeViewState'>
+        <text style="background-color:{{ isTrajectory == 2?themeColor:'' }};">按访客</text>
+      </view>
+    </view>
+    
+    <!-- 按轨迹 -->
+    <scroll-view wx:if="{{ isTrajectory == 1 }}" class="scroll-view_H" scroll-top="{{scrollTop}}" scroll-y="true"   style="height: 86vh;" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
+    <view class="vt-content {{ noVipTip ? 'no-pri' : '' }}">
+    <view wx:if="{{ noVipTip }}" class='vt-content-top'></view>
+
+    <block wx:key="trl" wx:for="{{ trackList }}" wx:for-index="tldx" wx:for-item="tl">
+      <view class='trail-act' bindtap='startChat' data-uid="{{ tl.to_uid }}" data-card_id="{{ tl.to_card_id }}" data-t_uid="{{ tl.uid }}" data-t_card_id="{{ tl.card_id }}">
+          <image class='trail-act-img' src='{{ tl.picture }}'></image>
+        <view class='trail-act-info'>
+          <view class='trail-act-info-top'>
+            <view class='trail-act-name'>{{ tl.name }}</view>
+            <view class='trail-act-time'>{{ tl.last_time }}</view>
+          </view>
+          <view class='trail-act-news'><text class='ck' style="color:{{ themeColor }};">第{{ tl.num }}次{{ tl.strobj.act }}</text>了你的<text class='ck' style="color:{{ themeColor }};">{{ tl.strobj.page }}</text>，{{ tl.strobj.str }}</view>
+        </view>
+      </view>
+    </block>
+
+    </view>
+    </scroll-view>
+
+    
+    <!-- 按访客 -->
+    <scroll-view wx:if="{{ isTrajectory == 2 }}" class="scroll-view_H"  scroll-top="{{scrollTop}}" scroll-y="true"   style="height: 86vh;" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
+    <view class="vt-content {{ noVipTip ? 'no-pri' : '' }}">
+    <view wx:if="{{ noVipTip }}" class='vt-content-top'></view>
+    <block wx:key="tru" wx:for="{{ trackUser }}" wx:for-index="tudx" wx:for-item="tu">
+        <view class='visitor-act' bindtap='startChat' data-uid="{{ tu.to_uid }}" data-card_id="{{ tu.to_card_id }}" data-t_uid="{{ tu.uid }}" data-t_card_id="{{ tu.card_id }}">
+          <image class='visitor-act-img' src='{{ tu.picture }}'></image>
+          <view class='visitor-act-info'>
+            <view class='visitor-act-info-top'>{{ tu.name }}跟你互动了<text class='ck' style="color:{{ themeColor }};">{{ tu.counts }}</text>次</view>
+            <view class='visitor-act-info-content'>{{ tu.last_date }}最后一次{{ tu.strobj.act }}了你的{{ tu.strobj.page }}</view>
+          </view>
+          
+            <view  class='visitor-act-info-ck' data-card_id="{{ tu.card_id }}" data-card_id_index="{{ tudx }}" catchtap="showTrackDetail" style="color:{{ themeColor }};">查看</view>
+            <text class='trans iconfont icon-jiantouarrow483' data-card_id_index="{{ tudx }}" data-card_id="{{ tu.card_id }}" catchtap="showTrackDetail"></text>
+
+        </view>
+      </block>
+    </view>
+    </scroll-view>
+
+      
+  </view>
+
+  <!-- 聊天 -->
+ <scroll-view wx:if="{{ itemChioce == 2 }}" class="scroll-view_H" scroll-y style="height: 92vh;" scroll-top="{{ scrollTop }}" scroll-y="true" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
+  <view class="chat {{ noVipTip ? 'no-pri' : '' }}">
+    <view wx:if="{{ noVipTip }}" class='vt-content-top'></view>
+
+    <view class='cose-chat'>
+
+    <block  wx:for="{{ chatList }}" wx:key="clist" wx:for-index="cdx" wx:for-item="chat">
+      <view class='main-items'>
+        <!--movable-area>
+          <movable-view damping="100" out-of-bounds="false" direction="horizontal" data-index='{{ cdx }}' x="{{ chat.x }}" animation="true" catchchange="handleMovableChange" catchtouchend="handleTouchend"-->
+            <navigator class='radar-nav' url="../../pages/chat/chat?chat_id={{ chat.chat_id }}&from=list">
+              <view class='cose-act'>
+            
+                  <view class='act-left-info'>
+                    <image class='act-left-img' src='{{ chat.avatar }}'></image>
+                    <view class='act-left-tr' wx:if="{{ chat.num > 0 }}">{{ chat.num }}</view>
+                  </view>
+                  <view class='act-centre'>
+                    <view class='act-centre-top'> 
+                      <view class='act-centre-name'>{{ chat.name }}</view>
+                      <view class='act-right'>{{ chat.time_str }}</view>
+                    </view>
+                    <view class='act-centre-say'>
+                        <text wx:if="{{chat.type == 1}}">[图片]</text>
+                        <text wx:if="{{chat.type == 2}}">[名片]</text>
+                        <text wx:if="{{chat.type == 3}}">[产品]</text>
+                        <text wx:if="{{chat.type == 0}}">{{ chat.msg == '::sayHi::' ? 'Ta向您打了招呼' : chat.msg }}</text>
+                    </view>
+                  </view>
+                
+              </view>
+            </navigator>
+          <!--/movable-view>
+        </movable-area>
+        <view class='delete-btn' data-productIndex="{{ cdx }}" catchtap='handleDeleteProduct'>删除</view-->
+      </view>
+
+    </block>
+
+    </view>
+  </view>
+  </scroll-view>
+    
+  <!-- 客户 -->
+  <scroll-view wx:if="{{ itemChioce == 3 }}" class="scroll-view_H" scroll-y style="height: 92vh;">
+  <view class="analysis {{ noVipTip ? 'no-pri' : '' }}">
+    <view wx:if="{{ noVipTip }}" class='vt-content-top'></view>
+    <block wx:key="cl" wx:for="{{ clientList }}" wx:for-index="cldx" wx:for-item="cli">
+    <navigator url='../radar/customer-details?client_id={{ cli.id }}'>
+      <view class='analysis-act'>
+        <image class='analysis-act-img' src='{{ cli.picture }}'></image>
+        <view class='analysis-act-info'>
+          <view class='analysis-act-name'>{{ cli.name }}</view>
+          <view class='analysis-act-bq'>
+            <view style="color:{{ themeColor }};">{{ cli.type }}</view>
+            <view style="color:{{ themeColor }};">{{ cli.status }}</view>
+          </view>
+        </view>
+        <view class='analysis-act-time'>{{ cli.last_time }}</view>
+      </view>
+    </navigator>
+    </block>
+
+    <!--view class='analysis-act-sum'>2个客户</view-->
+
+  </view>
+  </scroll-view>
+
+
+</view>
+
+
+<view class='vt-ck-coin-d' bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view class='vt-ck-coin' animation="{{animationData}}" wx:if="{{ showModalStatus}}">
+  
+  <view class='vt-ck-coin-top'>
+    <image class='visitor-act-img' src='{{ trackUserC.picture }}'></image>
+    <view class='visitor-act-info'>
+      <view class='visitor-act-info-top'>{{ trackUserC.name }}跟你互动了<text class='ck' style="color:{{ themeColor }};">{{ trackUserC.counts }}</text>次</view>
+      <view class='visitor-act-info-content'>{{ trackUserC.last_date }}最后一次{{ trackUserC.strobj.act }}了你的{{ trackUserC.strobj.page }}</view>
+    </view>
+    <view class='visitor-act-info-ck' bindtap='hideModal' style="color:{{ themeColor }};">收起</view>
+    <text class='transvt iconfont icon-jiantouarrow483' bindtap='hideModal'></text>
+  </view>
+
+ <scroll-view class="scroll-view_H"  scroll-top="{{scrollTopD}}" scroll-y="true" style="height: 76vh;" bindscrolltolower="bindDownLoad" bindscrolltoupper="refresh">
+  
+  <view class='vtck-act' wx:key="tru" wx:for="{{ trackUserDetail }}" wx:for-item="tud">
+    <view class='vtck-act-top'>
+      <view class='vtck-act-name'>{{ trackUserC.name }}</view>
+      <view class='vtck-act-time'>{{ tud.last_time }}</view>
+    </view>
+    <view class='vtck-act-content'><text class='ck' style="color:{{ themeColor }};">第{{ tud.num }}次{{ tud.strobj.act }}</text>了你的<text class='ck' style="color:{{ themeColor }};">{{ tud.strobj.page }}</text>, {{ tud.strobj.str }}</view>
+  </view>
+  </scroll-view>
+
+</view>
+
+<!-- 剩余通知 -->
+<form report-submit='true' bindsubmit="addNoticeNum">
+<button wx:if="{{ noVipTip === false }}" form-type='submit' class='s-not-coin'>
+  <view class='s-not-vta'>剩余</view>
+  <view class='s-not-vtb'>通知</view>
+  <view class='s-not-sum'>{{ noticeNum }}</view>
+</button>
+</form>
+
+
+<view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">
+    <view class="wux-dialog__hd">
+      <view class="wux-dialog__title">系统提示</view>
+    </view>
+    <view class="i-info wux-dialog__bd">
+      <view>
+        <text>{{ noVipTip }}</text>
+      </view>
+    </view>
+    <view class="wux-dialog__ft">
+        <view wx:if="{{ showTrialBtn && is_audit === false }}" class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="bindToTrial" style='color:{{ themeColor }};'>去试用</view>
+        <view  wx:if="{{ is_audit === false }}" class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="toOpenVip" style='color:{{ themeColorV }};'>开通/升级会员</view>
+    </view>
+</view>

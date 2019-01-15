@@ -1,0 +1,28 @@
+<!--super_card/pagess/quick-reply/quick-reply.wxml-->
+<view class='contains'>
+  <view class='qre-content'>
+    <view class='qrec-top'>
+      <view class='qrec-title'>快捷回复设置</view>
+      <navigator url='../../pagess/quick-editor/quick-editor'>
+        <view class='qrec-add' style='color:{{ themeColor }};'>
+          <text class='iconfont icon-plus'></text>
+          <view>添加快捷回复</view>
+        </view>
+      </navigator>
+    </view>
+
+    <navigator class='qrec-act' wx:key="list" wx:for="{{ list }}" wx:for-index="ldx" url='../quick-editor/quick-editor?index={{ ldx }}'>
+      <view class='qrec-list'>
+        <view class='qrec-sub'>{{ item.msg }}</view>
+        <text class='trans iconfont icon-jiantouarrow483'></text>
+      </view>
+    </navigator>
+    
+  
+  </view>
+  <view class='qre-num'> 最多可添加10条快捷回复</view>
+  <view class='blank'></view>
+  <view class='qre-hold'>
+    <button bindtap='savePage' class='btn-block btn-blue' style='background-color:{{ themeColor }};'>保存</button>
+  </view>
+</view>

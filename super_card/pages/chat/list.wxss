@@ -1,0 +1,129 @@
+/* super_card/pages/cose/cose.wxss */
+
+.cose-chat{
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 100rpx;
+  background-color:#fff;
+  /* padding:0 2vw; */
+}
+.cose-act{
+  padding: 2vw 2vw 2vw 0;
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content:flex-start;
+  /* overflow: hidden; */
+}
+/* navigator{ 
+  border-bottom: 1px solid #e2e2e2;
+}
+navigator:last-child{
+  border: 0;
+} */
+.act-left{
+  flex:1;
+  display: flex;
+  align-items: center;
+  -webkit-flex:1;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+.act-left-info{
+  border: 1px solid #ceced0;
+  display: flex;
+  display: -webkit-flex;
+  margin:0 2vw;
+  position: relative;
+}
+.act-left-tr{
+  width: 40rpx;
+  height: 40rpx;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  color: #fff;
+  background-color: red;
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  border-radius: 50%;
+  
+}
+.act-left-img{
+  width: 15vw;
+  height: 15vw;
+}
+.act-centre{
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+  -webkit-align-items: flex-start;
+}
+.act-centre-say{
+  width:77vw;
+  color: #ceced0;
+  font-size: 30rpx;
+  overflow: hidden;    
+  text-overflow:ellipsis;    
+  white-space: nowrap;
+}
+.act-right{
+  margin-left: 30rpx;
+  font-size: 26rpx;
+  color: #ceced0;
+  white-space:nowrap;
+}
+
+.act-centre-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:space-between;
+  width:100%;
+}
+
+/* 删除聊天记录 */
+movable-area{
+  width: 100vw;
+  height: 19vw;
+  background-color:#fff;
+}
+movable-view{
+  width: 100vw;
+  height: 19vw;
+  z-index:300;
+  background-color:#fff;
+}
+.main-items{
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #e2e2e2;
+}
+.main-items:last-child{
+  border: 0;
+}
+.delete-btn{
+  width:200rpx;
+  font-size:28rpx;
+  letter-spacing:4rpx;
+  background-color:#e8423f;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:100;
+}

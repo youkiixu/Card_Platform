@@ -1,0 +1,27 @@
+<!--super_card/pages/issue-dynamic/issue-dynamic.wxml-->
+<view class='contains'>
+  <textarea placeholder='发布一条最新的企业动态...' bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' placeholder-class='textmood' maxlength='200'/>
+  <view class='id-img'>
+
+    <view class='dt-img' wx:key="mpic" wx:for="{{ pics }}" wx:for-index="mpdx">
+      <image data-index="{{ mpdx }}" src='{{ item }}'></image>
+      <text class='del-icon iconfont icon-plus' bindtap='removePic' data-index="{{ mpdx }}"></text>
+    </view>
+    <view class='dt-img' wx:if="{{ pics.length < 9 }}" bindtap='uploadAlbumPic'>
+      <text class='iconfont icon-plus'></text>
+    </view>
+  </view>
+  <view class='address' bindtap='getCurrentLocation'>
+    <text class='iconfont icon-dingwei1'></text>
+    <view class='address-name' wx:if="{{ !address }}">
+      <view>所在位置</view>
+      <text class='act-trans iconfont icon-jiantouarrow483'></text>
+    </view>    
+    <view class='address-name' wx:if="{{ address }}">{{ province }}{{ city }}{{ dict }}{{ address }}</view>
+  </view>
+
+  <view class='btn-submit'>
+    <button class='btn-block btn-blue' bindtap='publicationDynamics' style='background:{{ themeColor }};'>发 布</button>
+  </view>
+
+</view>

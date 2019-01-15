@@ -1,0 +1,14 @@
+<!--super_card/pages/edit-page/croper-pic.wxml-->
+<import src="../../components/we-cropper/we-cropper.wxml"/>
+
+<view class="cropper-wrapper">
+    <template is="we-cropper" data="{{...cropperOpt}}"/>
+    <view class="cropper-buttons">
+        <view bindtap='goBack' class="upload">
+            取消
+        </view>
+        <view class="getCropperImage" bindtap="getCropperImage">
+            保存
+        </view>
+    </view>
+</view>

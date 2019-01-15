@@ -1,0 +1,24 @@
+/* super_card/pages/suggestion/suggestion.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.content{
+  background-color: #fff;
+  margin:20rpx;
+  padding:20rpx;
+}
+.introduction textarea{
+  width: 100%;
+  font-size: 30rpx;
+}
+.btn-submit{
+  margin:40rpx 20rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}

@@ -1,0 +1,92 @@
+<!--super_card/pagess/member-core/member-core.wxml-->
+<view class='contains'>
+
+  <view class='yellow-bg'>
+    <view class='top-bg-v'>
+      <view class='tb-top-zs'>
+        <view class='top-base-info'>
+          <view class='tb-top'>
+            <view class='tb-left'>
+              <image class='tb-img1' src='/super_card/resource/images/vip-1.png' mode='widthFix'></image>
+              <view class='tb-kind'>俱乐部</view>
+              <view class='tb-club'>VIP CLUB</view>
+            </view>
+            <image class='tb-img2' src='{{ wxInfo.avatarUrl }}'></image>
+          </view>
+          <view class='tb-bottom'>
+            <view class='tb-bottom-t'>
+              <view class='tb-bottom-name'>{{ wxInfo.nickName }}</view>
+              <view class='tb-bottom-time'>{{ uInfo.vip_last_time }}到期</view>
+            </view>
+            <view class='tb-bottom-b'>{{ vipSet[uInfo.vip - 1].name }}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='black-bg-bot'>
+      <view class='bgb'>
+        <view class='mc-gold-coint'>
+          <image class='mc-gold-li' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
+          <view class='mc-gold-coin-title'>您的特权</view>
+          <image class='mc-gold-ri' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
+        </view>
+        <swiper class="choice-coin" autoplay='' indicator-dots duration='300'>
+          <swiper-item wx:key="privilegek" wx:for="{{ privilege }}" wx:for-index="pdx" wx:for-item="pri">
+
+            <view class='bgb-con' wx:key="priivilegek" wx:for="{{ pri }}" wx:for-index="pidx" wx:for-item="prii" data-pdx="{{ pdx }}" data-pidx="{{ pidx }}" bindtap='showCardExpert'>
+              <text class="bgb-img iconfont {{ prii.rule_icon ? prii.rule_icon : 'icon-huiyuan' }}"></text>
+              <view class='bgb-tit'>{{ prii.privilege_name }}</view>
+            </view>
+
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
+  </view>
+
+  <view class='mc-tq'>
+    <!-- 黄金版本 -->
+    <view class='mc-gold'>
+      <view class='mc-gold-info'>
+        <image class='mc-gold-img1' mode='widthFix' src='/super_card/resource/images/xiaodian.png'></image>
+        <image class='mc-gold-img2' mode='widthFix' src='/super_card/resource/images/xiaodian.png'></image>
+        <image class='mc-gold-img3' mode='widthFix' src='/super_card/resource/images/xiaodian.png'></image>
+        <image class='mc-gold-img4' mode='widthFix' src='/super_card/resource/images/xiaodian.png'></image>
+        <view class='mc-gold-coint'>
+          <image class='mc-gold-li' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
+          <view class='mc-gold-coin-title'>{{ uInfo.vip < 3 ? '升级获得更多' : vipSet[uInfo.vip - 1].name }}特权</view>
+          <image class='mc-gold-ri' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
+        </view>
+        <view class='mc-gold-coin'>
+          <view wx:for="{{  uInfo.vip < 3 ? vipSet[uInfo.vip].rules : vipSet[uInfo.vip - 1].rules }}" wx:key="rules" wx:for-index="rdx" class='{{ rdx % 2 ==0 ? "mc-gold-main" : "" }}'>
+            <text class='m-g-d'></text>
+            <text class='m-g-nr'>{{ item.rule_name }}</text>
+          </view>
+          <!--view class='mc-gold-main'>
+            <text class='m-g-d'></text>
+            <text class='m-g-nr'>AI销售雷达</text>
+          </view-->
+          
+        </view>
+      </view>
+    </view>
+    <view class='mc-gold-join'>
+      <button class='mc-gold-btn' wx:if="{{ uInfo.vip < 3 }}" bindtap='toOpenVip'>去升级</button>
+    </view>
+  </view>
+ 
+  <view class='mc-zjxz-bg' wx:if="{{ cardExpert }}"></view>
+  <view class='mc-zjxz' wx:if="{{ cardExpert }}">
+    <view class='mc-zjxz-top'>
+      <view class='mc-zjxz-img'>
+        <text class="iconfont iconfont {{ cardExpert.rule_icon ? cardExpert.rule_icon : 'icon-huiyuan' }}"></text>
+      </view>
+      <view class='mc-zjxz-tit'>{{ cardExpert.privilege_name }}</view>
+      <view class='mc-zjxz-del' catchtap='hideCardExpert'>
+        <text class='trans iconfont icon-plus'></text>
+      </view>
+    </view>
+    <view class='mc-zjxz-bottom'><text>{{ cardExpert.rule_name }}，</text>{{ cardExpert.privilege_introduce }}</view>
+  </view>
+  
+</view>

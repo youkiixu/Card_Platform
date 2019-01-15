@@ -1,0 +1,24 @@
+<!--super_card/pages/modify/modify.wxml-->
+<import src="../../components/we-cropper/we-cropper.wxml"/>
+<view class='top'>
+  <text>请使用本人头像，提升名片真实度</text>
+</view>
+<view class="section" style="height:{{ cropperOpt.height }}px;">
+ <view class="cropper-wrapper">
+  <template is="we-cropper" data="{{...cropperOpt}}"/>
+ </view>
+</view>
+
+<image class='rotate' src='{{ wxAvatar }}'></image>
+
+<block wx:if="{{ !card_id }}">
+<view class='btn-submit'>
+  <button class='btn-block btn-blue' style='background-color:{{ themeColor }};' bindtap='getWxAavatar'>使用微信头像</button>
+</view>
+</block>
+<view class='btn-submit'>
+  <button class='btn-block btn-blue' style='background-color:{{ themeColor }};' bindtap='uploadPicture'>{{ card_id > 0 ? '重新选择头像' : '选择图片' }}</button>
+</view>
+<view class='btn-submit btn-bottom'>
+  <button class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};' bindtap='getCropperImage'>保 存</button>
+</view>

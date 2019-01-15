@@ -1,0 +1,193 @@
+<!--super_card/pagess/agent/agent.wxml-->
+<view class='contains'>
+
+   <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
+    <button form-type='submit' class='ove-btn'>
+      <text class='iconfont icon-daohangshouye' style='color:#4752e8;'></text>
+    </button>
+  </form>
+
+  <view class='seamlessscrolling'>
+    <view class='seamlessscrolling-coin'>您当前下级返点{{ agentGrade[(uInfo.agent - 1)].one_profit }}%<text wx:if="{{ agentGrade[(uInfo.agent - 1)].two_profit != 0 }}">， 二级返点{{ agentGrade[(uInfo.agent - 1)].two_profit }}%</text><text wx:if="{{ agentGrade[(uInfo.agent - 1)].three_profit != 0 }}">，三级返点{{ agentGrade[(uInfo.agent - 1)].three_profit }}%</text></view>
+    <text class='seamlessscrolling-more' wx:if="{{ uInfo.agent < 3 }}" bindtap="openAgent">升级赚更多</text>
+  </view>
+
+  <view class='top waveAnimation'>
+    <view class='top-u'>
+      <view class='topu-l'>
+        <!-- <view class='topu-l-tit'>总资产(元)</view>
+        <view class='topu-l-num'>49228.20</view> -->
+        <image class='topu-l-img' src='{{ wxInfo.avatarUrl }}'></image>
+        <view class='name-lv'>
+          <view class='topu-l-name'>{{ wxInfo.nickName }}</view>
+          <view class='topu-l-lv'>{{ agent_name }}</view>
+        </view>
+      </view>
+      <view class='topu-r'  bindtap='getAgentQrcode'>
+        <text class='topu-x iconfont icon-tuijianxiangmu'></text>
+        <text class='topu-r-tit'>推荐赚现金</text>
+        <text class='topu-xri iconfont icon-jiantou'></text>
+      </view>
+    </view>
+    <view class='top-d'>
+      <view class='topd-l'>
+        <view class='topd-t'>今日收益</view>
+        <view class='topd-b'>+{{ uInfo.today_profit }}</view>
+      </view>
+      <view class='topd-r'>
+        <view class='topd-t'>全部收益</view>
+        <view class='topd-b'>{{ uInfo.agent_profit }}</view>
+      </view>
+    </view>
+    <view class="waveWrapperInner bgTop"> 
+      <view class="wave waveTop" style="background-image: url('/super_card/resource/images/wave-top.png')"></view> 
+    </view> 
+    <view class="waveWrapperInner bgMiddle"> 
+      <view class="wave waveMiddle" style="background-image: url('/super_card/resource/images/wave-mid.png')"></view> 
+    </view> 
+  </view>
+
+  
+  <view class='iscash'>
+    <view class='iscash-l'>
+      <view class='iscash-money'>{{ uInfo.agent_balance }}</view>
+      <view class='iscash-tip'>可提现收益(元)</view>
+    </view>
+    <view class='iscash-r' bindtap='toCashPage' style='background-color:#4752e8;'>收益提现</view>
+  </view>
+
+  <view class='holiday-wishes-img' bindtap='getAgentQrcode' wx:if="{{ center_pic }}">
+    <image mode='widthFix' src='{{ center_pic }}'></image>
+  </view>
+
+
+  <view class='menu-info'>
+    <navigator url='../agent-revenue/agent-revenue'>
+    <view class='menu-act mabor-tl'>
+      <text class='iconfont icon-qian' style='color:#fe4356;'></text>
+      <view class='menu-right'>
+        <view class='menu-right-top'>收益详情</view>
+        <view class='menu-right-bot'>{{ uInfo.agent_profit }} 元</view>
+      </view>
+    </view>
+    </navigator>
+    <navigator url='../team/team?agent={{uInfo.agent}}'>
+    <view class='menu-act mabor-tr'>
+      <text class='iconfont icon-tuandui_keshi' style='color:#ff6e03;'></text>
+      <view class='menu-right'>
+        <view class='menu-right-top'>我的团队</view>
+        <view class='menu-right-bot'>{{ uInfo.team_num }} 人</view>
+      </view>
+    </view>
+    </navigator>
+    <navigator url='../cash-details/cash-details'>
+    <view class='menu-act mabor-bl'>
+      <text class='iconfont icon-tixian' style='color:#ffbe2e;'></text>
+      <view class='menu-right'>
+        <view class='menu-right-top'>提现明细</view>
+        <view class='menu-right-bot'>{{ uInfo.withdraw_num }} 笔</view>
+      </view>
+    </view>
+    </navigator>
+    <view class='menu-act mabor-br' wx:if="{{ uInfo.agent < 3 }}" bindtap="openAgent">
+      <text class='iconfont icon-dingdan' style='color:#9ec9f4;'></text>
+      <view class='menu-right'>
+        <view class='menu-right-top'>升级代言人</view>
+        <view class='menu-right-bot'>赚更多</view>
+      </view>
+    </view>
+  </view>
+  <view class='blank'></view>
+
+
+
+  <!-- 保存推荐图 -->
+  <view class='recommend-bg' bindtap="hideKeepImg" wx:if="{{ showModalRecommend }}"></view>
+  <scroll-view class='recommend-sv' wx:if="{{ showModalRecommend }}" scroll-y>
+    <view class='zq-tjimg' animation="{{animationDatasi}}" wx:if="{{ showImg }}">
+      <image mode='widthFix' src='{{ qrPic }}'></image>
+    </view>
+  </scroll-view>
+  <view class='recommend-sv-boxshdow' wx:if="{{ showImg }}"></view>
+  <view class='recommend-con' animation="{{animationData}}" wx:if="{{ showModalRecommend }}">
+    <view class='recommend-start'>
+      <view class='recommend-hd'></view>
+    </view>
+    <view class='recommend-hold'>
+      <button class='recommend-btn' bindtap="saveQrpic">保存</button>
+    </view>
+  </view>
+
+  <view class='classify' style='display:none;'>
+    <view class='classify-act'>
+      <text class='iconfont icon-xinheart281'></text>
+      <view>账单</view>
+    </view>
+    <view class='classify-act'>
+      <text class='iconfont icon-xinheart281'></text>
+      <view>关注</view>
+    </view>
+    <view class='classify-act'>
+      <text class='iconfont icon-xinheart281'></text>
+      <view>理财券</view>
+    </view>
+    <view class='classify-act'>
+      <text class='iconfont icon-xinheart281'></text>
+      <view>银行卡</view>
+    </view>
+  </view>
+  <view class='list-sz' style='display:none;'>
+    <view class='list-sz-top'>
+      <view class='lat-tit'>本月收支</view>
+      <view class='lat-tit-right'>
+        <!-- <view>还款时间28号</view> -->
+        <text class='iconfont icon-jiantou'></text>
+      </view>
+    </view>
+    <view class='list-sz-bot'>
+      <view class='list-sr'>收入<text>+50000</text></view>
+      <view class='list-zc'>支出<text>-5875</text></view>
+    </view>
+  </view>
+  <view class='list-sz' style='display:none;'>
+    <view class='list-sz-top'>
+      <view class='lat-tit'>个人消费信用卡</view>
+      <view class='lat-tit-right'>
+        <view>还款时间28号</view>
+        <text class='iconfont icon-jiantou'></text>
+      </view>
+    </view>
+    <view class='list-sz-bot'>
+      <view class='list-money'>可用额度<text>50000</text></view>
+      <view class='list-hkh'>本月应还<text class='ls'>-5875</text></view>
+    </view>
+  </view>
+  <view class='list-sz' style='display:none;'>
+    <view class='list-sz-top'>
+      <view class='lat-tit'>定期</view>
+      <view class='lat-tit-right'>
+        <!-- <view>还款时间28号</view> -->
+        <text class='iconfont icon-jiantou'></text>
+      </view>
+    </view>
+    <view class='list-sz-bot'>
+      <view class='list-money'>金额<text>50000</text></view>
+      <view class='list-hkh'>昨日收益<text class='hs'>+5875</text></view>
+    </view>
+  </view>
+  <view class='list-sz' style='display:none;'>
+    <view class='list-sz-top'>
+      <view class='lat-tit'>基金</view>
+      <view class='lat-tit-right'>
+        <!-- <view>还款时间28号</view> -->
+        <text class='iconfont icon-jiantou'></text>
+      </view>
+    </view>
+    <view class='list-sz-bot'>
+      <view class='list-money'>金额<text>50000</text></view>
+      <view class='list-hkh'>昨日收益<text class='ls'>-5875</text></view>
+    </view>
+  </view>
+
+
+</view>

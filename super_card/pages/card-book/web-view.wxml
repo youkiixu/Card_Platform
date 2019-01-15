@@ -1,0 +1,3 @@
+<!--super_card/pages/card-book/web-view.wxml-->
+ <!--跳转网页-->
+<web-view wx:if="{{ url != '' }}" src="{{ url }}" ></web-view>

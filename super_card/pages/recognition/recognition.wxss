@@ -1,0 +1,212 @@
+/* super_card/pages/recognition/recognition.wxss */
+.contains{
+  color: #666666;
+}
+.act {
+position:fixed;
+top:50%;
+right:10rpx;
+}
+.fix{
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  display: -webkit-flex;
+  padding: 6rpx;
+  border:6rpx solid #00a1e9;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 50%;
+}
+/*拍名片*/
+.fix-tg{
+  width: 140rpx;
+}
+.fix-tg image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.take{
+  flex: 1;
+  -webkit-flex: 1;
+  background-color:#00a1e9;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  flex-flow:column;
+  justify-content:center;
+  align-items:center;
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+  -webkit-align-items:center;
+}
+.take image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.take text{
+  font-size: 26rpx;
+  color: #fff;
+}
+.card-info{
+  margin:50rpx 30rpx 0rpx 30rpx;
+  background-color: #fff;
+  box-shadow: 0px 2px 1px #ccc;
+  padding: 30rpx;
+  background-position:center;
+}
+.top{
+  display: flex;
+  justify-content:space-between;
+  display: -webkit-flex;
+  -webkit-justify-content:space-between;
+}
+.card-tion{
+  display: flex;
+  flex-flow: column;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+}
+.card-tion text:nth-child(1) {
+  font-size:36rpx;
+  color: #686868;
+  vertical-align:middle;
+}
+.job{
+  font-size:24rpx;
+  color: #808080;
+}
+.company{
+  font-size:30rpx;
+  color: #808080;
+}
+.tips{
+  padding: 20rpx;
+  display: flex;
+  flex-flow:column;
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
+  text-align: center;
+}
+.tips image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.tips text{
+  font-size: 24rpx;
+  color: #808080;
+}
+.tips-img{
+  display:inline-flex;
+  margin:0 auto;
+}
+.file{
+  display: flex;
+  display: -webkit-flex;
+  margin-top: 10rpx;
+}
+.file image{
+  width: 50rpx;
+  height: 50rpx;
+  font-size:40rpx;
+  line-height: 50rpx;
+}
+/* .file text{
+  padding-left: 20rpx;
+  flex: 1;
+  color: #14cafa;
+  font-size:32rpx;
+} */
+.file view{
+  font-size: 30rpx;
+  color:#808080;
+}
+.file view:first-child{
+  width: 80rpx;
+}
+.file view.info-side{
+  padding-left: 20rpx;
+  flex: 1;
+  -webkit-flex: 1;
+  color: #14cafa;
+  font-size:30rpx;
+  word-break:break-all;
+}
+.grey{
+  color:#808080 !important;
+}
+.card{
+  display: flex;
+  display: -webkit-flex;
+  margin: 50rpx 30rpx;
+}
+.card image{
+  width: 100%;
+  background-color: #000;
+}
+.index-menu{
+  width: 100%;
+  display: -webkit-flex;
+  -webkit-flex-wrap:wrap;
+  flex-wrap:wrap;
+  background-color: #fff;
+  margin: 50rpx 0;
+}
+.menu-item{	
+  -webkit-flex: 0 0 33.3%;
+	-webkit-box-flex: 0;
+	flex: 0 0 33.3%;
+	max-width: 33.3%;
+	text-align: center;
+	margin-top: 10rpx;
+	padding: 20rpx 20rpx;
+	box-sizing: border-box;
+	margin-bottom: -1rpx;
+}
+.menu-item image{
+	width: 100rpx;
+	height: 100rpx;
+  border-radius: 50%;
+  background-color:#00a1e9;
+  line-height: 100rpx;
+  font-size: 56rpx;
+}
+.menu-item text{
+	display: block;
+	font-size: 26rpx;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+/* tips */
+.top-tips{
+  display:inline-block; 
+  font-size: 14px;
+  color: #fff;
+}
+.text-btn{
+  display: flex;
+  align-content: center;
+  display: -webkit-flex;
+  -webkit-align-content: center;
+  background-color: #555555;
+  border-radius: 16rpx;
+}
+.text-btn text{
+  flex:1;
+  -webkit-flex:1;
+  padding:0 10px;
+  height:25px;
+  line-height:25px;
+}
+.text-btn-call,.text-btn-map{
+  border-left: 1px solid #fff;
+}
+.top-tips image.tips-bottom{
+  width: 13px;
+  height: 11px;
+  display:flex;
+  display:-webkit-flex;
+  margin:auto;
+}

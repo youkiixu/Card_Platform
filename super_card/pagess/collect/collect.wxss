@@ -1,0 +1,45 @@
+/* super_card/pages/collect/collect.wxss */
+.contains{
+  color: #a1a1a1;
+  font-size: 30rpx;
+  background-color: #fff;
+}
+.act{
+  display: flex;
+  display: -webkit-flex;
+  border-bottom: 1px solid #e2e2e2;
+  padding: 30rpx;
+}
+image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.info{
+  padding-left: 20rpx;
+  flex: 1;
+  -webkit-flex: 1;
+  margin:20rpx 0;
+}
+.con{
+  display: flex;
+  display: -webkit-flex;
+}
+.con text:first-child{
+  flex: 1;
+  -webkit-flex: 1;
+  font-size: 36rpx;
+}
+
+.coll-top{
+  font-size:26rpx;
+  color:#b5b5b5;
+  padding:0 30rpx;
+  line-height:100rpx;
+  display:flex;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  border-bottom:1px solid #e2e2e2;
+}

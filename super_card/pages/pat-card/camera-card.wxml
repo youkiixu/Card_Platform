@@ -1,0 +1,52 @@
+<!--super_card/pages/pat-card/camera-card.wxml-->
+<view class="page-body">
+  <view class="page-body-wrapper" style="background:#000;">
+    <view style='height: {{ height }}px;'>
+      <canvas wx:if="{{src !== false }}"  canvas-id='myCanvas' style="width: 100%;height: {{ height }}px;">
+        <cover-view class='imgtop'>
+          <cover-view class='rect-l-top-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-l-top-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-r-top-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-r-top-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-l-bottom-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-l-bottom-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-r-bottom-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-r-bottom-b' style='background-color:{{ themeColor }};'></cover-view>
+        </cover-view>
+        <cover-view class='shade1'></cover-view>
+        <cover-view class='shade2'></cover-view>
+        <cover-view class='shade3'></cover-view>
+        <cover-view class='shade4'></cover-view>
+      </canvas>
+      <camera wx:if="{{ src === false }}" device-position="back" flash="off" binderror="error" style="width: 100%; height: {{ height }}px;"> 
+        <cover-view class='imgtop'>
+          <cover-view class='rect-l-top-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-l-top-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-r-top-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-r-top-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-l-bottom-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-l-bottom-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-r-bottom-a' style='background-color:{{ themeColor }};'></cover-view> 
+          <cover-view class='rect-r-bottom-b' style='background-color:{{ themeColor }};'></cover-view>
+          <cover-view class='rect-middle-info'>
+            <cover-image class='rect-middle' src="/super_card/resource/images/wbt.png" mode='widthFix' />
+          </cover-view>
+        </cover-view>
+        <cover-view class='shade1'></cover-view>
+        <cover-view class='shade2'></cover-view>
+        <cover-view class='shade3'></cover-view>
+        <cover-view class='shade4'></cover-view>
+        
+      </camera>
+    </view>
+    <view class='btn-bot'>
+      <text class='search search-xc' bindtap='chooseAlbumPic'>相册</text>
+      <view class="btn-area">
+        <view>
+          <button type="primary" disabled='{{ btnDisabled }}' bindtap="takePhoto" style='background-color:{{ themeColor }};'></button>
+        </view>
+      </view>
+      <text class='search search-fh' bindtap='chooseBackPre'>返回</text>
+    </view>
+  </view>
+</view>

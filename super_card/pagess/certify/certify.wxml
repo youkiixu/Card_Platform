@@ -1,0 +1,85 @@
+<!--super_card/pages/certify/certify.wxml-->
+<view class='contains'>
+  <view class='top' style='background:-webkit-radial-gradient(top left, ellipse, #fff,{{ themeColor }}, {{ themeColor }});'>
+    <text class='title'>身份认证</text>
+    <view class='tip'>
+      <view class='icon'>
+        <view class='img'>
+          <!-- <image src='../../resource/icon/group.png'></image> -->
+          <text class='cw b50 iconfont icon-renyuanxinxi1'></text>
+        </view>
+      </view>
+      <text class='solid'>------</text>
+      <view class='icon'>
+        <view class='img'>
+          <text class='cw b50 iconfont icon-bianjicailiao'></text>
+        </view>
+      </view>
+      <text class='solid'>------</text>
+      <view class='icon'>
+        <view class='img'>
+          <text class='cw b50 iconfont icon-duihao'></text>
+        </view>
+      </view>
+    </view>
+    <view class='top-state'>
+        <text>1完善信息</text>
+        <text>2提交认证材料</text>
+        <text>3完成认证</text>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='act'>
+      <view class='left'>
+        <!-- <image src='../../resource/icon/group.png'></image> -->
+        <view class='lists' style='border-color:{{ themeColorV }};'>
+          <text class='cn iconfont icon-huizhang' style='color:{{ themeColorV }};'></text>
+        </view>
+      </view>
+      <view class='right'>
+        <text>专属徽章</text>
+        <text>可信身份象征，更多合作机会</text>
+      </view>
+    </view>
+    <view class='act'>
+      <view class='left'>
+        <view class='lists' style='border-color:{{ themeColorV }};'>
+          <text class='cn iconfont icon-shaixuan' style='color:{{ themeColorV }};'></text>
+        </view>
+      </view>
+      <view class='right'>
+        <text>高级筛选</text>
+        <text>多维度筛选企业及联系人</text>
+      </view>
+    </view>
+    <view class='act'>
+      <view class='left'>
+        <view class='lists' style='border-color:{{ themeColorV }};'>
+          <text class='cn iconfont icon-dengpao' style='color:{{ themeColorV }};'></text>
+        </view>
+      </view>
+      <view class='right'>
+        <text>品牌曝光</text>
+        <text>可编辑主页，上传产品信息</text>
+      </view>
+    </view>
+    <view class='act'>
+      <view class='left'>
+        <view class='lists' style='border-color:{{ themeColorV }};'>
+          <text class='cn iconfont icon-changneifangke' style='color:{{ themeColorV }};'></text>
+        </view>
+      </view>
+      <view class='right'>
+        <text>访客查看</text>
+        <text>发现企业的潜在合作伙伴</text>
+      </view>
+    </view>
+  </view>
+  <view class='bottom'>
+    <view class='btn-submit'>
+      <form report-submit='true' bindsubmit="toCertifyOptPage">
+      <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>免费认证</button>
+      </form>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,55 @@
+/* super_card/pages/report/report.wxss */
+.contains{
+  font-size: 36rpx;
+  text-align: center;
+}
+.top{
+  background-color: #2a2623;
+  margin: 50rpx;
+  border-radius:100rpx;
+  padding:100rpx 0;
+  display:flex;
+  flex-flow:column;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-align-items:center;
+}
+.tip{
+  border: 3px solid #00c6cd;
+  border-radius: 50%;
+  display: flex;
+  align-items:center;
+  display: -webkit-flex;
+  -webkit-align-items:center;
+}
+.tip image{
+  width: 140rpx;
+  height: 140rpx;
+  margin: 50rpx;
+}
+.btn-submit{
+  margin-top: 80rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  font-size: 32rpx;
+}
+.btn-blue{
+  background: transparent;
+  color: #fff;
+  width: 250rpx;
+  border: 2px solid #fff;
+  border-radius: 50rpx;
+}
+.explain{
+  font-size: 30rpx;
+}
+.icon{
+  font-size:120rpx;
+  width: 140rpx;
+  height: 140rpx;
+  line-height:140rpx;
+  margin: 50rpx;
+  color: #00c6cd;
+}

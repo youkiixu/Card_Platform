@@ -1,0 +1,52 @@
+<!--super_card/pages/group/group.wxml-->
+<view class='contains'>
+  <view class='group'>
+    <block wx:if="{{ groups.length > 0}}">
+    <!--循环体  -->
+      <block  wx:key="groups" wx:for="{{ groups }}" x:for-index="gIdx" wx:for-item="group">
+        <navigator url="../../pages/group-manage/group-manage?group_id={{ group.id }}">
+        <button class='act'>     
+          <view class='imgset'>
+            <view class='group-image' wx:key="icons" wx:for="{{ group.icons }}" x:for-index="cIdx" wx:for-item="icon">
+              <block wx:if="{{ icon.picture == 'no' }}">
+                  <text class="iconfont icon-fl-renyuan"></text>
+              </block>
+              <block wx:else>
+                  <image src='{{ icon.picture }}'></image>
+              </block>
+            </view>
+          </view>
+          <view class='group-info'>
+            <text class='name'>{{ group.name }}</text>
+            <view class='total'>
+              <text class='exp'>共{{ group.card_num }}人</text>
+              <text style='color:{{ themeColor }};' class="add-pl iconfont icon-renyuanzengjia1 {{ group.anyone_request == 1 ? 'yes' : ''}}"></text>
+              <text style='color:{{ themeColor }};' class="store-pl iconfont icon-cunkuanlixi {{ group.allow_collect == 1 ? 'yes' : '' }}"></text>
+            </view>
+            <view class='manage'>
+              <text class='exp'>管理员：{{ group.admin_name }}</text>
+              <text wx:if="{{ group.is_admin }}" class="matron iconfont icon-user-star" style='color:{{ themeColor }};'></text>
+            </view>
+          </view>
+          
+        </button>
+        </navigator>
+      </block>
+    </block>
+    <block wx:else>
+      <text class='begin'>名片组是一组名片的集合,可用来制作各种通讯录,如企业通讯录、协会通讯录、同学通讯录、群通讯录,等等。名片组成员可以查看彼此的名片</text>
+    </block>
+  </view>
+  <view class='btn-submit'>
+    <button class='btn-block btn-blue' bindtap='toCreatePage' style='background:{{ themeColor }};'>创建新名片组</button>
+  </view>
+  <view class='reminder'>
+    <text>温馨提示：</text>
+    <text>1.点击微信菜单"发现" → "小程序" 可以找到"{{ app_name }}" </text>
+    <text>2.在小程序列表中，请将本小程序"标为星标" </text>
+    <text>3.安卓用户，点屏幕右上角图标···，可将本小程序添加到桌面</text>
+  </view>
+</view>
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>
+

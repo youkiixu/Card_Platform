@@ -1,0 +1,145 @@
+<!--super_card/pages/card-category/card-category.wxml-->
+<view class='contains'>
+
+  <navigator url="../holder/holder">
+  <button class='top'>  
+    <view class='search search-front'>
+      <icon type="search" size="16" color='{{ themeColor }}' />
+      <text>搜索</text>
+    </view>
+  </button>
+  </navigator>
+
+  <view class='tops'>
+    <form report-submit='true' bindsubmit="toHolderPage">
+    <button form-type='submit' class='clip-group'>
+      <text class='c-l iconfont icon-iconset0327' style='color:{{ themeColor }};'>
+        <text wx:if="{{ comebacksLen > 0 }}" class='holder-hint'>{{ comebacksLen }}</text>
+      </text>
+      <view class='cg-info'>
+        <text>名片夹 <text class='number'>({{ collectedNum }})</text></text>
+        <text class='cg-explain'>邀请好友交换名片</text>
+      </view>
+      <text class='trans iconfont icon-jiantouarrow483'></text> 
+    </button>
+    </form>
+   <form report-submit='true' bindsubmit="toGroupPage">
+    <button form-type='submit' class='clip-group'>
+       <text class='c-l iconfont icon-zy_qunzuduoren'style='color:{{ themeColor }};'></text>
+      <text class='cg'>群组通讯录 <text class='number'>({{ groupNum }})</text></text>
+      <text class='trans iconfont icon-jiantouarrow483'></text> 
+    </button>
+    </form>
+  
+  </view>
+  
+  <text wx:if="{{ link_show_pose != 3 && linkList.length > 0 }}" class='middle'>发现...</text>
+  <block wx:if="{{ adCode1 }}" >
+    <ad unit-id="adunit-{{ adCode1 }}"></ad>
+  </block>
+   <!-- 注：sw-info代表上下有距离 sw-pad代表无距离 -->
+  <swiper wx:if="{{ link_show_pose == 3 }}" class='sw-info' indicator-dots="true" autoplay="true" interval="3000">
+  <block wx:for="{{ linkList }}"  wx:key="linkIndex" wx:for-index="idx" wx:for-item="link">
+    <!--跳转小程序-->
+      <block wx:if="{{ link.type == 2 }}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{ link.appid }}" path="{{ link.value }}" version="release">
+          <swiper-item>
+            <view class='s-i'>
+              <image mode="aspectFit" class='swiper-lb' src="{{ link.pic }}"></image>
+            </view>
+          </swiper-item>
+         </navigator>
+       </block>
+
+      <block wx:else>
+        <swiper-item>
+            <view class='s-i' data-type="{{ link.type }}" data-appid="{{ link.appid }}" data-value="{{ link.value }}" bindtap='makeLinkWork'>
+              <image mode="aspectFill" class='swiper-lb' src="{{ link.pic }}"></image>
+            </view>
+        </swiper-item>
+      </block>
+
+    </block>
+  </swiper>
+
+  <view wx:if="{{ link_show_pose == 1 }}" class='card-set'>
+
+    <block wx:for="{{ linkList }}"  wx:key="linkIndex" wx:for-index="idx" wx:for-item="link">
+
+      <!--跳转小程序-->
+      <block wx:if="{{ link.type == 2 }}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{ link.appid }}" path="{{ link.value }}" version="release">
+          <view class='act'>
+            <view class='act-img'>
+              <image src='{{ link.pic }}'></image>
+            </view> 
+            <view class='act-info'>
+              <text>{{ link.title }}</text>
+              <text class='company'>{{ link.introduce }}</text>        
+            </view>
+            <view class='act-go'>
+              <text class='act-trans iconfont icon-jiantouarrow483'></text>
+            </view>
+          </view>
+        </navigator>
+      </block>
+
+      <block wx:else>
+      <view class='act' data-type="{{ link.type }}" data-appid="{{ link.appid }}" data-value="{{ link.value }}" bindtap='makeLinkWork'>
+        <view class='act-img'>
+          <image src='{{ link.pic }}'></image>
+        </view> 
+        <view class='act-info'>
+          <text>{{ link.title }}</text>
+          <text class='company'>{{ link.introduce }}</text>        
+        </view>
+        <view class='act-go'>
+          <text class='act-trans iconfont icon-jiantouarrow483'></text>
+        </view>
+      </view>
+      </block>
+
+    </block>
+
+  </view>
+
+  <block wx:if="{{ link_show_pose == 2 }}">
+    <view class='nav'>
+        <block wx:for="{{ linkList }}"  wx:key="linkIndex" wx:for-index="idx" wx:for-item="link">
+
+          <block wx:if="{{ link.type == 2 }}">
+            <navigator target="miniProgram" open-type="navigate" app-id="{{ link.appid }}" path="{{ link.value }}" version="release" class='nav-na-s'>
+              <view class='nav-na-t'>
+                <image class='an-img' mode='widthFix' src='{{ link.pic }}'></image>
+                <!--text class='an-hit'>0</text-->
+                <text class='an-tit'>{{ link.title }}</text>
+              </view>
+            </navigator>
+          </block>
+
+          <block wx:else> 
+              <view class='nav-na' data-type="{{ link.type }}" data-appid="{{ link.appid }}" data-value="{{ link.value }}" bindtap='makeLinkWork'>             
+                <image class='an-img' mode='widthFix' src='{{ link.pic }}'></image>
+                <!--text class='an-hit'>0</text-->
+                <text class='an-tit'>{{ link.title }}</text>
+              </view>
+            </block>
+
+
+        </block>
+        
+        <!--view class='nav-na'>
+        <view class='an-incon'>
+            <text class='an-i iconfont icon-zy_qunzuduoren'></text>
+          </view>
+          <text class='an-hit'>0</text>
+          <text class='an-tit'>名片夹</text>
+        </view-->
+        <!--view class='nav-na'>
+          <text class='nav-more'>更多...</text>
+        </view-->
+    </view>
+  </block>
+</view>
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

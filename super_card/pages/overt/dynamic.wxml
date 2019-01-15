@@ -1,0 +1,101 @@
+<!--super_card/pages/dynamic/dynamic.wxml-->
+<view class='contains' bindtap='hidePingZan'>
+
+
+  <form report-submit='true' bindsubmit="backCard">
+        <button form-type='submit' class='ove-btn'>
+          <text class='iconfont icon-renyuanxinxi' style='color:{{ themeColor }};'></text>
+        </button>
+  </form>
+
+  <view class='dy'> 
+    
+    <view class='dy-info' wx:for="{{ dyList }}" wx:key="dylist" wx:for-index="dydx" wx:for-item="dy">
+      <image class='dy-info-img' src='{{ dy.avatar }}'></image>
+      <view class='dy-ir'>
+        <view class='dy-ilt'>
+          <view class='dy-com'>
+            <view class='dy-company-name' style='color:{{ themeColor }};'>{{ dy.company }}</view>
+            <view class='dy-company'>公司</view>
+          </view>      
+          <button class='dy-share' open-type='share' style='color:{{ themeColor }};'>转发</button>
+        </view>
+        <navigator url='../../pages/overt/dynamic-details?card_id={{ card_id }}&dy_index={{ dydx }}'>
+          <view class='dy-content'>
+            <!-- 单张 -->
+            <view class='img-alone' wx:if="{{ dy.pics.length < 2 }}">
+              <image lazy-load="true" class='dy-con-img'  wx:key="dyPics" wx:for="{{ dy.pics }}" wx:for-index="dypdx" wx:for-item="pic" src='{{ pic }}' mode='widthFix'></image>
+            </view>
+            
+            <!-- 多张 -->
+            <view class='img-many' wx:if="{{ dy.pics.length > 1 }}">
+              <image lazy-load="true" class='dy-con-img' wx:key="dyPics" wx:for="{{ dy.pics }}" wx:for-index="dypdx" wx:for-item="pic" src='{{ pic }}' mode='aspectFill'></image>
+            </view>
+            <text class='dy-con-in'>{{ dy.list_content }}</text>
+            <text class='sjx'></text>
+          </view>
+        </navigator>
+        <view class='dy-ckxq'>
+          <view class='dy-ckxq-l'>
+            <view class='dy-ckxq-con'>
+              <navigator url='../../pages/overt/dynamic-details?card_id={{ card_id }}&dy_index={{ dydx }}'>
+                <view class='dy-ckxq-gxq' style='color:{{ themeColor }};'>查看详情</view>
+              </navigator>
+              <view class='dy-ckxq-time'>{{ dy.create_date }}</view>
+            </view>
+            
+            <view class='pos-zpf' wx:if="{{ dy.showPingZan }}" animation="{{animationData}}">
+              <view class='pos-zpf-act' catchtap='zanDynamic' data-index="{{ dydx }}" data-id="{{ dy.id }}">
+                <text class='iconfont icon-xinheart281'></text>
+                <text>{{ dy.is_zan ? '取消' : '赞'}}</text>
+              </view>
+              <view class='pos-zpf-act' catchtap='showPingInput' data-index="{{ dydx }}" data-id="{{ dy.id }}">
+                <text class='iconfont icon-xiaoxi' style='font-size:36rpx;line-height:34rpx;'></text>
+                <text>评论</text>
+              </view>
+            </view>
+
+          </view>
+          
+          <text class='dyicon iconfont icon-yipinglun' catchtap='showPingZan' data-index="{{ dydx }}" data-id="{{ dy.id }}"></text>
+
+            
+            
+        </view>
+        <view class='dy-laud' wx:if="{{ dy.zan_data.length > 0 || dy.comments_data.length > 0 }}">
+          <view class='dy-zan' wx:if="{{ dy.zan_data.length > 0 }}">
+            <text class='dy-xin iconfont icon-xinheart281' style='color:{{ themeColor }};'></text>
+            <text wx:key="zanData" wx:for="{{ dy.zan_data }}" style='color:{{ themeColor }};'>{{ item }} , </text>
+          </view>
+          <view class="dy-pz-line" wx:if="{{ dy.zan_data.length > 0 && dy.comments_data.length > 0 }}"></view>
+          <view class='dy-pl' wx:if="{{ dy.comments_data.length > 0 }}">
+            <view class='dy-pl-list' wx:key="commentsData" wx:for="{{ dy.comments_data }}">
+              <text class='dy-pl-name' style='color:{{ themeColor }};'>{{ item.uname }}：</text>
+              <text class='dy-pl-content'>{{ item.content }}</text>
+            </view>
+          </view>
+          <text class='sjx'></text>
+        </view>
+      </view>
+    </view>
+
+
+    <view class='buttom-info'>
+      <text>————</text>
+      <text>没有更多数据了</text>
+      <text>————</text>
+    </view>
+  </view>
+  
+  <!--view class='ws-logo'>
+    <image class='ws-logo-i' src='/super_card/resource/images/con-1.jpg' mode='widthFix'></image>
+    <view class='ws-logo-link'>www.baidu.com</view>
+  </view-->
+  <view class='discuss-edit' wx:if="{{ pingInput }}">
+    <input class='discuss-in' maxlength='100' bindinput='setPingContent' bindconfirm='pingDynamic' auto-focus='true' placeholder='快来发表评论吧'></input>
+    <view class='discuss-report' bindtap='pingDynamic'>发表</view>
+  </view>
+</view>
+
+<import src="/super_card/pages/templates/footer.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

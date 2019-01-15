@@ -1,0 +1,144 @@
+/* super_card/pages/partner-index/partner-index.wxss */
+
+.par-top-hb{
+  padding: 10rpx 30rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+.hb-info{
+  color:#999999;
+}
+.hb-sc{
+  width:140rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  background-color: #4752e8;
+  text-align:center;
+  color: #fff;
+}
+
+
+.partner-act{
+  margin: 20rpx;
+  padding: 10rpx 30rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  filter: drop-shadow(0px 0px 2px #ccc);
+}
+
+.partner-top{
+  padding-top:40rpx;
+  padding-bottom:10rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.partner-bot{
+  color:#999999;
+  font-size: 22rpx;
+}
+.partner-left{
+  width: 43%;
+  display:flex;
+  align-items:center;
+}
+.partner-left view{
+  font-size: 30rpx;
+}
+.iconv-img{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+.iconv{
+  font-size:40rpx;
+  line-height: 40rpx;
+  margin-right: 10rpx;
+}
+.iconv-c1{
+color:#cd8658;
+}
+.iconv-c2{
+color:#a7bac9;
+}
+.iconv-c3{
+color:#f5b31e;
+}
+.iconwh{
+  margin-left: 10rpx;
+  color:#bbbbbb;
+}
+.partner-right{
+  display:flex;
+  align-items:center;
+  flex:1;
+  justify-content:space-between;
+}
+.partner-price{
+  display:flex;
+  flex-flow:column;
+  font-size:30rpx;
+  align-items:center;
+}
+.partner-price-now{
+  color: #4752e8;
+}
+.partner-price-del{
+  font-size:22rpx;
+  color:#bbbbbb;
+  text-decoration:line-through;
+}
+.partner-dredge,.partner-not-dredge{
+  font-size:24rpx;
+  letter-spacing:4rpx;
+  height:48rpx;
+  line-height:48rpx;
+  width:140rpx;
+  text-align:center;
+}
+.partner-dredge{
+  color:#bbbbbb;
+  border:1px solid #bbbbbb;
+  box-sizing:content-box;
+}
+button.partner-not-dredge::after{
+ border: 0;
+}
+.partner-not-dredge{
+  color:#4752e8;
+  border:1px solid #4752e8;
+  padding:0;
+  background:#fff;
+  border-radius:0;
+  box-sizing:content-box;
+}
+
+.holiday-wishes-img{
+  display:flex;
+  display:-webkit-flex;
+  padding:10rpx 30rpx;
+  margin-top:20rpx;
+}
+.holiday-wishes-img image{
+  width:100%;
+  box-shadow:0 0 5px -8px rgba(61, 61, 61, 0.2),0 0 5px -8px rgba(61, 61, 61, 0.2),
+  3px 0 5px 3px rgba(61, 61, 61, 0.2),-3px 0 5px 3px rgba(61, 61, 61, 0.2);
+  -webkit-box-shadow:0 0 5px -8px rgba(61, 61, 61, 0.2),0 0 5px -8px rgba(61, 61, 61, 0.2),
+  3px 0 5px 3px rgba(61, 61, 61, 0.2),-3px 0 5px 3px rgba(61, 61, 61, 0.2);
+}
+
+.cash-bot{
+  padding:30rpx 40rpx;
+  font-size:22rpx;
+  color:#818181;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:space-between;
+}

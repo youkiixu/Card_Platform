@@ -1,0 +1,58 @@
+/* super_card/pagess/cash-record/cash-record.wxss */
+page{
+  background-color: #fff;
+}
+.care{
+  padding:80rpx 0 40rpx 0;
+  display:flex;
+  flex-flow:column;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-align-items:center;
+  background:linear-gradient(to right,#757df5,rgb(223, 221, 252), #757df5);
+}
+.care text:first-child {
+  color:rgb(124, 123, 123);
+  font-size:28rpx;
+}
+.care text:last-child {
+  font-size:70rpx;
+  color:rgb(0, 0, 0);
+}
+.blank{
+  width:100%;
+  height:20rpx;
+  background-color:#efefef;
+}
+
+.care-act{
+  padding:30rpx;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  display:-webkit-flex;
+  -webkit-align-items:center;
+  -webkit-justify-content:space-between;
+  border-bottom:1px solid #efefef;
+}
+.care-act-l{
+  display:flex;
+  flex-flow:column;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+}
+.care-act-lyue{
+  font-size:32rpx;
+}
+.care-act-time{
+  font-size:26rpx;
+  color:#868686;
+  margin-top:10rpx;
+}
+.care-act-r{
+  font-size:36rpx;
+}
+
+
+

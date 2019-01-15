@@ -1,0 +1,163 @@
+/* super_card/pages/seen-card/seen-card.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.top{
+  display: flex;
+  display: -webkit-flex;
+  padding: 20rpx;
+  border-bottom: 1px solid #d7d7d9;
+}
+.search{
+  flex: 1;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-justify-content:center;
+  -webkit-align-items:center;
+  font-size: 30rpx;
+  height: 70rpx;
+}
+.search-front{
+  background-color: #fff;
+  color: #aeaeae;
+  border-radius: 6rpx;
+}
+.search text{
+  margin-left: 10rpx;
+}
+.search-rear text{
+  color: #00a1e9;
+}
+.search-rear view{
+  flex: 1;
+  display: flex;
+  justify-content:flex-start;
+  align-items:center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-justify-content:flex-start;
+  -webkit-align-items:center;
+  background-color:#fff;
+  border-radius: 6rpx;
+  height:100%;
+  border: 1rpx solid #00a1e9;
+}
+.search-rear icon{
+  margin: 0 15rpx;
+}
+.search-rear input{
+  flex: 1;
+  -webkit-flex: 1;
+}
+.contant:last-child{
+  margin-bottom: 100rpx;
+}
+.contant view.time,.contant view.cards{
+  border-bottom: 1px solid #d7d7d9;
+}
+.time{
+  padding:16rpx 20rpx;
+} 
+.time text{
+  color: #a6a6a6;
+  font-size: 32rpx;
+}
+.cards{
+  align-items: center;
+  background-color: #fff;
+}
+.card{
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  color:#aeaeae;
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+}
+.card-img{
+  display: flex;
+  display: -webkit-flex;
+}
+.card-img text{
+  width:150rpx;
+  height:150rpx;
+  font-size:80rpx;
+  text-align:center;
+  background-color:#c0c0c0;
+  border-radius:50%;
+  color:#fff;
+  overflow:hidden;
+}
+.card-img image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5px;
+}
+.card-info{
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+  padding: 0 20rpx;
+}
+
+/* .name-time text:nth-child(1){
+  color: #000;
+}
+.name-time text:nth-child(2){
+  font-size: 28rpx;
+  padding-left: 10rpx;
+}
+.card-info-title , .card-info-company{
+  font-size: 28rpx;
+} */
+/* 时间 */
+ .card-info text:nth-child(1){
+  color: #000;
+} 
+ .card-info text:nth-child(2){
+  font-size: 28rpx;
+}
+.card-info text:nth-child(3){
+  font-size: 28rpx;
+} 
+.card-collection{
+  display: flex;
+  flex-flow: column;
+  justify-content:center;
+  align-content: center;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+  -webkit-justify-content:center;
+  -webkit-align-content: center;
+}
+.card-collection-img{
+  display: inline-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.card-collection text.store{
+  font-size: 26rpx;
+}
+.card-collection text.icon-wujiaoxing{
+  font-size:16px;
+}
+.card-img .rz-v{
+color:#fff;
+background-color:#f90;
+font-size:26rpx !important;
+border-radius:50%;
+width:34rpx;
+height:34rpx;
+text-align:center;
+}
+
+.hide{
+  display: none !important;
+}

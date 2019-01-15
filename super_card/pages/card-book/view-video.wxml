@@ -1,0 +1,13 @@
+<!--super_card/pages/card-book/view-video.wxml-->
+<view class='contains'>
+  <video src="{{ videoSrc }}" muted="{{ muted }}" autoplay="true" controls binderror="videoErrorCallback"></video>
+  <view class='fit'>
+    <view class='left' bindtap='toggleMuted'>
+      <image class="iconfont {{ muted == false ? 'icon-sound-' : 'icon-sound-1'}}" style='font-size:50rpx;line-height:50rpx;'></image>
+    </view>
+    <view class='right'>
+    </view>
+  </view>
+</view>
+
+

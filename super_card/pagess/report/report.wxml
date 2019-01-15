@@ -1,0 +1,19 @@
+<!--super_card/pages/report/report.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <view class='tip'>
+       <!-- <image src='../../resource/icon/group.png'></image>  -->
+      <text class="icon iconfont icon-zhiwen"></text> 
+    </view>
+    <view class='btn-submit'>
+     <form report-submit='true' bindsubmit="signIn">
+      <button form-type='submit' class='btn-block btn-blue'>点击签到</button>
+    </form>
+    </view>
+  </view>
+  <text class='explain'>点击签到可获赠随机奖励金，最高可达一次{{ sign_in_bouns }}元</text>
+</view>
+
+
+
+

@@ -1,0 +1,141 @@
+/* super_card/pages/mall/mall.wxss */
+
+.mall-t{
+  overflow: hidden;
+  background-color:#fcfcfc;
+}
+.mt-img{
+  width: 100%;
+}
+.swiper-img{
+  height: 50vw;
+}
+button.mt-share::after{
+  border:0;
+}
+.mt-share{
+  width: 70rpx;
+  height: 70rpx;
+  padding:0;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, .3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 30rpx;
+  top: 20rpx;
+}
+.mt-share .iconfont{
+  font-size: 50rpx;
+  line-height: 50rpx;
+  color: #fff;
+  margin:4rpx 4rpx 0 0;
+}
+
+.mt-brief{
+  background-color: #fff;
+  margin: -50rpx 30rpx 30rpx 30rpx;
+  padding: 30rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items:center;
+  filter: drop-shadow(0px 0px 3px #ccc);
+}
+.mt-logob{
+  border:1px solid #f4f4f6;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  display:flex;
+  align-items:center;
+}
+.mt-logo{
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+.mt-name{
+  font-size:28rpx;
+  letter-spacing:2rpx;
+}
+.mt-apt{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  margin-top:14rpx;
+}
+.mt-apt .iconfont{
+  font-size: 30rpx;
+  line-height: 30rpx;
+  margin-right: 16rpx;
+  color: #169bd6;
+}
+
+.m-shpping{
+  padding: 2vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+.ms-act{
+  font-size: 28rpx;
+  margin: 2vw;
+  border-radius: 10rpx;
+  background-color: #fff;
+  overflow: hidden;
+}
+.act-img{
+  width: 44vw;
+  height: 44vw;
+}
+.act-name{
+  padding:10rpx 1vw;
+  width: 42vw;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp: 1;    
+  overflow: hidden;
+}
+.act-price{
+  padding:10rpx 10rpx;
+  color: #169bd6;
+}
+.buttom-info {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #e5e5e7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+}
+.buttom-info text:nth-child(2) {
+  margin: 0 10rpx;
+}
+
+.ws-logo{
+  padding: 40rpx 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color:#c3c3c5;
+  font-size: 26rpx;
+}
+.ws-logo-i{
+  width: 300rpx;
+  margin-bottom: 10rpx;
+}
+
+.dh-info{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:28rpx;
+  padding:0 50rpx;
+}
+.dh-act{
+  color:#f90;
+  height:60rpx;
+  border-bottom:2px solid #f90;
+}

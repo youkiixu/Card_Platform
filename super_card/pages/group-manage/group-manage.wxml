@@ -1,0 +1,92 @@
+<!--super_card/pages/group-manage/group-manage.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class='contains'>
+  <view class='group' bindtap='showManageOptions'>
+    <view class='act'> 
+      <view class='imgset'>
+
+        <view class='group-image' wx:key="icons" wx:for="{{ group.icons }}" x:for-index="cIdx" wx:for-item="icon">
+           <block wx:if="{{ icon.picture == 'no' }}">
+              <text class="iconfont icon-fl-renyuan"></text>
+           </block>
+           <block wx:else>
+              <image src='{{ icon.picture }}'></image>
+           </block>
+        </view>
+
+      </view>
+      <view class='info-set'>
+        <view class='group-t'>
+          <view class='group-info'>
+            <text class='name'>{{ group.name }}</text>
+            <view class='total'>
+              <text class='exp'>共{{ group.card_num }}人</text>
+              <text style='color:{{ themeColor }};' class="add-pl iconfont icon-renyuanzengjia1 {{ group.anyone_request == 1 ? 'yes' : ''}}"></text>
+              <text style='color:{{ themeColor }};' class="store-pl iconfont icon-cunkuanlixi {{ group.allow_collect == 1 ? 'yes' : '' }}"></text>
+            </view>
+          </view>
+          <text class="fit iconfont icon-shezhi"></text>
+        </view>
+        <block wx:if="{{ group.note != '' }}">
+          <view class='group-remarks'>
+            <text>备注：</text>
+            <text class='remarks-content'>{{ group.note }}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class='change'>
+    <view style="margin-left:10px;" class='holder-search-n' bindtap='setSort' data-name="name" >名字</view>
+    <block wx:if="{{ sort == 'name' && sort_mode }}">
+      <text wx:if="{{ sort == 'name' && sort_mode == 'desc' }}" class="iconfont icon-iconset0413" style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+      <text wx:if="{{ sort == 'name' && sort_mode == 'asc' }}" class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+    </block>
+    <block wx:else>
+      <text class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;'></text>
+    </block>
+    
+    <view class='holder-search-t' bindtap='setSort' data-name="create_time">时间</view>
+    <block wx:if="{{ sort == 'create_time' && sort_mode }}">
+      <text wx:if="{{ sort == 'create_time' && sort_mode == 'desc' }}" class="iconfont icon-iconset0413" style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+      <text wx:if="{{ sort == 'create_time' && sort_mode == 'asc' }}" class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;color:{{ themeColor }};'></text>
+    </block>
+    <block wx:else>
+      <text class="iconfont icon-iconset0414"  style='font-size:48rpx; padding-right:20rpx;'></text>
+    </block>
+
+  </view>
+  <view class='content'>
+    <!-- 循环体 -->
+    <block wx:key="cards" wx:for="{{ group.card_list }}" x:for-index="ccIdx" wx:for-item="card">
+    <navigator url="../overt/overt?card_id={{ card.id }}&allow_collect={{ uid == card.uid ? 0 : group.allow_collect }}&allow_remove={{ (uid == group.card_list[0].uid && uid != card.uid ) ? 1 : 0 }}&from_group_id={{ group.id }}" >
+    <view class='card-holder' >
+      <image class='img' src='{{ card.picture }}' style="position:relative;"><text wx:if="{{ card.is_v == 1 }}" class='rz-v'>V</text></image>
+      <view class='card-info'>
+        <view class='card-name'>
+          <view class='card-icon'>
+            <text>{{ card.name }}</text>
+            <icon wx:if="{{ card.name == group.admin_name }}" class='cl iconfont icon-user-star' style='color:{{ themeColor }}'></icon>
+          </view>
+          <text>{{ card.create_date }}</text>
+        </view>
+        <text class='job'>{{ card.title }}</text>
+        <text class='company'>{{ card.company }}</text>
+      </view>
+    </view>
+    </navigator>
+    </block>
+
+     <view class='bottom' wx:if="{{ showBackIndex }}">
+    <view class='btn-submit'>
+      <button class='btn-block btn-white' bindtap='backIndex' style='color:{{ themeColor }};border-color:{{ themeColor }};'>返回首页</button>
+    </view>
+  </view>
+
+  </view>
+  <view class='fix' wx:if="{{ group.anyone_request == 1 || uid == group.card_list[0].uid }}">
+    <button id="requestJoinBtn" open-type="share">邀请新成员<icon class="iconfont icon-renyuanzengjia1" style='padding-left:10rpx;'></icon></button>
+  </view>
+</view>

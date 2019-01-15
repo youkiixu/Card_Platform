@@ -1,0 +1,31 @@
+<!--super_card/pagess/cash-details/cash-details.wxml-->
+<view class='contains'>
+  <view class='team-top'>
+    <view class="team-title" data-reply-type="1" style="color:{{ itemChioce == 1 ? '#4752e8':'' }};" bindtap='goChangeTeam'>全部</view>
+    <view class="team-title" data-reply-type="2" style="color:{{ itemChioce == 2 ? '#4752e8':'' }};" bindtap='goChangeTeam'>待审核</view>
+    <view class="team-title" data-reply-type="3" style="color:{{ itemChioce == 3 ? '#4752e8':'' }};" bindtap='goChangeTeam'>待打款</view>
+    <view class="team-title" data-reply-type="4" style="color:{{ itemChioce == 4 ? '#4752e8':'' }};" bindtap='goChangeTeam'>已打款</view>
+    <view class="team-title" data-reply-type="5" style="color:{{ itemChioce == 5 ? '#4752e8':'' }};" bindtap='goChangeTeam'>无效</view>
+    <view class="weui-navbar__slider" style="width:19vw;background:#4752e8;left: {{sliderLeft}}vw; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
+  </view>
+
+  <view class='team-info'>
+
+    <view class='cash-act' wx:key="wlist" wx:for="{{ list }}" wx:for-index="ldx">
+      <view class='act-left'>
+        <view class='al-num'>提现 {{ item.profit }}</view>
+        <view class='al-time'>{{ item.create_time }}</view>
+      </view>
+      <view wx:if="{{ item.status == 0 }}" class='act-right'>待审核</view>
+      <view wx:if="{{ item.status == 1 }}" style="color:#ff6e03;" class='act-right'>待打款</view>
+      <view wx:if="{{ item.status == 2 }}" style="color:#52c333;" class='act-right'>已打款</view>
+      <view wx:if="{{ item.status == 3 }}" style="color:#fe4356;" class='act-right'>无效</view>
+
+    </view>
+    
+
+  </view>
+  
+
+ 
+</view>

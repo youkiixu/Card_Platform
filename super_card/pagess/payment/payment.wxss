@@ -1,0 +1,91 @@
+/* super_card/pages/payment/payment.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.top{
+  margin:50rpx 20rpx 20rpx 20rpx;
+}
+.change{
+  background-color: #fff;
+}
+.up,.down{
+  margin: 0 20rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+.down{
+  border-top:1px solid #dfdfdf;
+  padding-left: 60rpx;
+}
+checkbox{
+  width: 60rpx;
+  vertical-align:top;
+}
+checkbox .wx-checkbox-input{
+   border-radius: 50%;
+   width: 40rpx;
+   height: 40rpx;
+}
+/*checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   border-color:#00a1e9;
+   background: #00a1e9;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   border-radius: 50%;
+   width: 40rpx;
+   height: 40rpx;
+   line-height: 40rpx;
+   text-align: center;
+   font-size:30rpx;
+   color:#fff;
+   background: transparent;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}*/
+.btn-submit{
+  margin:40rpx 20rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}
+.card-method{
+  color:#2cb1ed;
+  font-size:30rpx;
+  text-align: center;
+  margin: 60rpx 0;
+}
+
+.i-info{
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+  -webkit-align-items: flex-start;
+}
+.i-info view{
+  display: flex;
+  align-items: flex-start;
+  justify-content:flex-start;
+  display: -webkit-flex;
+  -webkit-align-items: flex-start;
+  -webkit-justify-content:flex-start;
+  color: #a0a0a0;
+  font-size: 30rpx;
+  margin-bottom:20rpx;
+}
+.i-info view text:last-child{
+  text-align: left;
+  margin-left: 10rpx;
+}
+.i-info view:last-child{
+  margin-bottom:0;
+}
+.i-btn{
+  color: #0ec1ec;
+}

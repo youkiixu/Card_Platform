@@ -1,0 +1,155 @@
+<!--super_card/pages/customer-details/customer-details.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<view class='contains'>  
+  <view class='top' style='background:{{ themeColor }};'>
+    <view class='top-left'>
+      <image class='top-left-img' src='{{ client_info.picture }}'></image>
+      <view class='user-info'>
+        <view class='user-name'>{{ client_info.name }}</view>
+        <picker bindchange="updateClientRate" value="{{ rate_value_index }}" range="{{ rate_arr }}">
+            <view class='user-data' style='color:{{ themeColor }};border-color:{{ themeColor }};'>
+              修改成交率
+            </view>
+          </picker>
+      </view>
+    </view>
+    <view class='top-right'>
+      <canvas class="cir" style="width:100px; height:100px;" canvas-id="canvasArc">
+        <cover-view class='tr-content'>
+          <cover-view class='tr-number'>≥{{ client_info.rate }}%</cover-view>
+          <cover-view class='tr-bot'>预计成交率</cover-view>
+        </cover-view> 
+      </canvas>
+    </view>
+  </view>
+  <view class='fit'>
+    <view class='tag'>
+      <view class='rag-left'>
+        <view class='rag-left-bq'>标签</view>
+        <view class='rag-left-cons'>
+          <view class='rag-left-con' style='color:{{ themeColor }};'>{{ client_info.type }}</view>
+          <view class='rag-left-con' style='color:{{ themeColor }};'>{{ client_info.status }}</view>
+          <block wx:if="{{ client_info.labels  }}">
+            <view class='rag-left-con' style='color:{{ themeColor }};'>{{ client_info.labels }}</view>
+          </block>
+        </view>
+      </view>
+      <navigator url='./tab-setting?client_id={{ client_id }}' >
+        <view class='rag-right'>
+          <text class='iconfont icon-shezhi'></text>
+          <view>标签设置</view>
+        </view>
+      </navigator>
+    </view>
+    <view class='remarks'>
+      <view class='remarks-tit'>备注</view>
+      <textarea wx:if="{{ showNoteInput == true }}" class='remarks-text' maxlength="255" auto-focus="true" auto-height='true' bindblur="saveClientNote" bindconfirm="saveClientNote" value="{{ client_info.note}}"></textarea>
+      <view class='remarks-input' bindtap='startNote' wx:if="{{ showNoteInput == false }}">{{ client_info.note ? client_info.note : '点击添加客户备注' }}</view>
+    </view>
+  </view>
+
+  <view class='radar-top'>
+    <view class="radar-title {{ itemChioce == 1?'on':'' }}" style="border-color:{{ itemChioce == 1?themeColor:'' }};color:{{ itemChioce == 1?themeColor:'' }};" data-reply-Type="1" bindtap='goChangeItemChioce'>轨迹</view>
+    <view class="radar-title {{ itemChioce == 2?'on':'' }}" style="border-color:{{ itemChioce == 2?themeColor:'' }};color:{{ itemChioce == 2?themeColor:'' }};" data-reply-Type="2" bindtap='goChangeItemChioce'>智能分析</view>
+    <view class="radar-title {{ itemChioce == 3?'on':'' }}" style="border-color:{{ itemChioce == 3?themeColor:'' }};color:{{ itemChioce == 3?themeColor:'' }};" data-reply-Type="3" bindtap='goChangeItemChioce'>跟进记录</view>
+  </view>
+
+  <!-- 轨迹 -->
+  <view class='visitor' wx:if="{{ itemChioce == 1 }}">
+
+    <block wx:for="{{ trackList }}" wx:key="tl" wx:for-index="tldx" wx:for-item="tl">
+    <view class='visi-time' wx:if="{{ tl.last_date != trackList[tldx - 1].last_date }}">{{ tl.last_date }}</view>
+    <view class='visitor-act'>
+      <image class='visitor-act-img' src='{{ client_info.picture }}'></image>
+      <view class='visitor-act-info'><text class='ck' style="color:{{ themeColor }};">第{{ tl.num }}次{{ tl.strobj.act }}</text>了你的<text class='ck' style="color:{{ themeColor }};">{{ tl.strobj.page }}</text>, {{ tl.strobj.str }}。</view>
+    </view>
+    </block>
+    
+  </view>
+
+  <!-- 智能分析 -->
+  <view class='chat' wx:if="{{ itemChioce == 2 }}">
+    <view class='chat-act'>
+      <view class='chat-act-timesolt'>
+        <view class='chat-act-title'>客户兴趣占比</view>
+        <view class='chat-act-pic'>
+          <picker bindchange="getIntreChart" value="{{intre_times_index}}" range="{{intre_times}}" style='color:{{ themeColor }};'>
+            <view class="picker">
+              {{ intre_times[intre_times_index] }}
+            </view>
+          </picker>
+          <text class='iconfont icon-caret-right-copy-copy' style='color:{{ themeColor }};'></text>
+        </view>
+      </view>
+
+      <view class='chat-act-info'>
+        <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ecPie }}"></ec-canvas>
+      </view>
+    </view>
+    <view class='chat-act'>
+      <view class='chat-act-timesolt'>
+        <view class='chat-act-title'>客户互动情况</view>
+        <view class='chat-act-pic'>
+          <picker bindchange="getInterChart" value="{{inter_times_index}}" range="{{inter_times}}" style='color:{{ themeColor }};'>
+            <view class="picker">
+              {{ inter_times[inter_times_index] }}
+            </view>
+          </picker>
+          <text class='iconfont icon-caret-right-copy-copy' style='color:{{ themeColor }};'></text>
+        </view>
+      </view>
+
+      <view class='chat-act-info'>
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+    <view class='chat-act'>
+
+      <view class='chat-act-timesolt'>
+        <view class='chat-act-title'>客户活跃度</view>
+        <view class='chat-act-pic'>
+          <picker bindchange="getActiveChart" value="{{active_times_index}}" range="{{active_times}}" style='color:{{ themeColor }};'>
+            <view class="picker">
+              {{ active_times[active_times_index] }}
+            </view>
+          </picker>
+          <text class='iconfont icon-caret-right-copy-copy' style='color:{{ themeColor }};'></text>
+        </view>
+      </view>
+
+      <view class='chat-act-info'>
+        <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}"></ec-canvas>
+      </view>
+    </view>
+  </view>
+
+  <!-- 跟进记录 -->
+  <view class='analysis' wx:if="{{ itemChioce == 3 }}">
+    
+    <block wx:for="{{ recordList }}" wx:key="rl" wx:for-index="rldx" wx:for-item="rl">
+    <view class='ana-act'>
+      <view class='ana-act-top'>
+          <block wx:for="{{ rl.record }}" wx:key="rd" wx:for-index="rddx" wx:for-item="rd">
+              <text wx:if="{{ rd.color == 0 }}">{{ rd.str }}</text>
+              <text wx:if="{{ rd.color == 1 }}" class='ck' style='color:{{ themeColor }};'>{{ rd.str }}</text>
+          </block>
+      </view>
+      <view class='ana-act-bottom'>
+        <view class='ana-act-time'>{{ rl.last_time }}</view>
+        <view data-index="{{ rldx }}" data-id="{{ rl.id }}" bindtap="delRecord" class='ana-act-del'>删除</view>
+      </view>
+    </view>
+    </block>
+
+  </view>
+
+  <view class='blank'></view>
+  <view class='btn-submit' wx:if="{{ itemChioce == 1 || itemChioce == 3 }}">
+    <button wx:if="{{ itemChioce == 1 }}" bindtap='contactClient' class='btn-block btn-blue' style='background:{{ themeColor }};'>联系客户</button>
+    <button bindtap='toFollowRecord' wx:if="{{ itemChioce == 3 }}" class='btn-block btn-blue' style='background:{{ themeColor }};'>添加跟进记录</button>
+  </view>
+
+
+</view>

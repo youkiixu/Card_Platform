@@ -1,0 +1,801 @@
+<!--用户下所有名片-->
+<view bindtap='tapPage'>
+<import src="../../components/picker/picker.wxml"/>
+<template is="picker" data="{{ ...$wux.picker.bglist }}"/>
+
+<official-account></official-account>
+
+<block wx:if="{{ setDone === true &&  cardLists.length > 0 }}">
+
+<!-- <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view> -->
+<form report-submit='true' bindsubmit="toChatPage">
+  <button form-type='submit' class='L-T-icon'>
+    <text class='iconfont icon-tubiao15' style='color:{{ themeColor }};'></text>
+    <view class='L-T-sum' wx:if="{{ msgNum > 0 }}">{{ msgNum }}</view>
+  </button>
+</form>
+
+<view class='holiday-wishes-img' wx:if="{{ holiday_wishes_pic }}">
+  <image mode='widthFix' src='{{ holiday_wishes_pic }}'></image>
+</view>
+
+<block wx:if="{{ cardLists[0].no_perfect == 1 }}">
+  <view class='contains'>
+
+    <view class='avatar_img'>
+      <image src='{{ cardLists[0].picture }}' mode='widthFix'></image>
+    </view>
+    <view class='state'>
+      <text>完善名片，开通更多高级功能</text>
+      <text>“{{ app_name }}” 注重隐私保护的强功能电子名片</text>
+    </view>
+    <view class='btn-submit'>
+      <form report-submit='true' bindsubmit="toPerfectCard">
+        <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>完善我的名片</button>
+      </form>
+    </view>
+  </view>
+
+  <form wx:if="{{ identify_card_switch == 1 }}" report-submit='true' bindsubmit="toPatCardPage">
+  <button form-type='submit' class='contains quick-read'>
+    <view class='cognize'>
+      <view class='cognize-img'>
+        <text class='iconfont icon-renyuanxinxi' style='color:{{ themeColor }};'></text>
+      </view>
+      <view class='cognize-read'>
+        <text>15秒快速认识{{ app_name }}</text>
+        <text>体验智能的名片识别、人脉管理</text>
+      </view>
+    </view>
+  </button>
+  </form>
+
+</block>
+
+
+<block wx:else>
+
+<block wx:key="unique" wx:for="{{cardLists}}" wx:for-index="idx" wx:for-item="card" wx:if="{{ card_id == card.id }}">
+
+<view class='index-top-bg' wx:if="{{ card.style == 1 }}">
+  <view class='card-info' style="background:url({{card.bg_img}}) #fff no-repeat center; background-size:cover; color:{{card.bg_color}};">
+    <text bindtap='showBgPick' class='change-skin iconfont icon-xiyifuwu'></text>
+    <view class='card-info-basic' style='display:flex;'>
+      <view class='card-tion' style='flex:1;display:flex;flex-flow:column;'>
+        <view class='card-tion-name'>
+            <text id='card-Tips-name' bindtap='showTips' data-plate='{{ card.name }}'>{{ card.name }}</text>
+        </view>
+        <view class='card-tion-title'><text id='card-Tips-title' bindtap='showTips' data-plate='{{ card.title }}'>{{ card.title }}</text></view>
+        <view class='card-tion-company'><text id="company-text" bindtap='showTips' selectable="true" data-plate='{{ card.company }}'>{{ card.company }}</text></view>
+      </view>
+      
+      <image bindtap='editAvatar' class='card-img' src='{{ card.picture }}'></image>
+    </view>
+    <view class='blank'></view>
+    <view class='card-alike blue'  style="color:{{card.bg_color}}">
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-lvzhou_zhongduan_shouji" ></text> 
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-mobile'  bindtap='callMobile' bindlongpress='showTips' data-plate='{{ card.mobile }}'>{{ card.mobile }}</text>
+      </view>
+    </view>
+    <view class='card-alike blue' style="color:{{card.bg_color}}">
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-dingwei1"></text>
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text>
+      </view>
+    </view>
+    <block wx:if="{{ card.tel }}">
+    <view class='card-alike blue' style="color:{{card.bg_color}}">
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-dianhua1"></text>
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-tel' bindtap='showTips' data-plate='{{ card.tel }}'>{{ card.tel }}</text>
+      </view>
+    </view>
+    </block>
+    <block wx:if="{{ card.email }}">
+    <view class='card-alike'>
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-youxiang-"></text>
+        <!-- <text class="card-t">邮箱</text>  -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-email' bindtap='showTips' data-plate='{{ card.email }}'>{{ card.email }}</text>
+      </view>
+    </view>
+    </block>
+    <block wx:if="{{ card.qq }}">
+    <view class='card-alike'>
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-tencentqq"></text>
+        <!-- <text class="card-t">QQ</text> -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-qq' bindtap='showTips' data-plate='{{ card.qq }}'> {{ card.qq }} </text>
+      </view>
+    </view>
+    </block>
+    <block wx:if="{{ card.fax }}">
+    <view class='card-alike'>
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-chuanzhen"></text>
+        <!-- <text class="card-t">传真</text> -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-fax' bindtap='showTips' data-plate='{{ card.fax }}'>{{ card.fax }}</text>
+      </view>
+    </view>
+    </block>
+    <block wx:if="{{ card.www }}">
+    <view class='card-alike'>
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-diqiu"></text>
+        <!-- <text class="card-t">网址</text> -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-www' bindtap='showTips' data-plate='{{ card.www }}'>{{ card.www }}</text>
+      </view>
+    </view>
+    </block>
+
+    <block wx:if="{{ card.wx }}">
+    <view class='card-alike'>
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-weixin2"></text>
+        <!-- <text class="card-t">微信</text>  -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-wx' bindtap='showTips' data-plate='{{ card.wx }}'>{{ card.wx }}</text>
+      </view>
+    </view>
+    </block>
+
+    <block wx:if="{{ card.weibo }}">
+    <view class='card-alike' >
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-weibo"></text>
+        <!-- <text class="card-t">微博</text> -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-weibo' bindtap='showTips' data-plate='{{ card.weibo }}'>{{ card.weibo }}</text>
+      </view>
+    </view>
+    </block>
+
+    <block wx:if="{{ card.job_no }}">
+    <view class='card-alike'>
+      <view class='card-alike-top'>
+        <text class="card-iconimg iconfont icon-tag"></text>
+        <!-- <text class="card-t">工号</text> -->
+      </view>
+      <view class='card-alike-buttom'>
+        <text class="card-i" id='card-Tips-job-no' bindtap='showTips' data-plate='{{ card.job_no }}'>{{ card.job_no }}</text>
+      </view>
+    </view>
+    </block>
+
+      <view style="border-color:{{card.bg_color}};" wx:if="{{card.bg_music}}" class='music'>
+        <text style="color:{{card.bg_color}};" bindtap="{{ playMusic === false ? 'playMusicAct' : 'stopMusicAct' }}" class="music-i {{ playMusic === true ? 'music-run' : '' }}">♬</text>
+      </view>
+    
+  </view>
+</view>
+
+<!-- 新名片 主体 start-->
+<!-- 大图名片 -->
+<view class='new-card-all' wx:if="{{ card.style == 2 }}">
+  <view class='new-card-dt' style='align-items:center;'>
+    <image bindtap='editAvatar' class='new-card-txdt' mode='widthFix' src='{{ card.picture }}'>
+      <text wx:if="{{ card.is_v == 1 }}" class='rz-v'>V</text>
+    </image>
+    <!-- <view class='asds'></view> -->
+    <view class='new-card-dtinfo'>
+      <view class='ncd-l'>
+        <view class='ncd-top'>
+          <view class='ncd-l-name' id='card-Tips-name' bindtap='showTips' data-plate='{{ card.name }}'>{{ card.name }}</view>
+          <view class='ncd-top-hr' wx:if="{{ card.title }}"></view>
+          <view class='ncd-content' wx:if="{{ card.title }}" id='card-Tips-title' bindtap='showTips' data-plate='{{ card.title }}'>{{ card.title }}</view>
+        </view>
+        <view class='ncd-l-phone' id='card-Tips-company' bindtap='showTips' data-plate='{{ card.company }}'>{{ card.company }}</view>
+        <view class='ncd-l-phone' id='card-Tips-mobile' bindlongpress='showTips' data-plate='{{ card.mobile }}' bindtap='callMobile' style='color:{{ themeColor }};'><text class='iconfont icon-lvzhou_zhongduan_shouji'></text> {{ card.mobile }}</view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 小图名片 -->
+<view class='new-card-all' wx:if="{{ card.style == 3}}">
+  <view class='new-card-x'>
+    <view class='ncx'>
+      <view class='new-card-total-l'>
+        <view class='new-card-xcx-name'>
+          <!-- <text class='iconfont icon-wujiaoxing'></text> -->
+          <view class='new-card-ncxn' id='card-Tips-company' bindtap='showTips' data-plate='{{ card.company }}'>{{ card.company }}</view>
+        </view>
+        <view class='new-card-xcx-peo' style='font-size:32rpx;'>
+          <view class='new-card-xm' id='card-Tips-name' bindtap='showTips' data-plate='{{ card.name }}'>{{ card.name }}</view>
+          <view class='new-card-zw' id='card-Tips-title' bindtap='showTips' data-plate='{{ card.title }}'>{{ card.title }}</view>
+        </view>
+        <view class='new-card-info'>
+          <view class='new-card-info-act'>
+            <text class='iconfont icon-shouji'></text>
+            <view id='card-Tips-mobile' bindlongpress='showTips' data-plate='{{ card.mobile }}' bindtap='callMobile'>{{ card.mobile }}</view>
+          </view>
+          <view class='new-card-info-act' wx:if="{{ card.tel }}">
+            <text class='iconfont icon-dianhua'></text>
+            <view id='card-Tips-tel' bindtap='showTips' data-plate='{{ card.tel }}'>{{ card.tel }}</view>
+          </view>
+          <view class='new-card-info-act'>
+            <text class='iconfont icon-dingwei'></text>
+            <view class='new-card-address' id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+          </view>
+        </view>
+
+      </view>
+      <view class='new-card-bor'></view>
+      <view class='new-card-bor-s'></view>
+      <view class='new-card-total-r' bindtap='editAvatar'>
+        <image src='{{ card.picture }}'></image>
+      </view>
+      <text wx:if="{{ card.is_v == 1 }}" class='rz-v'>V</text>
+    </view>
+  </view>
+  
+</view>
+<!-- 新名片 主体 end-->
+
+
+<view class='per-card' wx:if="{{ card.style == 1 || card.style == 3 }}">
+  <text class='iconfont icon-Pine-Tree'></text>
+  <text>节纸 {{ card.save_paper }}g</text>
+  <text class='iconfont icon-yanjingshixin'></text>
+  <text>人气 {{ card.views }}</text>
+  <text class='iconfont icon-wujiaoxing' bindtap="toCollectPage"></text>
+  <text bindtap="toCollectPage">收藏 <text style='color:{{ themeColorV }};vertical-align:top;font-weight:bold;'>{{ card.collected }}</text></text>
+</view>
+
+
+
+<!-- 新名片 扩展 start-->
+<!-- 全部信息  竖排-->
+<view class='new-card-xx' wx:if="{{ card.style == 3 }}">
+  <view class='new-card-act-top3' bindtap='showNewCard'>
+    <view class='new-card-sh'>{{ shownc === false ? '展开' : '收起' }}全部名片信息</view>
+    <text class="{{ shownc === false ? 'trans' : '' }} iconfont icon-jiantouarrow483"></text>
+  </view>
+  <!-- 竖排 -->
+  <view class='new-car-allinfo' wx:if="{{ shownc === true }}">
+    <view class='new-card-act' wx:if="{{ card.mobile }}">
+      <view class='new-card-act-l'>手机</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.mobile }}</view>
+        <view class='new-card-copy' bindtap='callMobile' style='color:{{ themeColor }};border-color:{{ themeColor }};'>拨打</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.tel }}">
+      <view class='new-card-act-l'>座机</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.tel }}</view>
+        <view class='new-card-copy' data-id='card-Tips-tel' data-copytent='{{ card.tel }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.address }}">
+      <view class='new-card-act-l'>地址</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+        <view class='new-card-copy' bindtap='showMapLocation' style='color:{{ themeColor }};border-color:{{ themeColor }};'>显示</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.email }}">
+      <view class='new-card-act-l'>邮箱</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.email }}</view>
+        <view class='new-card-copy' data-id='card-Tips-email' data-copytent='{{ card.email }}'  bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.qq }}">
+      <view class='new-card-act-l'>QQ</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.qq }}</view>
+        <view class='new-card-copy' data-id='card-Tips-qq' data-copytent='{{ card.qq }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.fax }}">
+      <view class='new-card-act-l'>传真</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.fax }}</view>
+        <view class='new-card-copy' data-id='card-Tips-fax' data-copytent='{{ card.fax }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.www }}">
+      <view class='new-card-act-l'>网址</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.www }}</view>
+        <view class='new-card-copy' data-id='card-Tips-www' data-copytent='{{ card.www }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.wx }}">
+      <view class='new-card-act-l'>微信</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.wx }}</view>
+        <view class='new-card-copy' data-id='card-Tips-wx' data-copytent='{{ card.wx }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.weibo }}">
+      <view class='new-card-act-l'>微博</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.weibo }}</view>
+        <view class='new-card-copy' data-id='card-Tips-weibo' data-copytent='{{ card.weibo }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+    <view class='new-card-act' wx:if="{{ card.job_no }}">
+      <view class='new-card-act-l'>工号</view>
+      <view class='new-card-act-r'>
+        <view class='new-card-content'>{{ card.job_no }}</view>
+        <view class='new-card-copy' data-id='card-Tips-job-no' data-copytent='{{ card.job_no }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 全部信息  横排-->
+<view class='new-card-xx' wx:if="{{  card.style == 2  }}">
+  <view class='new-card-act-top' bindtap='showNewCard'>
+    <view class='new-card-sh'>{{ shownc === false ? '展开' : '收起' }}全部名片信息</view>
+    <text class="{{ shownc ===false? 'trans' : '' }} iconfont icon-jiantouarrow483"></text>
+  </view>
+  <!-- 横排 -->
+  <view class='new-card-scroll' wx:if="{{ shownc === true }}">
+    <view class='mb-know-people'>
+      <!-- <view class='nc-ws'>
+        <text class='iconfont icon-tixingtianchong'></text>
+        <view class='nc-wsmp'>完善名片</view>
+      </view> -->
+      <scroll-view scroll-x='true'>
+        <view class='people-act' wx:if="{{ card.mobile }}">
+          <view class='people-act-nr' bindtap='callMobile'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-lvzhou_zhongduan_shouji' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>拨打手机</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.mobile }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.tel }}">
+          <view class='people-act-nr' data-id='card-Tips-tel' data-copytent='{{ card.tel }}' catchtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-dianhua1' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>座机</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.tel }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.address }}">
+          <view class='people-act-nr' bindtap='showMapLocation'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-dingwei1' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>定位</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.email }}">
+          <view class='people-act-nr' data-id='card-Tips-email' data-copytent='{{ card.email }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-youxiang-' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>邮箱</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.email }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.qq }}">
+          <view class='people-act-nr' data-id='card-Tips-qq' data-copytent='{{ card.qq }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-tencentqq' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>QQ</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.qq }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.fax }}">
+          <view class='people-act-nr' data-id='card-Tips-fax' data-copytent='{{ card.fax }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-chuanzhen' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>传真</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.fax }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.www }}">
+          <view class='people-act-nr' data-id='card-Tips-www' data-copytent='{{ card.www }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-diqiu' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>网址</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.www }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.wx }}">
+          <view class='people-act-nr' data-id='card-Tips-wx' data-copytent='{{ card.wx }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-weixin2' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>微信</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.wx }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.weibo }}">
+          <view class='people-act-nr' data-id='card-Tips-weibo' data-copytent='{{ card.weibo }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-weibo' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>微博</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.weibo }}</view>
+          </view>
+        </view>
+        <view class='people-act' wx:if="{{ card.job_no }}">
+          <view class='people-act-nr' data-id='card-Tips-job-no' data-copytent='{{ card.job_no }}' bindtap='copyThis'>
+            <view class='act-con-top'>
+              <text class='iconfont icon-tag' style='color:{{ themeColor }};'></text>
+              <view class='act-con-infoname'>工号</view>
+            </view>
+            <view class='act-con-jtinfo'>{{ card.job_no }}</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+
+<view class='per-card-big' wx:if="{{ card.style == 2 }}">
+  <view class='pcb-act'>
+    <text class='iconfont icon-Pine-Tree' style="font-weight:bold;color:{{ themeColor }};"></text>
+    <view>节纸 {{ card.save_paper }} g</view>
+  </view>
+  <view class='pcb-act'>
+    <text class='iconfont icon-yanjingshixin' style="font-size:51rpx;color:#ffc816;"></text>
+    <view>人气 {{ card.views }}</view>
+  </view>
+  <view class='pcb-act' bindtap="toCollectPage">
+    <text class='iconfont icon-wujiaoxing' style="color:{{ themeColorV }};font-size:35rpx;"></text>
+    <view>{{ card.collected }} 人已收藏</view>
+  </view>
+</view>
+
+<!-- 新名片 扩展 end-->
+
+<view class='index-menu'>
+
+  <block wx:key="funcBtn" wx:for="{{ funcBtnArr }}" wx:for-index="btdx">
+  <form report-submit='true' bindsubmit="{{ item.func }}" class='menu-form'>
+  <button form-type='submit' class='menu-item'>
+    <block wx:if="{{ item.img === false }}">
+    <view class='menu-item-img' style='background-color:{{ themeColor }};'>
+      <text class='iconfont {{ item.icon }} {{ btdx == 7 ? "music-run" : "" }}'></text>
+    </view>
+    </block>
+    <block wx:else>
+      <view class='menu-item-img' style="background:none;">
+        <image src="{{ item.img }}" mode="widthFix" />
+      </view>
+    </block>
+    <text class='menu-item-word'>{{ item.txt }}</text>
+  </button>
+  </form>
+  </block>
+ 
+</view>
+
+<form wx:if="{{ identify_card_switch == 1 }}" report-submit='true' bindsubmit="toPatCardPage">
+<button form-type='submit' class='contains quick-read'>
+  <view class='cognize'>
+    <view class='cognize-img'>
+      <text class='iconfont icon-renyuanxinxi' style='color:{{ themeColor }};'></text>
+    </view>
+    <view class='cognize-read'>
+      <text>15秒快速认识{{ app_name }}</text>
+      <text>体验智能的名片识别、人脉管理</text>
+    </view>
+  </view>
+</button>
+</form>
+
+<view class='video-se' wx:if="{{ card.audio !== false && card.style == 3 }}">
+  <view class='video-se-left'>
+    <image src='{{ card.picture }}'></image>
+    <view class='video-se-img' bindtap='{{ playAudio === true ? "stopAudioAct" : "playAudioAct"}}'>
+      <text wx:if= class='iconfont {{ playAudio === true ? "icon-tingzhi" : "icon-sanjiao"}}'></text>
+    </view>
+  </view>
+  <view class='video-se-right'>
+    <view class='video-ser-top'>
+      <view class='video-ser-head'>{{ card.name }}</view>
+      <view class='video-ser-time'>{{ recordingSec }}s</view>
+    </view>
+    <view class='video-ser-name'>{{ card.audio.name }}</view>
+  </view>
+</view>
+
+<view class='play-audio-s' wx:if="{{ card.audio !== false && card.style == 2 }}">
+  <view class='play-audio-word'>{{ card.audio.name }}</view>
+  <view class='play-audio-go'>
+    <image class='play-audio-img' src='{{ card.picture }}'></image>
+    <view class='play-audio-right' bindtap='{{ playAudio === true ? "stopAudioAct" : "playAudioAct"}}'>
+      <image class='audio-ztbf' src='/super_card/resource/images/adio-{{ playAudio === true ? "bf.gif" : "zt.png"}}'></image>
+      <view class='par-time'>
+        <view>{{ recordingSec }}s</view>
+        <text class='par-time-dian'>·</text>
+      </view>
+      <!-- <text class='sjx'></text> -->
+    </view>
+  </view>
+</view>
+
+  <view class='ther'>
+    <view class='ll-info' wx:if="{{card.viewsUser !== false && card.viewsUser.total > 0 }}">
+      <view class='ll-info-top'>
+        <view class='ll-info-img'>
+          <block wx:key="viewsUser" wx:for="{{card.viewsUser.list}}" wx:for-index="uIdx" wx:for-item="item">
+            <image mode="aspectFit" src='{{ item.avatar }}'></image>
+          </block>
+          <view class='ll-info-ellipsis' wx:if="{{ card.viewsUser.total > 9 }}">...</view>
+        </view>
+
+        <view wx:if="{{ card.audio !== false && card.style == 1 }}" class='ther-sound'>
+          <block wx:if="{{ playAudio === true }}">
+
+          <view class='ther-ll'>
+            <view bindtap='stopAudioAct' style='background-color:{{ themeColor }};' class='cartoon ll-info-sound iconfont icon-msnui-mic'></view>
+          </view>
+
+          </block>
+          <block wx:else>
+        
+          <view>
+            <view bindtap='playAudioAct' style='background-color:{{ themeColor }};' class='ll-info-sound iconfont icon-msnui-mic'></view>
+          </view>
+          
+          
+          </block>
+        </view>
+
+      </view>
+
+      <view class='ll-info-sum'>{{ card.viewsUser.total }}人浏览</view>
+    </view>
+    <text class='ther-name' id='card-Tips-intro-title' bindtap='showTips' data-plate='{{ card.intro_title }}'>{{ card.intro_title }}</text>
+    <view class='ther-trade'>
+      <view class='ther-voc' decode>〖行业：{{ card.industry }}〗 
+        <view class='ther-state' wx:if="{{ card.public > 0 }}">
+          <text wx:if="{{ card.public == 1 }}" style='background-color:{{ themeColorV }};'>公开</text>
+          <text wx:if="{{ card.public == 2 }}" style="background-color:#949494;">部分公开</text>
+        </view>      
+      </view>
+    </view>
+    <view class='ther-comment'>
+      <text class="intro_content" id='card-Tips-intro-content' bindtap='showTips' data-plate='{{ card.intro_content }}'>{{ card.intro_content }}</text>
+    </view>
+    <!--视频  -->
+   
+    <view class='video' wx:if='{{ card.video }}'>
+      <navigator url="../../pages/video-watch/video-watch?card_id={{ card.id }}&forwarding=1">
+        <image class='video-img' src="{{ !card.video.thumb ? card.video.path + '?x-oss-process=video/snapshot,t_50000,f_jpg,m_fast' : card.video.thumb }}" mode='aspectFit'></image>     
+        <view class='begin'>
+          <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
+          <text class='video-time'>{{ card.video.duration }}</text>
+        </view>
+        <view class='video-title' wx:if='{{ card.video.name }}'>{{ card.video.name }}</view>
+      </navigator>
+    </view>
+  
+
+    <!-- <block wx:key="albums" wx:for="{{card.albums}}" wx:for-index="albumIdx" wx:for-item="album">
+     <view class='person_box' wx:if='{{ album.name }}'>
+      <text>相册{{ albumIdx + 1 }}:{{ album.name }}</text>
+      <text class='iconfont icon-caret-right-copy-copy' style='font-size:50rpx;height:50rpx;line-height:50rpx;'></text>
+    </view>  -->
+    
+    <block wx:key="albums" wx:for="{{card.albums}}" wx:for-index="albumIdx" wx:for-item="album">
+      <view class='person_box' wx:if='{{album.name !="相册名称"}}'>
+        <text>{{ album.name }}</text>
+      </view>  
+      <view class='ther-album'>
+        <!--一行一张-->
+        <view class='img-large' wx:if='{{ showLine === true }}'>
+          <!--循环体 class 为 img-total -->
+          <view class='img-total' wx:key="pics" wx:for="{{ album.pic_list }}" wx:for-index="picIdx" wx:for-item="pic">
+          <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
+            <image class='img-album' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='widthFix'></image>
+            <view class='img-titles' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            <!--/navigator-->
+            <view class='img-info'>
+              <text class='img-num'>{{ picIdx + 1 }}/{{ album.pic_list.length }}</text>
+              <view class='rest-info'>
+                <text class='iconfont icon-yanjing' style='font-size:20px;margin-right:6rpx;'></text>
+                <text class='rin'>{{ pic.views }}</text>
+                <button open-type='share' data-album_id="{{ album.id }}" data-pic_id="{{ pic.id }}" data-src="{{ pic.path }}" class='iconfont icon-fenxiang'></button>
+              </view>
+            </view>
+
+          </view>        
+          <view wx:if="{{ album.pic_list.length > 0 }}" bindtap="togglePicShow" class='large' style='border-color:{{ themeColor }};'>
+            <text class='iconfont icon-liebiao' style='font-size:76rpx;color:{{ themeColor }};'></text>
+          </view>
+
+        </view>
+        <!--一行两张-->
+        <view class='img-small' wx:if='{{ showLine === false }}'>
+          <!--循环体 class 为 img-small -->
+          <view class='img-total'  wx:key="pics" wx:for="{{ album.pic_list }}" wx:for-index="picIdx" wx:for-item="pic">
+            <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
+            <image class='img-album' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='aspectFill'></image>
+            <view class='img-title' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            <!--/navigator-->
+          </view>
+          <view wx:if="{{ album.pic_list.length > 0 }}" bindtap="togglePicShow" class='small' style='border-color:{{ themeColor }};'>
+            <text class='iconfont icon-llist_one' style='font-size:50rpx;color:{{ themeColor }};'></text>
+          </view>
+        </view>
+        
+      </view>
+    </block>
+
+  </view>
+</block>
+
+<view bindtap='showIntro' class='card-method' bindtap='openCardSelect' style='color:{{ themeColor }};'>
+  <text class="card-t iconfont icon-question" style='margin-right:6rpx;'></text>
+  <text>如何发名片</text>
+</view>
+
+<view class='switch ind-switch {{ hideSwitchCard === false ? "right-show" : "right-hide" }}'  bindtap='{{ hideSwitchCard === false ? "showCardCut" : "showSwitchCard" }}'>
+  <text class='iconfont icon-fangxiang' style='color:{{ themeColor }};'></text>
+  <view>切换名片</view>
+</view>
+
+<view class='card-cut-mask' wx:if="{{ show_card_cut == true }}" bindtap='hideCardCut'></view>
+<view class='card-cut' animation="{{animationData}}" wx:if="{{ show_card_cut == true }}">
+  <view class='card-cut-top'>
+    <view>切换名片</view>
+    <icon type="cancel" size="18" color="#666666"  bindtap='hideCardCut'/>
+  </view>
+  <scroll-view class="scroll-view_H" scroll-y style="width: 100%">
+    <view  wx:key="unique" wx:for="{{cardLists}}"  wx:for-index="idx" wx:for-item="card">
+      <view class='card-cut-show' data-value="{{card.id}}" bindtap="toggleCard">
+        <image class='card-cut-img' src='{{ card.picture }}'></image>
+        <view class='card-cut-right'>
+          <view class='card-cut-names'>
+            <view class='card-cut-name'>{{ card.name }}</view>
+              <view class='card-cut-default' style='background-color:{{ themeColor }};' wx:if="{{ card.is_default == 1 }}">默认名片</view>
+          </view>
+          <view class='card-cut-company'>{{ card.title }}</view>
+          <view class='card-cut-vocation'>{{ card.company }}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class='card-cut-explain'>点击名片切换</view>
+    <view class='card-cut-btn'>
+      <view class='ccb' style='border-color:{{ themeColor }};color:{{ themeColor }};' bindtap='showTakeCard'>
+        <text class='iconfont icon-paizhao-xianxing'></text>
+        <view>拍照识别</view>
+      </view>
+      <view class='ccb' style='border-color:{{ themeColor }};color:{{ themeColor }};' bindtap='toCreateCard'>
+        <text class='iconfont icon-954caidan_mingpian'></text>
+        <view>创建新名片</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="sp-info" wx:if="{{ imgShow == 2 }}" bindtap='hidePoster'>
+  <view class='sp-c'>    
+    <view class='sp-content'>
+      <image src='{{ tempPoster }}' class='sp-img' mode='aspectFit'></image>
+      <!-- <view class='sp-sm'>保存分享给朋友</view> -->
+      <view class='btn-submite btn-submite-index'>
+        <button catchtap='savePosterPic' class='btn-bc' style='background-color:{{ themeColor }};'>保存分享给朋友</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class='switch voice-switch {{ hideSwitchStyle === false ? "right-show" : "right-hide" }}' bindtap='{{ hideSwitchStyle === false ? "cardTypeChange" : "showSwitchStyle" }}'>
+  <text class='iconfont icon-fenggepitchon' style='color:{{ themeColor }};font-size:30rpx;'></text>
+  <view>名片风格</view>
+</view>
+
+<view class='fmp-share-mask' wx:if="{{ share_card_link == true }}" bindtap='hideFmpShare'></view>
+<view class='fmp-share' animation="{{animationData}}" wx:if="{{ share_card_link == true }}">
+  <view class='fmp-share-top'>
+    <button class='fmp-act' id="sendCardBtn" open-type="share">
+      <view class='fmp-act-top'>
+        <text class='fmp-sen iconfont icon-mingpian' style='color:{{ themeColorV }};'></text>
+      </view>
+      <view class='fmp-act-name'>分享名片</view>
+    </button>
+    <view class='fmp-act' wx:if="{{ qrcodePicIsDesign != '' }}" bindtap='getQrcodePic'>
+      <view class='fmp-act-top'>
+        <text class='fmp-pyq iconfont icon-pengyouquan' style='color:{{ themeColorV }};'></text>
+      </view>
+      <view class='fmp-act-name'>转朋友圈</view>
+    </view>
+  </view>
+  <view class='fmp-qx' bindtap='hideFmpShare'>取消</view>
+</view>
+
+<!--tips  -->
+<view wx:if="{{ showTip }}" class='top-tips' style='position:fixed;top:{{ tipTop }};left:{{ tipLeft }};'>
+  <view class='text-btn'>
+    <text bindtap='copyShare'>复制信息</text>
+    <text wx:if="{{ showTipObj }}" class='text-btn-call' bindtap='{{ showTipObj.tapFun }}'>{{ showTipObj.tapText }}</text> 
+  </view>
+  <image class='tips' src='/super_card/resource/images/tips-x.png'></image>
+</view>
+
+</block>
+
+</block>
+
+
+<!--用户没有名片时显示-->
+<block  wx:if="{{setDone === true && cardLists.length < 1 }}">
+
+<view class='contains'>
+  <view class='img'>
+    <image src='/super_card/resource/images/wmp.png' mode='widthFix'></image>
+  </view>
+  <view class='state'>
+    <text>您尚无名片,马上创建一个吧</text>
+    <text>{{ app_name }},注重隐私保护的强功能电子名片</text>
+  </view>
+  
+  <view class='btn-submit'>
+     <form report-submit='true' bindsubmit="toCreateCard">
+      <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>十秒创建我的名片</button>
+     </form>
+  </view>
+  
+</view>
+
+<form wx:if="{{ identify_card_switch == 1 }}" report-submit='true' bindsubmit="toPatCardPage">
+<button form-type='submit' class='contains quick-read'>
+  <view class='cognize'>
+    <view class='cognize-img'>
+      <text class='iconfont icon-renyuanxinxi' style='color:{{ themeColor }};'></text>
+    </view>
+    <view class='cognize-read'>
+      <text>15秒快速认识{{ app_name }}</text>
+      <text>体验智能的名片识别、人脉管理</text>
+    </view>
+  </view>
+</button>
+</form>
+
+<view class='card-method' bindtap='openCardSelect' style='color:{{ themeColor }};'>
+  <text class="card-t iconfont icon-question" style='margin-right:6rpx;'></text>
+  <text>如何发名片</text>
+</view>
+
+</block>
+
+<view class="wux-backdrop {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}"></view>
+	<view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">
+    <view class="i-info wux-dialog__bd">
+        <view>
+            <text>{{ send_card_intro }}</text>
+        </view>
+    </view>
+    <view class="wux-dialog__ft">
+          <view class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelSelect" style='color:{{ themeColor }};'>我知道了</view>
+    </view>
+</view>
+</view>
+<import src="/super_card/pages/templates/tab-bar.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>

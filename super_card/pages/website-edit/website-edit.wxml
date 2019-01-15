@@ -1,0 +1,216 @@
+<!--super_card/pages/website-edit/website-edit.wxml-->
+<view class='contains'>
+
+  <view class='mall-classify'>
+    <view class="{{ mallselected == 1 ? 'active':'' }}" style="color:{{ mallselected == 1 ? themeColor:'' }};border-color:{{  mallselected == 1 ? themeColor:''  }};" bindtap='mallBasic'>站点设置</view>
+    <view class="{{ mallselected == 2 ? 'active':'' }}" style="color:{{ mallselected == 2 ? themeColor:'' }};border-color:{{  mallselected == 2 ? themeColor:''  }};"  bindtap='mallShop'>编辑内容</view>
+  </view>
+
+  <!-- 站点设置 -->
+  <view class='basic' wx:if="{{ mallselected == 1 }}">
+    <view class='zd-bt'>
+      <view class='zd-tit'>官网名称</view>
+      <view class='zd-must' style='color:{{ themeColorV }};'>*</view>
+    </view>
+    <view class='zd-fill'>
+      <input placeholder='请输入官网名称' name="website_name" value="{{  website_name }}" maxlength='16' data-field="website_name" bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
+      <view class='ad-logo' data-field="website_logo" bindtap="choosePic">
+        <!-- 设置前 -->
+        <text wx:if="{{ !website_logo }}" class='iconfont icon-plus'></text>
+        <!-- 设置后 -->
+        <image  wx:if="{{ website_logo }}" src='{{ website_logo }}'></image>
+      </view>
+    </view>
+    <view class='zd-bt'>
+      <view class='zd-tit'>公司名称</view>
+      <view class='zd-must' style='color:{{ themeColorV }};'>*</view>
+    </view>
+    <view class='zd-fill'>
+      <input placeholder='请输入公司名称' name="company_name" value="{{ company_name }}" maxlength='16' data-field="company_name" bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
+    </view>
+    <view class='zd-bt'>
+      <view class='zd-tit'>联系方式</view>
+      <view class='zd-must' style='color:{{ themeColorV }};'>*</view>
+    </view>
+    <view class='zd-fill'>
+      <input placeholder='请输入联系方式(手机号)' name="contact" value="{{ contact }}" type="number" maxlength="11" data-field="contact" bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
+    </view>
+    <view class='zd-bt'>
+      <view class='zd-tit'>店铺所有者</view>
+      <view class='zd-must' style='color:{{ themeColorV }};'>*</view>
+    </view>
+    <view class='zd-fill'>
+      <input placeholder='请输入店铺所有者' name="owner" value="{{ owner }}" data-field="owner" maxlength="8"  bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
+    </view>
+    <view class='zd-bt'>
+      <view class='zd-tit'>banner图</view>
+      <view class='zd-must' style='color:{{ themeColorV }};'>*</view>
+    </view>
+    <view class='zd-banner' data-field="banner" bindtap="choosePic">
+      <!-- 添加图片前 -->
+
+      <!-- 添加图片 -->
+      <image wx:if="{{ banner }}" class='add-banner' src='{{ banner }}' mode='widthFix'></image>
+
+      <view class='banner-edit'>
+        <text class='iconfont icon-tupianweijihuo'></text>
+        <text class='edit-img'>编辑图片</text>
+      </view>
+
+    </view>
+
+    <view class='btn-submit'>
+     <form report-submit='true' bindsubmit="createCardWebsite">
+      <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>{{ have_website === false ? '创建' : '保存' }}</button>
+    </form>
+    </view>
+
+  </view>
+
+  <!-- 编辑内容 -->
+  <view class='edit-info' wx:if="{{ mallselected == 2 }}">
+    <view class='ed-btn'>
+      <view class='ed-tj' bindtap='jumpList' data-index="top" style='color:{{ themeColor }};border-color:{{ themeColor }};'>
+          <text class='iconfont icon-plus'></text>
+          <view>添加</view>
+      </view>
+    </view>
+
+    <!-- 标题 -->
+    <view class="pageList" wx:for="{{ pageData }}" wx:key="pagedata" wx:for-index="pdx">
+
+
+    <view wx:if="{{ item.type == 'title' }}" class='ed-title'>
+      <view class='vl' style='background-color:{{ themeColorV }};'></view>
+      <view class='title-content'>{{ item.val }}</view>
+    </view>
+
+    <!-- 文本 -->
+    <view class='ed-con' wx:if="{{ item.type == 'content' }}">
+      <text class='content-info' space="ensp" decode="true" selectable="false">{{ item.val }}</text>
+    </view>
+
+    <!-- 网格 开始 -->
+    <view wx:if="{{ item.type == 'grid_pic' }}" class="grid-pics">
+     <!--一行两张-->
+      <view class='img-small'>
+        <!--循环体 class 为 img-small -->
+        <view class='img-total'  wx:for="{{ item.val }}" wx:key="mpic" wx:for-index="mpdx" wx:for-item="pic">
+          <image bindtap='showPics' data-index="{{ mpdx }}" data-pics="{{ item.val }}" class='img-album' src='{{ pic }}' mode='aspectFill'></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 轮播 开始 -->
+    <view wx:if="{{ item.type == 'more_pic' }}">
+      <swiper class='con' indicator-dots='true' autoplay='true' interval='5000' duration='500'>
+       <swiper-item wx:for="{{ item.val }}" wx:key="mpic" wx:for-index="mpdx" wx:for-item="pic">
+          <image bindtap='showPics' data-index="{{ mpdx }}" data-pics="{{ item.val }}" src="{{ pic }}" mode='aspectFill'/>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <!-- 平铺 开始 -->
+    <view wx:if="{{ item.type == 'pic' }}" class='img-pp'>
+      <image bindtap='showPic' data-pic="{{ item.val }}" style="width:100%;" src="{{ item.val }}" mode='widthFix'/>
+    </view>
+    
+    <view class='contactus' wx:if="{{ item.type == 'card' }}">
+    <view class='ct-top'>
+      <view class='ct-l'>
+        <view class='ct-name'>{{ card.name }}</view>
+        <view class='ct-phone'>
+          <view class='ct-p'>电 话:</view>
+          <view bindtap='copyInfo' data-id="card_mobile" data-plate="{{ card.mobile }}">{{ card.mobile }}</view>
+          <view class='ct-dial' bindtap='callMobile'>联系TA</view>
+        </view>
+      </view>
+      <image class='ct-r' src='{{ card.picture }}'></image>
+    </view>
+    <view class='ct-act'>
+      <view class='ct-act-name'>公 司:</view>
+      <view class='ct-act-con' bindtap='copyInfo' data-id="card_company" data-plate="{{ card.company }}">{{ card.company }}</view>
+    </view>
+    <view class='ct-act'>
+      <view class='ct-act-name'>地 址:</view>
+      <view class='ct-act-con' bindtap='copyInfo' data-id="card_address" data-plate="{{ card.province}}{{ card.city }}{{ card.dict }}{{ card.address }}">{{ card.province}}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+    </view>
+   </view>
+
+
+    <block wx:if="{{ item.type == 'map' }}">
+      <map longitude="{{ item.val.longitude }}" markers='{{ [item.val] }}' latitude="{{ item.val.latitude }}" show-location="true" scale="16" show-location style="width: 100%; height: 300px;">
+        <cover-image class='coverimg' src='/super_card/resource/images/del.png' bindtap='delPageData' data-index="{{ pdx }}"></cover-image>
+      </map>
+    </block>
+    
+    
+    <icon class="del-icon" wx:if="{{ item.type !== 'map' }}" bindtap='delPageData' data-index="{{ pdx }}" type="clear" size="18"/>
+    <view class='ed-btn'>
+
+      <view class='ed-tj tj-repeat' data-index="{{ pdx }}" bindtap='jumpList' style='border-color:{{ themeColor }};background-color:{{ themeColor }};'>
+        <text class='iconfont icon-plus'></text>
+        <view>添加</view>
+      </view>
+
+      <view wx:if="{{ item.type != 'card' }}" data-index="{{ pdx }}" bindtap='editPageData' class='ed-tj' style='color:{{ themeColor }};border-color:{{ themeColor }};'>编辑</view>
+
+      <view class='ed-tj' data-index="{{ pdx }}" bindtap='moveList' style='color:{{ themeColor }};border-color:{{ themeColor }};'>移动</view>
+
+    </view>
+
+    </view>
+
+
+    <block wx:if="{{ pageData.length > 0 }}">
+    <view class='blank'></view>
+    <view class='refer-btn'>
+      <view class='btn-submit'>
+        <form report-submit='true' bindsubmit="createCardWebsite">
+        <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>保存</button>
+        </form>
+      </view>
+      <view class='btn-submit'>
+        <form report-submit='true' bindsubmit="toPreviewWebsite">
+          <button form-type='submit' class='btn-block btn-blue' style='background:{{ themeColor }};'>预览</button>
+        </form>
+      </view>
+    </view>
+    </block>
+
+    <!-- 点击图片出现的选项 -->
+    <view class='display-mode-bot' wx:if="{{ showMode }}" bindtap='delDmb'></view>
+    <view class='display-mode' wx:if="{{ showMode }}">
+      <view class='dm-title'>图片展示方式</view>
+      <view class='dm-act' data-type="pic" bindtap='goChoicePicture'>
+        <text class='tex-img-gs pp-wg  iconfont icon-tupianweijihuo'></text>
+        <!-- <image src='/super_card/resource/images/con-2.jpg' mode='aspectFill'></image> -->
+        <view class='dm-act-pp'>
+          <view>平铺</view>
+          <view>图片纵向排列(最多1张图)</view>
+        </view>
+      </view>
+      <view class='dm-act' data-type="grid_pic" bindtap='goChoicePicture'>
+        <text class='tex-img-gs pp-wg iconfont icon-grid'></text>
+        <!-- <image src='/super_card/resource/images/con-2.jpg' mode='aspectFill'></image> -->
+        <view class='dm-act-pp'>
+          <view>网格</view>
+          <view>图片两列一行，纵向排列(最多8张图)</view>
+        </view>
+      </view>
+      <view class='dm-act' data-type="more_pic"  bindtap='goChoicePicture'>
+        <text class='tex-img-gs iconfont icon-lunboxiaoguo'></text>
+        <!-- <image src='/super_card/resource/images/con-2.jpg' mode='aspectFill'></image> -->
+        <view class='dm-act-pp'>
+          <view>轮播图</view>
+          <view>多图轮播，左右滑动(最多9张图)</view>
+        </view>
+      </view>      
+      <view class='dm-act-del' bindtap='delDmb'>取消</view>
+    </view>
+
+  </view>
+
+
+
+</view>

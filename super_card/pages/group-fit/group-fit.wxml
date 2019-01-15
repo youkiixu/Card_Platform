@@ -1,0 +1,30 @@
+<!--super_card/pages/group-fit/group-fit.wxml-->
+
+<view class='contains'>
+  <view class='tb'>
+    <text>1.改名片组的名称:</text>
+    <text>{{ group.name }}</text>
+  </view>
+  <view class='tb'>
+    <text>2.管理员:</text>
+    <text>{{ group.admin_name }}</text>
+    <text class='tra iconfont icon-user-star'></text>
+  </view>
+  <view class='tb'>
+    <text>3.名片组类型:</text>
+    <text>{{ groupTypes[group.type_id].name }}</text>
+  </view>
+  <view class='tbs'>
+    <text>4.隐私权限设置:</text>
+    <view class='act'>
+      <text class="trb iconfont icon-renyuanzengjia1 {{ group.anyone_request == 1 ? 'yes' : ''}}"></text>
+      <text wx:if="{{ group.anyone_request == 1 }}">组员都可邀请</text>
+      <text wx:if="{{ group.anyone_request == 0 }}">仅管理员可邀请新成员</text>
+    </view>
+    <view class='act'>
+      <text class="trb iconfont icon-cunkuanlixi {{ group.allow_collect == 1 ? 'yes' : '' }}"></text>
+      <text wx:if="{{ group.allow_collect == 1 }}">允许收藏组内名片</text>
+      <text wx:if="{{ group.allow_collect == 0 }}">不允许直接收藏</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,105 @@
+/* super_card/pages/company-login/company-login.wxss */
+page{
+  background-color: #fff;
+}
+
+.top{
+  padding-top: 100rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-bottom:10rpx;
+}
+.top-tit{
+  letter-spacing: 4rpx;
+  font-weight: 600;
+  font-size: 34rpx;
+  margin-bottom:10rpx;
+}
+.top-hr{
+  width: 90rpx;
+  height: 6rpx;
+  background-color: #cccccc;
+}
+.content{
+  padding: 10rpx 80rpx;
+  border-bottom: 2px dashed #cccccc;
+  display: flex;
+  flex-flow: column;
+}
+.act{
+  margin: 10rpx 0;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+  border: 1px solid #cccccc;
+}
+.act input{
+  flex: 1;
+  padding: 0 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.act-address{
+  margin-right: 20rpx;
+}
+
+button::after{
+  border:0;
+}
+.btn-submit{
+  padding:20rpx 0;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:50rpx;
+}
+.btn-yellow{
+  background: #f90;
+  color: #fff;
+  font-size:30rpx;
+  letter-spacing:4rpx;
+}
+.apply-sum{
+  display:flex;
+  align-items:center;
+  font-size:30rpx;
+  justify-content:center;
+  color:#cccccc;
+  padding-bottom: 50rpx;
+}
+.apply-sum text{
+  color:#f90;
+  margin: 0 6rpx;
+}
+
+.bottom{
+  padding: 40rpx 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.bot-tit{
+  letter-spacing: 4rpx;
+  font-size: 34rpx;
+}
+.bot-phone{
+  font-size: 30rpx;
+  color:#f90;
+  padding: 20rpx 0;
+}
+.bot-dianhua{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 1px solid #f90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bot-dianhua text{
+  color:#f90;
+  font-size: 70rpx;
+  line-height: 70rpx;
+}

@@ -1,0 +1,38 @@
+<!--super_card/pages/company-login/company-login.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <view class='top-tit'>企业版申请</view>
+    <view class='top-hr'></view>
+  </view>
+  <form report-submit='true' bindsubmit='companyApply'>
+    <view class='content'>
+      <view class='act'>
+        <input placeholder='企业名称' name='enter_name' type='text' value='{{ enter_name }}'></input>
+      </view>
+      <view class='act'>
+        <input placeholder='姓名'  type="text" name="name" value='{{ name }}'></input>
+      </view>
+      <view class='act'>
+        <input type='number' placeholder='手机' name="phone" value='{{ phone }}'></input>
+      </view>
+      <view class='act'>
+        <input placeholder='企业地址' name='address' value="{{ address }}"></input>
+        <view class='act-address' bindtap='getCurrentLocation' >获取地址</view>
+      </view>
+      <view class='act'>
+        <input type='number' placeholder='企业人数' name='num' value='{{ num }}'></input>
+      </view>
+      <view class='btn-submit'>
+        <button class='btn-block btn-yellow'  style='background:{{ themeColorV }};' form-type='submit'>立即提交</button>
+      </view>
+      <view class='apply-sum'>已经<text style='color:{{ themeColorV }};'>{{ total }}</text>个企业参与申请</view>
+    </view>
+  </form>
+  <view class='bottom'>
+    <view class='bot-tit'>客服热线</view>
+    <view class='bot-phone'>{{ customer_tel }}</view>
+    <view class='bot-dianhua'  bindtap='callMobile'>
+      <text class='iconfont icon-dianhua'></text>
+    </view>
+  </view>
+</view>

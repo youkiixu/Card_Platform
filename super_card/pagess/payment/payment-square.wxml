@@ -1,0 +1,41 @@
+<!--super_card/pages/payment/payment.wxml-->
+<view class='contains'>
+  <view class='top' style="font-size:16px;line-height:26px;">该张名片下发布信息需支付￥{{ total_fee }}</view>
+  <view class='change'>
+    <view class='up'>
+      <checkbox-group bindchange="changeMoneyPay">
+        <label>
+            <checkbox color="{{ themeColor }}" name="moneyPay" disabled='{{ uMoney > 0 ? false : true }}' value="1" checked = "{{ uMoney > 0 ? true : false }}"></checkbox>
+              <text>余额支付￥{{ money }}</text>
+        </label>   
+      </checkbox-group>
+    </view>
+    <view class='down'>
+      <text>微信支付￥{{ fee }}</text>
+    </view>
+  </view>
+
+  <view class='btn-submit'>
+    <form report-submit='true' bindsubmit="confirmPay">
+    <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>确认支付</button>
+    </form>
+  </view>
+  <view class='card-method' bindtap='openCardSelect' style='color:{{ themeColor }};'>
+    <text class="card-t iconfont icon-question" style='margin-right:6rpx;'></text>
+    <text>如何增长账户余额？</text>
+  </view>
+
+</view>
+
+<view class="wux-backdrop {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}"></view>
+	<view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">
+    <view class="i-info wux-dialog__bd">
+      <view><text>{{ account_intro }}</text></view>
+    </view>
+    <view class="wux-dialog__ft">
+          <view class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelSelect" style='color:{{ themeColor }};'>我知道了</view>
+    </view>
+</view>
+
+<import src="/super_card/pages/templates/iospay.wxml"/>
+<template is="iosPayWx" data="{{...iosPayDialog}}"/>

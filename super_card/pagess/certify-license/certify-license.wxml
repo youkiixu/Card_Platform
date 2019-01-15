@@ -1,0 +1,85 @@
+<!--super_card/pages/certify-license/certify-license.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<view class='contains'>
+  <block wx:if="{{ type == 2 }}">
+  <view class='top'>
+    <text class='title'>请上传身份证照片</text>
+    <view class='photo'>
+      <view class='upload'>
+        <view class='bg'>
+          <image class='grey' src='{{ badge_path }}' mode='widthFix'></image>
+          <view class='fl' bindtap='chooseBadge' style='background-color:{{ themeColor }};box-shadow: 0 0 3rpx 3rpx {{ themeColor }};'>
+            <text class='fl-img cw iconfont icon-plus'></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='explain'>
+    <text class='title'>拍摄要求</text>
+    <view class='con'>
+      <view class='bg-bit'></view>
+      <text>文字应清晰可见</text>
+    </view>
+    <view class='con'>
+      <view class='bg-bit'></view>
+      <text>姓名与您名片姓名一致</text>
+    </view>
+  </view>
+  </block>
+  <block wx:if="{{ type == 1 }}">
+  <view class='top'>
+    <text class='title'>请上传营业执照</text>
+    <view class='photo'>
+      <view class='upload'>
+        <view class='bg'>
+          <image class='grey' src='{{ license_path }}' mode='widthFix'></image>
+          <view class='fl' bindtap='chooseLicense' style='background-color:{{ themeColor }};box-shadow: 0 0 3rpx 3rpx {{ themeColor }};'>
+            <text class='fl-img cw iconfont icon-plus'></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='top'>
+    <text class='title'>请上传身份证照片</text>
+    <view class='photo'>
+      <view class='upload'>
+        <view class='bg'>
+          <image class='grey' src='{{ id_path }}' mode='widthFix'></image>
+          <view class='fl' bindtap='chooseId' style='background-color:{{ themeColor }};box-shadow: 0 0 3rpx 3rpx {{ themeColor }};'>
+            <text class='fl-img cw iconfont icon-plus'></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='explain'>
+    <text class='title'>拍摄要求</text>
+    <view class='con'>
+      <view class='bg-bit'></view>
+      <text>文字应清晰可见</text>
+    </view>
+    <view class='con'>
+      <view class='bg-bit'></view>
+      <text>营业执照上的名称必须与开通的企业保持一致</text>
+    </view>
+    <view class='con'>
+      <view class='bg-bit'></view>
+      <text>请手持身份证进行拍照，保证信息清晰可见</text>
+    </view>
+  </view>
+  </block>
+  <view class='bottom'>
+    <view class='btn-submit btn-left'>
+      <button bindtap='navBack' class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};'>更换认证类型</button>
+    </view>
+    <view class='btn-submit btn-right'>
+    <form report-submit='true' bindsubmit="saveCertifyInfo">
+      <button class='btn-block btn-blue' form-type='submit' disabled="{{ disableBtn }}" style='background:{{ themeColor }};'>提交</button>
+    </form>
+    </view>
+    <view class='cler'></view>
+  </view>
+</view>

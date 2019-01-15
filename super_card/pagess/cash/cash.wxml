@@ -1,0 +1,52 @@
+<!--super_card/pagess/cash/cash.wxml-->
+<view class='contains'>
+  <view class='top'>
+    <view class='top-up'>
+      <text class='top-tit'>提现金额</text>
+      <view class='top-num'>
+        <text class='top-num-zs'>￥</text>
+        <input type='digit' placeholder-class='top-num-input' placeholder='0' onblur="setMoney" onconfirm="setMoney" bindinput='setMoney'></input>
+      </view>
+      <view class='top-info'>
+        <text class='top-info-l'>当前余额:</text>
+        <view class='top-info-con'>
+          <text>￥{{ agent_balance }}</text>{{ min_withdrawal_money ? ", 攒够"+ min_withdrawal_money +"元可以提现" : ""}}{{ withdrawal_apply_rate ? ", 提现服务费率"+ withdrawal_apply_rate +"%" : "" }}</view>
+      </view>
+    </view>
+    <view class='top-down'>
+      <text class='top-style'>提现方式</text>
+      <view class='top-sty-con'>
+        <view class='top-sty-l'>
+          <text class='iconfont icon-wechat'></text>
+          <view>微信</view>
+        </view>
+        <icon type="success" size="16" color="#4752e8"></icon>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{ withdrawal_method == 1 }}" class='tx-ewm'>
+    <view class='tx-ewm-top'>
+      <!-- 无图片 -->
+      <text wx:if="{{ !withdrawal_qrcode }}" bindtap='choosePic' class='iconfont icon-plus'></text>
+      <!-- 有图片 -->
+      <image wx:if="{{ withdrawal_qrcode }}" bindtap='choosePic' src='{{ withdrawal_qrcode }}'></image>
+    </view>
+    <view class='tx-ewm-bot'>
+      <text class='iconfont icon-erweima2'></text>
+      <view>收款二维码</view>
+    </view>
+  </view>
+
+  <view class='ca-top'>
+    <view class='ca-tit'>申请的提现会直接打款到您的微信钱包，请注意查看通知</view>
+    <view class='ca-tit'>提现到账时间为1-3个工作日之内。</view>
+    <form report-submit='true' bindsubmit="toWithDrawal">
+      <button class='btn-block' form-type='submit' disabled='{{ btnDis }}'>提现</button>
+    </form>
+  </view>
+  <view class='cash-bot'>
+    <view class='cash-bot-l' bindtap='toProPage' data-t="withdrawal_rule_explain">提现规则</view>
+    <!-- <view class='cash-bot-r'>资金记录</view> -->
+  </view>
+</view>

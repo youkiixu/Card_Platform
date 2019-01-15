@@ -1,0 +1,51 @@
+/* super_card/pages/revise/revise.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.act{
+  background-color: #fff;
+  border-bottom: 1px solid #dfdfdf;
+  border-top: 1px solid #dfdfdf;
+  margin: 50rpx 0;
+}
+.info{
+  display: flex;
+  display: -webkit-flex;
+  margin: 0 30rpx;
+  border-bottom: 1px solid #dfdfdf;
+  padding: 16rpx 0;
+}
+.info:last-of-type{
+  border: 0;
+}
+.tit{
+  width: 150rpx;
+}
+.tit text{
+  vertical-align:top;
+}
+.tit image{
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align:text-top;
+  font-size:20rpx;
+  color:red;
+  text-align: center;
+  line-height: 50rpx;
+}
+input{
+  flex: 1;
+  -webkit-flex: 1;
+}
+
+.btn-submit{
+  margin:50rpx 20rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+}

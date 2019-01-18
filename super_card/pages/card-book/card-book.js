@@ -60,7 +60,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    
     that.getBookInfo()
   },
 
@@ -82,6 +81,7 @@ Page({
   makeLinkWork: function (e){
     var that = this
     console.log(e)
+  
     var data = e.currentTarget.dataset
     if(!data.type) return
     switch(data.type){
@@ -131,7 +131,7 @@ Page({
   },
 
   toNavigateMiniPro: function (path, appid){
-
+   
     wx.navigateToMiniProgram({
       appId: appid,
       path: path,
@@ -178,6 +178,7 @@ Page({
     app.config.footer(this)
     app.config.setAd(this)
     this.setData({ link_show_pose: app.config.getConf('link_show_pose'), linkList: app.config.getConf('app_link_list') })
+    console.log('linkList', this.data.linkList)
     this.getUserComeback()
   },
 

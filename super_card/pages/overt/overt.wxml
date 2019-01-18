@@ -27,9 +27,10 @@
 
   <!--view wx:if="{{ showBackIndex === false && show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view-->
 
+<!-- 发送名片显示加号返回首页 -->
   <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
-    <button form-type='submit' class='ove-btn'>
-      <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>
+    <button form-type='submit' class='returnIndex'>
+     <text class='suca iconfont icon-add-pluss-'></text>     
     </button>
   </form>
 
@@ -47,12 +48,15 @@
   </view> -->
 
 
-   <!-- 创建名片 -->
+   <!-- 创建名片 
   <view class='createCard' bindtap='toCreateCard'>
     <text class='suca iconfont icon-add-pluss-'></text>
-  </view>
+  </view>-->
 
- 
+  <!-- 小房子返回首页 -->
+  <view wx:if="{{ showHouseIndex }}" class='ove-btn' bindtap='toReturnIndex'>
+     <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>
+  </view>
 
   <!--form report-submit='true' wx:if="{{ showCreateBtn === true }}" bindsubmit="toCreateCard">
     <button  class='icon-creation-prompts' form-type='submit'>

@@ -26,7 +26,9 @@ Page({
       console.log(this.data.app_logo)
       console.log(this.data.app_content)
 
-    wx.setNavigationBarTitle({ title: this.data.app_name });
+    wx.setNavigationBarTitle({ 
+      title: '关于我们' //this.data.app_name
+       });
   },
 
   /**

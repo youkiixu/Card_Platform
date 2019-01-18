@@ -202,6 +202,7 @@ Page({
       })
 
     }
+
     that.getGroupType()
   
    
@@ -210,14 +211,16 @@ Page({
 
   //获取名片组类型
   getGroupType:function (){
+    console.log('1111')
     var that = this
     app.util.request({
       'url': 'entry/wxapp/getGroupType',
       'method': 'POST',
       success(res) {
 
-        //console.log(res)
+        console.log('res.data.data.length', res.data.data.length)
         that.data.groupTypes = res.data.data
+        console.log(' this.data.groupTypes', that.data.groupTypes)
         if(that.data.type_id > 0)
           for(var x in that.data.groupTypes){
             if (that.data.groupTypes[x].id == that.data.type_id)
@@ -232,7 +235,7 @@ Page({
 
   //显示类型选择
   showTypeSelect: function (){
-    
+   
     var types = []
     var typeIds = []
     for(var x in this.data.groupTypes){
@@ -241,15 +244,16 @@ Page({
       typeIds.push(this.data.groupTypes[x].id)
     }
     var that = this
-    wx.showActionSheet({
-      itemList: types,
-      success: function (res) {
-        
-        //console.log(res)
-        that.setData({ typeVal: types[res.tapIndex], type_id: typeIds[res.tapIndex] })
+      wx.showActionSheet({
+        itemList: types,
+        success: function (res) {
 
-      }
-    })
+          console.log('res', res)
+          that.setData({ typeVal: types[res.tapIndex], type_id: typeIds[res.tapIndex] })
+
+        }
+      }) 
+   
   },
 
   /**

@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "人脉商圈",
   "usingComponents": {
     "popup": "../../components/popup/popup",
     "cascader": "../../components/cascader/cascader"

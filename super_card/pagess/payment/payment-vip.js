@@ -100,7 +100,7 @@ Page({
 
       },
       fail(err) {
-        console.log('errNO:');
+        console.log('errNO:', err);
         console.log(err);
         that.failPayAfter(err.data.message)
       }
@@ -141,15 +141,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    console.log('options', options)
     if (typeof options.umoney == 'undefined' || typeof options.timeYear == 'undefined' || typeof options.choiceVipLevel == 'undefined' || options.price == 'undefined'){
       wx.navigateBack({ delta: 1 })
       return
     }
     var vipSet = app.config.getConf('member_grade')
+    // var vip_name
+    // if (typeof vipSet == 'undefined'){
+    //    vip_name = ''
+    // }else{
+    //   vip_name = vipSet[parseInt(options.choiceVipLevel) - 1].name
+    // }
+    var vip_name = typeof vipSet == 'undefined' ? '' : vipSet[parseInt(options.choiceVipLevel) - 1].name;
     //for(var x in vipSet)
-    var vip_name = vipSet[parseInt(options.choiceVipLevel) - 1].name
-
+    
     var uMoney = parseFloat(options.umoney)
 
     this.setData({ uMoney: uMoney, vip_name: vip_name, timeYear: options.timeYear, choiceVipLevel: options.choiceVipLevel, price: parseFloat(options.price), account_intro: app.config.getConf('account_intro') })

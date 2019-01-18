@@ -364,6 +364,8 @@ util.getUserInfo = function (cb) {
 							wx.getUserInfo({
 								success: function (wxInfo) {
                   userInfo.sessionid = session.data.data.sessionid
+
+                  //wx.setStorageSync('sessionid', userInfo.sessionid);
 							    //wx.setStorageSync('userInfo', userInfo);
 									userInfo.wxInfo = wxInfo.userInfo
 									wx.setStorageSync('userInfo', userInfo);

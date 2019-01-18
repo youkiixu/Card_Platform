@@ -70,7 +70,7 @@
         <form class='bib-form-bor' report-submit='true' bindsubmit="toBalancePage">
           <button class='bib-act' form-type='submit'>
             <view class='bib-act-s'>{{ uInfo.money }}</view>
-            <view class='bib-act-w'>余额</view>
+            <view class='bib-act-w'>积分</view>
           </button>
         </form>
         <view class='bib-act' bindtap='toViewProfit'>
@@ -305,7 +305,7 @@
     <form report-submit='true' bindsubmit="toBalancePage">
       <button class='top' form-type='submit'>
         <text class='cl b50 iconfont icon-yue' style='color:{{ themeColor }};'></text>
-        <text class='explain'>余额账户</text>
+        <text class='explain'>积分账户</text>
         <view class='trans-text'>
           <text class='trans iconfont icon-jiantouarrow483'></text>
         </view>

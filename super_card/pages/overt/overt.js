@@ -36,6 +36,8 @@ Page({
 
     from_act: '',
     showBackIndex: false,
+    
+    showHouseIndex: true,
 
     uid: '',
     
@@ -128,11 +130,12 @@ Page({
     
   },
   // 创建名片
-  toCreateCard: function(){
-    wx.navigateTo({
-      url: '../basic/basic',
-    })
-  },
+  // toCreateCard: function(){
+  //   wx.navigateTo({
+  //     url: '../basic/basic',
+  //   })
+  // },
+  
   getChatNum: function () {
     var that = this
     wx.request({
@@ -384,9 +387,8 @@ Page({
   },
 
 
-  //返回首页
+  //小房子返回首页
   backIndex:function (e){
-
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
@@ -396,6 +398,13 @@ Page({
       url: '../index/index',
     });
 
+  },
+
+  //+号返回首页
+  toReturnIndex: function () {
+    wx.switchTab({
+      url: '../index/index',
+    });
   },
 
   //设置回传消息
@@ -735,23 +744,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+   //加号返回按钮和小房子返回按钮的切换
+    var pages = getCurrentPages()
+    console.log('pages', pages)
+    var url = pages[0].route
+    console.log('url', url)
+    if (typeof options.from_act !== 'undefined' || url == 'super_card/pages/overt/overt'){
+      this.setData({
+        showBackIndex: true,
+        showHouseIndex: false
+      })
+    }
+
+    console.log('options', options)
+    console.log('typeof options.from_act:', typeof options.from_act)
     
     var that = this
     
-   
     if (typeof options.scene !== 'undefined') options = app.util.urlToJson(decodeURIComponent(options.scene))
     if(!options.card_id){
        wx.navigateBack()
        return false
     }
     that.setData({ card_id: options.card_id })
+    
 
     //获取当前用户ID
     app.util.getUserInfo(function (response) {
 
-        //console.log(response)
+        console.log('response', response)
         that.setData({ uid: response.memberInfo.uid })
-        
         that.getChatNum()
 
         if (typeof options.allow_collect !== 'undefined'){
@@ -762,17 +785,26 @@ Page({
               fromGroupId: options.from_group_id, 
             })
         }
+
+        // console.log('allow_collect', that.data.allow_collect)
+        // console.log('showRmBtn', that.data.showRmBtn)
+        // console.log('fromGroupId', that.data.fromGroupId)
           
-          
-        if(typeof options.from_act !== 'undefined') {
-          that.setData({ showBackIndex: true })
+        if(typeof options.from_act !== 'undefined') {      
+          // that.setData({
+          //    showBackIndex: true ,
+          //    showHouseIndex: false
+          //    })
 
           if(app.shareOrScanIsValide === true)
             that.setData({ from_act: options.from_act })
         }
+        console.log('from_act', that.data.from_act)
+
         that.freshCurrentPage(false, 1)
 
     })
+   
     
   },
 
@@ -971,7 +1003,8 @@ Page({
             that.setData({ qrcodePicIsDesign: app.config.getConf('card_qrcode_design') })
             app.util.footer(that, that.data.card_id);
             wx.setNavigationBarTitle({
-              title: that.data.card.name //+ ' - ' + app.config.getConf('app_name')
+              //title: that.data.card.name //+ ' - ' + app.config.getConf('app_name')
+              title:'名片'
             })
             var func_arr = app.config.getConf('custom_function_nav')
             if (func_arr.length == 5){
@@ -1243,7 +1276,7 @@ Page({
       var imgUrl = ''
 
       app.config.cardTrack(this.data.card_id, 4, 'praise')
-
+      console.log('分享路径path:', path)
     }
     
     return {

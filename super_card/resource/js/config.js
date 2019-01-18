@@ -3,8 +3,9 @@ var config = {}
 
 
 config.getConf = function (key){
-  
+  //console.log('key',key)
   var conf = wx.getStorageSync('appConfig');
+ // console.log('conf', conf)
   for (var x in conf)
     if (conf[x].code == key) return conf[x].value
  
@@ -13,8 +14,8 @@ config.getConf = function (key){
 config.init = function (cb) { 
     var app = getApp()
     var conf = wx.getStorageSync('appConfig');
+  console.log(app.util.url('entry/wxapp/getAppConfig'))
     if(!conf){
-      
       wx.request({
         url: app.util.url('entry/wxapp/getAppConfig'),
         success(res) {
@@ -44,9 +45,10 @@ config.init = function (cb) {
 config.set = function (obj){
   
   var app = getApp()
-  wx.setNavigationBarTitle({
-    title: app.config.getConf('app_name')
-  })
+  //全局统一设置默认标题
+  // wx.setNavigationBarTitle({
+  //   title: app.config.getConf('app_name')
+  // })
 
   var nav_set = app.config.getConf('app_nav_set')
   wx.setNavigationBarColor({

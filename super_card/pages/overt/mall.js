@@ -23,7 +23,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-
+  
     if (typeof options.card_id != 'undefined') {
       
         that.setData({ card_id: options.card_id })
@@ -42,7 +42,8 @@ Page({
             that.setData({ storeInfo: data.store, goodsList: data.goods })
             console.log(that.data.goodsList)
             wx.setNavigationBarTitle({
-              title: that.data.storeInfo.store_name + ' - ' + app.config.getConf('app_name')
+              //title: that.data.storeInfo.store_name + ' - ' + app.config.getConf('app_name')
+              title:'商城'
             })
 
           }

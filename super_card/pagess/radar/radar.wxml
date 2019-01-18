@@ -165,13 +165,13 @@
 </view>
 
 <!-- 剩余通知 -->
-<form report-submit='true' bindsubmit="addNoticeNum">
+<!-- <form report-submit='true' bindsubmit="addNoticeNum">
 <button wx:if="{{ noVipTip === false }}" form-type='submit' class='s-not-coin'>
   <view class='s-not-vta'>剩余</view>
   <view class='s-not-vtb'>通知</view>
   <view class='s-not-sum'>{{ noticeNum }}</view>
 </button>
-</form>
+</form> -->
 
 
 <view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">

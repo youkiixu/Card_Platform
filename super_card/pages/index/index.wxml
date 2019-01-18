@@ -653,6 +653,7 @@
   <text>如何发名片</text>
 </view>
 
+
 <view class='switch ind-switch {{ hideSwitchCard === false ? "right-show" : "right-hide" }}'  bindtap='{{ hideSwitchCard === false ? "showCardCut" : "showSwitchCard" }}'>
   <text class='iconfont icon-fangxiang' style='color:{{ themeColor }};'></text>
   <view>切换名片</view>

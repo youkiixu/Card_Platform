@@ -544,7 +544,8 @@ Page({
     app.config.init(function () {
 
       wx.setNavigationBarTitle({
-        title: app.config.getConf('app_name')
+       // title: app.config.getConf('app_name')
+        title:'我的名片'
       })
       that.setData({ 
         send_card_intro: app.config.getConf('send_card_intro'), 
@@ -1082,7 +1083,7 @@ Page({
       var imgUrl = item_forward_pic ? item_forward_pic : ''
 
     }
-
+    console.log(path)
     return {
       title: title,
       path: path,
@@ -1369,6 +1370,8 @@ Page({
     })
 
   },
+  
+  
 
   //如何发名片
   //显示/隐藏

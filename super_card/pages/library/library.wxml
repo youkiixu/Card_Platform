@@ -149,7 +149,7 @@
           <text wx:if="{{ card.recommend == 1 }}" class='groom' style="color:{{ themeColor }};border-color:{{ themeColor }};">荐</text>
           <text>{{card.name}}</text>
           <view class='job'>{{card.title}}</view>
-          <view class='VIP'>VIP</view>
+          <view class='VIP' wx:if="{{ card.vip > 0}}">VIP</view>
         </view>
         
         <text class='company'>{{card.company}}</text>

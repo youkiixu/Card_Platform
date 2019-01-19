@@ -39,7 +39,7 @@ Page({
     
     showHouseIndex: true,
 
-    NOVip:true,
+    noOpen:false,
 
     uid: '',
     
@@ -410,7 +410,7 @@ Page({
   },
 
   //未开通商城/官网
-  NOVipReturn: function () {
+  noOpenReturn: function () {
     wx.switchTab({
       url: '../index/index',
     });
@@ -971,7 +971,7 @@ Page({
 
   //刷新当前页面
   freshCurrentPage: function (cb, watch){
-
+  
     var that = this
     if (typeof that.data.audioCtx.destroy != 'undefined')
       that.data.audioCtx.destroy()
@@ -981,6 +981,11 @@ Page({
         //'cachetime': '30',
         'data' : { card_id: that.data.card_id , watch: watch, from_act: that.data.from_act},
         success(res) {
+          console.log('3.3',res)
+          if (res.data.data.agent_status == 0){
+            that.setData({ noOpen: true })
+          }
+         
           that.data.isFresh = false
           if(res.data.message == 'myself'){
             wx.setStorageSync('index_card_id', that.data.card_id)

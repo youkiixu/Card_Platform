@@ -793,7 +793,7 @@
 </view>
 
 <!-- 未开通商城/官网的创建名片按钮的显示 -->
- <view wx:if="{{ NOVip }}" class='return-btn' bindtap='NOVipReturn'>
+ <view wx:if="{{ noOpen }}" class='return-btn' bindtap='noOpenReturn'>
     创建我的名片
   </view>
 

@@ -30,6 +30,7 @@ Page({
 
     showCreateBtn: false,
 
+
     userPosLat:0,
     userPosLng: 0,
 
@@ -395,7 +396,7 @@ Page({
       'method': 'POST',
       'data': data,
       success(res) {
-        //console.log(res)
+       
         that.data.isLoading = false
 
         typeof callback === `function` && callback()

@@ -865,6 +865,10 @@ Page({
     //console.log('here2')
     var that = this;
 
+    //获取视频信息
+    var arrvideo = wx.getStorageSync('arrvideo');
+    console.log('44', arrvideo)
+
     //console.log(options)
 
     //获取当前用户ID

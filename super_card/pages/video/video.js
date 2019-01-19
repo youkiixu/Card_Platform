@@ -178,9 +178,7 @@ Page({
         title: '您只能上传' + that.data.path.length+'个视频',
       })
       return;
-    }
-   
-    
+    }   
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
@@ -219,7 +217,7 @@ Page({
           path: arr,
           res: res
         })
-        //  console.log('path:', that.data.path)
+          console.log('path:', that.data.path)
         //  console.log('res:', that.data.res)
       },
       fail: function (res) {
@@ -324,16 +322,22 @@ Page({
       that.setData({ disabledBtn: true })
       
     //遍历上传
-      var tempFilePaths = that.data.arrvideo;
-      tempFilePaths.concat(that.data.path);
+     
+      console.log('path2', that.data.path)
+      var tempFilePaths = that.data.path;
+      console.log('tempFilePaths', tempFilePaths)
+
+      // var tempFilePaths = that.data.arrvideo;
+      // tempFilePaths.concat(that.data.path);
 
       var uploadImgCount = 0; 
-      for (var i = 0, h = tempFilePaths.length; i < h; i++) {
+      for (var i = 0; i < tempFilePaths.length; i++) {
         var dd = tempFilePaths[i];
+        console.log('dd',dd)
         
         wx.uploadFile({
           url: app.util.url('entry/wxapp/saveCardVideo'),
-          filePath: tempFilePaths[i],
+          filePath: tempFilePaths[i].tempFilePath,
           name: 'video',
           header: {
             'content-type': 'multipart/form-data' // 默认值
@@ -347,14 +351,14 @@ Page({
             'height': dd.height
           },
           success: function (res) {
-            if (tempFilePaths.length>5){
-              wx.showToast({
-                title: '最多只可上传5个！',
-                icon: 'none',
-                duration: 2000
-              })
-              return false
-            }
+            // if (tempFilePaths.length>5){
+            //   wx.showToast({
+            //     title: '最多只可上传5个！',
+            //     icon: 'none',
+            //     duration: 2000
+            //   })
+            //   return false
+            // }
             uploadImgCount++;  
             app.freshIndex = true
             wx.hideLoading()
@@ -606,6 +610,7 @@ Page({
 
 
            }
+           console.log('arrvideo:', arrvideo)
          }
 
        })

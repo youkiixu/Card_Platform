@@ -12,23 +12,26 @@
         <txv-video wx:if="{{ showVideo === true &&  VqqId != 0}}" class="goods-video"  vid="{{VqqId}}" playerid="txv1" ></txv-video>
         <video wx:if="{{ showVideo === true && VqqId == 0 }}" class="video2" src="{{ item.path }}" controls></video>
       </view>
-      <view class='btn-submit'>
-        <button class='btn-block btn-blue' bindtap='updateVideoName' style='background:{{  themeColor }};'>
-          <block wx:if="{{  item.name }}">
-          修改标题
-          </block>
-          <block wx:else>
-          添加标题
-          </block>
-        </button>
-      </view>
-      <view class='btn-submit'>
-        <button class='btn-block btn-white' bindtap='delCardVideo' style='color:{{ themeColor }};border-color:{{ themeColor }};'>删除视频</button>
-    </view>
+      <view class='edit-btn'>
+          <view class='btn-submit'>
+              <button class='btn-block btn-blue' bindtap='updateVideoName' style='background:{{  themeColor }};'>
+                <block wx:if="{{  item.name }}">
+                修改标题
+                </block>
+                <block wx:else>
+                添加标题
+                </block>
+              </button>
+          </view>
+          <view class='btn-submit'>
+            <button class='btn-block btn-blue' bindtap='delCardVideo' style='background:{{  themeColor }};'>删除视频</button>
+          </view>
 
-   <view class='btn-submit'>
-        <button class='btn-block btn-white' bindtap='newUploadVideo' style='color:{{ themeColor }};border-color:{{ themeColor }};'>重新上传视频</button>
-    </view>
+        <view class='btn-submit'>
+              <button class='btn-block btn-blue' bindtap='newUploadVideo' style='background:{{  themeColor }};'>重新上传                    </button>
+          </view>
+      </view>
+     
     </view>
   
   </block>
@@ -39,7 +42,7 @@
      <button wx:if="{{ showReturn }}" class='btn-block btn-blue returnVideo' bindtap='returnVideo' style='background:{{  themeColor }};'>返回</button>
          <view class='record-option'>
         <view class="{{catalogSelect == 2 ? 'active':''}}" bindtap='selectRecording'>上传视频</view>
-        <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectInstall'>视频链接22</view>
+        <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectInstall'>视频链接</view>
       </view>
      <block wx:for="{{path}}" wx:for-index="key">   
       <view class='content'>
@@ -76,7 +79,7 @@
        <button wx:if="{{ showReturn }}" class='btn-block btn-blue returnVideo' bindtap='returnVideo' style='background:{{  themeColor }};'>返回</button>
       <view class='record-option'>
         <view class="{{catalogSelect == 2 ? 'active':''}}" bindtap='selectRecording'>上传视频</view>
-        <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectInstall'>视频链接111</view>
+        <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectInstall'>视频链接</view>
       </view>
 
 
@@ -114,6 +117,8 @@
     </view>
 
   </block>
+
+  
 
  
 </view>

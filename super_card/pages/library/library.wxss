@@ -720,3 +720,13 @@ margin-left:8rpx;
 .cabg-color9{
   background:linear-gradient(to right,#5cc75c, #00c201);
 }
+/* VIP专属标识 */
+.VIP{
+  height: 40rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: #FFD700;
+  font-weight: bold;
+  padding-left: 15rpx;
+  box-sizing: border-box;
+}

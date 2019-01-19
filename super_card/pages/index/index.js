@@ -1100,7 +1100,7 @@ Page({
             title: '分享失败',
             icon: 'none'
           })
-
+        console.log('分享路径：', path)
       },
       fail: function (res) {
         

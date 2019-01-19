@@ -159,3 +159,16 @@
   background: #00a1e9;
   margin: 20rpx 0;
 }
+.edit-btn{
+  display: flex;
+}
+.btn-submit{
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 20rpx;
+}
+.btn-block{
+  line-height:80rpx;
+  border-radius:10rpx;
+}

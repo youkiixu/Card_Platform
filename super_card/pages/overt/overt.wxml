@@ -791,6 +791,12 @@
           <form class='wux-form-qd' report-submit='true' bindsubmit="{{ isChat === false ? 'confirmCardSelect' :  'confirmCardChat' }}"><button class='wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary' style="color:{{ themeColor }};" form-type='submit'>确定</button></form>
         </view>
 </view>
+
+<!-- 未开通商城/官网的创建名片按钮的显示 -->
+ <view wx:if="{{ NOVip }}" class='return-btn' bindtap='NOVipReturn'>
+    创建我的名片
+  </view>
+
 </view>
 <import src="/super_card/pages/templates/footer.wxml"/>
 <template is="footerWx" data="{{...tabBar}}"/>

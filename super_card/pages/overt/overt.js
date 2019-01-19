@@ -39,6 +39,8 @@ Page({
     
     showHouseIndex: true,
 
+    NOVip:true,
+
     uid: '',
     
     show_goTop: false,
@@ -407,6 +409,13 @@ Page({
     });
   },
 
+  //未开通商城/官网
+  NOVipReturn: function () {
+    wx.switchTab({
+      url: '../index/index',
+    });
+  },
+
   //设置回传消息
   setComeBackMsg: function (e){
     this.setData({ comeBackMsg: e.detail.value })
@@ -744,7 +753,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var userInfo = wx.getStorageSync('userInfo', userInfo);
+    console.log('userInfo', userInfo)
    //加号返回按钮和小房子返回按钮的切换
     var pages = getCurrentPages()
     console.log('pages', pages)

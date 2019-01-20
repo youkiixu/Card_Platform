@@ -53,6 +53,8 @@ Page({
 
     msgNum: 0,
 
+    arrvideo:[],//存放视频信息
+
     show_card_cut:false,
     animationData: "",
     share_card_link:false,
@@ -867,7 +869,8 @@ Page({
 
     //获取视频信息
     var arrvideo = wx.getStorageSync('arrvideo');
-    console.log('44', arrvideo)
+    that.setData({ arrvideo: arrvideo })
+    console.log('arrvideo3:', arrvideo)
 
     //console.log(options)
 

@@ -34,6 +34,8 @@ Page({
     isComeBack: false,
     comeBackMsg: '您好，很高兴认识您！',
 
+    arrvideo:[], //存放视频信息
+
     from_act: '',
     showBackIndex: false,
     
@@ -753,6 +755,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    //获取视频信息
+    // var arrvideo = wx.getStorageSync('arrvideo');
+    // this.setData({ arrvideo: arrvideo })
+    // console.log('arrvideo3:', arrvideo)
+    console.log('card:', this.data.card)
+
     var userInfo = wx.getStorageSync('userInfo', userInfo);
     console.log('userInfo', userInfo)
    //加号返回按钮和小房子返回按钮的切换

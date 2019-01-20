@@ -8,7 +8,7 @@ Page({
    */
   data: {
       card_id: 0,
-       pathOne: '',
+      //  pathOne: '',
       // videoInfo:{},
       path: [],
       name: '',
@@ -40,7 +40,17 @@ Page({
 
   setVqqLink: function (e){
       //console.log(e)
+      
       var that = this
+    var userInfo = wx.getStorageSync('userInfo');
+    var isVip = userInfo.memberInfo.vip;
+    var length = that.data.arrvideo.length;
+    if ((isVip == 0 && length > 1) || (isVip > 0 && length >= 5)) {
+      wx.showToast({
+        title: '您只能上传' + length + '个视频',
+      })
+      return;
+    }   
       that.data.VqqLink = e.detail.value
 
   },
@@ -62,7 +72,7 @@ Page({
     var that = this
 
     var id = e.target.dataset.id
-    console.log('id3', id)
+    console.log('id4', id)
 
     var arrvideo = that.data.arrvideo;
 
@@ -92,26 +102,44 @@ Page({
             duration: 2000
           })
           return false
-        }      
-        //that.setData({ pathOne: res.tempFilePath, res: res })
-
-
-        // var src = this.data.src;
-        // wx.uploadFile({
-        //   url: 'http://172.16.98.36:8080/upanddown/upload2',//服务器接口
-        //   method: 'POST',//这句话好像可以不用
-        //   filePath: src,
-        //   header: {
-        //     'content-type': 'multipart/form-data'
-        //   },
-        //   name: 'files',//服务器定义的Key值
-        //   success: function () {
-        //     console.log('视频上传成功')
-        //   },
-        //   fail: function () {
-        //     console.log('接口调用失败')
-        //   }
-        // })
+        }   
+        var pathOne = res.tempFilePath
+        console.log('pathOne', pathOne)
+        console.log('res5', res)
+        wx.uploadFile({
+          // url: app.util.url('entry/wxapp/saveCardVideo'),
+          url: app.util.request({
+            'url': 'entry/wxapp/saveCardVideo',
+            'method': 'POST',
+            // 'data': id,
+            success(res) {
+            console.log('调用接口成功')
+            }
+          }),
+          filePath: pathOne,
+          name: 'video',
+          header: {
+            'content-type': 'multipart/form-data' // 默认值
+          },
+          formData: {
+            'id': id,
+            'duration': res.duration,
+            'size': res.size,
+            'width': res.width,
+            'height': res.height
+          },
+          success: function () {
+            wx.showToast({
+              title: '上传成功',
+              icon: 'success',
+              duration: 2000
+            })
+            console.log('视频上传成功')
+          },
+          fail: function () {
+            console.log('接口调用失败')
+          }
+        })
 
 
       },
@@ -238,21 +266,22 @@ Page({
     console.log('id2', id)
 
     var arrvideo=that.data.arrvideo;
-    
+    var newName = ''
     that.setData({ showVideo: false })
     $wuxDialog.prompt({
       title: '',
       content: '视频名称为',
       fieldtype: 'text',
       password: false,
-      defaultText: arrvideo[id].name,
+      defaultText: newName,
       placeholder: '0~12字符',
       maxlength: 12,
       onConfirm(e) {
         var name = that.data.$wux.dialog.prompt.response
+        console.log('name5', name)
         var data = {
           id: id,
-          name: name
+          name: newName
         }
         app.util.request({
           'url': 'entry/wxapp/saveCardVname',
@@ -356,7 +385,7 @@ Page({
     if ((isVip == 0 && length > 1) || (isVip > 0 && length>= 5) ){
 
       wx.showToast({
-        title: '您只能上传' + that.data.path.length+'个视频',
+        title: '您只能上传' + length+'个视频',
       })
       return;
     }   

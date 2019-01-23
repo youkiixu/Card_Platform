@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -91,6 +91,23 @@
 					"name": "非会员的分享",
 					"pathName": "super_card/pages/overt/overt",
 					"query": "card_id=7&from_act=other"
+				},
+				{
+					"id": -1,
+					"name": "代言人中心",
+					"pathName": "super_card/pagess/agent/agent",
+					"query": "card_id=7&from_act=other"
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "super_card/pagess/library/search",
+					"query": "card_id=7&from_act=other"
+				},
+				{
+					"id": -1,
+					"name": "搜索页",
+					"pathName": "super_card/pagess/library/search"
 				}
 			]
 		}

@@ -18,6 +18,7 @@ Page({
     animationDatasi: "",
     showImg:false,
     qrPic: '',
+    memberCodeView:false,
   },
 
   //返回首页
@@ -33,6 +34,24 @@ Page({
     });
 
   },
+
+  //生成会员码
+  toMemberCode:function(){
+    this.setData({
+      memberCodeView: true
+    })
+  },
+
+//返回按钮
+  codeViewReturn: function () {
+    this.setData({
+      memberCodeView: false
+    })
+  },
+
+
+
+
 
   // 显示需要保存图片  
   showKeepImg: function () {
@@ -315,7 +334,32 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+    console.log('share',res)
+
+    // if (res.target.id != 'codeShareBtn') {
+
+    //   var title = '点击查看全图'
+    //   var path = '/super_card/pages/pic-watch/pic-watchphoto-watch/photo-watch?card_id=' + this.data.card_id + '&album_id=' + res.target.dataset.album_id + '&pic_id=' + res.target.dataset.pic_id + '&from_act=share'
+    //   var imgUrl = res.target.dataset.src
+
+    // } else {
+      
+      //点击按钮分享二维码
+
+    //   var title = '您好，这是 "' + this.data.card.name + '" 的名片，请惠存'
+    //   var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    //   var imgUrl = ''
+
+    //   console.log('分享路径path:', path)
+    // }
+
+    // return {
+    //   title: title,
+    //   path: path,
+    //   imageUrl: imgUrl
+    // }
 
   }
+
 })

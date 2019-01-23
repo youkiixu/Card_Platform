@@ -141,6 +141,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    //qinghuancun
+   
     console.log('options', options)
     if (typeof options.umoney == 'undefined' || typeof options.timeYear == 'undefined' || typeof options.choiceVipLevel == 'undefined' || options.price == 'undefined'){
       wx.navigateBack({ delta: 1 })

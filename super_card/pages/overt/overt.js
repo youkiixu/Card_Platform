@@ -34,7 +34,7 @@ Page({
     isComeBack: false,
     comeBackMsg: '您好，很高兴认识您！',
 
-    arrvideo:[], //存放视频信息
+     cardVideo:[], //存放用户视频信息
 
     from_act: '',
     showBackIndex: false,
@@ -756,14 +756,11 @@ Page({
    */
   onLoad: function (options) {
 
-    //获取视频信息
-    // var arrvideo = wx.getStorageSync('arrvideo');
-    // this.setData({ arrvideo: arrvideo })
-    // console.log('arrvideo3:', arrvideo)
     console.log('card:', this.data.card)
 
-    var userInfo = wx.getStorageSync('userInfo', userInfo);
-    console.log('userInfo', userInfo)
+    var userInfo = wx.getStorageSync('userInfo');
+
+    
    //加号返回按钮和小房子返回按钮的切换
     var pages = getCurrentPages()
     console.log('pages', pages)
@@ -775,9 +772,6 @@ Page({
         showHouseIndex: false
       })
     }
-
-    console.log('options', options)
-    console.log('typeof options.from_act:', typeof options.from_act)
     
     var that = this
     
@@ -787,44 +781,64 @@ Page({
        return false
     }
     that.setData({ card_id: options.card_id })
-    
+    if(!userInfo) {
+      // that.getChatNum()
 
-    //获取当前用户ID
-    app.util.getUserInfo(function (response) {
+      if (typeof options.allow_collect !== 'undefined') {
+        var showRmBtn = options.allow_remove == 1 ? true : false
+        that.setData({
+          allow_collect: options.allow_collect,
+          showRmBtn: showRmBtn,
+          fromGroupId: options.from_group_id,
+        })
+      }
+
+      // console.log('allow_collect', that.data.allow_collect)
+      // console.log('showRmBtn', that.data.showRmBtn)
+      // console.log('fromGroupId', that.data.fromGroupId)
+
+      if (typeof options.from_act !== 'undefined') {
+
+        if (app.shareOrScanIsValide === true)
+          that.setData({ from_act: options.from_act })
+      }
+      console.log('from_act', that.data.from_act)
+
+      that.freshCurrentPage(false, 1)
+    } else {
+      //获取当前用户ID
+      app.util.getUserInfo(function (response) {
 
         console.log('response', response)
         that.setData({ uid: response.memberInfo.uid })
+
         that.getChatNum()
 
-        if (typeof options.allow_collect !== 'undefined'){
+        if (typeof options.allow_collect !== 'undefined') {
           var showRmBtn = options.allow_remove == 1 ? true : false
-          that.setData({ 
-              allow_collect: options.allow_collect, 
-              showRmBtn: showRmBtn,  
-              fromGroupId: options.from_group_id, 
-            })
+          that.setData({
+            allow_collect: options.allow_collect,
+            showRmBtn: showRmBtn,
+            fromGroupId: options.from_group_id,
+          })
         }
 
         // console.log('allow_collect', that.data.allow_collect)
         // console.log('showRmBtn', that.data.showRmBtn)
         // console.log('fromGroupId', that.data.fromGroupId)
-          
-        if(typeof options.from_act !== 'undefined') {      
-          // that.setData({
-          //    showBackIndex: true ,
-          //    showHouseIndex: false
-          //    })
 
-          if(app.shareOrScanIsValide === true)
+        if (typeof options.from_act !== 'undefined') {
+         
+          if (app.shareOrScanIsValide === true)
             that.setData({ from_act: options.from_act })
         }
         console.log('from_act', that.data.from_act)
 
         that.freshCurrentPage(false, 1)
 
-    })
-   
-    
+      })
+    }
+
   },
 
   //信息卡片显示
@@ -980,7 +994,7 @@ Page({
 
   //刷新当前页面
   freshCurrentPage: function (cb, watch){
-  
+    var userInfo = wx.getStorageSync('userInfo');
     var that = this
     if (typeof that.data.audioCtx.destroy != 'undefined')
       that.data.audioCtx.destroy()
@@ -988,9 +1002,8 @@ Page({
     app.util.request({
         'url': 'entry/wxapp/getCardItem',
         //'cachetime': '30',
-        'data' : { card_id: that.data.card_id , watch: watch, from_act: that.data.from_act},
+      'data': { card_id: that.data.card_id, watch: watch, from_act: that.data.from_act },//, state:false
         success(res) {
-          console.log('3.3',res)
           if (res.data.data.agent_status == 0){
             that.setData({ noOpen: true })
           }
@@ -1007,6 +1020,8 @@ Page({
           //console.log(res)
           typeof cb == "function" && cb()
           that.setData({ card: res.data.data, from_act: '' })
+               
+          that.setData({ cardVideo: that.data.card.video })
 
           var getItemFlag = res.data.message
 
@@ -1020,7 +1035,9 @@ Page({
           }else{
             app.overtHaveBar = false
           }
-
+          // that.setData({loadingDone: true })
+          // return
+          
           app.config.init(function () {
 
             app.config.set(that)
@@ -1045,9 +1062,13 @@ Page({
             wx.hideShareMenu()
           else
             wx.showShareMenu()
-
+          if(!userInfo){
+            that.setData({ loadingDone: true })
+            // that.showViewsCardUser()
+            return
+          }
           that.checkIsComeback(watch)
-
+          
           app.util.request({
             'url': 'entry/wxapp/getIsCollect',
             'method': 'POST',
@@ -1069,7 +1090,7 @@ Page({
             }
 
           })
-
+        
           that.showViewsCardUser()
 
           that.data.audioCtx = wx.createInnerAudioContext()

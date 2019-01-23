@@ -8,8 +8,6 @@ Page({
    */
   data: {
       card_id: 0,
-      //  pathOne: '',
-      // videoInfo:{},
       path: [],
       name: '',
       res : {},
@@ -38,14 +36,13 @@ Page({
     })
   },
 
-  setVqqLink: function (e){
-      //console.log(e)
-      
-      var that = this
+  setVqqLink: function (e){ 
+    console.log('VqqLink', this.data.VqqLink)
+    var that = this
     var userInfo = wx.getStorageSync('userInfo');
     var isVip = userInfo.memberInfo.vip;
-    var length = that.data.arrvideo.length;
-    if ((isVip == 0 && length > 1) || (isVip > 0 && length >= 5)) {
+    var length = that.data.arrvideo.length + that.data.path.length;
+    if ((isVip == 0 && length >= 1) || (isVip > 0 && length >= 5)) {
       wx.showToast({
         title: '您只能上传' + length + '个视频',
       })
@@ -104,18 +101,8 @@ Page({
           return false
         }   
         var pathOne = res.tempFilePath
-        console.log('pathOne', pathOne)
-        console.log('res5', res)
         wx.uploadFile({
-          // url: app.util.url('entry/wxapp/saveCardVideo'),
-          url: app.util.request({
-            'url': 'entry/wxapp/saveCardVideo',
-            'method': 'POST',
-            // 'data': id,
-            success(res) {
-            console.log('调用接口成功')
-            }
-          }),
+           url: app.util.url('entry/wxapp/saveCardVideo'),
           filePath: pathOne,
           name: 'video',
           header: {
@@ -123,21 +110,26 @@ Page({
           },
           formData: {
             'id': id,
+            'card_id': that.data.card_id,
             'duration': res.duration,
             'size': res.size,
             'width': res.width,
             'height': res.height
           },
-          success: function () {
+          success: function (res) {
+            app.freshIndex = true
             wx.showToast({
               title: '上传成功',
               icon: 'success',
               duration: 2000
             })
+            setTimeout(function () {
+              wx.navigateBack()
+            }, 2000)
             console.log('视频上传成功')
           },
           fail: function () {
-            console.log('接口调用失败')
+            console.log('接口上传失败')
           }
         })
 
@@ -177,7 +169,8 @@ Page({
       onConfirm(e) {
 
         var data = {
-          id: id
+          id: id,
+          card_id: that.data.card_id,
         }
 
         app.util.request({
@@ -210,49 +203,6 @@ Page({
 
   },
 
- /**
-   * 删除视频原始代码
-   */
-  // delCardVideo: function () {
-  //   var that = this
-  //   that.setData({ showVideo: false })
-  //   $wuxDialog.confirm({
-  //     title: '',
-  //     content: '您确定要删除吗？',
-  //     onConfirm(e) {
-
-  //       var data = {
-  //         card_id: that.data.card_id
-  //       }
-
-  //       app.util.request({
-  //         'url': 'entry/wxapp/delCardVideo',
-  //         //'cachetime': '30',
-  //         'method': 'POST',
-  //         'data': data,
-  //         success(res) {
-  //           app.freshIndex = true
-  //           wx.showToast({
-  //             title: res.data.message,
-  //             icon: res.data.errno ? 'error' : 'success',
-  //             duration: 2000
-  //           })
-  //           if (res.data.errno == 0)
-  //             setTimeout(function () {
-  //               wx.navigateBack()
-  //             }, 2000)
-
-
-  //         }
-  //       })
-
-  //     },
-  //     onCancel(e) {
-  //       that.setData({ showVideo: true })
-  //     }
-  //   })
-
-  // },
 
   /**
  * 修改视频名称
@@ -280,8 +230,9 @@ Page({
         var name = that.data.$wux.dialog.prompt.response
         console.log('name5', name)
         var data = {
+          card_id: that.data.card_id,
           id: id,
-          name: newName
+          name: name
         }
         app.util.request({
           'url': 'entry/wxapp/saveCardVname',
@@ -290,9 +241,15 @@ Page({
           'data': data,
           success(res) {
             app.freshIndex = true
-            //console.log(res)
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.navigateBack()
+            }, 2000)
             that.setData({ arrvideo: arrvideo })
-
           }
 
         })
@@ -306,57 +263,6 @@ Page({
   },
 
 
-
-  // 修改视频名称原始代码
-  // updateVideoName: function (e) {
-  //   //console.log($wuxDialog)
-  //   console.log('修改视频名称e',e)
-  //   var id = e.target.dataset.id
-  //   console.log('id2',id)
-
-    
-  //     // var arrvideo=this.data.arrvideo;
-  //     // arrvideo[id].name=name;
-   
-
-
-  //   var that = this
-  //   that.setData({ showVideo: false })
-  //   $wuxDialog.prompt({
-  //     title: '',
-  //     content: '视频名称为',
-  //     fieldtype: 'text',
-  //     password: false,
-  //     defaultText: that.data.name,
-  //     placeholder: '0~12字符',
-  //     maxlength: 12,
-  //     onConfirm(e) {
-  //       var name = that.data.$wux.dialog.prompt.response
-  //       var data = {
-  //         card_id: that.data.card_id,
-  //         name: name
-  //       }
-  //       app.util.request({
-  //         'url': 'entry/wxapp/saveCardVname',
-  //         //'cachetime': '30',
-  //         'method': 'POST',
-  //         'data': data,
-  //         success(res) {
-  //           app.freshIndex = true
-  //           //console.log(res)
-  //           that.setData({ name: name })
-
-  //         }
-
-  //       })
-
-  //     },
-  //     onCancel(e){
-  //       that.setData({ showVideo: true })
-  //     }
-  //   })
-
-  // },
 
   //设置视频名称
   setVideoName: function (e){
@@ -381,8 +287,7 @@ Page({
     var isVip = userInfo.memberInfo.vip;
     var that = this;
     var length = that.data.arrvideo.length + that.data.path.length ;
-
-    if ((isVip == 0 && length > 1) || (isVip > 0 && length>= 5) ){
+    if ((isVip == 0 && length >= 1) || (isVip > 0 && length>= 5) ){
 
       wx.showToast({
         title: '您只能上传' + length+'个视频',
@@ -444,56 +349,6 @@ Page({
     })
 
   },
-
-
-
-  //选择上传单个短视频
-  // chooseCardVideoOne: function() {
-
-  //   var that = this
-  //   wx.chooseVideo({
-  //     sourceType: ['album', 'camera'],
-  //     maxDuration: 60,
-  //     camera: 'back',
-  //     success: function (res) {
-        
-  //       //console.log('%c' + that.data.card_id, 'font-size:30px;color:green')
-        
-  //       console.log('res:', res)
-        
-  //       if (Math.floor(res.duration) < 10)
-  //       {
-  //           wx.showToast({
-  //             title: '时长太小',
-  //             icon : 'none',
-  //             duration: 2000
-  //           })
-  //           return false
-  //       }
-  //       if(Math.floor(res.duration) > 600){
-  //         wx.showToast({
-  //           title: '时长太大',
-  //           icon: 'none',
-  //           duration: 2000
-  //         })
-  //         return false
-  //       }      
-  //       that.setData({ pathOne: res.tempFilePath, res: res })
-  //     },
-  //     fail: function (res){
-
-  //       console.log(res)
-  //       return
-  //       wx.showToast({
-  //         title: res.errMsg,
-  //         icon: 'error',
-  //         duration: 2000
-  //       })
-
-  //     },
-  //   })
-
-  // },
 
 
   //点击添加更多视频
@@ -740,19 +595,15 @@ Page({
          success(res) {
            
            var data = res.data.data
-           console.log('data:', data)
+           console.log('data:', res)
            
-           if (data){
-             
-            //  var arrvideo=[];
-            //  arrvideo = that.data.arrvideo;
-            //  arrvideo.concat(data);       
+           if (data){ 
              that.setData({
-              //  arrvideo: arrvideo
-               arrvideo: data
+               arrvideo: data 
              })
              wx.setStorageSync('arrvideo', that.data.arrvideo)
-
+             console.log('66', that.data.arrvideo)
+           
              var linkReg = /v.qq.com\/x\/page/
              if (linkReg.test(data.path)){
                 var temp = data.path.match(/page\/(.*)\.html/)

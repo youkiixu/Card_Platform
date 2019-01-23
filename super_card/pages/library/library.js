@@ -408,6 +408,7 @@ Page({
             return false
           }
           console.log(res.data.data)
+          console.log('cardList', that.data.cardList)
           that.data.cardList = that.data.cardList.concat(res.data.data)
           console.log(that.data.cardList)
           if (!that.data.searchKey) that.data.cardListCopy = that.data.cardList

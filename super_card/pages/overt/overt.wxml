@@ -654,19 +654,19 @@
     </view>
     <!--视频  -->
 
-     <!-- <view class='video' wx:if='{{ arrvideo.length > 0  }}'>
-      <view wx:for="{{arrvideo}}">   
-        <video  src="{{ item.path }}" controls></video>   
-        <view class='begin'>
+     <view class='video videoClass' wx:if='{{cardVideo.length > 0 }}'>
+      <view wx:for="{{cardVideo}}">   
+        <video src="{{ item.path }}" controls></video>   
+        <view class='begin' style='display:none'>
           <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
           <text class='video-time'>{{ item.duration }}</text>
         </view>
         <view class='video-title' wx:if='{{ item.name }}'>{{ item.name }}</view>
     </view>
-    </view> -->
+    </view>
 
 
-    <view class='video' wx:if='{{ card.video }}'>
+    <!-- <view class='video' wx:if='{{ card.video }}'>
       <navigator url="../../pages/video-watch/video-watch?card_id={{ card.id }}&forwarding={{ card.forwarding }}">
         <image class='video-img' src='{{ card.video.thumb }}' mode='aspectFit'></image>     
         <view class='begin'>
@@ -675,7 +675,7 @@
         </view>
         <view class='video-title' wx:if='{{ card.video.name }}'>{{ card.video.name }}</view>
       </navigator>
-    </view>
+    </view> -->
 
     <block wx:key="albums" wx:for="{{card.albums}}" wx:for-index="albumIdx" wx:for-item="album">
     <!-- <view class='person_box' wx:if='{{ album.name }}'>

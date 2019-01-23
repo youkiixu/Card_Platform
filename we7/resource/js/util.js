@@ -269,84 +269,92 @@ util.request = function (option) {
 	}
 
   if(option.data) option.data.formIds = app.formIds.join(',')
-	wx.request({
-		'url': url,
+  wx.request({
+    'url': url,
     'data': option.data ? option.data : { formIds: app.formIds.join(',') },
-    'header': option.header ? option.header : {'content-type': 'application/x-www-form-urlencoded'},
-		'method': option.method ? option.method : 'GET',
-		'success': function (response) {
-			wx.hideNavigationBarLoading();
-			wx.hideLoading();
-			if (response.data.errno) {
-				if (response.data.errno == '41009') {
-					wx.setStorageSync('userInfo', '');
-					util.getUserInfo(function () {
-						util.request(option)
-					});
-					return;
-				} else {
-					if (option.fail && typeof option.fail == 'function') {
-						option.fail(response);
-					} else {
-						if (response.data.message) {
-							if (response.data.data != null && response.data.data.redirect) {
-								var redirect = response.data.data.redirect;
-							} else {
-								var redirect = '';
-							}
-							app.util.message(response.data.message, redirect, 'error');
-						}
-					}
-					return;
-				}
-            } else {
-				if (option.success && typeof option.success == 'function') {
-					option.success(response);
-				}
-				//写入缓存，减少HTTP请求，并且如果网络异常可以读取缓存数据
-				if (option.cachetime) {
-					var cachedata = { 'data': response.data, 'expire': timestamp + option.cachetime * 1000 };
-					wx.setStorageSync(cachekey, cachedata);
-				}
-			}
-		},
-		'fail': function (response) {
-			wx.hideNavigationBarLoading();
-			wx.hideLoading();
-			
-			//如果请求失败，尝试从缓存中读取数据
-			var md5 = require('md5.js');
-			var cachekey = md5(url);
-			var cachedata = wx.getStorageSync(cachekey);
-			if (cachedata && cachedata.data) {
-				if (option.success && typeof option.success == 'function') {
-					option.success(cachedata);
-				}
-				console.log('failreadcache:' + url);
-				return true;
-			} else {
-				if (option.fail && typeof option.fail == 'function') {
-					option.fail(response);
-				}
-			}
-		},
-		'complete': function (response) {
-			// wx.hideNavigationBarLoading();
-			// wx.hideLoading();
-			if (option.complete && typeof option.complete == 'function') {
-				option.complete(response);
-			}
+    'header': option.header ? option.header : { 'content-type': 'application/x-www-form-urlencoded' },
+    'method': option.method ? option.method : 'GET',
+    'success': function (response) {
+
+      // console.log('response', response)
+      wx.hideNavigationBarLoading();
+      wx.hideLoading();
+      if (response.data.errno) {
+        if (response.data.errno == '41009') {
+          //response.data.errno == '41009'表示：请登录
+          wx.setStorageSync('userInfo', '');
+          util.getUserInfo(function () {
+            util.request(option)
+          });
+          return;
+        } else {
+          // console.log('ttttt')
+          if (option.fail && typeof option.fail == 'function') {
+            option.fail(response);
+          } else {
+            if (response.data.message) {
+              if (response.data.data != null && response.data.data.redirect) {
+                var redirect = response.data.data.redirect;
+                console.log('oh', redirect)
+              } else {
+                var redirect = '';
+              }
+              app.util.message(response.data.message, redirect, 'error');
+            }
+          }
+          return;
+        }
+      } else {
+        // console.log('bbb')
+        if (option.success && typeof option.success == 'function') {
+          option.success(response);
+        }
+        //写入缓存，减少HTTP请求，并且如果网络异常可以读取缓存数据
+        if (option.cachetime) {
+          var cachedata = { 'data': response.data, 'expire': timestamp + option.cachetime * 1000 };
+          wx.setStorageSync(cachekey, cachedata);
+        }
+      }
+    },
+    'fail': function (response) {
+      console.log('vvv')
+      wx.hideNavigationBarLoading();
+      wx.hideLoading();
+
+      //如果请求失败，尝试从缓存中读取数据
+      var md5 = require('md5.js');
+      var cachekey = md5(url);
+      var cachedata = wx.getStorageSync(cachekey);
+      if (cachedata && cachedata.data) {
+        if (option.success && typeof option.success == 'function') {
+          option.success(cachedata);
+        }
+        console.log('failreadcache:' + url);
+        return true;
+      } else {
+        if (option.fail && typeof option.fail == 'function') {
+          option.fail(response);
+        }
+      }
+    },
+    'complete': function (response) {
+      // wx.hideNavigationBarLoading();
+      // wx.hideLoading();
+      if (option.complete && typeof option.complete == 'function') {
+        option.complete(response);
+      }
 
       app.formIds = []
-		}
-	});
+    }
+  });
+
+ 
 }
 /*
 * 获取用户信息
 */
 util.getUserInfo = function (cb) {
 	var login = function() {
-		console.log('start login');
 		var userInfo = {
 			'sessionid': '',
 			'wxInfo': '',
@@ -364,7 +372,6 @@ util.getUserInfo = function (cb) {
 							wx.getUserInfo({
 								success: function (wxInfo) {
                   userInfo.sessionid = session.data.data.sessionid
-
                   //wx.setStorageSync('sessionid', userInfo.sessionid);
 							    //wx.setStorageSync('userInfo', userInfo);
 									userInfo.wxInfo = wxInfo.userInfo
@@ -407,6 +414,7 @@ util.getUserInfo = function (cb) {
                 }
 							})
 						}
+            
 					}
 				});
 			},

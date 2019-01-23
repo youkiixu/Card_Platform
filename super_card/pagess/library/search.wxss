@@ -1,5 +1,4 @@
 /* super_card/pagess/library/search.wxss */
-
 .search-rear{
   display:flex;
   align-items:center;
@@ -61,7 +60,7 @@
 
 
 .cards-holder{
-  background-color:#fff;
+  /* background-color:#fff; */
   border-bottom:1px solid #e2e2e2;
   border-top:1px solid #e2e2e2;
   position: relative;
@@ -257,4 +256,160 @@
 .icon-87{
   font-size:36rpx;
   margin-right: 8rpx;
+}
+/* 搜索分类更改 */
+.category{
+  width: 750rpx;
+  height: 80rpx;
+  display: flex;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 80rpx;
+  margin: 20prx 0 ;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  background-color:#fff;
+}
+.category_item{
+  flex: 1;
+}
+.category_active{
+  border-bottom: 2rpx solid #01a1e9;
+}
+.cardInfo{
+  margin-top: 10rpx;
+  background-color:#fff;
+  border: 1rpx solid green;
+}
+.info_title{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  color: #212121;
+  border-bottom:1px solid #e2e2e2;
+}
+.info_name{
+  color: #212121;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.info_more{
+  height: 60rpx;
+  width: 100%;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+}
+.websiteInfo{
+  margin-top: 10rpx;
+  background-color:#fff;
+  border: 1rpx solid blue;
+}
+.productInfo{
+  margin-top: 10rpx;
+  background-color:#fff;
+  border: 1rpx solid green;
+}
+.demandInfo{
+  margin-top: 10rpx;
+  background-color:#fff;
+  border: 1rpx solid red;
+}
+/* 商城官网 */
+.info_item{
+  background-color:#fff;
+  margin:0 20rpx;
+  padding:20rpx 0;
+  display:flex;
+  display:-webkit-flex;
+  border-bottom:1px solid #e2e2e2;
+  border-radius:0;
+  line-height:inherit;
+  font-size:36rpx;
+  text-align:left;
+}
+.info_itemImg{
+  display:flex;
+  display:-webkit-flex;
+  position:relative;
+  border: 1rpx solid red;
+}
+.info_itemInfo{
+  display:flex;
+  flex-flow:column;
+  justify-content:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+  padding-left:30rpx;
+  vertical-align:middle;
+  flex:1;
+  -webkit-flex:1;
+  align-items:flex-start;
+  -webkit-align-items:flex-start;
+  border: 1rpx solid blue;
+}
+.shop_name{
+  font-size:26rpx;
+  color:#999999;
+  line-height:50rpx;
+}
+.info_introduce{
+  width: 500rpx;
+  font-size:26rpx;
+  color:#999999;
+  line-height:40rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap; 
+}
+.shop_business{
+  width: 500rpx;
+  font-size:20rpx;
+  color:#666666;
+  line-height:35rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  align-content: center;
+}
+.productInfo_price{
+  width: 500rpx;
+  font-size:30rpx;
+  color:#d83030;
+  line-height:35rpx;
+}
+.demandInfo_introduce{
+  width: 500rpx;
+  font-size:20rpx;
+  color:#666666;
+  line-height:35rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  align-content: center;
+}
+/* VIP专属标识 */
+.VIP{
+  height: 40rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: #FFD700;
+  font-weight: bold;
+  padding-left: 15rpx;
+  box-sizing: border-box;
+}
+/* 关键字高亮显示 */
+
+.searchHigh {
+  color: #01a1e9;
 }

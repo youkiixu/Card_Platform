@@ -1,6 +1,24 @@
 //获取小程序配置
 var config = {}
 
+function getAppConfigInfo(app, cb) {
+  wx.request({
+    // url: app.util.url('entry/wxapp/getAppConfig', undefined, false) + '&m=super_card',
+    url: app.util.url('entry/wxapp/getAppConfig'),
+    success(res) {
+      wx.setStorageSync('appConfig', res.data.data);
+      typeof cb == `function` && cb()
+
+    }
+  })
+  wx.request({
+    url: app.util.url('entry/wxapp/getEmojiPic'),
+    success: function (res) {
+      app.emoji = res.data.data
+    }
+  })
+}
+
 
 config.getConf = function (key){
   //console.log('key',key)
@@ -11,34 +29,42 @@ config.getConf = function (key){
  
 },
 
+
+
+  
+
+
 config.init = function (cb) { 
     var app = getApp()
     var conf = wx.getStorageSync('appConfig');
-  console.log(app.util.url('entry/wxapp/getAppConfig'))
-    if(!conf){
-      wx.request({
-        url: app.util.url('entry/wxapp/getAppConfig'),
-        success(res) {
+    var userInfo = wx.getStorageSync('userInfo');
 
+  if (!conf){
+    if (userInfo == ''){
+  
+      wx.request({
+       url: app.util.url('entry/wxapp/getAppConfig', undefined, false) + '&m=super_card',
+        //url: app.util.url('entry/wxapp/getAppConfig'),
+        success(res) {
           wx.setStorageSync('appConfig', res.data.data);
-          typeof cb ==  `function` && cb()
+          typeof cb == `function` && cb()
 
         }
       })
-
       wx.request({
         url: app.util.url('entry/wxapp/getEmojiPic'),
         success: function (res) {
           app.emoji = res.data.data
         }
       })
-      
     }else{
+      getAppConfigInfo(app, cb)
+    }   
+  }else{
+      getAppConfigInfo(app, cb)
       typeof cb == `function` && cb()
     }
 
-  
-    
 }
 
 
@@ -49,6 +75,7 @@ config.set = function (obj){
   // wx.setNavigationBarTitle({
   //   title: app.config.getConf('app_name')
   // })
+console.log(app)
 
   var nav_set = app.config.getConf('app_nav_set')
   wx.setNavigationBarColor({

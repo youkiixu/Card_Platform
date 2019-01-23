@@ -1647,3 +1647,6 @@ color: #fff;
   bottom: 0;
   background: #fff;
 }
+.videoClass{
+  z-index: 1;
+}

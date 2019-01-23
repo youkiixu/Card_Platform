@@ -858,7 +858,7 @@ Page({
     })
 
   },
-
+ 
 
   /**
    * 生命周期函数--监听页面加载
@@ -867,17 +867,13 @@ Page({
     //console.log('here2')
     var that = this;
 
-    //获取视频信息
-    var arrvideo = wx.getStorageSync('arrvideo');
-    that.setData({ arrvideo: arrvideo })
-    console.log('arrvideo3:', arrvideo)
-
     //console.log(options)
+
 
     //获取当前用户ID
     app.util.getUserInfo(function (response) {
-
-      console.log(response)
+     
+      console.log('response', response)
       app.UID = response.memberInfo.uid
       that.setData({ uid : response.memberInfo.uid })
       app.util.request({

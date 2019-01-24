@@ -186,6 +186,17 @@ Page({
   onLoad: function (options) {
     var that = this
 
+    
+    //为了能调起授权--新加代码start（bug：不在此页面调起授权，点击产品进这个详情页的时候就会报“非法进入”的错误，所以只能在这再调起一次授权）
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        app.config.init()
+      });
+      return
+    }
+    //为了能调起授权--新加代码end
+
     if (typeof options.card_id != 'undefined') {
       
       that.setData({ card_id: options.card_id, goods_id: options.goods_id })

@@ -34,9 +34,40 @@ Page({
     length: '',
     allInfo: [],
     cardInfo: [],
-    websiteInfo: [],
-    productInfo: [],
-    demandInfo: [],
+    cardMore:false,
+    websiteMore: false,
+    productMore: false,
+    demandMore: false,
+
+    sliceCard:[],//存放截取后的数组数据
+    sliceWebsite: [],//存放截取后的数组数据
+    sliceProduct: [],//存放截取后的数组数据
+    sliceDemand: [],//存放截取后的数组数据
+
+    // websiteInfo: [],
+    // productInfo: [],
+    // demandInfo: [],
+    websiteInfo: [
+      { id: "0", name: "彩印通", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架"},
+      { id: "1", name: "印生活", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
+      { id: "2", name: "印讯", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
+      { id: "3", name: "印捷", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
+    ],
+    productInfo: [
+      { id: "0", name: "铁板门架", introduce: "方便快捷", price:"999"},
+      { id: "1", name: "铜板门架", introduce: "方便快捷", price: "888" },
+      { id: "2", name: "银板门架", introduce: "方便快捷", price: "666" },
+      { id: "3", name: "钢板门架", introduce: "方便快捷", price: "555" },
+    ],
+    demandInfo: [
+      {
+        id: "0", name: "关子炫", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
+      { id: "1", name: "张雪娟", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
+      { id: "2", name: "ZZMK",  demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
+      { id: "3", name: "张艺兴", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
+    ],
+
+
     listDataCopy: [],// 用来搜索的复制数组,实现关键字高亮，原来数组不可以动的，所以要复制个新数组出来拆分成需要的数据去展示
   },
 
@@ -74,7 +105,33 @@ Page({
     });
   },
 
+  // 名片点击查看更多
+  cardInfoMore: function (e) {
+    this.setData({
+      activeCategoryId: 1
+    });
+  },
 
+  // 商城官网点击查看更多
+  websiteInfoMore: function (e) {
+    this.setData({
+      activeCategoryId: 2
+    });
+  },
+
+  // 产品点击查看更多
+  productInfoMore: function (e) {
+    this.setData({
+      activeCategoryId: 3
+    });
+  },
+
+  // 需求点击查看更多
+  demandInfoMore: function (e) {
+    this.setData({
+      activeCategoryId: 4
+    });
+  },
   
 // 名片点击查看更多
   // cardInfoMore: function (e) {
@@ -116,7 +173,7 @@ Page({
     var prevPageData = that.data.prevPage.data
     that.setData({ userPosLat: prevPageData.userPosLat, userPosLng: prevPageData.userPosLng })
     that.getHistory()
-    
+
   },
 
   /**
@@ -253,8 +310,8 @@ Page({
       this.setData({ showHistory: false })
       this.data.lastPage = false
       this.data.page = 1
-       //this.getPulicCard()
-      this.searchTap()
+       //this.getPulicCard() //原本的
+      this.searchTap() //测试的
       console.log('cardlist', this.data.cardList)
       console.log('listDataCopy', this.data.listDataCopy)
       this.setHistory(this.data.searchKey)
@@ -270,17 +327,28 @@ Page({
   },
 
 
+//设置搜索关键字
+  // setSearchKey: function (e) {
+  //   //console.log(e)
+  //   var key = e.detail.value
+  //   this.setData({ searchKey: key })
+  //   this.data.lastPage = false
+  //   this.data.page = 1
+  // },
+
+
+
+
+
+// 测试start
 
 //设置搜索关键字
   setSearchKey: function (e) {
-    //console.log(e)
-    // var key = e.detail.value
     var that = this;
     var key = that.trim(e.detail.value)
     that.setData({ searchKey: key })
     that.data.lastPage = false
     that.data.page = 1
-    //that.searchTap()
   },
   // 去除首尾的空格
   trim: function (s) {
@@ -289,7 +357,7 @@ Page({
 
   // 搜索关键字，实现高亮效果
   searchTap: function () {
-    var that = this;
+    var that = this; 
     var data = {
       page: that.data.page,
       search_key: that.data.searchKey,
@@ -301,46 +369,65 @@ Page({
       'url': 'entry/wxapp/getPubCard',
       'method': 'POST',
       'data': data,
-      success(res) {
-        //console.log(res)
-        that.data.isLoading = false
-
-        var data = res.data.data
-        var newData = res.data.data
-
+      success(res) { 
+        that.data.isLoading = false  
+        that.setData({
+          cardList: res.data.data,
+          listDataCopy: res.data.data
+        })
+        var data = that.data.cardList
+        var newData = that.data.listDataCopy
         for (var i = 0; i < data.length; i++) {
           var dic = data[i];
           var newDic = newData[i];
-          var text = dic.name;
-          newDic.name = getInf(text, that.data.searchKey);
+          var name = dic.name;
+          newDic.name = getInf(name, that.data.searchKey);
+          var title = dic.title;
+          newDic.title = getInf(title, that.data.searchKey);
           var company = dic.company;
           newDic.company = getInf(company, that.data.searchKey);
-
         }
-
         that.setData({
-          cardList: data,
           listDataCopy: newData
         })
+
+    //数组截取及查看更多按钮的显示start （名片信息的没渲染截取后的，因为接口还不完善，现在只能搜索出名片信息）
+        var cardbLength = that.data.cardList.length
+        var webLength = that.data.websiteInfo.length
+        var proLength = that.data.productInfo.length
+        var demLength = that.data.demandInfo.length
+
+        var sliceC = that.data.cardList
+        var sliceW = that.data.websiteInfo
+        var sliceP = that.data.productInfo
+        var sliceD = that.data.demandInfo
+
+        cardbLength > 3 ? that.setData({ cardMore: true, sliceCard: sliceC.slice(0, 3) }) : that.setData({ cardMore: false, sliceCard: sliceC })
+        webLength > 3 ? that.setData({ websiteMore: true, sliceWebsite: sliceW.slice(0, 3) }) : that.setData({ websiteMore: false, sliceWebsite: sliceW })
+        proLength > 3 ? that.setData({ productMore: true, sliceProduct: sliceP.slice(0, 3) }) : that.setData({ productMore: false, sliceProduct: sliceP })
+        demLength > 3 ? that.setData({ demandMore: true, sliceDemand: sliceD.slice(0, 3) }) : that.setData({ demandMore: false, sliceDemand: sliceD })
+
+        // that.setData({
+        //   sliceCard: sliceC.slice(0, 3),
+        //   sliceWebsite: sliceW.slice(0, 3),
+        //   sliceProduct: sliceP.slice(0, 3),
+        //   sliceDemand: sliceD.slice(0, 3)
+        // })
+    //数组截取及查看更多按钮的显示end
 
       }
     })
 
-    console.log('cardlist2', this.data.cardList)
-    console.log('listDataCopy2', this.data.listDataCopy)
+
+  
+
+
   },
 
+// 测试end
 
 
-  //设置搜索关键字
-  // setSearchKey: function (e) {
-  //   //console.log(e)
-  //   var key = e.detail.value
-  //   this.setData({ searchKey: key })
-  //   this.data.lastPage = false
-  //   this.data.page = 1
-  // },
-
+  
 
   //切换搜索状态
   toggleSearchInput: function (e) {

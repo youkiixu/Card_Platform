@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -103,6 +103,12 @@
 					"name": "搜索",
 					"pathName": "super_card/pagess/library/search",
 					"query": "card_id=7&from_act=other"
+				},
+				{
+					"id": -1,
+					"name": "搜索页",
+					"pathName": "super_card/pagess/library/search",
+					"query": ""
 				},
 				{
 					"id": -1,

@@ -86,6 +86,17 @@ Page({
   },
 
   zanDynamic: function (e) {
+
+    //为了能调起授权--新加代码start
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        app.config.init()
+      });
+      return
+    }
+    //为了能调起授权--新加代码end
+
     
     var that = this
     var id = e.currentTarget.dataset.id
@@ -134,6 +145,17 @@ Page({
     this.data.pingContent = e.detail.value
   },
   showPingInput(e){
+   
+    //为了能调起授权--新加代码start
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        app.config.init()
+      });
+      return
+    }
+    //为了能调起授权--新加代码end
+
     var id = e.currentTarget.dataset.id
     var index = e.currentTarget.dataset.index
 

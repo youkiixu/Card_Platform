@@ -279,7 +279,7 @@
 .cardInfo{
   margin-top: 10rpx;
   background-color:#fff;
-  border: 1rpx solid green;
+  /* border: 1rpx solid green; */
 }
 .info_title{
   height: 60rpx;
@@ -306,17 +306,17 @@
 .websiteInfo{
   margin-top: 10rpx;
   background-color:#fff;
-  border: 1rpx solid blue;
+  /* border: 1rpx solid blue; */
 }
 .productInfo{
   margin-top: 10rpx;
   background-color:#fff;
-  border: 1rpx solid green;
+  /* border: 1rpx solid green; */
 }
 .demandInfo{
   margin-top: 10rpx;
   background-color:#fff;
-  border: 1rpx solid red;
+  /* border: 1rpx solid red; */
 }
 /* 商城官网 */
 .info_item{
@@ -350,7 +350,7 @@
   -webkit-flex:1;
   align-items:flex-start;
   -webkit-align-items:flex-start;
-  border: 1rpx solid blue;
+  /* border: 1rpx solid blue; */
 }
 .shop_name{
   font-size:26rpx;

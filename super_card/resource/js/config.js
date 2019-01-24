@@ -6,8 +6,10 @@ function getAppConfigInfo(app, cb) {
     // url: app.util.url('entry/wxapp/getAppConfig', undefined, false) + '&m=super_card',
     url: app.util.url('entry/wxapp/getAppConfig'),
     success(res) {
-      wx.setStorageSync('appConfig', res.data.data);
-      typeof cb == `function` && cb()
+      if (res.data.data!=""){
+        wx.setStorageSync('appConfig', res.data.data);
+        typeof cb == `function` && cb()
+      }
 
     }
   })
@@ -39,16 +41,13 @@ config.init = function (cb) {
     var conf = wx.getStorageSync('appConfig');
     var userInfo = wx.getStorageSync('userInfo');
 
-  if (!conf){
-    if (userInfo == ''){
-  
+  if (!userInfo){
       wx.request({
        url: app.util.url('entry/wxapp/getAppConfig', undefined, false) + '&m=super_card',
         //url: app.util.url('entry/wxapp/getAppConfig'),
         success(res) {
           wx.setStorageSync('appConfig', res.data.data);
           typeof cb == `function` && cb()
-
         }
       })
       wx.request({
@@ -56,13 +55,10 @@ config.init = function (cb) {
         success: function (res) {
           app.emoji = res.data.data
         }
-      })
-    }else{
-      getAppConfigInfo(app, cb)
-    }   
+      });
+      
   }else{
-      getAppConfigInfo(app, cb)
-      typeof cb == `function` && cb()
+      getAppConfigInfo(app, cb) 
     }
 
 }
@@ -74,12 +70,15 @@ config.set = function (obj){
   //全局统一设置默认标题
   // wx.setNavigationBarTitle({
   //   title: app.config.getConf('app_name')
-  // })
-console.log(app)
-
+  // }) 
   var nav_set = app.config.getConf('app_nav_set')
-  wx.setNavigationBarColor({
-    frontColor: (nav_set.top.top_text_color == 1 ? '#ffffff' : '#000000'),
+  if (typeof nav_set== "undefined"){
+    return;
+  }
+
+  
+    wx.setNavigationBarColor({
+    frontColor: (   nav_set.top.top_text_color == 1 ? '#ffffff' : '#000000'),
     backgroundColor: nav_set.top.top_bg_color,
     /*animation: {
       duration: 400,

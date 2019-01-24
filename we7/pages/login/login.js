@@ -35,13 +35,15 @@ Page({
   },
   bindGetUserInfo: function (e) {
     var that = this
-    if (that.data.toPage !== false){
-      wx.reLaunch({ url: that.data.toPage })
-    }else
-      wx.reLaunch({ url: "/super_card/pages/index/index" })
-
-    console.log(e)
-    console.log('jkg',e)
+    //为了能重新调起授权--新加代码start 此处表示点击了授权登录就返回当前页面，而之前的授权方法是一进页面就加载授权了，所以要重新调起授权才能保证分享页面改的授权方法的正确调起
+    app.util.getUserInfo(function (response) {
+      if (that.data.toPage !== false) {
+        wx.reLaunch({ url: that.data.toPage })
+      } else{
+        wx.reLaunch({ url: "/super_card/pages/index/index" })
+      }
+    },true);  
+    //为了能重新调起授权--新加代码end
   }
 
 })

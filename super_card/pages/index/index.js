@@ -470,7 +470,7 @@ Page({
     var that = this
 
     if (!that.data.tempPoster) return
-
+ 
     wx.getImageInfo({
       src: this.data.tempPoster,
       success(res) {

@@ -1,0 +1,51 @@
+<!--super_card/pages/opt-version/opt-version.wxml-->
+<view class='contains'>
+  <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
+    <button form-type='submit' class='ove-btn'>
+      <text class='iconfont icon-daohangshouye' style='color:#4752e8;'></text>
+    </button>
+  </form>
+  <view class='top'>
+    <!-- 有图片 -->
+    <image class='top-logo' src='{{ wxInfo.avatarUrl }}'></image>
+    <!-- 无图片 -->
+    <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
+    <view class='company-name'>{{ wxInfo.nickName }}</view>
+    <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
+    <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view>
+  </view>
+
+  <view class='ov-content'>
+    <view  class="act-classify " >
+        <view class='act-name'>{{ vipSetOnly.name }}</view>
+        <view class='buttom-info'>
+        <text style="color:{{ themeColorV }};">畅享12大特权</text>
+        </view>
+
+        <view class='act-lm' wx:key="vipdesc" wx:for="{{ vipSetOnly.rules }}" wx:for-index="didx" wx:for-item="desc">
+        <view class='act-item'>○ </view>
+        <block>
+            <view class='act-lm-con'>{{ desc.rule_name }}</view>
+        </block>
+    </view>
+    </view>
+    <view class='state-clause'>
+      <checkbox-group>
+        <label>
+            <checkbox name="clause"  value="1" checked="true"></checkbox>
+            <text class='protocol'>开通即表示同意</text><text data-t="service_agreement" class='fwxy'  style='color:{{ themeColor }};' catchtap='toProPage'>服务协议</text>和<text class='fwxy' data-t="legal_declaration" catchtap='toProPage' style='color:{{ themeColor }};'>法律声明</text>
+        </label>   
+      </checkbox-group>
+    </view>
+
+    <view class='ov-bottom'>
+      <form report-submit='true' bindsubmit="confirmPay">
+        <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (alreadyOpen ? '已经开通' : '立即升级') : '立即开通' }}</button>
+      </form>
+    </view>
+  </view>
+
+</view>
+
+<import src="/super_card/pages/templates/iospay.wxml"/>
+<template is="iosPayWx" data="{{...iosPayDialog}}"/>

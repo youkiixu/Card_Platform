@@ -1,0 +1,14 @@
+<!--super_card/pagess/spread/spread.wxml-->
+<view class='contains'>
+    <view class="qrcode-content">
+        <view class="qrcode-content-top">
+            <image src="/super_card/resource/images/logo.png" class="qrcode-content-top-logo" />
+            <text class="qrcode-content-top-text">商桥智能名片VIP</text>
+        </view>
+        <view class="qrcode-content-center">
+            <image src="{{qrPic}}" class="qrcode-content-center-qrcode" />
+            <text class="qrcode-content-center-text">扫一扫二维码图案，即可开通会员！</text>
+        </view>
+        <button class="share-btn" type="default" size="defaultSize" bindtap="savePosterPic" hover-class="defaultTap">分享二维码</button>
+    </view>
+</view>

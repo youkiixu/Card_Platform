@@ -1,0 +1,65 @@
+/* super_card/pagess/spread/spread.wxss */
+
+.contains {
+    background: #4752e8;
+    height: 100vh;
+}
+.qrcode-content {
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    top: 13vh;
+    height: 87vh;
+    background: #fff;
+    border-radius: 25rpx 25rpx 0 0; 
+    text-align: center;
+    padding-top: 70rpx;
+}
+.qrcode-content-top {
+    display: flex;
+    align-items: center;
+    width: 454rpx;
+    height: 55rpx;
+    margin: 0 auto;     
+}
+.qrcode-content-top-logo {
+    display: inline-block;
+    width: 55rpx;
+    height: 55rpx;
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+    background: #4752e8;
+}
+.qrcode-content-top-text {
+    display: inline-block;
+    line-height: 55rpx;
+    height: 55rpx;
+    font-size: 48rpx;
+}
+.qrcode-content-center {
+    position: relative;
+    width: 454rpx;
+    height: 515rpx;
+    margin: 60rpx auto;
+}
+.qrcode-content-center-qrcode {
+    width: 454rpx;
+    height: 454rpx;
+    background: #4752e8;
+}
+.qrcode-content-center-text {
+    font-size: 25rpx;
+    color: #515151;
+}
+.share-btn {
+    position: absolute;
+    width: 454rpx;
+    height: 75rpx;
+    line-height: 75rpx;
+    left: 50%;
+    bottom: 155rpx;
+    transform: translateX(-50%);
+    background: -webkit-linear-gradient(left, #4752e8 , #622afe) !important;
+    color: #fff !important;
+    font-size: 30rpx;
+}

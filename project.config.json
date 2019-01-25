@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -51,10 +51,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "会员中心",
 					"pathName": "super_card/pages/opt-version/opt-version",
-					"query": ""
+					"query": "spread_member=39&from_act=other"
 				},
 				{
 					"id": 3,
@@ -107,7 +107,20 @@
 				{
 					"id": -1,
 					"name": "搜索页",
-					"pathName": "super_card/pagess/library/search"
+					"pathName": "super_card/pagess/library/search",
+					"query": ""
+				},
+				{
+					"id": 12,
+					"name": "推荐开会员",
+					"pathName": "super_card/pagess/spread/spread",
+					"query": ""
+				},
+				{
+					"id": 13,
+					"name": "免费开通会员",
+					"pathName": "super_card/pages/open-membership/open-membership",
+					"query": "agent_id=39&&sign=y59axa14z"
 				}
 			]
 		}

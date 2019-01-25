@@ -190,6 +190,8 @@ Page({
 
   getPip3: function () {
     var that = this
+    console.log(app.util.url('entry/wxapp/getFrontPics'));
+    
     wx.request({
       url: app.util.url('entry/wxapp/getFrontPics'),
       data: {
@@ -209,7 +211,6 @@ Page({
       'url': 'entry/wxapp/getAgentQrcode',
       //'cachetime': '30',
       success(res) {
-
           that.setData({ qrPic: res.data.data }, that.showModal())
 
       }
@@ -223,6 +224,13 @@ Page({
       url: '../cash/cash'
     })
   },
+
+  //调到生成会员码页面
+  toSpreadPage: function (params) {
+    wx.navigateTo({
+        url:'../spread/spread'
+    })  
+  },   
 
   //刷新代言人中心
   freshAgent: function (cb) {

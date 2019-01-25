@@ -60,7 +60,8 @@
     "super_card/pages/edit-page/edit-sizepic",
     "super_card/pages/mall-manage/edit-goods",
     "super_card/pages/opt-version/opt-version",
-    "super_card/pages/issue-dynamic/manage-dynamic"
+    "super_card/pages/issue-dynamic/manage-dynamic",
+    "super_card/pages/open-membership/open-membership"
   ],
   "subPackages": [
     {
@@ -103,7 +104,8 @@
         "certify-license/certify-license",
         "agent/protocol",
         "company-login/company-login",
-        "cash-details/cash-details"
+        "cash-details/cash-details",
+        "spread/spread"
       ]
     }
   ],

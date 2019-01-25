@@ -63,20 +63,13 @@
   <!-- 生成会员码start -->
 
   <view class='memberCode'>
-    <view class='memberCode_icon' bindtap='toMemberCode'>
-      生成会员码
+    <view class='memberCode_icon' bindtap='toMemberCode' bindtap="toSpreadPage">
+        <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
+        <view >
+            <text class="member-text">生成会员码</text>
+        </view>
     </view>
-    <view class='memberCode_num'>剩余<text>45/50</text></view>
-  </view>
-
-  <view  class='memberCodeView' wx:if="{{ memberCodeView }}">
-    <view class='memberCodeView_inner'>
-      <view class='codeView_return' bindtap='codeViewReturn'>返回</view>
-      <view class='codeView_title'>商桥智能名片VIP</view>
-      <view class='codeView_code'></view>
-      <view class='codeView_tips'>扫一扫二维码图案，即可开通会员</view>
-      <button class='codeView_share'id="codeShareBtn" open-type="share">分享二维码</button>
-    </view>
+    <view class='memberCode_num'>剩余<text>{{uInfo.team_num}}/{{uInfo.agent_limit}}</text></view>
   </view>
 
   <!-- 生成会员码end -->

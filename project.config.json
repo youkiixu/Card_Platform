@@ -51,10 +51,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "会员中心",
 					"pathName": "super_card/pages/opt-version/opt-version",
-					"query": ""
+					"query": "spread_member=39&from_act=other"
 				},
 				{
 					"id": 3,

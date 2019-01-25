@@ -45,6 +45,7 @@ Page({
     if ((isVip == 0 && length >= 1) || (isVip > 0 && length >= 5)) {
       wx.showToast({
         title: '您只能上传' + length + '个视频',
+        icon:'none'
       })
       return;
     }   
@@ -296,6 +297,7 @@ Page({
 
       wx.showToast({
         title: '您只能上传' + length+'个视频',
+        icon: 'none'
       })
       return;
     }   

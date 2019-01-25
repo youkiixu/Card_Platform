@@ -97,7 +97,7 @@ Page({
                 fail(err) {
                     wx.showModal({
                         title: '系统提示',
-                        content: '您扫描的二维码已失效,请联系代言人.',
+                      content: err.data.message,
                         showCancel: false,
                         confirmText: '知道了',
                         success: function () {

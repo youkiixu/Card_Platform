@@ -806,8 +806,6 @@ Page({
    */
   onLoad: function (options) {
 
-    console.log('card:', this.data.card)
-
     var userInfo = wx.getStorageSync('userInfo');
 
     
@@ -859,7 +857,6 @@ Page({
       //获取当前用户ID
       app.util.getUserInfo(function (response) {
 
-        console.log('response', response)
         that.setData({ uid: response.memberInfo.uid })
 
         that.getChatNum()
@@ -1067,6 +1064,7 @@ Page({
         //'cachetime': '30',
       'data': { card_id: that.data.card_id, watch: watch, from_act: that.data.from_act },//, state:false
         success(res) {
+          // console.log('getCardItem.res',res)
           if (res.data.data.agent_status == 0){
             that.setData({ noOpen: true })
           }

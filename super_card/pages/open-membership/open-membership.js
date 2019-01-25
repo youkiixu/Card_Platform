@@ -70,7 +70,6 @@ Page({
     confirmPay: function (e) {
 
         var that = this
-
         var formId = e.detail.formId;
         that.setData({
             btnDis: true
@@ -88,6 +87,12 @@ Page({
                         title: '会员开通成功',
                         icon: 'success'
                     })
+                    setTimeout(() => {
+                        app.freshHome = true
+                        wx.reLaunch({
+                            url: '../home/home',
+                        })
+                    }, 2000);
                 },
                 fail(err) {
                     wx.showModal({

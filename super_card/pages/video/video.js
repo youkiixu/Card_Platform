@@ -69,7 +69,7 @@ Page({
     var that = this
 
     var id = e.target.dataset.id
-    console.log('id4', id)
+    var index = e.target.dataset.index
 
     var arrvideo = that.data.arrvideo;
 
@@ -111,6 +111,7 @@ Page({
           formData: {
             'id': id,
             'card_id': that.data.card_id,
+            'name': arrvideo[index].name, 
             'duration': res.duration,
             'size': res.size,
             'width': res.width,
@@ -127,6 +128,10 @@ Page({
               wx.navigateBack()
             }, 2000)
             console.log('视频上传成功')
+
+            // that.setData({ arrvideo: arrvideo })
+            // console.log('上传后', that.data.arrvideo)
+
           },
           fail: function () {
             console.log('接口上传失败')

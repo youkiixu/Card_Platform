@@ -864,16 +864,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    //console.log('here2')
+
+    
     var that = this;
+
+    
 
     //console.log(options)
 
 
     //获取当前用户ID
     app.util.getUserInfo(function (response) {
-     
-      console.log('response', response)
+
       app.UID = response.memberInfo.uid
       that.setData({ uid : response.memberInfo.uid })
       app.util.request({
@@ -958,7 +960,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
     if(app.freshIndex === true) this.freshCurrCard()
 
     if (this.data.cardLists.length < 1) {

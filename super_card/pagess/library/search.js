@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showHistory:false,
+    showHistory: false,
 
     searchKey: '',
     page: 1,
@@ -23,7 +23,7 @@ Page({
 
     searchHistory: [],
 
-    category:[
+    category: [
       { id: 0, name: "全部" },
       { id: 1, name: "名片" },
       { id: 2, name: "官网商城" },
@@ -34,12 +34,12 @@ Page({
     length: '',
     allInfo: [],
     cardInfo: [],
-    cardMore:false,
+    cardMore: false,
     websiteMore: false,
     productMore: false,
     demandMore: false,
 
-    sliceCard:[],//存放截取后的数组数据
+    sliceCard: [],//存放截取后的数组数据
     sliceWebsite: [],//存放截取后的数组数据
     sliceProduct: [],//存放截取后的数组数据
     sliceDemand: [],//存放截取后的数组数据
@@ -48,22 +48,23 @@ Page({
     // productInfo: [],
     // demandInfo: [],
     websiteInfo: [
-      { id: "0", name: "彩印通", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架"},
+      { id: "0", name: "彩印通", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
       { id: "1", name: "印生活", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
       { id: "2", name: "印讯", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
       { id: "3", name: "印捷", business: "主营业务：广告耗材、不干胶、联单、手挽袋、门型架、手举牌、桁架、手举牌、保温杯、拉网架" },
     ],
     productInfo: [
-      { id: "0", name: "铁板门架", introduce: "方便快捷", price:"999"},
+      { id: "0", name: "铁板门架", introduce: "方便快捷", price: "999" },
       { id: "1", name: "铜板门架", introduce: "方便快捷", price: "888" },
       { id: "2", name: "银板门架", introduce: "方便快捷", price: "666" },
       { id: "3", name: "钢板门架", introduce: "方便快捷", price: "555" },
     ],
     demandInfo: [
       {
-        id: "0", name: "关子炫", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
+        id: "0", name: "关子炫", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材"
+      },
       { id: "1", name: "张雪娟", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
-      { id: "2", name: "ZZMK",  demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
+      { id: "2", name: "ZZMK", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
       { id: "3", name: "张艺兴", demand: "易拉宝画面）千帆160Q哑面PP纸广告喷绘写真耗材 广告耗材" },
     ],
 
@@ -72,32 +73,32 @@ Page({
   },
 
   // 聚焦事件
-  focusInput:function(){
+  focusInput: function () {
     var that = this
-    that.setData({ showHistory:true })
+    that.setData({ showHistory: true })
   },
 
-  cancelSearch: function (){
+  cancelSearch: function () {
     wx.navigateBack({
-      
+
     })
   },
 
-  truncateHistory:function (){
+  truncateHistory: function () {
     wx.setStorageSync('pubS', [])
     this.setData({ searchHistory: [], showHistory: false })
   },
 
-  chooseSearch:function (e){
+  chooseSearch: function (e) {
     this.data.lastPage = false
     this.data.page = 1
-    this.setData({ showHistory: false, searchKey : e.currentTarget.dataset.key })
+    this.setData({ showHistory: false, searchKey: e.currentTarget.dataset.key })
     this.getPulicCard()
   },
 
-// 点击分类标题切换
+  // 点击分类标题切换
   tabClick: function (e) {
-    console.log('tabClick-e',e)
+    console.log('tabClick-e', e)
     var id = e.target.dataset.id
     console.log('id', id)
     this.setData({
@@ -132,8 +133,8 @@ Page({
       activeCategoryId: 4
     });
   },
-  
-// 名片点击查看更多
+
+  // 名片点击查看更多
   // cardInfoMore: function (e) {
   //   console.log('tabClick-e', e)
   //   var that = this;
@@ -160,7 +161,7 @@ Page({
   //     }
   //   })
   // },
-  
+
 
 
   /**
@@ -221,10 +222,10 @@ Page({
   getPulicCard: function (callback = false, mode = 'cover') {
     var that = this
 
-    if (that.data.isLoading === true || that.data.searchKey == ''){
+    if (that.data.isLoading === true || that.data.searchKey == '') {
       typeof callback === `function` && callback()
       return
-    } 
+    }
 
     var data = {
       page: that.data.page,
@@ -262,19 +263,19 @@ Page({
       }
     })
 
-    
+
 
   },
 
-  setHistory: function (searchKey){
+  setHistory: function (searchKey) {
 
     try {
 
       var history = wx.getStorageSync('pubS')
-      if (history.length > 0){
+      if (history.length > 0) {
         history.push(searchKey)
         wx.setStorageSync('pubS', history)
-      }else{
+      } else {
         var history = [searchKey]
         wx.setStorageSync('pubS', history)
       }
@@ -289,7 +290,7 @@ Page({
     this.setData({ searchHistory: history })
   },
 
-  getHistory: function (){
+  getHistory: function () {
     var that = this
     try {
       var history = wx.getStorageSync('pubS')
@@ -310,7 +311,7 @@ Page({
       this.setData({ showHistory: false })
       this.data.lastPage = false
       this.data.page = 1
-       //this.getPulicCard() //原本的
+      //this.getPulicCard() //原本的
       this.searchTap() //测试的
       console.log('cardlist', this.data.cardList)
       console.log('listDataCopy', this.data.listDataCopy)
@@ -327,7 +328,7 @@ Page({
   },
 
 
-//设置搜索关键字
+  //设置搜索关键字
   // setSearchKey: function (e) {
   //   //console.log(e)
   //   var key = e.detail.value
@@ -340,9 +341,9 @@ Page({
 
 
 
-// 测试start
+  // 测试start
 
-//设置搜索关键字
+  //设置搜索关键字
   setSearchKey: function (e) {
     var that = this;
     var key = that.trim(e.detail.value)
@@ -357,7 +358,7 @@ Page({
 
   // 搜索关键字，实现高亮效果
   searchTap: function () {
-    var that = this; 
+    var that = this;
     var data = {
       page: that.data.page,
       search_key: that.data.searchKey,
@@ -369,8 +370,8 @@ Page({
       'url': 'entry/wxapp/getPubCard',
       'method': 'POST',
       'data': data,
-      success(res) { 
-        that.data.isLoading = false  
+      success(res) {
+        that.data.isLoading = false
         that.setData({
           cardList: res.data.data,
           listDataCopy: res.data.data
@@ -391,7 +392,7 @@ Page({
           listDataCopy: newData
         })
 
-    //数组截取及查看更多按钮的显示start （名片信息的没渲染截取后的，因为接口还不完善，现在只能搜索出名片信息）
+        //数组截取及查看更多按钮的显示start （名片信息的没渲染截取后的，因为接口还不完善，现在只能搜索出名片信息）
         var cardbLength = that.data.cardList.length
         var webLength = that.data.websiteInfo.length
         var proLength = that.data.productInfo.length
@@ -413,21 +414,21 @@ Page({
         //   sliceProduct: sliceP.slice(0, 3),
         //   sliceDemand: sliceD.slice(0, 3)
         // })
-    //数组截取及查看更多按钮的显示end
+        //数组截取及查看更多按钮的显示end
 
       }
     })
 
 
-  
+
 
 
   },
 
-// 测试end
+  // 测试end
 
 
-  
+
 
   //切换搜索状态
   toggleSearchInput: function (e) {

@@ -7,14 +7,15 @@
   <block wx:if="{{ arrvideo.length > 0 && showVideoInfo}}">
       <button class='btn-block btn-blue addVideo' bindtap='addVideo' style='background:{{  themeColor }};'>添加更多视频</button>
     <view class='vidoeInfo' wx:for="{{arrvideo}}" wx:for-index="index">
-       <view wx:if="{{ item.name }}" class='title2'>{{ item.name }}</view>
+      <view>
+      <view wx:if="{{ item.name }}" class='title2'>{{ item.name }}</view>
       <view class="video-bg">
         <txv-video wx:if="{{ showVideo === true &&  VqqId != 0}}" class="goods-video"  vid="{{VqqId}}" playerid="txv1" ></txv-video>
         <video wx:if="{{ showVideo === true && VqqId == 0 }}" class="video2" src="{{ item.path }}" controls></video>
       </view>
       <view class='edit-btn'>
           <view class='btn-submit'>
-              <button class='btn-block btn-blue' data-id='{{item.id}}' bindtap='updateVideoName' style='background:{{  themeColor }};'>
+              <button class='btn-block btn-blue'   data-id='{{item.id}}' bindtap='updateVideoName' style='background:{{  themeColor }};'>
                 <block wx:if="{{  item.name }}">
                 修改标题
                 </block>
@@ -28,10 +29,14 @@
           </view>
 
         <view class='btn-submit'>
-              <button class='btn-block btn-blue' data-id='{{item.id}}' bindtap='newUploadVideo' style='background:{{  themeColor }};'>重新上传</button>
+              <button class='btn-block btn-blue' data-index='{{index}}'  data-id='{{item.id}}' bindtap='newUploadVideo' style='background:{{  themeColor }};'>重新上传</button>
           </view>
       </view>
+    </view>
      
+     
+   
+   
     </view>
   
   </block>

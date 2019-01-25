@@ -72,7 +72,6 @@ Page({
           var data = res.data.data
           console.log(data)
           if (data){
-            
             that.setData({
               views: data.views,
               path: data.path,

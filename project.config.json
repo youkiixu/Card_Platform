@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 14,
 			"list": [
 				{
 					"id": -1,
@@ -121,6 +121,18 @@
 					"name": "免费开通会员",
 					"pathName": "super_card/pages/open-membership/open-membership",
 					"query": "agent_id=39&&sign=y59axa14z"
+				},
+				{
+					"id": 14,
+					"name": "分享",
+					"pathName": "super_card/pages/video-watch/video-watch",
+					"query": "card_id=1&Msgs={\"id\":\"2\",\"path\":\"https://yun.s280.com/attachment/audios/2/2019/01/Zy79dO4J7cCcA7aEc4yDg45Z4EeBC4.mp4\",\"thumb\":\"\",\"name\":\"\",\"duration\":\"00:12\",\"views\":\"38\"}&from_act=share&forwarding=1"
+				},
+				{
+					"id": -1,
+					"name": "名片页",
+					"pathName": "super_card/pages/overt/overt",
+					"query": ""
 				}
 			]
 		}

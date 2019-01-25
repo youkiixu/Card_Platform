@@ -581,8 +581,22 @@
       <text class="intro_content" id='card-Tips-intro-content' bindtap='showTips' data-plate='{{ card.intro_content }}'>{{ card.intro_content }}</text>
     </view>
     <!--视频  -->
-   
+
+
     <view class='video' wx:if='{{ card.video }}'>
+      <view wx:for="{{card.video}}"> 
+        <view class='cardInfo' data-index="{{index}}" bindtap='toPlay'>
+        <video src="{{ item.path }}"></video> 
+        <view class='begin' style='display:none'>
+        <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
+        <text class='video-time'>{{ item.duration }}</text>
+        </view>
+        <view class='video-title' wx:if='{{ item.name }}'>{{ item.name }}</view>
+      </view> 
+      </view>
+    </view>
+   
+    <!-- <view class='video' wx:if='{{ card.video }}'>
     <view wx:for="{{card.video}}">   
         <video  src="{{ item.path }}" controls></video>   
         <view class='begin' style='display:none'>
@@ -591,7 +605,7 @@
         </view>
         <view class='video-title' wx:if='{{ item.name }}'>{{ item.name }}</view>
     </view>
-    </view>
+    </view> -->
 
 
  <!-- <view class='video' wx:if='{{ card.video  }}'> 

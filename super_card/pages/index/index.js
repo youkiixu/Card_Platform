@@ -54,6 +54,8 @@ Page({
     msgNum: 0,
 
     arrvideo:[],//存放视频信息
+    videoInfo:{}, //存放跳转到播放页面的视频信息
+
 
     show_card_cut:false,
     animationData: "",
@@ -747,6 +749,7 @@ Page({
     for (var x in this.data.cardLists) {
       if (this.data.cardLists[x].id == this.data.card_id) {
         temp = this.data.cardLists[x]
+       
         break
       }
     }
@@ -853,8 +856,35 @@ Page({
 
         that.toggleCardBgPickerV()
 
+   
+
       }
 
+    })
+
+
+  },
+
+
+  //跳到视频播放页面
+  toPlay: function (e) {
+    var that = this
+
+    //判断是哪张名片的信息
+    var temp = {}
+    for (var x in this.data.cardLists) {
+      if (this.data.cardLists[x].id == this.data.card_id) {
+        temp = this.data.cardLists[x]
+        break
+      }
+    }
+
+    var index = e.currentTarget.dataset.index
+    console.log(that.data.cardLists)
+    var msg = temp.video[index]
+    msg = JSON.stringify(msg)
+    wx.navigateTo({
+      url: '../video-watch/video-watch?card_id=' + that.data.card_id + '&Msgs=' + msg + '&forwarding=' + 1  
     })
 
   },
@@ -868,7 +898,6 @@ Page({
     
     var that = this;
 
-    
 
     //console.log(options)
 
@@ -948,6 +977,8 @@ Page({
     }, 1000)
 
   },
+
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

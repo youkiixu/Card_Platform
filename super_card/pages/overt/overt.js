@@ -139,6 +139,18 @@ Page({
   //     url: '../basic/basic',
   //   })
   // },
+
+
+  //跳到视频播放页面
+  toPlay: function (e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var msg = that.data.card.video[index]
+    msg = JSON.stringify(msg)
+    wx.navigateTo({
+      url: '../video-watch/video-watch?card_id=' + that.data.card_id + '&Msgs=' + msg + '&forwarding=' + 1
+    })
+  },
   
   getChatNum: function () {
     var that = this

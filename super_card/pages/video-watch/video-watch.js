@@ -7,6 +7,7 @@ Page({
    */
   data: {
       card_id: 0,
+      arrVideo:{},
       path: '',
       views: 0,
       data: {},
@@ -45,51 +46,63 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     var that = this
     if (typeof options.card_id == 'undefined' || options.card_id < 1){
       wx.navigateBack()
       return false
     }
 
-    
-    that.setData({ card_id: options.card_id , forwarding: options.forwarding })
+    var info = JSON.parse(options.Msgs)
+   
+    that.setData({ 
+       card_id: options.card_id ,
+       forwarding: options.forwarding ,
+        views: info.views,
+        path: info.path,
+        arrVideo: options.Msgs
+
+       })
 
     if (typeof options.from_act !== 'undefined') {
       that.setData({ showBackIndex: true, from_act: options.from_act })
-    }
-      //获取当前用户ID
-    app.util.getUserInfo(function (response) {
-
-        //console.log(response)
-      that.setData({ uid: response.memberInfo.uid })
       
-      app.util.request({
-        'url': 'entry/wxapp/getCardVideo',
-        //'cachetime': '30',
-        'data': { card_id: that.data.card_id, watch : 1},
-        success(res) {
+    }
 
-          var data = res.data.data
-          console.log(data)
-          if (data){
-            that.setData({
-              views: data.views,
-              path: data.path,
-              data: data
-            })
 
-            var linkReg = /v.qq.com\/x\/page/
-            if (linkReg.test(data.path)) {
-              var temp = data.path.match(/page\/(.*)\.html/)
-              that.setData({ VqqId: temp[1] })
-            }
+      //获取当前用户ID
+    // app.util.getUserInfo(function (response) {
 
-          }
-        }
+    //     //console.log(response)
+    //   that.setData({ uid: response.memberInfo.uid })
+      
+    //   app.util.request({
+    //     'url': 'entry/wxapp/getCardVideo',
+    //     //'cachetime': '30',
+    //     'data': { card_id: that.data.card_id, watch : 1},
+    //     success(res) {
 
-      })
+    //       var data = res.data.data
+    //       console.log(data)
+    //       if (data){
+    //         that.setData({
+    //           views: data.views,
+    //           path: data.path,
+    //           data: data
+    //         })
 
-    })
+    //         var linkReg = /v.qq.com\/x\/page/
+    //         if (linkReg.test(data.path)) {
+    //           var temp = data.path.match(/page\/(.*)\.html/)
+    //           that.setData({ VqqId: temp[1] })
+    //         }
+
+    //       }
+    //     }
+
+    //   })
+
+    // })
 
     app.config.cardTrack(that.data.card_id, 3, 'copy')
   },
@@ -144,11 +157,11 @@ Page({
    */
   onShareAppMessage: function () {
 
-    var path = '/super_card/pages/video-watch/video-watch?card_id=' + this.data.card_id + '&from_act=share'
+    var path = '/super_card/pages/video-watch/video-watch?card_id=' + this.data.card_id + '&Msgs=' + this.data.arrVideo + '&from_act=share' + '&forwarding=' + 1
+    // console.log('path',path)
     return {
       title: '请点击看视频',
       path: path
     }
-
   }
 })

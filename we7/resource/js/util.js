@@ -353,7 +353,7 @@ util.request = function (option) {
 /*
 * 获取用户信息
 */
-util.getUserInfo = function (cb) {
+util.getUserInfo = function (cb,bTran) { 
 	var login = function() {
 		var userInfo = {
 			'sessionid': '',
@@ -368,14 +368,16 @@ util.getUserInfo = function (cb) {
 					cachetime: 0,
 					showLoading: false,
 					success: function (session) {
-						if (!session.data.errno) {
+            console.log('session', session)
+						if (!session.data.errno) {           
 							wx.getUserInfo({
-								success: function (wxInfo) {
+								success: function (wxInfo) {  
                   userInfo.sessionid = session.data.data.sessionid
                   //wx.setStorageSync('sessionid', userInfo.sessionid);
 							    //wx.setStorageSync('userInfo', userInfo);
 									userInfo.wxInfo = wxInfo.userInfo
 									wx.setStorageSync('userInfo', userInfo);
+                  
 									util.request({
 										url: 'auth/session/userinfo',
 										data: {
@@ -389,8 +391,8 @@ util.getUserInfo = function (cb) {
 											'content-type': 'application/x-www-form-urlencoded'
 										},
 										cachetime: 0,
-										success: function (res) {
-											if (!res.data.errno) {
+										success: function (res) {                
+											if (!res.data.errno) {                        
 												userInfo.memberInfo = res.data.data;
 												wx.setStorageSync('userInfo', userInfo);
 											}
@@ -400,11 +402,13 @@ util.getUserInfo = function (cb) {
 								},
 								fail: function (info) {
                   //console.log(info)
+                  if (bTran) return
                   var path = getCurrentPages()[0].route
                   var optionsObj = getCurrentPages()[0].options
                   path += util.JsonToUrl(optionsObj)
                   path = encodeURIComponent(path)
-                  if(info.errMsg)
+                  
+                  if (info.errMsg)
                     wx.redirectTo({url: "/we7/pages/login/login?path=" + path })
                   else
 									  typeof cb == "function" && cb(userInfo)

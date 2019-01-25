@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -111,16 +111,9 @@
 					"query": ""
 				},
 				{
-					"id": 12,
-					"name": "推荐开会员",
-					"pathName": "super_card/pagess/spread/spread",
-					"query": ""
-				},
-				{
-					"id": 13,
-					"name": "免费开通会员",
-					"pathName": "super_card/pages/open-membership/open-membership",
-					"query": "agent_id=39&&sign=y59axa14z"
+					"id": -1,
+					"name": "搜索页",
+					"pathName": "super_card/pagess/library/search"
 				}
 			]
 		}

@@ -33,9 +33,9 @@
   <!-- 全部分类start -->
     <view class='category_all' wx:if="{{ activeCategoryId == 0 }}">
         <!-- 名片结果start -->
-        <view class='cardInfo'>
+        <view class='cardInfo' wx:if="{{ listDataCopy.length > 0 }}">
           <view class='info_title'>名片</view>
-          <block wx:key="cards" wx:for="{{ listDataCopy }}" wx:for-index="idx" wx:for-item="card">
+          <block wx:key="cards" wx:for="{{ listDataCopy }}" wx:for-index="idx"  wx:for-item="card">
           <navigator url="../../pages/overt/overt?card_id={{ card.id }}">
           <button class='card-holder' >
             <view class='img-fit'>
@@ -45,14 +45,13 @@
             <view class='card-info'>
               <view class="card-name info_name">
                 <text wx:if="{{ card.recommend == 1 }}" class='groom' style="color:{{ themeColor }};border-color:{{ themeColor }};">荐</text>
-                <text  wx:for="{{card.name}}" class="{{item == searchKey ? 'searchHigh' : '' }}">{{item}}</text>
-                <view  class='job'>{{card.title}}</view>
-                <view class='VIP' wx:if="{{ card.vip > 0}}">VIP</view>
+                <text wx:for="{{card.name}}"  class="{{item == searchKey ? 'searchHigh' : '' }}">{{item}}</text>
+                <view wx:for="{{card.title}}" class="job {{item == searchKey ? 'searchHigh' : '' }}">{{item}}</view>
+                <view  class="VIP" wx:if="{{ card.vip > 0}}">VIP</view>
               </view>
+              <text wx:for="{{card.company}}" class="company {{item == searchKey ? 'searchHigh' : '' }}">{{item}}</text>
               
-              <text class="company">{{card.company}}</text>
-              <view class='card-zt'>
-                
+              <view class='card-zt'>            
                 <view class='card-zt-icon'>
                   <text wx:if="{{ card.store > 0 }}" style='color:#ff9593;' class='iconfont icon-icon-test1'></text>
                   <text wx:if="{{ card.dynamic > 0 }}" style='color:##ffc816;'  class='iconfont iconfont icon-pengyouquan'></text>
@@ -61,10 +60,8 @@
 
                 <block wx:if="{{ card.distance != 0 }}" >
                 <text class='icon-distance iconfont icon-dingwei1' style='color:{{ themeColor }};'></text>
-                <text class="distance">{{ card.distance }}km</text>
-                </block>
-
-                
+                <text  class="distance">{{ item.distance }}km</text>
+                </block>               
               </view>
               
             </view>
@@ -77,25 +74,23 @@
           </button>
           </navigator>
           </block>
-          <view class='info_more' bindtap='cardInfoMore'>查看更多</view>
+          <view wx:if="{{ cardMore }}" class='info_more' bindtap='cardInfoMore'>查看更多</view>
 
         </view>
         <!-- 名片结果end -->
 
         <!-- 商城官网start -->
-        <view class='websiteInfo'>
+        <view class='websiteInfo' wx:if="{{ websiteInfo.length > 0 }}">
           <view class='info_title'>商城官网</view>
-          <block>
+          <block wx:key="website" wx:for="{{ sliceWebsite }}" wx:for-index="idw">
            <navigator url="">
               <view class='websiteInfo_item info_item'>
                 <view class='websiteInfo_itemImg info_itemImg'>
                   <image class='img' src=''></image>
                 </view>
                 <view class='info_itemInfo'>
-                  <view class='info_name'>彩印通</view>
-                  <view class='shop_business'>主营业务：广告耗材、不干胶、联单、手挽袋、门
-                  型架、手举牌、桁架、手举牌、保温杯、拉网架
-                  </view>
+                  <view class='info_name'>{{item.name}}</view>
+                  <view class='shop_business'>{{item.business}}</view>
                     <view class='card-zt-icon'>
                     <text style='color:#ff9593;' class='iconfont icon-icon-test1'></text>
                     <text  style='color:##ffc816;'  class='iconfont iconfont icon-pengyouquan'></text>
@@ -109,50 +104,48 @@
               </view>
            </navigator>
           </block>
-          <view class='info_more' bindtap='websiteInfoMore'>查看更多</view>
+          <view  wx:if="{{ websiteMore }}" class='info_more' bindtap='websiteInfoMore'>查看更多</view>
         </view>
         <!-- 商城官网end -->
 
         <!-- 产品start -->
-        <view class='productInfo'>
+        <view class='productInfo' wx:if="{{ productInfo.length > 0 }}">
           <view class='info_title'>产品</view>
-          <block>
+          <block wx:key="product" wx:for="{{ sliceProduct }}" wx:for-index="idp">
             <navigator url="">
               <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src=''></image>
                 </view>
                 <view class='info_itemInfo'>
-                  <view class='info_name'>铁板门架</view>
-                  <view class='info_introduce'>方便快捷</view>
-                  <view class='productInfo_price'>￥9999</view>
+                  <view class='info_name'>{{item.name}}</view>
+                  <view class='info_introduce'>{{item.introduce}}</view>
+                  <view class='productInfo_price'>￥{{item.price}}</view>
                 </view>
               </view>
             </navigator>
           </block>
-          <view class='info_more' bindtap='productInfoMore'>查看更多</view>
+          <view  wx:if="{{ productMore }}" class='info_more' bindtap='productInfoMore'>查看更多</view>
         </view>
         <!-- 产品end -->
 
         <!-- 需求信息start -->
-        <view class='demandInfo'>
+        <view class='demandInfo' wx:if="{{ demandInfo.length > 0 }}">
           <view class='info_title'>需求信息</view>
-          <block>
+          <block wx:key="demand" wx:for="{{ sliceDemand }}" wx:for-index="idd">
             <navigator url="">
               <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src=''></image>
                 </view>
                 <view class='info_itemInfo'>
-                  <view class='info_name'>关子炫</view>
-                  <view class='demandInfo_introduce'>易拉宝画面）千帆160Q哑面PP纸广告喷绘写真
-                    耗材 广告耗材
-                  </view>
+                  <view class='info_name'>{{item.name}}</view>
+                  <view class='demandInfo_introduce'>{{item.demand}}</view>
                 </view>
               </view>
             </navigator>
           </block>
-          <view class='info_more' bindtap='demandInfoMore'>查看更多</view>
+          <view  wx:if="{{ demandMore }}" class='info_more' bindtap='demandInfoMore'>查看更多</view>
         </view>
         <!-- 需求信息end -->
     </view>
@@ -204,7 +197,7 @@
           </button>
           </navigator>
           </block>
-          <view class='info_more' bindtap='cardInfoMore'>查看更多</view>
+          <!-- <view class='info_more' bindtap='cardInfoMore'>查看更多</view> -->
 
         </view>
     </view>
@@ -212,19 +205,17 @@
 
   <!-- 官网商城分类start -->
     <view class='category_website' wx:if="{{ activeCategoryId == 2 }}">
-        <view class='websiteInfo'>
+        <view class='websiteInfo' wx:if="{{ websiteInfo.length > 0 }}">
           <!-- <view class='info_title'>商城官网</view> -->
-          <block>
+          <block wx:key="website" wx:for="{{ websiteInfo }}" wx:for-index="idw">
            <navigator url="">
               <view class='websiteInfo_item info_item'>
                 <view class='websiteInfo_itemImg info_itemImg'>
                   <image class='img' src=''></image>
                 </view>
                 <view class='info_itemInfo'>
-                  <view class='info_name'>彩印通</view>
-                  <view class='shop_business'>主营业务：广告耗材、不干胶、联单、手挽袋、门
-                  型架、手举牌、桁架、手举牌、保温杯、拉网架
-                  </view>
+                  <view class='info_name'>{{item.name}}</view>
+                  <view class='shop_business'>{{item.business}}</view>
                     <view class='card-zt-icon'>
                     <text style='color:#ff9593;' class='iconfont icon-icon-test1'></text>
                     <text  style='color:##ffc816;'  class='iconfont iconfont icon-pengyouquan'></text>
@@ -238,54 +229,52 @@
               </view>
            </navigator>
           </block>
-          <view class='info_more' bindtap='websiteInfoMore'>查看更多</view>
+          <!-- <view class='info_more' bindtap='websiteInfoMore'>查看更多</view> -->
         </view>
     </view>
   <!-- 官网商城分类end -->
 
   <!-- 产品分类start -->
     <view class='category_product' wx:if="{{ activeCategoryId == 3 }}">
-       <view class='productInfo'>
+        <view class='productInfo' wx:if="{{ productInfo.length > 0 }}">
           <!-- <view class='info_title'>产品</view> -->
-          <block>
+          <block wx:key="product" wx:for="{{ productInfo }}" wx:for-index="idp">
             <navigator url="">
               <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src=''></image>
                 </view>
                 <view class='info_itemInfo'>
-                  <view class='info_name'>铁板门架</view>
-                  <view class='info_introduce'>方便快捷</view>
-                  <view class='productInfo_price'>￥9999</view>
+                  <view class='info_name'>{{item.name}}</view>
+                  <view class='info_introduce'>{{item.introduce}}</view>
+                  <view class='productInfo_price'>￥{{item.price}}</view>
                 </view>
               </view>
             </navigator>
           </block>
-          <view class='info_more' bindtap='productInfoMore'>查看更多</view>
+          <!-- <view class='info_more' bindtap='productInfoMore'>查看更多</view> -->
         </view>
     </view>
   <!-- 产品分类end -->
 
   <!-- 需求信息分类start -->
     <view class='category_demand' wx:if="{{ activeCategoryId == 4 }}">
-       <view class='demandInfo'>
-          <view class='info_title'>需求信息</view>
-          <block>
+       <view class='demandInfo' wx:if="{{ demandInfo.length > 0 }}">
+          <!-- <view class='info_title'>需求信息</view> -->
+          <block wx:key="demand" wx:for="{{ demandInfo }}" wx:for-index="idd">
             <navigator url="">
               <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src=''></image>
                 </view>
                 <view class='info_itemInfo'>
-                  <view class='info_name'>关子炫</view>
-                  <view class='demandInfo_introduce'>易拉宝画面）千帆160Q哑面PP纸广告喷绘写真
-                    耗材 广告耗材
-                  </view>
+                  <view class='info_name'>{{item.name}}</view>
+                  <view class='demandInfo_introduce'>{{item.demand}}</view>
                 </view>
               </view>
             </navigator>
           </block>
-          <view class='info_more' bindtap='demandInfoMore'>查看更多</view>
+          <!-- <view class='info_more' bindtap='demandInfoMore'>查看更多</view> -->
         </view>
     </view>
   <!-- 需求信息分类end -->

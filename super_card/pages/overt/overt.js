@@ -155,6 +155,7 @@ Page({
 
   //获取微信绑定的手机号
   getPhoneNumber: function (e) {
+
     var that = this
     //console.log(e.detail)
     if(e.detail.iv){
@@ -243,7 +244,17 @@ Page({
 
 
   toChat: function (e){
-    var that = this
+    var that = this;
+    //为了能调起授权--新加代码start
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        that.freshCurrentPage()
+      });
+      return
+    }
+    //为了能调起授权--新加代码end
+
     if (that.checkUserIsCreate('和她/他聊天') === false) return
 
     if (that.data.my_userCards.length > 1){
@@ -533,6 +544,20 @@ Page({
   //确认名片选择
   openCardSelect: function (e) {
 
+    var that = this;
+
+    //为了能调起授权--新加代码start
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        that.freshCurrentPage()
+      });
+      return
+    }
+//为了能调起授权--新加代码end
+
+
+
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
@@ -540,7 +565,6 @@ Page({
 
     if (this.checkUserIsCreate('回传') === false) return
 
-    var that = this
     if (that.data.my_userCards[0].no_perfect == 1) {
       wx.showModal({
         title: '系统提示',
@@ -676,12 +700,26 @@ Page({
 
   //添加到手机通讯路
   addPhoneContact:function (e){
+
+    var that = this;
+
+    //为了能调起授权--新加代码start
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        that.freshCurrentPage()
+      });
+      return
+    }
+    //为了能调起授权--新加代码end
+
+    
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
     }
 
-    var that = this;
+
     //if (that.checkUserIsCreate('存入手机') === false) return
 
     wx.addPhoneContact({
@@ -909,11 +947,24 @@ Page({
 
   //收藏/取消收藏
   toggleCollectStatus: function (e) {
+    var that = this;
+    
+    //为了能调起授权--新加代码start
+    var userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) {
+      app.util.getUserInfo(function (response) {
+        that.freshCurrentPage()
+      }); 
+      return 
+    }
+  //为了能调起授权--新加代码end
+
+
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
     }
-    var that = this
+
 
     //if(that.checkUserIsCreate('收藏') === false) return
 
@@ -1303,7 +1354,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    
     console.log(res)
     if (res.from != 'menu' && res.target.id != 'sendCardBtn') {
 

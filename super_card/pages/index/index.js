@@ -1170,11 +1170,11 @@ Page({
                     url: '../sound-recording/sound-recording?card_id=' + that.data.card_id
                   })
                 } else {
-
                   var uInfo = res.data.data
                   console.log(uInfo)
+                  
                   wx.navigateTo({
-                    url: '../../pagess/payment/payment-audio?umoney=' + uInfo.money + '&card_id=' + that.data.card_id
+                    url: '../../pagess/payment/payment-audio?umoney=' + (uInfo == null ? 0 : uInfo.money ) + '&card_id=' + that.data.card_id
                   })
 
                 }
@@ -1189,7 +1189,6 @@ Page({
               'method': 'post',
               'data': { card_id: that.data.card_id },
               success(res) {
-                //console.log(res)
                 if (res.data.message === 'ok') {
                   wx.navigateTo({
                     url: '../video/video?card_id=' + that.data.card_id
@@ -1199,7 +1198,7 @@ Page({
                   var uInfo = res.data.data
                   console.log(uInfo)
                   wx.navigateTo({
-                    url: '../../pagess/payment/payment-video?umoney=' + uInfo.money + '&card_id=' + that.data.card_id
+                    url: '../../pagess/payment/payment-video?umoney=' + (uInfo == null ? 0 : uInfo.money) + '&card_id=' + that.data.card_id
                   })
 
                 }

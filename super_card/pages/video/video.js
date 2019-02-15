@@ -289,7 +289,6 @@ Page({
   //上传多个视频
   chooseCardVideo: function () {
     var userInfo = wx.getStorageSync('userInfo');
-    console.log('9', userInfo)
     var isVip = userInfo.memberInfo.vip;
     var that = this;
     var length = that.data.arrvideo.length + that.data.path.length ;

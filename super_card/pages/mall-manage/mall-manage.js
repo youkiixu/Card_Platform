@@ -416,7 +416,27 @@ Page({
     //that.getBgPic()
     that.setData({ card_id: options.card_id })
 
-    that.getUserInfo()
+  
+    //判断是否为会员，非会员不能开通商城
+    var userInfo = wx.getStorageSync('userInfo');
+    var isVip = userInfo.memberInfo.vip;
+    if (isVip == 0 ) {  
+      wx.showModal({
+        title: '系统提示',
+        content: '您还不是会员，请先开通会员',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '去开通',
+        success: function (res) {
+          wx.redirectTo({
+            url: '../opt-version/opt-version',
+          })
+        }
+      });
+      return
+    }
+
+    //that.getUserInfo()  //之前代码调用函数that.getUserInfo()，默认是需要进行认证的
 
     
   },

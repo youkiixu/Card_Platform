@@ -391,7 +391,7 @@ util.getUserInfo = function (cb,bTran) {
 											'content-type': 'application/x-www-form-urlencoded'
 										},
 										cachetime: 0,
-										success: function (res) {                
+										success: function (res) {               
 											if (!res.data.errno) {                        
 												userInfo.memberInfo = res.data.data;
 												wx.setStorageSync('userInfo', userInfo);

@@ -139,7 +139,27 @@ Page({
     that.setData({ card_id: options.card_id })
     console.log(that.data.card_id)
 
-    that.getUserInfo()
+    //判断是否为会员，非会员不能发布动态
+    var userInfo = wx.getStorageSync('userInfo');
+    var isVip = userInfo.memberInfo.vip;
+    if (isVip == 0) {
+      wx.showModal({
+        title: '系统提示',
+        content: '您还不是会员，请先开通会员',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '去开通',
+        success: function (res) {
+          wx.redirectTo({
+            url: '../opt-version/opt-version',
+          })
+        }
+      });
+      return
+    } 
+
+
+    //that.getUserInfo()
   },
 
   getUserInfo: function () {

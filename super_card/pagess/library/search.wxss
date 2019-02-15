@@ -138,8 +138,8 @@
    font-size: 36rpx; 
 } */
 .job{
-  flex: 1;
-  -webkit-flex:1;
+  flex: 1.5;
+  -webkit-flex:1.5;
   font-size:28rpx;
   color:#999999;
   height:38rpx;
@@ -149,12 +149,19 @@
   -webkit-box-orient: vertical;    
   -webkit-line-clamp: 1;    
   overflow: hidden;
+  text-align: left;
+}
+.job text{
+  display: inline-block;
 }
 .company{
   font-size:26rpx;
   color:#999999;
   /*height:50rpx;*/
   line-height: 50rpx;
+}
+.company text{
+  display: inline-block;
 }
 .card-collection{
   margin-left:20rpx;
@@ -335,7 +342,6 @@
   display:flex;
   display:-webkit-flex;
   position:relative;
-  border: 1rpx solid red;
 }
 .info_itemInfo{
   display:flex;
@@ -400,12 +406,16 @@
 }
 /* VIP专属标识 */
 .VIP{
+  flex: 0.5;
+  -webkit-flex:0.5;
   height: 40rpx;
   line-height: 50rpx;
   font-size: 30rpx;
   color: #FFD700;
   font-weight: bold;
-  padding-left: 15rpx;
+  /* padding-left: 15rpx; */
+  margin-left: 15rpx;
+  text-align: left;
   box-sizing: border-box;
 }
 /* 关键字高亮显示 */

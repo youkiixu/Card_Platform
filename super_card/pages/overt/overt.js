@@ -806,6 +806,8 @@ Page({
    */
   onLoad: function (options) {
 
+    //console.log('options', options)
+  
     var userInfo = wx.getStorageSync('userInfo');
 
     
@@ -1064,8 +1066,10 @@ Page({
         //'cachetime': '30',
       'data': { card_id: that.data.card_id, watch: watch, from_act: that.data.from_act },//, state:false
         success(res) {
-          // console.log('getCardItem.res',res)
-          if (res.data.data.agent_status == 0){
+           console.log('getCardItem.res',res)
+
+           //未开通商城或已开通商城但把商城屏蔽后需要显示的按钮
+          if (res.data.data.agent_status == 0 || res.data.data.store_status == 0){
             that.setData({ noOpen: true })
           }
          
@@ -1125,7 +1129,7 @@ Page({
             wx.showShareMenu()
           if(!userInfo){
             that.setData({ loadingDone: true })
-            // that.showViewsCardUser()
+             that.showViewsCardUser()
             return
           }
           that.checkIsComeback(watch)

@@ -167,7 +167,7 @@ Page({
 
               // 使用 wx.createContext 获取绘图上下文 context
               const context = wx.createCanvasContext('canvas')
-
+              // context.b
               context.setFontSize(20)
               context.setFillStyle('#000')
               context.setTextAlign('center')
@@ -187,6 +187,7 @@ Page({
                   height: winHeight,
                   destWidth: ratio * screenWidth,
                   destHeight: ratio * winHeight,
+                  fileType: 'jpg',//保存为jpg，不然默认是png，就没有底图
                   canvasId: 'canvas',
                   quality: 1,
                   success: function (res) {

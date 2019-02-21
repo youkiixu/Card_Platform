@@ -489,14 +489,29 @@
 .memberCode_icon{
   display: flex;
   flex: 1;
-  font-size: 32rpx;
+  font-size: 28rpx;
   align-items: center;
 }
 .memberCode_num{
-  flex: 1;
+  display: flex;
+  flex: 1.5;
   color: #828282;
   font-size: 28rpx;
 }
-.memberCode_num text{
-  margin-left: 15rpx;
+.bug_num{
+ flex: 1;
+ height: 60rpx;
+ line-height: 60rpx;
+ margin: 40rpx 12rpx;
+ background-color:#4752e8;
+ color:#fff;
+ border-radius:15rpx;
+ text-align: center;
 }
+.member_num{
+ flex: 1;
+}
+
+/* .memberCode_num text{
+  margin-left: 15rpx;
+} */

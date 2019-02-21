@@ -42,6 +42,22 @@ Page({
     })
   },
 
+  //购买次数
+  toBuyNum: function() {
+    wx.showModal({
+      title: '系统提示',
+      content: '请选择购买次数',
+      showCancel: false,
+      confirmColor: '#f90',
+      confirmText: '知道了',
+      success: function (res) {
+        // wx.redirectTo({
+        //   url: '../../pages/opt-version/opt-version',
+        // })
+      }
+    });
+  },
+
 //返回按钮
   codeViewReturn: function () {
     this.setData({

@@ -82,7 +82,7 @@ page{
 }
 
 .ov-swiper swiper-item{
-  overflow:visible;
+   overflow:visible;
 }
 .act-left,.act-right{
   width:100rpx;
@@ -101,6 +101,9 @@ page{
   left:-138rpx;
   border-top-right-radius:10rpx;
   border-bottom-right-radius:10rpx;
+}
+.act-one{
+   background-color: #fff;
 }
 .act-right{
   right:-138rpx;

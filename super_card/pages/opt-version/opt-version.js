@@ -289,6 +289,7 @@ Page({
 
           //typeof cb == "function" && cb()
           //console.log(res)
+          console.log('res:',res)
           var uInfo = res.data.data.uInfo
           if (uInfo.vip == 3){
             wx.showModal({
@@ -305,17 +306,20 @@ Page({
           }
 
           var vipSet = res.data.data.vipSet
+        //  vipSet.push(new Array())
           
           /*for(var x in vipSet){
             console.log(vipSet[x])
             //vipSet[x].value = x + 1
             //vipSet[x].checked = x == 0 ? true : false
           }*/
+          var vipLen = vipSet.length
 
           var price = parseFloat(vipSet[0].price)
-          var current = parseInt(uInfo.vip)
+          // var current = parseInt(uInfo.vip)
+          //根据返回数据判断当前选中的swiper
+          var current = parseInt(vipLen === 1 ? 0 : uInfo.vip)
           that.setData({ wxInfo: wxInfo, uInfo: uInfo, vipSet: vipSet, price: price.toFixed(2), current: current })
-          
           //app.freshHome = false
         }
       });

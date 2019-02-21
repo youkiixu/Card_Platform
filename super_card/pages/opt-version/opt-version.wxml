@@ -15,10 +15,15 @@
       <swiper class='ov-swiper' previous-margin="140rpx" next-margin="140rpx" indicator-dots="" autoplay="" current="{{ current }}" bindanimationfinish="choiceSwiper">
         <block wx:for="{{ vipSet }}"  wx:for-index="idx"  wx:for-item="item" wx:key="{{ index }}">
         <swiper-item>
-          <view class='act-left' wx:if="{{ idx == 0 }}">
+
+        <view class=" {{ vipSet.length > 1 ? 'act-left' : 'act-left act-one'}}"  wx:if="{{ idx == 0 }}">
+            <text class='iconfont icon-bhjleftslide' wx:if="{{ vipSet.length > 1}}"></text>
+            <view class='al-con' wx:if="{{ vipSet.length > 1}}">到顶了，请往左滑</view>
+          </view>
+          <!-- <view class='act-left' wx:if="{{ idx == 0 }}">
             <text class='iconfont icon-bhjleftslide'></text>
             <view class='al-con'>到顶了，请往左滑</view>
-          </view>
+          </view> -->
           <view class='act-right' wx:if="{{ radListLtngth-1 == idx }}">
             <text class='iconfont icon-bhjrigthslide'></text>
             <view class='ar-con'>到顶了，请往右滑</view>

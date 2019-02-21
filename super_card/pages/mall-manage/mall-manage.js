@@ -217,7 +217,7 @@ Page({
 
     if (that.data.store_introduce.length < 4 || that.data.store_introduce.length > 140) {
       wx.showToast({
-        title: '公司名称长度应该在4至140个字符之内',
+        title: '公司简介长度应该在4至140个字符之内',
         icon: 'none'
       })
       return
@@ -435,6 +435,9 @@ Page({
       });
       return
     }
+
+    //获取商城信息
+    that.getStoreInfo()
 
     //that.getUserInfo()  //之前代码调用函数that.getUserInfo()，默认是需要进行认证的
 

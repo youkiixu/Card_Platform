@@ -111,7 +111,7 @@
       <view class='safe-title' style='border-color:{{ themeColor }};'>高级功能</view>
       <view class='safe-coin'>
 
-        <form class='func-bor' report-submit='true' bindsubmit="toCertifyPage">
+        <!-- <form class='func-bor' report-submit='true' bindsubmit="toCertifyPage">
           <button class='safe-act' form-type='submit'>
             <view class='safe-act-l'>
               <text class='iconfont icon-xinxirenzheng' style='background-color:#00CED1;'></text>
@@ -122,7 +122,7 @@
               <text class='iconfont icon-jiantou'></text>
             </view>
           </button>
-        </form>
+        </form> -->
 
         <form class='func-bor' report-submit='true' bindsubmit='toMemPage'>
           <button class='safe-act' form-type='submit'>
@@ -141,10 +141,10 @@
           <button class='safe-act' form-type='submit' wx:if="{{ uInfo.agent == 1 }}">
             <view class='safe-act-l'>
               <text class='iconfont icon-fuzeren' style='background-color:#C28F5C;'></text>
-              <view class=''>代言人中心</view>
+              <view class=''>代理中心</view>
             </view>
             <view class='safe-act-r'>
-              <view class='safe-act-know'>代言赚收益</view>
+              <view class='safe-act-know'>代理赚收益</view>
               <text class='iconfont icon-jiantou'></text>
             </view>
           </button>

@@ -540,6 +540,9 @@ Page({
       return
     } 
 
+    //获取官网信息
+    that.getWebSite()
+
    // that.getUserInfo()
   },
 

@@ -86,7 +86,7 @@
   line-height:34rpx;
   font-size:34rpx;
   font-weight:600;
-  width:240rpx;
+  width:100%;
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:1;

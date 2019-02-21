@@ -92,7 +92,7 @@ Page({
 
     var data = {
       goods_id: that.data.goods_id,
-      card_id: that.data.card.id,
+      card_id: that.data.prevPage.data.card_id,
       goods_name: that.data.goods_name,
       goods_introduce: that.data.goods_introduce,
       goods_price: that.data.goods_price,
@@ -434,7 +434,7 @@ Page({
     }
 
     that.setData({ card_id: that.data.prevPage.data.card_id, card : that.data.prevPage.data.card })
-
+    
   },
 
   /**

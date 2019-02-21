@@ -69,7 +69,7 @@
             <text class="member-text">生成会员码</text>
         </view>
     </view>
-    <view class='memberCode_num'>剩余<text>{{uInfo.team_num}}/{{uInfo.agent_limit}}</text></view>
+    <view class='memberCode_num'>团队人数<text>{{uInfo.team_num}}/{{uInfo.agent_limit}}</text></view>
   </view>
 
   <!-- 生成会员码end -->

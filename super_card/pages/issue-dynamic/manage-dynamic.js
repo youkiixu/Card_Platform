@@ -159,6 +159,9 @@ Page({
     } 
 
 
+    //获取动态信息
+    that.getCardDynamic()
+
     //that.getUserInfo()
   },
 

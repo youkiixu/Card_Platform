@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 16,
 			"list": [
 				{
 					"id": -1,
@@ -133,6 +133,13 @@
 					"name": "名片页",
 					"pathName": "super_card/pages/overt/overt",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "代理中心",
+					"pathName": "super_card/pagess/agent/agent",
+					"query": "spread_member=39&from_act=other",
+					"scene": null
 				}
 			]
 		}

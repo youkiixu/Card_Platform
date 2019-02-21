@@ -7,8 +7,16 @@ Page({
      */
     data: {
         memberInfo: '',
-        qrPic: ''
+        qrPic: '',
+        screenWidth: '',
+        winHeight: '',
+        ratio: '',
+        qrPicUrl:'',
+        shareImgPath: '',
+        hiddenImg: false
     },
+
+
 
     //刷新二维码
     freshQrcode: function (cb) {
@@ -35,17 +43,18 @@ Page({
                 that.setData({
                     qrPic: res.data.data
                 })
-
+              wx.setStorageSync('qrPic', that.data.qrPic);
+              
             }
         })
 
     },
 
     downImage() {
-        var that = this
-        if (!that.data.qrPic) return
+      var that = this
+      if (!that.data.shareImgPath) return
         wx.getImageInfo({
-            src: this.data.qrPic,
+          src: this.data.shareImgPath,
             success(res) {
                 wx.saveImageToPhotosAlbum({
                     filePath: res.path,
@@ -123,7 +132,86 @@ Page({
      */
     onReady: function () {
 
-    },
+      //画布
+
+      var that = this
+
+      //获取用户设备信息，屏幕宽度
+      wx.getSystemInfo({
+        success(res) {
+          that.setData({
+            screenWidth: res.screenWidth,
+            winHeight: res.windowHeight,
+            ratio: res.pixelRatio
+          })
+
+        }
+      }) 
+      //读取缓存
+      var qrPic = wx.getStorageSync('qrPic');
+
+      // 由于canvas不能使用网络图片，所以此处进行头像临时路径存储，下载文件下来
+          wx.downloadFile({
+            url: qrPic,
+            success(res) {
+
+              that.setData({
+                qrPicUrl: res.tempFilePath,
+              })
+
+              var unit = that.data.screenWidth / 375;
+              var ratio = that.data.ratio;
+              var screenWidth = that.data.screenWidth;
+              var winHeight = that.data.winHeight;
+              var qrPicUrl = that.data.qrPicUrl;
+
+              // 使用 wx.createContext 获取绘图上下文 context
+              const context = wx.createCanvasContext('canvas')
+
+              context.setFontSize(20)
+              context.setFillStyle('#000')
+              context.setTextAlign('center')
+              context.fillText('商桥智能名片VIP', unit * 130, unit * 50)
+              context.drawImage(qrPicUrl, unit * 20, unit * 80, unit * 454 / 2, unit * 454 / 2)
+              context.setFontSize(15)
+              context.setFillStyle('#515151')
+              context.setTextAlign('center')
+              context.fillText('扫一扫二维码图案，即可开通会员！', unit * 140, unit * 350)
+
+              //把画板内容绘制成图片，并回调 画板图片路径
+              context.draw(false, function () {
+                wx.canvasToTempFilePath({
+                  x: 0,
+                  y: 0,
+                  width: screenWidth,
+                  height: winHeight,
+                  destWidth: ratio * screenWidth,
+                  destHeight: ratio * winHeight,
+                  canvasId: 'canvas',
+                  quality: 1,
+                  success: function (res) {
+                    that.setData({
+                      shareImgPath: res.tempFilePath,
+                      hiddenImg: false
+                    })
+                    if (!res.tempFilePath) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '图片绘制中，请稍后重试',
+                        showCancel: false
+                      })
+                    }
+                    wx.hideLoading()
+
+                  }
+
+                })
+              });
+            },
+          });
+
+  },
+
 
     /**
      * 生命周期函数--监听页面显示
@@ -180,5 +268,6 @@ Page({
         // }
 
     }
+
 
 })

@@ -63,3 +63,11 @@
     color: #fff !important;
     font-size: 30rpx;
 }
+
+/* 画布 */
+.canvas{
+  width: 554rpx;
+  height: 764rpx;
+  background-color: #fff;
+  margin: 0 auto;
+}

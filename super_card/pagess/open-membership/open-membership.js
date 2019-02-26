@@ -54,7 +54,13 @@ Page({
 
         vipSetOnly: '',
         agent_id: 0,
-        qrcode_sign: ''
+        qrcode_sign: '',
+        qrType:'',
+        vipSetagent:[
+          { id: 1, rule_name: "可获得30次VIP免费开通权（原价98元）价值2940元！"},
+          { id: 2, rule_name: "可获得原价98元VIP，永久5元低价开通权" },
+          { id: 3, rule_name: "企业版名片推荐返佣，佣金高至1600元/个" }
+        ]
     },
 
     toProPage: function (e) {
@@ -66,7 +72,7 @@ Page({
         })
     },
 
-    //确认开通
+    //确认开通会员
     confirmPay: function (e) {
 
         var that = this
@@ -127,16 +133,78 @@ Page({
 
     },
 
+  //确认开通代理
+  confirmPayAgent: function (e) {
+
+    var that = this
+    var formId = e.detail.formId;
+    that.setData({
+      btnDis: true
+    })
+    if (that.data.agent_id && that.data.qrcode_sign) {
+      app.util.request({
+        'url': 'entry/wxapp/agentOpenCardAgent',
+        data: {
+          agent_id: that.data.agent_id,
+          qrcode_sign: that.data.qrcode_sign,
+          form_id: formId
+        },
+        success(res) {
+          wx.showToast({
+            title: '会员开通成功',
+            icon: 'success'
+          })
+          setTimeout(() => {
+            app.freshHome = true
+            wx.reLaunch({
+              url: '../home/home',
+            })
+          }, 2000);
+        },
+        fail(err) {
+          wx.showModal({
+            title: '系统提示',
+            content: err.data.message,
+            showCancel: false,
+            confirmText: '知道了',
+            success: function () {
+
+            }
+          })
+
+        },
+        complete() {
+          that.setData({
+            btnDis: false
+          })
+        }
+      })
+
+    } else {
+      wx.showModal({
+        title: '系统提示',
+        content: "当前页面无效,请重新扫描",
+        showCancel: false,
+        confirmText: '知道了',
+        success: function () {
+
+        }
+      })
+    }
+
+  },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      console.log('options', options)
         // options : {agent_id: '' , sign: ''}
         if(typeof options.agent_id != 'undefined') {
             this.setData({
                 agent_id: options.agent_id,
-                qrcode_sign: options.sign
+                qrcode_sign: options.sign,
+                qrType: options.qrType 
             })
         }
         //console.log(app.UID)
@@ -190,6 +258,7 @@ Page({
                             vipSetOnly: vipSet[0],
                             showBackIndex: true
                         })
+                      console.log('vipSetOnly', that.data.vipSetOnly)
     
                         //app.freshHome = false
                     }

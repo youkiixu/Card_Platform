@@ -18,7 +18,14 @@ Page({
     animationDatasi: "",
     showImg:false,
     qrPic: '',
-    memberCodeView:false,
+    hiddenMask:true,
+    buyNumber: 1,
+    buyNumMin: 1,
+    price: 2.00,
+    memberPrice:0.00, //会员码价格
+    agentPrice: 0.00,//代理码价格
+    qrType:'',
+    agent:'',
   },
 
   //返回首页
@@ -35,37 +42,146 @@ Page({
 
   },
 
-  //生成会员码
-  toMemberCode:function(){
+
+  //跳到生成会员码页面
+  toSpreadPage: function (params) {
+    var qrType = params.currentTarget.dataset.qrtype
+    wx.navigateTo({
+      url: '../spread/spread?qrType= ' + qrType 
+    })
+  },   
+
+  //显示会员码购买弹框
+  memberShowMask: function(e) {
+    var qrType = e.target.dataset.type
     this.setData({
-      memberCodeView: true
+      hiddenMask: false,
+      qrType: qrType
+    })
+  },
+  
+
+  //显示代理码购买弹框
+  agentShowMask: function (e) {
+    var qrType = e.target.dataset.type
+    this.setData({
+      hiddenMask: false,
+      qrType: qrType
     })
   },
 
-  //购买次数
-  toBuyNum: function() {
-    wx.showModal({
-      title: '系统提示',
-      content: '请选择购买次数',
-      showCancel: false,
-      confirmColor: '#f90',
-      confirmText: '知道了',
-      success: function (res) {
-        // wx.redirectTo({
-        //   url: '../../pages/opt-version/opt-version',
-        // })
+
+  //关闭购买弹框
+  boxClose: function() {
+    this.setData({
+      hiddenMask: true
+    })
+  },
+
+  numJianTap: function () {
+    if (this.data.buyNumber > this.data.buyNumMin) {
+      var currentNum = this.data.buyNumber;
+      currentNum--;
+      this.setData({
+        buyNumber: currentNum
+      })
+    }
+    this.totalPrice()
+  },
+  numJiaTap: function () {
+      var currentNum = this.data.buyNumber;
+      currentNum++;
+      this.setData({
+        buyNumber: currentNum
+      })
+    this.totalPrice()
+  },
+
+  //确认支付
+  confirmPay: function (e) {
+    var that = this
+    if (that.data.buyNumber < 1) {
+      wx.showModal({
+        title: '提示',
+        content: '购买次数不能为0！',
+        showCancel: false
+      })
+      return;
+    }
+    var formId = e.detail.formId;
+
+    app.util.request({
+      'url': 'entry/wxapp/buyNums',
+      data: {
+        choiceAgentGrade: that.data.agent,
+        qrType: that.data.qrType,
+        nums: that.data.buyNumber,
+        pay_method: 1,
+        form_id: formId,
+      },
+      success(res) {
+        if (res.data.message == 'ok'){
+          wx.requestPayment({
+            'timeStamp': res.data.data.timeStamp,
+            'nonceStr': res.data.data.nonceStr,
+            'package': res.data.data.package,
+            'signType': 'MD5',
+            'paySign': res.data.data.paySign,
+            success(res) {
+              wx.showToast({
+                title: '支付成功',
+                icon: 'success'
+              })
+            },
+            fail(res) {
+              wx.showModal({
+                title: '系统提示',
+                content: '支付失败',
+                showCancel: false,
+                confirmColor: '#f90',
+                confirmText: '知道了'
+              });
+            }
+
+          })
+        }  
+      },
+      fail(err) {
+        wx.showModal({
+          title: '系统提示',
+          content: err.data.message,
+          showCancel: false,
+          confirmColor: '#f90',
+          confirmText: '知道了'
+        });   
       }
-    });
+    })
+
+
   },
 
-//返回按钮
-  codeViewReturn: function () {
+  //购买总价格
+  totalPrice: function () {
+    var statu = this.data.agent  //statu == 1表示"个人代理"，statu==2表示"渠道代理"，statu==3表示"至尊合伙人"
+    var number = this.data.buyNumber
+    var personalMemberPrice = 5.0 * number //个人代理的会员码价格，个人代理没有代理码购买权限
+    var channelMenberPrice = 2.0 * number //渠道代理的会员码价格
+    var channelAgentPrice = 180.0 * number //渠道代理的代理码价格
+    var superPartnerMenberPrice = 1.0 * number //至尊合伙人的会员码价格
+    var superPartnerAgentPrice = 180.0 * number //至尊合伙人的代理码价格
+
+    // price = price.toFixed(2) //js浮点计算bug，取两位小数精度
+    var memberPrice = statu > 1 ? (statu > 2 ? superPartnerMenberPrice : channelMenberPrice) : personalMemberPrice //会员码价格
+    var agentPrice = statu > 2 ? superPartnerAgentPrice : channelAgentPrice //代理码价格
+    memberPrice = memberPrice.toFixed(2)
+    agentPrice = agentPrice.toFixed(2)
+
     this.setData({
-      memberCodeView: false
+      memberPrice: memberPrice,
+      agentPrice: agentPrice,
+      agentGrade: statu
     })
   },
-
-
 
 
 
@@ -198,7 +314,14 @@ Page({
   onLoad: function (options) {
     this.freshAgent()
     this.getPip3()
+
+  //延时获取价格，否则容易出现价格不对应（有些方法执行的速度比你获取的速度慢 就会有这个情况  ,因为是同时进行，就是执行你前面那个方法的同时  也继续往下执行 ）
+    setTimeout(() => {
+      this.totalPrice()
+    },1000)
+
     
+
     if (options.agent_id > 0)
       this.setData({ showBackIndex: true })
   },
@@ -241,17 +364,12 @@ Page({
     })
   },
 
-  //调到生成会员码页面
-  toSpreadPage: function (params) {
-    wx.navigateTo({
-        url:'../spread/spread'
-    })  
-  },   
 
   //刷新代言人中心
   freshAgent: function (cb) {
 
     var that = this
+    that.totalPrice()
 
     app.util.getUserInfo(function (res) {
 
@@ -267,6 +385,8 @@ Page({
           typeof cb == "function" && cb()
           //console.log(res)
           var uInfo = res.data.data
+
+          console.log('uInfo', uInfo)
 
 
           if (uInfo.agent == 0) {
@@ -299,8 +419,11 @@ Page({
 
           var agentGrade = app.config.getConf('agent_grade')
           var agent_name = agentGrade[parseInt(uInfo.agent) - 1].name
+          var agent = uInfo.agent
 
-          that.setData({ wxInfo: wxInfo, agent_name: agent_name, uInfo: uInfo, agentGrade: agentGrade })
+          console.log('agentGrade', agentGrade)
+
+          that.setData({ wxInfo: wxInfo, agent_name: agent_name, agent: agent, uInfo: uInfo, agentGrade: agentGrade })
           
         }
 

@@ -64,9 +64,18 @@ Page({
 
        })
 
+    console.log('path', that.data.path)
+
     if (typeof options.from_act !== 'undefined') {
       that.setData({ showBackIndex: true, from_act: options.from_act })
       
+    }
+
+  //判断腾讯视频
+    var linkReg = /v.qq.com\/x\/page/
+    if (linkReg.test(that.data.path)) {
+      var temp = that.data.path.match(/page\/(.*)\.html/)
+      that.setData({ VqqId: temp[1] })
     }
 
 

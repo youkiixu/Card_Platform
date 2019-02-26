@@ -138,7 +138,7 @@
         </form>
 
         <form wx:if="{{ agent_switch == 1 }}" class='func-bor' report-submit='true' bindsubmit='toAgentCenter'>
-          <button class='safe-act' form-type='submit' wx:if="{{ uInfo.agent == 1 }}">
+          <button class='safe-act' form-type='submit' wx:if="{{ uInfo.agent > 0 }}">
             <view class='safe-act-l'>
               <text class='iconfont icon-fuzeren' style='background-color:#C28F5C;'></text>
               <view class=''>代理中心</view>

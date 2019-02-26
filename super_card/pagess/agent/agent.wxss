@@ -494,24 +494,138 @@
 }
 .memberCode_num{
   display: flex;
-  flex: 1.5;
+  flex: 1;
   color: #828282;
   font-size: 28rpx;
-}
-.bug_num{
- flex: 1;
- height: 60rpx;
- line-height: 60rpx;
- margin: 40rpx 12rpx;
- background-color:#4752e8;
- color:#fff;
- border-radius:15rpx;
- text-align: center;
 }
 .member_num{
  flex: 1;
 }
-
-/* .memberCode_num text{
+.bug_num{
+ width: 60rpx;
+ height: 60rpx;
+ line-height: 48rpx;
+ margin: 40rpx 12rpx;
+ font-size: 50rpx;
+ background-color:#e9a944;
+ color:#fff;
+ border-radius:30rpx;
+ text-align: center;
+}
+.agentCode{
+  margin-top: 10rpx;
+}
+/* 黑色透明弹层 */
+.mask{
+  position: fixed;
+   z-index: 1;
+   background: rgba(0, 0, 0, .5);
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+}
+.choice_box{
+    width: 580rpx;
+    height: 430rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -215rpx 0 0 -290rpx;
+    border-radius: 15rpx;
+    background-color: #fff;
+}
+.choice_boxTop{
+  display: flex;
+  height: 75rpx;
+  margin-top: 15rpx;
+}
+.boxTop_title{
+  width: 500rpx;
+  color: #202020;
+  font-size: 38rpx;
+  text-align: center;
+  line-height: 75rpx;
+}
+.boxTop_close{
+  width: 80rpx;
+  height: 75rpx;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 55rpx;
+  font-weight: bold;
+  color: #9b9b9b;
+}
+.buy-num-box{
+  height: 160rpx;
+  width: 350rpx;
+  margin: 0 auto;
+  margin-top: 10rpx;
+}
+.num-label{
+  color: #7f7f7f;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+}
+.buy-num-box .num-box{
+     display: flex;
+     margin: 30rpx;
+}
+.buy-num-box .num-box .num-jian,
+.buy-num-box .num-box .num-jia{
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 48rpx;
+  font-size: 50rpx;
+  color:#fff;
+  border-radius:30rpx;
+  text-align: center;
+}
+.buy-num-box .num-box .num-jia{
+  background-color:#e9a944;
   margin-left: 15rpx;
-} */
+}
+.buy-num-box .num-box .num-jian{
+  color: #7f7f7f;
+  border: 1px solid #eceaea;
+  margin-right: 15rpx;
+}
+
+.buy-num-box .num-box .num-input{
+  width: 135rpx;
+  height: 64rpx;
+  line-height: 62rpx;
+  text-align: center;
+  border: 1px solid #eceaea;
+  background-color: #f6f6f6;
+  color: #7f7f7f;
+  font-size: 40rpx;
+  border-radius:10rpx;
+}
+.buy-num-box .num-box .num-input{
+  font-size: 28rpx;
+}
+.buy-num-box .num-box .num-input input{
+  height: 100%;
+}
+.price{
+  height: 50rpx;
+  width: 300rpx;
+  margin: 0 auto;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 50rpx;
+  color: red;
+}
+.buyMemBtn{
+  width: 455rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  margin: 10rpx auto;
+  color: #fff;
+  background-color:#e9a944;
+  font-size: 36rpx;
+  text-align: center;
+  border-radius:15rpx;
+}

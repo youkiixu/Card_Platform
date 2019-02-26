@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 20,
 			"list": [
 				{
 					"id": -1,
@@ -153,6 +153,20 @@
 					"id": -1,
 					"name": "会员中心",
 					"pathName": "super_card/pagess/member-core/member-core",
+					"query": "spread_member=39&from_act=other",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "开通代理",
+					"pathName": "super_card/pages/open-agentship/open-agentship",
+					"query": "spread_member=39&from_act=other",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "开通会员",
+					"pathName": "super_card/pages/open-membership/open-membership",
 					"query": "spread_member=39&from_act=other",
 					"scene": null
 				}

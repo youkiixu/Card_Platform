@@ -61,22 +61,66 @@
   </view>
 
   <!-- 生成会员码start -->
-
   <view class='memberCode'>
-    <view class='memberCode_icon' bindtap='toMemberCode' bindtap="toSpreadPage">
+    <view class='memberCode_icon'  bindtap="toSpreadPage" data-qrtype='1'>
         <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
         <view >
             <text class="member-text">生成会员码</text>
         </view>
     </view>
     <view class='memberCode_num'>
-      <view class='bug_num' bindtap="toBuyNum">购买次数</view>
       <view class='member_num'>团队人数<text>{{uInfo.team_num}}/{{uInfo.agent_limit}}</text></view>
+       <view class='bug_num' bindtap="memberShowMask" data-type='1'>+</view>
     </view>
-    <!-- <view class='memberCode_num'></view> -->
   </view>
-
   <!-- 生成会员码end -->
+
+  <!-- 生成代理码start -->
+  <view class='memberCode agentCode'  wx:if="{{ uInfo.agent > 1 }}">
+    <view class='memberCode_icon'  bindtap="toSpreadPage" data-qrtype='2'>
+        <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
+        <view >
+            <text class="member-text">生成代理码</text>
+        </view>
+    </view>
+    <view class='memberCode_num'>
+      <view class='member_num'>代理人数<text>{{uInfo.high_team_num}}/{{uInfo.high_agent_limit}}</text></view>
+       <view class='bug_num' bindtap="agentShowMask" data-type='2'>+</view>
+    </view>
+  </view>
+  <!-- 生成代理码end -->
+
+
+   <!-- 黑色透明弹层start -->
+     <view class='mask' hidden="{{hiddenMask}}">
+      <view class='choice_box'>
+        <view class='choice_boxTop'>
+          <view class='boxTop_title'>{{ qrType == 1 ? '会员码':'代理码' }}</view>
+          <view class='boxTop_close' bindtap="boxClose">X</view>
+        </view>
+
+        <view class='buy-num-box choice_boxContent'>
+          <view class='num-label'>购买次数</view>
+          <view class="num-box">
+              <view class="num-jian" bindtap="numJianTap">-</view>
+              <view class="num-input">
+                  <input  type="number" value="{{buyNumber}}" disabled/>
+              </view>
+              <view class="num-jia" bindtap="numJiaTap">+</view>
+          </view>  
+        </view>
+
+        <view class='price'>{{ qrType == 1 ? memberPrice : agentPrice }}</view>
+
+        <view class="choice_boxBottom">
+          <form report-submit='true' bindsubmit="confirmPay">
+          <button form-type='submit' class='buyMemBtn'>购买</button>
+          </form>
+        </view>
+        
+      </view>
+    </view>
+    <!-- 黑色透明弹层end -->
 
 
   <view class='menu-info'>

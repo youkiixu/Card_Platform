@@ -22,7 +22,8 @@ Page({
       showReturn:true,
       VqqLink: '',
 
-      VqqId: 0,
+     // VqqId: 0, //原来的
+      VqqId: [],
       
   },
 
@@ -394,7 +395,6 @@ Page({
       
     //遍历上传
      
-      console.log('path2', that.data.path)
       var tempFilePaths = that.data.path;
       console.log('tempFilePaths', tempFilePaths)
 
@@ -404,8 +404,6 @@ Page({
       var uploadImgCount = 0; 
       for (var i = 0; i < tempFilePaths.length; i++) {
         var dd = tempFilePaths[i];
-        console.log('dd',dd)
-        
         wx.uploadFile({
           url: app.util.url('entry/wxapp/saveCardVideo'),
           filePath: tempFilePaths[i].tempFilePath,
@@ -599,23 +597,29 @@ Page({
          //'cachetime': '30',
          'data' : {card_id : that.data.card_id},
          success(res) {
-           
            var data = res.data.data
-           console.log('data:', res)
-           
            if (data){ 
-             that.setData({
-               arrvideo: data 
-             })
-             wx.setStorageSync('arrvideo', that.data.arrvideo)
-             console.log('66', that.data.arrvideo)
-           
-             var linkReg = /v.qq.com\/x\/page/
-             if (linkReg.test(data.path)){
-                var temp = data.path.match(/page\/(.*)\.html/)
-                that.setData({ VqqId : temp[1] })
-              }
+             //判断腾讯视频
+               var linkReg = /v.qq.com\/x\/page/
+               for (var i = 0; i < data.length; i++) {
+                   var temId = ''
+                   if (linkReg.test(data[i].path)) {
+                     var temp = data[i].path.match(/page\/(.*)\.html/)
+                     temId = temp[1]
+                   }
+                 var VId = that.data.VqqId
+                 VId.push(temId)
+                  that.setData({
+                    VqqId: VId
+                  })
+               }
 
+             that.setData({
+               arrvideo: data
+             })
+             console.log('VqqId', that.data.VqqId)
+             wx.setStorageSync('arrvideo', that.data.arrvideo)
+             console.log('arrvideo', that.data.arrvideo)
            }
            ;
          }

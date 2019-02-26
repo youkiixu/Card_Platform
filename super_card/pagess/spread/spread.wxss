@@ -70,4 +70,12 @@
   height: 764rpx;
   background-color: #fff;
   margin: 0 auto;
+/* 让画布在屏幕外，不要在视野内，不然会出现闪一下的情况，感觉是先看到画布了然后被image组件覆盖 */
+  left: -1000rpx;
+}
+
+.shareimg{
+  width: 554rpx;
+  height: 764rpx;
+  margin: 0 auto;
 }

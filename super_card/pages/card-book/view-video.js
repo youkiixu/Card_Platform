@@ -12,15 +12,28 @@ Page({
     videoSrc: '',
 
     muted: false,
+    VqqId:0,
   },
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
-    if (options.url)
-      this.setData({ videoSrc: decodeURIComponent(options.url) })
+    if (options.url){
+      this.setData({
+         videoSrc: decodeURIComponent(options.url) 
+         })
+    }
+
+    //判断腾讯视频
+    var linkReg = /v.qq.com\/x\/page/
+    if (linkReg.test(this.data.videoSrc)) {
+      var temp = this.data.videoSrc.match(/page\/(.*)\.html/)
+      this.setData({ VqqId: temp[1] })
+    }
 
   },
 

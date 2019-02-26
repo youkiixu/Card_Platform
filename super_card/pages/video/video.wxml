@@ -10,12 +10,12 @@
       <view>
       <view wx:if="{{ item.name }}" class='title2'>{{ item.name }}</view>
       <view class="video-bg">
-        <txv-video wx:if="{{ showVideo === true &&  VqqId != 0}}" class="goods-video"  vid="{{VqqId}}" playerid="txv1" ></txv-video>
-        <video wx:if="{{ showVideo === true && VqqId == 0 }}" class="video2" src="{{ item.path }}" controls></video>
+      <txv-video wx:if="{{ showVideo === true &&  VqqId[index] != ''}}" class="goods-video"  vid="{{ VqqId[index] }}" playerid="txv1" ></txv-video>
+      <video wx:if="{{ showVideo === true && VqqId[index] == '' }}" class="video2" src="{{ item.path }}" controls></video>
       </view>
       <view class='edit-btn'>
           <view class='btn-submit'>
-              <button class='btn-block btn-blue'   data-id='{{item.id}}' bindtap='updateVideoName' style='background:{{  themeColor }};'>
+            <button class='btn-block btn-blue'   data-id='{{item.id}}' bindtap='updateVideoName' style='background:{{  themeColor }};'>
                 <block wx:if="{{  item.name }}">
                 修改标题
                 </block>
@@ -45,10 +45,10 @@
 
     <block wx:if="{{ path.length>0 }}">
      <button wx:if="{{ showReturn }}" class='btn-block btn-blue returnVideo' bindtap='returnVideo' style='background:{{  themeColor }};'>返回</button>
-         <view class='record-option'>
+      <!-- <view class='record-option'>
         <view class="{{catalogSelect == 2 ? 'active':''}}" bindtap='selectRecording'>上传视频</view>
         <view class="{{catalogSelect == 1 ? 'active':''}}" bindtap='selectInstall'>视频链接</view>
-      </view>
+      </view> -->
      <block wx:for="{{path}}" wx:for-index="key">   
       <view class='content'>
       <view class='video'>
@@ -91,16 +91,20 @@
       </view>
 
 
-      <view wx:if="{{ catalogSelect == 2 }}" class='content'  bindtap='chooseCardVideo'>
+      <view wx:if="{{ catalogSelect == 2 }}" class='content2'  bindtap='chooseCardVideo'>
+      <view class='video-content'>
         <view class='video'>
-          <image class='icon iconfont icon-plus'></image>
+            <image class='icon iconfont icon-plus'></image>
         </view>
-        <text class='up'>上传视频</text>
-        <text class='info'>最短10秒 最长10分钟</text>
+          <text class='up'>上传视频</text>
+          <text class='info'>最短10秒 最长10分钟</text>
       </view>
-      <view class='title'>
-       <input name="mailbox" maxlength="25" placeholder="视频标题0~25字" value="{{ name }}" bindblur='setVideoName'></input>
+        <view class='title'>
+          <input name="mailbox" maxlength="25" placeholder="视频标题0~25字" value="{{ name }}" bindblur='setVideoName'></input>
+       </view>
       </view>
+       
+      
 
 
 

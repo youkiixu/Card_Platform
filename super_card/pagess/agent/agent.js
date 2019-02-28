@@ -45,10 +45,32 @@ Page({
 
   //跳到生成会员码页面
   toSpreadPage: function (params) {
+    var that = this
     var qrType = params.currentTarget.dataset.qrtype
-    wx.navigateTo({
-      url: '../spread/spread?qrType= ' + qrType 
-    })
+    var uInfo = that.data.uInfo
+    
+    uInfo.agent_limit == uInfo.team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码',showCancel: false,confirmText: '知道了'}) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+
+    // wx.navigateTo({ 
+    //   url: '../spread/spread?qrType= ' + qrType 
+    //   })
+
+   
+  },   
+
+ //跳到生成代理码页面
+  toSpreadPageAgent: function(params) {
+    var that = this
+    var qrType = params.currentTarget.dataset.qrtype
+    var uInfo = that.data.uInfo
+  
+    uInfo.high_agent_limit == uInfo.high_team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买代理码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+
+      // wx.navigateTo({ 
+    //   url: '../spread/spread?qrType= ' + qrType 
+    //   })
+
+
   },   
 
   //显示会员码购买弹框
@@ -164,10 +186,10 @@ Page({
   totalPrice: function () {
     var statu = this.data.agent  //statu == 1表示"个人代理"，statu==2表示"渠道代理"，statu==3表示"至尊合伙人"
     var number = this.data.buyNumber
-    var personalMemberPrice = 5.0 * number //个人代理的会员码价格，个人代理没有代理码购买权限
-    var channelMenberPrice = 2.0 * number //渠道代理的会员码价格
-    var channelAgentPrice = 180.0 * number //渠道代理的代理码价格
-    var superPartnerMenberPrice = 1.0 * number //至尊合伙人的会员码价格
+    var personalMemberPrice = 6.0 * number //个人代理的会员码价格，个人代理没有代理码购买权限
+    var channelMenberPrice = 3.0 * number //渠道代理的会员码价格
+    var channelAgentPrice = 280.0 * number //渠道代理的代理码价格
+    var superPartnerMenberPrice = 2.0 * number //至尊合伙人的会员码价格
     var superPartnerAgentPrice = 180.0 * number //至尊合伙人的代理码价格
 
     // price = price.toFixed(2) //js浮点计算bug，取两位小数精度

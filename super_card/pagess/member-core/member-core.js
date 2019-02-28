@@ -47,7 +47,7 @@ Page({
 
           console.log(privilege)
           that.setData({ uInfo: uInfo, vipSet: vipSet, privilege: privilege })
-
+          console.log('privilege', that.data.privilege)
         }
       })
 

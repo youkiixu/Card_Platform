@@ -89,14 +89,15 @@ Page({
                     form_id: formId
                 },
                 success(res) {
+                  console.log('open-membership-res', res)
                     wx.showToast({
                         title: '会员开通成功',
                         icon: 'success'
                     })
                     setTimeout(() => {
                         app.freshHome = true
-                        wx.reLaunch({
-                            url: '../home/home',
+                        wx.switchTab({
+                            url: '../../pages/index/index',
                         })
                     }, 2000);
                 },
@@ -151,13 +152,13 @@ Page({
         },
         success(res) {
           wx.showToast({
-            title: '会员开通成功',
+            title: '代理开通成功',
             icon: 'success'
           })
           setTimeout(() => {
             app.freshHome = true
-            wx.reLaunch({
-              url: '../home/home',
+            wx.switchTab({
+              url: '../../pages/index/index',
             })
           }, 2000);
         },

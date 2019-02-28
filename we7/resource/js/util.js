@@ -371,7 +371,7 @@ util.getUserInfo = function (cb,bTran) {
             console.log('session', session)
 						if (!session.data.errno) {           
 							wx.getUserInfo({
-								success: function (wxInfo) {  
+								success: function (wxInfo) {
                   userInfo.sessionid = session.data.data.sessionid
                   //wx.setStorageSync('sessionid', userInfo.sessionid);
 							    //wx.setStorageSync('userInfo', userInfo);
@@ -391,10 +391,11 @@ util.getUserInfo = function (cb,bTran) {
 											'content-type': 'application/x-www-form-urlencoded'
 										},
 										cachetime: 0,
-										success: function (res) {               
-											if (!res.data.errno) {                        
+										success: function (res) {           
+											if (!res.data.errno) {                  
 												userInfo.memberInfo = res.data.data;
 												wx.setStorageSync('userInfo', userInfo);
+                        
 											}
 											typeof cb == "function" && cb(userInfo);
 										}
@@ -437,6 +438,7 @@ util.getUserInfo = function (cb,bTran) {
 			}
 		});
 	};
+
 
 	var app = wx.getStorageSync('userInfo');
 	if (app.sessionid) {

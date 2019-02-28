@@ -418,8 +418,9 @@ Page({
 
   
     //判断是否为会员，非会员不能开通商城
-    var userInfo = wx.getStorageSync('userInfo');
+    var userInfo = wx.getStorageSync('userInfo'); 
     var isVip = userInfo.memberInfo.vip;
+
     if (isVip == 0 ) {  
       wx.showModal({
         title: '系统提示',

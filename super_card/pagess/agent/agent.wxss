@@ -541,10 +541,11 @@
   margin-top: 15rpx;
 }
 .boxTop_title{
-  width: 500rpx;
+  width: 480rpx;
   color: #202020;
   font-size: 38rpx;
   text-align: center;
+  padding-left: 70rpx;
   line-height: 75rpx;
 }
 .boxTop_close{
@@ -552,8 +553,7 @@
   height: 75rpx;
   text-align: center;
   line-height: 50rpx;
-  font-size: 55rpx;
-  font-weight: bold;
+  font-size: 45rpx;
   color: #9b9b9b;
 }
 .buy-num-box{

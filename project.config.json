@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 20,
+			"current": 24,
 			"list": [
 				{
 					"id": -1,
@@ -158,16 +158,44 @@
 				},
 				{
 					"id": -1,
-					"name": "开通代理",
-					"pathName": "super_card/pages/open-agentship/open-agentship",
-					"query": "spread_member=39&from_act=other",
+					"name": "我的团队",
+					"pathName": "super_card/pagess/team/team",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "开通会员",
-					"pathName": "super_card/pages/open-membership/open-membership",
-					"query": "spread_member=39&from_act=other",
+					"pathName": "super_card/pagess/open-membership/open-membership",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "partner-index",
+					"pathName": "super_card/pagess/partner-index/partner-index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员中心",
+					"pathName": "super_card/pagess/member-core/member-core",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的团队",
+					"pathName": "super_card/pagess/team/team",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "官网",
+					"pathName": "super_card/pages/overt/website",
+					"query": "",
 					"scene": null
 				}
 			]

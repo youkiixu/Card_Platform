@@ -70,6 +70,7 @@ Page({
         form_id: formId
       },
       success(res) {
+        console.log('opt-version-res',res)
 
            
           if (res.data.message == 'ok')
@@ -80,9 +81,8 @@ Page({
               'package': res.data.data.package,
               'signType': 'MD5',
               'paySign': res.data.data.paySign,
-              'success': function (res) {
-                console.log('succ:');
-                console.log(res);
+              'success': function (respay) {
+                console.log('succ:', respay);
 
                 that.successPayAfter()
                 //支付成功后，系统将会调用payResult() 方法，此处不做支付成功验证，只负责提示用户

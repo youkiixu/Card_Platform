@@ -28,9 +28,9 @@
               <view class='act-lm-con'>{{ desc.rule_name }}</view>
           </block>
         </view>
-        <view class='act-agent' wx:if="{{qrType == 2 }}" wx:for="{{ vipSetagent }}">
+        <view class='act-agent'  wx:if="{{qrType == 2 }}" wx:for="{{ vipSetagent }}">
            <view class='act-lm2'>
-            <view class='act-item'>○ </view>
+            <view class='act-item act-item2'>○ </view>
              <block>
                <view class='act-lm-con act-lm-con2'>{{ item.rule_name }}</view>
              </block> 

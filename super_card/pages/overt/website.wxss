@@ -185,7 +185,7 @@ z-index:999;
 
 /* 新版制作型网站 */
 .gw-top{
-  display: flex;
+  /* display: flex; */
   position: relative;
 }
 .topimg{
@@ -194,10 +194,10 @@ z-index:999;
 .gw-zs{
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: absolute;
+  /* justify-content: center;
+   position: absolute; 
   top: 50rpx;
-  left: 20rpx;
+  left: 20rpx; */
 }
 .gw-logo{
   width: 80rpx;
@@ -206,9 +206,15 @@ z-index:999;
   margin-right: 10rpx;
 }
 .gw-name{
-  color:#fff;
-  font-size: 30rpx;
+  color:#2d9fdb;
+  font-size: 36rpx;
 }
+
+
+
+
+
+
 
 .ed-title{
   padding:20rpx 30rpx;

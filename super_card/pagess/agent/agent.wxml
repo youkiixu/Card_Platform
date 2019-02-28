@@ -7,10 +7,10 @@
     </button>
   </form>
 
-  <view class='seamlessscrolling'>
+  <!-- <view class='seamlessscrolling'>
     <view class='seamlessscrolling-coin'>您当前下级返点{{ agentGrade[(uInfo.agent - 1)].one_profit }}%<text wx:if="{{ agentGrade[(uInfo.agent - 1)].two_profit != 0 }}">， 二级返点{{ agentGrade[(uInfo.agent - 1)].two_profit }}%</text><text wx:if="{{ agentGrade[(uInfo.agent - 1)].three_profit != 0 }}">，三级返点{{ agentGrade[(uInfo.agent - 1)].three_profit }}%</text></view>
     <text class='seamlessscrolling-more' wx:if="{{ uInfo.agent < 3 }}" bindtap="openAgent">升级赚更多</text>
-  </view>
+  </view> -->
 
   <view class='top waveAnimation'>
     <view class='top-u'>
@@ -77,7 +77,7 @@
 
   <!-- 生成代理码start -->
   <view class='memberCode agentCode'  wx:if="{{ uInfo.agent > 1 }}">
-    <view class='memberCode_icon'  bindtap="toSpreadPage" data-qrtype='2'>
+    <view class='memberCode_icon'  bindtap="toSpreadPageAgent" data-qrtype='2'>
         <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
         <view >
             <text class="member-text">生成代理码</text>

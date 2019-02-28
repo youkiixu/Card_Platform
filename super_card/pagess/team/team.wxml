@@ -1,48 +1,109 @@
 <!--super_card/pagess/team/team.wxml-->
 <view class='contains'>
 
-  <view class='team-top'>
-    <view class="team-title" data-reply-type="1" style="color:{{ itemChioce == 1 ? '#4752e8':'' }};" bindtap='goChangeTeam'>一级({{ childs_num[0] }})</view>
-    <view class="team-title" wx:if="{{ agent_grade[lv-1].two_profit != 0 }}" data-reply-type="2" style="color:{{ itemChioce == 2 ? '#4752e8':'' }};" bindtap='goChangeTeam'>二级({{ childs_num[1] }})</view>
-    <view class="team-title" wx:if="{{ agent_grade[lv-1].three_profit != 0 }}" data-reply-type="3" style="color:{{ itemChioce == 3 ? '#4752e8':'' }};" bindtap='goChangeTeam'>三级({{ childs_num[2] }})</view>
-    
-    <!-- 显示一级 -->
-    <view class="weui-navbar__slider" wx:if="{{ agent_grade[lv-1].two_profit == 0 && agent_grade[lv-1].three_profit == 0 }}" style="width:96vw;background:#fff;left: 2vw;"></view>
-    <!-- 显示二级 -->
-    <view wx:if="{{ agent_grade[lv-1].two_profit != 0 && agent_grade[lv-1].three_profit == 0 }}" class="weui-navbar__slider" style="width:48vw;background:#4752e8;left: {{sliderLeft}}vw; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
-    <!-- 显示三级 -->
-    <view class="weui-navbar__slider" wx:if="{{ agent_grade[lv-1].three_profit != 0 }}" style="width:32vw;background:#4752e8;left: {{sliderLeft}}vw; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
-
+  <!-- 搜索类别标题 -->
+  <view class='category'>
+    <block wx:for="{{ category }}">
+      <view class="category_item {{activeCategoryId == item.id ? 'category_active' : ''}}"  data-id="{{item.id}}" bindtap="tabClick">{{item.name}}
+      </view>
+    </block>
   </view>
 
-  <view class='team-info'>
+   <!--循环体  -->
 
-    <view class='team-act' wx:key="list" wx:for="{{ list }}" wx:for-index="ldx">
-      <view class='ta-top'>
-        <image mode='widthFix' class='ta-left' src='{{ item.avatar }}'></image>
-        <view class='ta-rirht'>
-          <view class='info-t'>
-            <view class='infot-l'>
-              <view wx:if="{{ item.agent > 0 }}" class='infot-l-ver dl-block-color'>代</view>
-              <view class='infot-l-name'>{{ item.nickname }}</view>
-            </view>
-            <view class='infot-r' wx:if="{{ item.agent > 0 }}">推广{{ item.child_num }}人</view>
-          </view>
-          <view class='info-b'>注册时间:{{ item.create_date }}</view>
+     <!-- 全部分类start -->
+    <view class='category_all' wx:if="{{ activeCategoryId == 1 }}">
+        <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
+          <block wx:for="{{ allInfo }}" wx:for-index="idr">
+              <view class='info_item'>
+                <view class='info_itemImg'>
+                  <image class='img' src='{{ item.avatar }}'></image>
+                </view>
+                <view class='info_itemInfo'>
+                  <view class='info_name'>
+                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
+                    <view class='name'>{{item.nickname}}</view>
+                  </view>
+                  <view class='info-date'>注册时间：{{item.create_date}}</view>
+                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                </view>
+              </view>
+          </block>
         </view>
-      </view>
-      <view class='ta-bot'>
-        <view>消费{{ item.order_fee }}元</view>
-        <view>{{ item.order_num }}个订单</view>
-      </view>
     </view>
-    
-  </view>
-  
-  <view class='buttom-info'>
-    <text>————</text>
-    <text>没有更多了</text>
-    <text>————</text>
-  </view>
+  <!-- 全部分类end -->
+
+  <!-- 推荐分类start -->
+    <view class='category_recommend' wx:if="{{ activeCategoryId == 2 }}">
+        <view class='recommend' wx:if="{{ cateRecommend.length > 0 }}">
+          <block wx:for="{{ cateRecommend }}" wx:for-index="idr">
+              <view class='info_item'>
+                <view class='info_itemImg'>
+                  <image class='img' src='{{ item.avatar }}'></image>
+                </view>
+                <view class='info_itemInfo'>
+                  <view class='info_name'>
+                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
+                    <view class='name'>{{item.nickname}}</view>
+                  </view>
+                  <view class='info-date'>注册时间：{{item.create_date}}</view>
+                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                </view>
+              </view>
+          </block>
+        </view>
+    </view>
+  <!-- 推荐分类end -->
+
+  <!-- 会员分类start -->
+    <view class='category_member' wx:if="{{ activeCategoryId == 3 }}">
+      <view class='memberAgent' wx:if="{{ cateMember.length > 0 }}">
+         <block wx:for="{{ cateMember }}" wx:for-index="idm">
+               <view class='info_item'>
+                <view class='info_itemImg'>
+                  <image class='img' src='{{ item.avatar }}'></image>
+                </view>
+                <view class='info_itemInfo'>
+                  <view class='info_name'>
+                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
+                    <view class='name'>{{item.nickname}}</view>
+                  </view>
+                  <view class='info-date'>注册时间：{{item.create_date}}</view>
+                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                </view>
+              </view>
+          </block>
+        </view>
+    </view>
+  <!-- 会员分类end -->
+
+  <!-- 代理分类start -->
+    <view class='category_agent' wx:if="{{ activeCategoryId == 4 }}">
+       <view class='memberAgent' wx:if="{{ cateAgent.length > 0 }}">
+           <block wx:for="{{ cateAgent }}" wx:for-index="idm">
+               <view class='info_item'>
+                <view class='info_itemImg'>
+                  <image class='img' src='{{ item.avatar }}'></image>
+                </view>
+                <view class='info_itemInfo'>
+                  <view class='info_name'>
+                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
+                    <view class='name'>{{item.nickname}}</view>
+                  </view>
+                  <view class='info-date'>注册时间：{{item.create_date}}</view>
+                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                </view>
+              </view>
+          </block>
+        </view>
+    </view>
+  <!-- 代理分类end -->
+
+
+   <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
  
 </view>

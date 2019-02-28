@@ -1,7 +1,7 @@
 <!--super_card/pagess/member-core/member-core.wxml-->
 <view class='contains'>
 
-  <view class='yellow-bg'>
+  <view class='yellow-bg yellow-bg2'>
     <view class='top-bg-v'>
       <view class='tb-top-zs'>
         <view class='top-base-info'>
@@ -16,14 +16,43 @@
           <view class='tb-bottom'>
             <view class='tb-bottom-t'>
               <view class='tb-bottom-name'>{{ wxInfo.nickName }}</view>
-              <view class='tb-bottom-time'>{{ uInfo.vip_last_time }}到期</view>
+              <!-- <view class='tb-bottom-time'>{{ uInfo.vip_last_time }}到期</view> -->
+              <view class='tb-bottom-time'>到期时间：永久</view>
             </view>
             <view class='tb-bottom-b'>{{ vipSet[uInfo.vip - 1].name }}</view>
           </view>
         </view>
       </view>
     </view>
-    <view class='black-bg-bot'>
+
+
+   <view class='black-bg-bot'>
+      <view class='bgb'>
+        <view class='mc-gold-coint'>
+          <image class='mc-gold-li' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
+          <view class='mc-gold-coin-title'>您的特权</view>
+          <image class='mc-gold-ri' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
+        </view>
+
+        <view class="choice-coin2">
+          <view class='choice-coinItem' wx:key="privilegek" wx:for="{{ privilege }}" wx:for-index="pdx" wx:for-item="pri">
+
+            <view class='bgb-con2' wx:key="priivilegek" wx:for="{{ pri }}" wx:for-index="pidx" wx:for-item="prii" data-pdx="{{ pdx }}" data-pidx="{{ pidx }}" bindtap='showCardExpert'>
+              <text class="bgb-img iconfont {{ prii.rule_icon ? prii.rule_icon : 'icon-huiyuan' }}"></text>
+              <view class='bgb-tit'>{{ prii.privilege_name }}</view>
+            </view>
+
+          </view>
+        </view>
+
+
+      </view>
+    </view>
+
+
+
+
+    <!-- <view class='black-bg-bot'>
       <view class='bgb'>
         <view class='mc-gold-coint'>
           <image class='mc-gold-li' mode='widthFix' src='/super_card/resource/images/zyzs.png'></image>
@@ -41,11 +70,11 @@
           </swiper-item>
         </swiper>
       </view>
-    </view>
+    </view> -->
   </view>
 
-  <view class='mc-tq'>
-    <!-- 黄金版本 -->
+  <!-- <view class='mc-tq'>
+    黄金版本 
     <view class='mc-gold'>
       <view class='mc-gold-info'>
         <image class='mc-gold-img1' mode='widthFix' src='/super_card/resource/images/xiaodian.png'></image>
@@ -62,10 +91,12 @@
             <text class='m-g-d'></text>
             <text class='m-g-nr'>{{ item.rule_name }}</text>
           </view>
-          <!--view class='mc-gold-main'>
+          注释start
+          <view class='mc-gold-main'>
             <text class='m-g-d'></text>
             <text class='m-g-nr'>AI销售雷达</text>
-          </view-->
+          </view>
+          注释end
           
         </view>
       </view>
@@ -73,7 +104,7 @@
     <view class='mc-gold-join'>
       <button class='mc-gold-btn' wx:if="{{ uInfo.vip < 3 }}" bindtap='toOpenVip'>去升级</button>
     </view>
-  </view>
+  </view> -->
  
   <view class='mc-zjxz-bg' wx:if="{{ cardExpert }}"></view>
   <view class='mc-zjxz' wx:if="{{ cardExpert }}">

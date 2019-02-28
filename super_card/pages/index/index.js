@@ -991,7 +991,47 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+      //保证一进去首页，就能实时获取到最新的用户信息
+    var userInfo = wx.getStorageSync('userInfo'); 
+    console.log('userInfo', userInfo)
+    var sessionid = userInfo.sessionid
+    wx.getUserInfo({
+      success: function (wxInfo) {
+        var userInfo = {
+          'sessionid': '',
+          'wxInfo': '',
+          'memberInfo': '',
+        };
+        userInfo.sessionid = sessionid
+        userInfo.wxInfo = wxInfo.userInfo
+        wx.setStorageSync('userInfo', userInfo);
+
+        app.util.request({
+          url: 'auth/session/userinfo',
+          data: {
+            signature: wxInfo.signature,
+            rawData: wxInfo.rawData,
+            iv: wxInfo.iv,
+            encryptedData: wxInfo.encryptedData
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          cachetime: 0,
+          success: function (res) {
+            if (!res.data.errno) {
+              userInfo.memberInfo = res.data.data;
+              wx.setStorageSync('userInfo', userInfo);
+            }
+          }
+        });
+      },
+    })
+
     
+   
     if(app.freshIndex === true) this.freshCurrCard()
 
     if (this.data.cardLists.length < 1) {

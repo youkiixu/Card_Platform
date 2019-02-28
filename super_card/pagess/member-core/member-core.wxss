@@ -8,6 +8,9 @@ page{
   position:relative;
   height:650rpx;
 }
+.yellow-bg2{
+  height:1100rpx;
+}
 .top-bg-v{
   background-color:#47443e;
   overflow: hidden;
@@ -155,6 +158,7 @@ page{
   -webkit-align-items:center;
   width:25%;
 }
+
 .bgb-img{
   width:90rpx;
   height:90rpx;
@@ -197,6 +201,31 @@ page{
 .choice-coin .wx-swiper-dot-active::before {
   background-color: #f3dba4;
 }
+
+.black-bg-bot{
+  height: 1200rpx;
+}
+
+.choice-coinItem{
+  height: 200rpx;
+  display: flex;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.bgb-con2{
+  flex: 1;
+  display:flex;
+  flex-flow:column;
+  /* align-items:center; */
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  margin-left: 30rpx;
+  /* -webkit-align-items:center; */
+  width:18%;
+}
+
+
 .mc-gold{
   padding: 38rpx 50rpx;
 }

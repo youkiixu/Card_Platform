@@ -133,3 +133,134 @@
   padding:20rpx 0;
   color:#939392;
 }
+
+
+/* 我的团队修改 */
+.category{
+  width: 750rpx;
+  height: 80rpx;
+  display: flex;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 80rpx;
+  margin: 20prx 0 ;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  background-color:#fff;
+}
+.category_item{
+  flex: 1;
+}
+.category_active{
+  color: #4951df;
+}
+.recommend{
+  margin-top: 20rpx;
+  /* background-color:#fff; */
+}
+.info_item{
+  background-color:#fff;
+  /* margin:0 20rpx; */
+  padding:20rpx;
+  margin-top: 5rpx;
+  display:flex;
+  display:-webkit-flex;
+  /* border-bottom:1px solid #e2e2e2; */
+  border-radius:0;
+  line-height:inherit;
+  font-size:36rpx;
+  text-align:left;
+}
+.info_itemImg{
+  display:flex;
+  display:-webkit-flex;
+  position:relative;
+}
+.info_itemImg .img{
+  width:150rpx;
+  height:150rpx;
+  /* border-radius:14rpx; */
+}
+.info_itemInfo{
+  display:flex;
+  flex-flow:column;
+  justify-content:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-justify-content:center;
+  padding-left:15rpx;
+  vertical-align:middle;
+  flex:1;
+  -webkit-flex:1;
+  align-items:flex-start;
+  -webkit-align-items:flex-start;
+}
+.info_name{
+  display: flex;
+  height: 50rpx;
+  line-height: 50rpx;
+  align-items:center;
+  -webkit-align-items:center;
+}
+.info_name .name{
+  color: #000;
+  font-size: 36rpx;
+  margin-left: 10rpx;
+  width: 420rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap; 
+}
+.info_name .dai{
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  padding: 5rpx;
+  background-color:#fe4356;
+}
+.info_name .vip{
+  margin-left: 10rpx;
+  font-size: 36rpx;
+  color: #f9d849;
+}
+.info-date{
+  font-size:28rpx;
+  color:#939392;
+  margin-top: 0;
+}
+.info-b{
+  font-size:28rpx;
+  color:#939392;
+  margin-top: 20rpx;
+}
+.info-b .order{
+  margin-left: 30rpx;
+}
+.info_more{
+  height: 60rpx;
+  width: 100%;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+  margin-top: 5rpx;
+  background-color:#fff; 
+}
+.memberAgent{
+  margin-top: 20rpx;
+}
+.info_itemInfoMA{
+  display:flex;
+  flex-flow:column;
+  /* justify-content:center; */
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  /* -webkit-justify-content:center; */
+  padding-left:15rpx;
+  vertical-align:middle;
+  flex:1;
+  -webkit-flex:1;
+  align-items:flex-start;
+  -webkit-align-items:flex-start;
+}

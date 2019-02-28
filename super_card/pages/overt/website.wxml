@@ -10,12 +10,12 @@
 
   <!-- 顶部banner -->
   <view class='gw-top'>
-    <image class='topimg' lazy-load="true" mode='widthFix' src='{{ website.banner }}'></image>
     <view class='gw-zs'>
-      <image class='gw-logo' src='{{ website.website_logo }}'></image>
-      <view class='gw-name'>{{ website.website_name }}</view>
-    </view>
-
+        <image class='gw-logo' src='{{ website.website_logo }}'></image>
+        <view class='gw-name'>{{ website.website_name }}</view>
+      </view>
+    <image class='topimg' lazy-load="true" mode='widthFix' src='{{ website.banner }}'></image>
+    
     <block wx:if="{{ preview === false }}">
       <button class='mt-share' open-type='share'>
         <text class='iconfont icon-fenxiang1'></text>

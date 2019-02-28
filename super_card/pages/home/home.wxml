@@ -56,18 +56,19 @@
             <!-- 企业认证 -->
             <text class="iconfont company-v {{ uInfo.is_company == 1 ? 'already-open':'' }}">企</text>
           </view>
-          <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }} 将于 {{ uInfo.vip_last_time }} 到期</view>
+          <!-- <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }} 将于 {{ uInfo.vip_last_time }} 到期</view> -->
+          <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }}  到期时间：永久</view>
           <view class='bit-yx' bindtap='toOpenVip' wx:if="{{ uInfo.vip == 0 }}" style="color:{{ themeColor }};">开通会员 享受至尊服务</view>
         </view>
       </view>
       <view class='basic-info-bot'>
-        <form class='bib-form-bor' report-submit='true' bindsubmit="createNewCard">
+        <!-- <form class='bib-form-bor' report-submit='true' bindsubmit="createNewCard">
           <button class='bib-act' form-type='submit'>
             <view class='bib-act-s'>{{ card_num }}</view>
             <view class='bib-act-w'>名片</view>
           </button>
-        </form>
-        <form class='bib-form-bor' report-submit='true' bindsubmit="toBalancePage">
+        </form> -->
+        <!-- <form class='bib-form-bor' report-submit='true' bindsubmit="toBalancePage">
           <button class='bib-act' form-type='submit'>
             <view class='bib-act-s'>{{ uInfo.money }}</view>
             <view class='bib-act-w'>积分</view>
@@ -76,7 +77,7 @@
         <view class='bib-act' bindtap='toViewProfit'>
           <view class='bib-act-s' style="color:{{ themeColorV }};">{{ uInfo.agent_profit }}</view>
           <view class='bib-act-w'>收益</view>
-        </view>
+        </view> -->
       </view>
     </view>
     <!-- 基本信息 -->

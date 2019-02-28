@@ -7,7 +7,8 @@
     <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
     <view class='company-name'>{{ wxInfo.nickName }}</view>
     <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
-    <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view>
+    <!-- <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view> -->
+     <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：永久</view>
   </view>
 
   <view class='ov-content'>
@@ -34,7 +35,8 @@
               <view class='act-name'>{{ item.name }}</view>
               <view class='buttom-info'>
                 <text>——</text>
-                <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text>
+                <!-- <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text> -->
+                <text style="color:{{ themeColorV }};">{{ item.price }}元/永久</text>
                 <text>——</text>
               </view>
 
@@ -66,10 +68,15 @@
     <view class='blank'></view>
 
     <view class='ov-bottom'>
-      <view class='ov-b-left' bindtap='chooseTime'>
+      <!-- <view class='ov-b-left' bindtap='chooseTime'>
         <view>￥{{ price }}元</view>
         <view class='ov-b-time' style='color:{{ themeColor }};'>{{ timeYear }}年</view>
         <text class='trans iconfont icon-jiantouarrow483' style='color:{{ themeColor }};'></text>
+      </view> -->
+       <view class='ov-b-left'>
+        <view>￥{{ price }}元</view>
+        <view class='ov-b-time' style='color:{{ themeColor }};'>永久</view>
+        <!-- <text class='trans iconfont icon-jiantouarrow483' style='color:{{ themeColor }};'></text> -->
       </view>
       <form report-submit='true' bindsubmit="confirmPay">
         <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (alreadyOpen ? '已经开通' : '立即升级') : '立即开通' }}</button>

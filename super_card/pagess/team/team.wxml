@@ -36,8 +36,8 @@
 
   <!-- 推荐分类start -->
     <view class='category_recommend' wx:if="{{ activeCategoryId == 2 }}">
-        <view class='recommend' wx:if="{{ cateRecommend.length > 0 }}">
-          <block wx:for="{{ cateRecommend }}" wx:for-index="idr">
+        <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
+          <block wx:for="{{ allInfo }}" wx:for-index="idr">
               <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src='{{ item.avatar }}'></image>
@@ -59,8 +59,8 @@
 
   <!-- 会员分类start -->
     <view class='category_member' wx:if="{{ activeCategoryId == 3 }}">
-      <view class='memberAgent' wx:if="{{ cateMember.length > 0 }}">
-         <block wx:for="{{ cateMember }}" wx:for-index="idm">
+      <view class='memberAgent' wx:if="{{ allInfo.length > 0 }}">
+         <block wx:for="{{ allInfo }}" wx:for-index="idm">
                <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src='{{ item.avatar }}'></image>
@@ -82,8 +82,8 @@
 
   <!-- 代理分类start -->
     <view class='category_agent' wx:if="{{ activeCategoryId == 4 }}">
-       <view class='memberAgent' wx:if="{{ cateAgent.length > 0 }}">
-           <block wx:for="{{ cateAgent }}" wx:for-index="idm">
+       <view class='memberAgent' wx:if="{{ allInfo.length > 0 }}">
+           <block wx:for="{{ allInfo }}" wx:for-index="idm">
                <view class='info_item'>
                 <view class='info_itemImg'>
                   <image class='img' src='{{ item.avatar }}'></image>

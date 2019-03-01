@@ -993,6 +993,7 @@ Page({
   onShow: function () {
 
     //保证一进去首页，就能实时获取到最新的用户信息
+    
     app.util.request({
       url: 'entry/wxapp/getUserInfo',
       success: function (res) {
@@ -1000,6 +1001,8 @@ Page({
         wx.setStorageSync('getUserInfo', getUserInfo);
       }
     });
+
+
 
     if(app.freshIndex === true) this.freshCurrCard()
 

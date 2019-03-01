@@ -29,13 +29,8 @@ Page({
     ],
     activeCategoryId: 1,
 
-   //全部分类的数据
     allInfo: [],
 
-    //各个分类的数据
-    cateRecommend: [],
-    cateMember: [],
-    cateAgent: [],
 
   },
 
@@ -47,16 +42,7 @@ Page({
       activeCategoryId: id,
       itemChioce: id
     });
-    this.setData({
-      cateRecommend: [],
-      cateMember: [],
-      cateAgent: [],
-    })
-    this.getUserTeam() //全部列表
-    this.getRecommend()//推荐列表
-    this.getMember()//会员列表
-    this.getAgent()//代理列表
-    
+    this.getUserTeam() 
   },
 
  
@@ -123,136 +109,48 @@ Page({
   onLoad: function (options) {
     console.log('options', options)
     this.setData({ lv:options.agent })
-    this.getUserTeam() //全部列表
-
-    this.setData({
-      cateRecommend: [],
-      cateMember: [],
-      cateAgent: [],
-    })
-    this.getRecommend()//推荐列表
-    this.getMember()//会员列表
-    this.getAgent()//代理列表
-
+    this.getUserTeam() 
     var agentGrade = app.config.getConf('agent_grade')
     this.setData({ agent_grade: agentGrade })
     console.log(this.data.agent_grade)
   },
 
 
+
 // 全部列表
-  getUserTeam: function (cb, mode = 'cover') {
-    var that = this
+  getUserTeam: function (isload) {
+    var that = this;
+    var data = {
+      page: that.data.page,
+      type: that.data.itemChioce
+    }
     app.util.request({
       'url': 'entry/wxapp/getAgentTeam',
-      'data': { page: that.data.page, type: that.data.itemChioce },
+      'method': 'POST',
+      'data': data,
       success(res) {
-        typeof cb == "function" && cb()
-        // console.log(res)
-        if (mode == 'append') {
-          if (!res.data.data.length) {
-            that.data.lastPage = true
-            return false
-          }
-          console.log(res.data.data)
+        // if (!res.data.data.length) {
+        //   that.data.lastPage = true
+        //   return false
+        // }
+
+        //isload==true表示是在下拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
+        if (isload==true){
           that.data.allInfo = that.data.allInfo.concat(res.data.data)
-
-        } else {
+        }else{
+          that.setData({
+            allInfo: []
+          })
           that.data.allInfo = res.data.data
-          // that.setData({ child_num: res.data.data.child_num })
         }
-        that.setData({ allInfo: that.data.allInfo })
-      }
-    })
-  },
-  
-   // 推荐列表数据方法start
-  getRecommend: function () {
-    var that = this;
-    var data = {
-     page: that.data.page, 
-     type: that.data.itemChioce
-    }
-    app.util.request({
-      'url': 'entry/wxapp/getAgentTeam',
-      'method': 'POST',
-      'data': data,
-      success(res) {
-
-        if (!res.data.data.length) {
-          that.data.lastPage = true
-          return false
-        }
-        that.data.cateRecommend = that.data.cateRecommend.concat(res.data.data)
-
         that.setData({
-          cateRecommend: that.data.cateRecommend
+          allInfo: that.data.allInfo
         })
-        
+        console.log('allInfo', that.data.allInfo)
       }
     })
   },
 
-  // 推荐列表数据方法end
-
-
-  // 会员列表数据方法start
-  getMember: function () {
-    var that = this;
-    var data = {
-      page: that.data.page,
-      type: that.data.itemChioce
-    }
-    app.util.request({
-      'url': 'entry/wxapp/getAgentTeam',
-      'method': 'POST',
-      'data': data,
-      success(res) {
-
-        if (!res.data.data.length) {
-          that.data.lastPage = true
-          return false
-        }
-        that.data.cateMember = that.data.cateMember.concat(res.data.data)
-
-        that.setData({
-          cateMember: that.data.cateMember
-        })
-
-      }
-    })
-  },
-
-  // 会员列表数据方法end
-
-
-  // 会员列表数据方法start
-  getAgent: function () {
-    var that = this;
-    var data = {
-      page: that.data.page,
-      type: that.data.itemChioce
-    }
-    app.util.request({
-      'url': 'entry/wxapp/getAgentTeam',
-      'method': 'POST',
-      'data': data,
-      success(res) {
-
-        if (!res.data.data.length) {
-          that.data.lastPage = true
-          return false
-        }
-        that.data.cateAgent = that.data.cateAgent.concat(res.data.data)
-
-        that.setData({
-          cateAgent: that.data.cateAgent
-        })
-      }
-    })
-  },
-
-  // 会员列表数据方法end
 
 
   /**
@@ -317,21 +215,8 @@ Page({
     this.data.page = 1
     this.data.lastPage = false
     var that = this
-    this.getUserTeam(function () {
-
-      wx.stopPullDownRefresh()
-
-    })
-
-    this.setData({
-      cateRecommend: [],
-      cateMember: [],
-      cateAgent: [],
-    })
-    this.getRecommend()//推荐列表
-    this.getMember()//会员列表
-    this.getAgent()//代理列表
-
+    this.getUserTeam()
+    
   },
 
   /**
@@ -348,20 +233,7 @@ Page({
 
     that.data.page++
 
-    that.getUserTeam(function () {
-
-      wx.hideLoading();
-
-    }, 'append')
-
-    that.setData({
-      cateRecommend: [],
-      cateMember: [],
-      cateAgent: [],
-    })
-    that.getRecommend()//推荐列表
-    that.getMember()//会员列表
-    that.getAgent()//代理列表
+    that.getUserTeam(true) //传值过去，表示下拉加载的就不清空数据
 
   },
 

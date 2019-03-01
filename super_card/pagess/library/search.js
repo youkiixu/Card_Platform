@@ -574,7 +574,7 @@ Page({
     }
   },
 
-  //确认搜索
+  //按回车键或者手机输入法的搜索确认搜索
   confirmSearchKey: function () {
 
     if (this.data.searchKey) {
@@ -610,6 +610,44 @@ Page({
 
     }
   },
+
+  //按搜索两个字进行搜索
+  searchResult: function () {
+
+    if (this.data.searchKey) {
+
+      this.setData({ showHistory: false })
+      this.data.lastPage = false
+      this.data.page = 1
+      //清空一次数据，防止搜索的时候重复加载
+      this.setData({
+        cateCardList: [],
+        cateWebsite: [],
+        cateProduct: [],
+        cateDemand: [],
+        cateCardListDataCopy: [],
+        cateWebsiteDataCopy: [],
+        cateProductDataCopy: [],
+        cateDemandDataCopy: []
+      })
+      this.getPubAll() //原本的  全部数据
+      this.getCardInfo() //名片数据
+      this.getPubStore() //商城数据
+      this.getPubProduct()//产品数据
+      this.getPubSquare()//需求数据
+
+      this.setHistory(this.data.searchKey)
+
+    } else {
+
+      wx.showToast({
+        title: '请输入搜索关键词',
+        icon: 'none'
+      })
+
+    }
+  },
+
 
 
   //设置搜索关键字

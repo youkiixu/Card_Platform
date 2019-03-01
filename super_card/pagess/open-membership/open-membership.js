@@ -58,7 +58,7 @@ Page({
         qrType:'',
         vipSetagent:[
           { id: 1, rule_name: "可获得30次VIP免费开通权（原价98元）价值2940元！"},
-          { id: 2, rule_name: "可获得原价98元VIP，永久5元低价开通权" },
+          { id: 2, rule_name: "可获得原价98元VIP，永久6元低价开通权" },
           { id: 3, rule_name: "企业版名片推荐返佣，佣金高至1600元/个" }
         ]
     },

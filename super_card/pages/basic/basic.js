@@ -396,7 +396,7 @@ Page({
     var mobile = this.data.mobile
     if(mobile.length == 0){
       wx.showToast({
-        title: '',
+        title: '请输入手机号',
         icon: 'none',
         duration: 2000
       })

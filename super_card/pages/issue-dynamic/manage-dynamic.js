@@ -140,8 +140,8 @@ Page({
     console.log(that.data.card_id)
 
     //判断是否为会员，非会员不能发布动态
-    var userInfo = wx.getStorageSync('userInfo'); 
-    var isVip = userInfo.memberInfo.vip;
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
     
     if (isVip == 0) {
       wx.showModal({

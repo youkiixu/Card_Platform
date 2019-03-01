@@ -4,8 +4,8 @@
   <view class='search-rear'>
     <view class='search-rear-l'>
       <icon type="search" size="16" color='{{ themeColor }}'/>
-      <input type='text' name="pic" placeholder='搜索' class='search-rear-i' focus="true"  bindfocus='focusInput' bindconfirm="confirmSearchKey" bindinput='setSearchKey' value="{{ searchKey }}"></input>
-      <icon wx:if="{{ showHistory }}" type='clear' size="20" bindtap='cancelSearch' color='{{ themeColor }}'/>
+      <input type='text' name="pic" placeholder='请输入关键词' class='search-rear-i' focus="true"  bindfocus='focusInput' bindconfirm="confirmSearchKey" bindinput='setSearchKey' value="{{ searchKey }}"></input><text class='search-text' bindtap='searchResult'>搜索</text>
+      <!-- <icon wx:if="{{ showHistory }}" type='clear' size="20" bindtap='cancelSearch' color='{{ themeColor }}'/> -->
     </view>
   </view>
 

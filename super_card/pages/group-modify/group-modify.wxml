@@ -29,6 +29,45 @@
         </view>
       </radio-group>
     </view>
+
+<!-- 新增start -->
+  <!-- <view wx:if="{{ type_id == 1 }}">
+    <view class='act'>
+      <text>3.3</text>
+      <radio-group class="radio-group" bindchange="mallChange">
+        <view class="radio">
+            <label><radio color='{{ themeColor }}' name="allow_mall" checked="{{allow_mall == 1 ? true : false}}" value="1"/>共用管理员商城</label>
+            <label><radio color='{{ themeColor }}' name="allow_mall" checked="{{allow_mall == 0 ? true : false}}" value="0" />不共用管理员商城</label>
+        </view>
+      </radio-group>
+    </view>
+
+    <view class='act'>
+      <text>3.4</text>
+      <radio-group class="radio-group" bindchange="websiteChange">
+        <view class="radio">
+            <label><radio color='{{ themeColor }}' name="allow_website" checked="{{allow_website == 1 ? true : false}}" value="1"/>共用管理员官网</label>
+            <label><radio color='{{ themeColor }}' name="allow_website" checked="{{allow_website == 0 ? true : false}}" value="0" />不共用管理员官网</label>
+        </view>
+      </radio-group>
+    </view>
+
+    <view class='act'>
+      <text>3.5</text>
+      <radio-group class="radio-group" bindchange="dynamicChange">
+        <view class="radio">
+            <label><radio color='{{ themeColor }}' name="allow_dynamic" checked="{{allow_dynamic == 1 ? true : false}}" value="1"/>共用管理员动态</label>
+            <label><radio color='{{ themeColor }}' name="allow_dynamic" checked="{{allow_dynamic == 0 ? true : false}}" value="0" />不共用管理员动态</label>
+        </view>
+      </radio-group>
+    </view>
+  </view> -->
+    
+
+<!-- 新增end -->
+
+
+
   </view>
 
   <block wx:if="{{ group_id > 0 }}">

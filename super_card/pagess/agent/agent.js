@@ -152,7 +152,12 @@ Page({
             success(res) {
               wx.showToast({
                 title: '支付成功',
-                icon: 'success'
+                icon: 'success',
+                success:function(res){
+                  wx.redirectTo({
+                    url: '../agent/agent',
+                  })
+                }
               })
             },
             fail(res) {

@@ -419,7 +419,11 @@
   box-sizing: border-box;
 }
 /* 关键字高亮显示 */
-
 .searchHigh {
   color: #01a1e9;
+}
+
+.search-text{
+  color: #01a1e9;
+  padding: 5rpx 10rpx;
 }

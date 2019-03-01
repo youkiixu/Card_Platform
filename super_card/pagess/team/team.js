@@ -14,6 +14,7 @@ Page({
     list:false,
     page:1,
     lastPage:false,
+    child_num:0,
 
     agent_grade:'',
     lv:'',
@@ -120,7 +121,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('options', options)
     this.setData({ lv:options.agent })
     this.getUserTeam() //全部列表
 
@@ -147,7 +148,7 @@ Page({
       'data': { page: that.data.page, type: that.data.itemChioce },
       success(res) {
         typeof cb == "function" && cb()
-        console.log(res)
+        // console.log(res)
         if (mode == 'append') {
           if (!res.data.data.length) {
             that.data.lastPage = true
@@ -158,7 +159,7 @@ Page({
 
         } else {
           that.data.allInfo = res.data.data
-          that.setData({ childs_num: res.data.data.childs_num })
+          // that.setData({ child_num: res.data.data.child_num })
         }
         that.setData({ allInfo: that.data.allInfo })
       }

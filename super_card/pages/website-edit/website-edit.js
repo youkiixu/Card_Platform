@@ -522,8 +522,8 @@ Page({
 
 
     //判断是否为会员，非会员不能开通官网
-    var userInfo = wx.getStorageSync('userInfo'); 
-    var isVip = userInfo.memberInfo.vip;
+    var getUserInfo = wx.getStorageSync('getUserInfo'); 
+    var isVip = getUserInfo.vip;
     
     if (isVip == 0) {
       wx.showModal({

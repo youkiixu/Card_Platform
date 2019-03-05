@@ -806,7 +806,7 @@ Page({
    */
   onLoad: function (options) {
 
-    //console.log('options', options)
+    console.log('options', options)
   
     var userInfo = wx.getStorageSync('userInfo');
 
@@ -1074,13 +1074,14 @@ Page({
           }
          
           that.data.isFresh = false
-          if(res.data.message == 'myself'){
-            wx.setStorageSync('index_card_id', that.data.card_id)
-            wx.switchTab({
-              url: '../index/index',
-            });
-            return
-          }
+          //判断是否是进入到自己的名片页面
+          // if(res.data.message == 'myself'){
+          //   wx.setStorageSync('index_card_id', that.data.card_id)
+          //   wx.switchTab({
+          //     url: '../index/index',
+          //   });
+          //   return
+          // }
 
           //console.log(res)
           typeof cb == "function" && cb()

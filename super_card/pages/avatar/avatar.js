@@ -1,7 +1,8 @@
 import WeCropper from '../../components/we-cropper/we-cropper'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
-const height = width
+const height = device.windowHeight - 250 //250是三个选择按钮所占的高度--新修改
+// const height = width //原来的代码
 
 var app = getApp()
 Page({
@@ -299,7 +300,6 @@ Page({
   onLoad: function (options) {
     
     var that = this;
-
     const { cropperOpt } = this.data
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => {

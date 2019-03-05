@@ -236,6 +236,7 @@ Page({
 
   //跳转签到页
   toSignInPage: function (e){
+    console.log('签到')
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)

@@ -520,9 +520,11 @@ Page({
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-
-        that.setData({ address: res.address, latitude: res.latitude, longitude: res.longitude })
-      
+        console.log('选择地址信息',res)
+        var address = res.address + '(' + res.name + ')'
+        that.setData({ address: address, latitude: res.latitude, longitude: res.longitude })
+        // that.setData({ address: res.address, latitude: res.latitude, longitude: res.longitude })
+        console.log('address:', that.data.address)
       }
     })
   },
@@ -555,6 +557,7 @@ Page({
   },
 
   choosePic:function (e){
+    console.log('选择图片：',e)
 
     var field = e.currentTarget.dataset.field
     var that = this
@@ -564,6 +567,7 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         var src = res.tempFilePaths[0]
+        console.log('chooseImage-res:',res)
         wx.compressImage({
           src: src, // 图片路径
           quality: 80, // 压缩质量

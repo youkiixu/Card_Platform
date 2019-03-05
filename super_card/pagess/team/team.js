@@ -134,7 +134,7 @@ Page({
         //   return false
         // }
 
-        //isload==true表示是在下拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
+        //isload==true表示是在页面上拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
         if (isload==true){
           that.data.allInfo = that.data.allInfo.concat(res.data.data)
         }else{
@@ -211,11 +211,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
     this.data.page = 1
     this.data.lastPage = false
-    var that = this
     this.getUserTeam()
+    wx.stopPullDownRefresh() //处理完数据刷新后，wx.stopPullDownRefresh可以停止当前页面的下拉刷新。
     
   },
 
@@ -233,7 +232,7 @@ Page({
 
     that.data.page++
 
-    that.getUserTeam(true) //传值过去，表示下拉加载的就不清空数据
+    that.getUserTeam(true) //传值过去，表示页面上拉加载的就不清空数据
 
   },
 

@@ -501,7 +501,9 @@ navigator .h-c-act{
   background-color:#00a1e9;
 }
 .basic-info{
-  border-radius:10rpx;
+  /* border-radius:10rpx; */
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
   background-color: #fff;
   box-shadow:2px 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   /* filter:drop-shadow(0px 0px 5px #ccc); */
@@ -633,7 +635,7 @@ button.bit-top-left::after,button.bit-top-right::after{
   line-height:30rpx;
 }
 .basic-info-bot{
-  border-top:1px solid #ececec;
+  /* border-top:1px solid #ececec; */
   padding: 10rpx;
   display: flex;
   align-items: center;
@@ -673,13 +675,16 @@ button.bib-act::after{
   margin-top:8rpx;
 }
 .conter-info{
-  margin:20rpx 5vw;
+  /* margin:20rpx 5vw; */
+  margin:0 5vw 20rpx 5vw;
   display:flex;
   align-items:center;
   display:-webkit-flex;
   -webkit-align-items:center;
   flex-wrap:wrap;
-  border-radius:10rpx;
+  /* border-radius:10rpx; */
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
   background-color:#ffff;
   box-shadow:2px 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   /* filter:drop-shadow(0px 0px 5px #ccc); */

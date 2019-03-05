@@ -342,8 +342,9 @@ Page({
         })
       },
       onDone(p) {
-        console.log(p)
+        console.log('p',p)
         var pcd = p.value.join('-')
+        console.log('pcd', pcd)
         this.setData({
           pcd: pcd,
           pcd_value: p.valueIndex
@@ -364,6 +365,7 @@ Page({
 
   //保存名片信息
   saveCard: function (e){
+    console.log('保存名片信息-e:',e)
    
     //提交内容判断
     if (!this.data.picture || this.data.picture == '../../resource/icon/group.png'){
@@ -452,9 +454,11 @@ Page({
       this.errTips()
       return false
     } 
+    
 
     var values = e.detail.value
     var pcdArr = values.pcd.split('-')
+
 
     var data = {
       card_id: this.data.card_id,
@@ -475,6 +479,8 @@ Page({
       smscode: values.smscode,
       form_id: (e.detail.formId != 'undefined' ? e.detail.formId : '')
     }
+
+    
     var that = this
     app.util.request({
         'url': 'entry/wxapp/saveUserCard',
@@ -482,6 +488,7 @@ Page({
         'data':data,
         'cachetime': 0,
         success(res) {
+          console.log('保存名片信息成功：',res)
 
             app.freshIndex = true
             app.freshHome = true
@@ -567,39 +574,55 @@ Page({
     //console.log(data)
   },
 
-  //选择地址信息
+  //选择地址信息 ---原始代码
+  // getCurrentLocation: function () {
+  //   var that = this;
+  //   wx.chooseLocation({
+  //     success: function (res) {
+  //       console.log('地图信息:',res)
+  //       var regex = /^(北京市|天津市|重庆市|上海市|香港特别行政区|澳门特别行政区)/;
+  //       var REGION_PROVINCE = [];
+  //       var addressBean = {
+  //         REGION_PROVINCE: null,
+  //         REGION_COUNTRY: null,
+  //         REGION_CITY: null,
+  //         ADDRESS: null
+  //       };
+  //       function regexAddressBean(address, addressBean) {
+  //         regex = /^(.*?[市州]|.*?地区|.*?特别行政区)(.*?[市区县])(.*?)$/g;
+  //         var addxress = regex.exec(address);
+  //         addressBean.REGION_CITY = addxress[1];
+  //         addressBean.REGION_COUNTRY = addxress[2];
+  //         addressBean.ADDRESS = addxress[3] + "(" + res.name + ")";
+  //         //console.log(addxress);
+  //       }
+  //       if (!(REGION_PROVINCE = regex.exec(res.address))) {
+  //         regex = /^(.*?(省|自治区))(.*?)$/;
+  //         REGION_PROVINCE = regex.exec(res.address);
+  //         addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
+  //         regexAddressBean(REGION_PROVINCE[3], addressBean);
+  //       } else {
+  //         addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
+  //         regexAddressBean(res.address, addressBean);
+  //       }
+  //       that.setData({ address: addressBean.ADDRESS, latitude: res.latitude, longitude: res.longitude })
+  //       //console.log(addressBean);
+  //       console.log('addressBean.REGION_PROVINCE', addressBean.REGION_PROVINCE)
+        
+  //     }
+  //   })
+  // },
+
+
+  //选择地址信息  ---修改后代码
   getCurrentLocation: function () {
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-        console.log(res)
-        var regex = /^(北京市|天津市|重庆市|上海市|香港特别行政区|澳门特别行政区)/;
-        var REGION_PROVINCE = [];
-        var addressBean = {
-          REGION_PROVINCE: null,
-          REGION_COUNTRY: null,
-          REGION_CITY: null,
-          ADDRESS: null
-        };
-        function regexAddressBean(address, addressBean) {
-          regex = /^(.*?[市州]|.*?地区|.*?特别行政区)(.*?[市区县])(.*?)$/g;
-          var addxress = regex.exec(address);
-          addressBean.REGION_CITY = addxress[1];
-          addressBean.REGION_COUNTRY = addxress[2];
-          addressBean.ADDRESS = addxress[3] + "(" + res.name + ")";
-          //console.log(addxress);
-        }
-        if (!(REGION_PROVINCE = regex.exec(res.address))) {
-          regex = /^(.*?(省|自治区))(.*?)$/;
-          REGION_PROVINCE = regex.exec(res.address);
-          addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
-          regexAddressBean(REGION_PROVINCE[3], addressBean);
-        } else {
-          addressBean.REGION_PROVINCE = REGION_PROVINCE[1];
-          regexAddressBean(res.address, addressBean);
-        }
-        that.setData({ address: addressBean.ADDRESS, latitude: res.latitude, longitude: res.longitude })
-        //console.log(addressBean);
+        console.log('选择地址信息', res)
+        // var address = res.address + '(' + res.name + ')'
+        that.setData({ address: res.name,  latitude: res.latitude, longitude: res.longitude })
+        console.log('address:', that.data.address)
       }
     })
   },
@@ -638,6 +661,7 @@ Page({
         'method': 'POST',
         'data': { 'card_id': that.data.card_id },
         success(res) {
+          console.log('加载名片信息：',res)
           console.log(res)
           var card = res.data.data
           var industry = card.industry.split(',')
@@ -669,9 +693,11 @@ Page({
             pcd_value: card.pcd_value.split(','),
             pcd: card.province + '-' + card.city + '-' + card.dict,
             address: card.address,
+            latitude: card.latitude,
+            longitude: card.longitude,  
             industryList: industryList
           })
-
+         
         }
 
       })

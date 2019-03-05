@@ -70,10 +70,10 @@
 }
 
 .btn-submit{
-  margin:40rpx 20rpx;
+  margin:20rpx 20rpx;
 }
 .btn-block{
-  line-height: 90rpx;
+  line-height: 75rpx;
   border-radius:50rpx;
 }
 .btn-blue{

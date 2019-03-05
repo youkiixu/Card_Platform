@@ -14,6 +14,7 @@ Page({
     type_id:0,
 
     uid:0,
+    my_userCards: [],
 
     lists: [],
     indexFresh: false,
@@ -413,12 +414,169 @@ Page({
     this.getSquareLists()
   },
 
-  callPhone: function (e){
-    var m = e.target.dataset.mobile
-    wx.makePhoneCall({
-      phoneNumber: m,
+  // callPhone: function (e){
+  //   var m = e.target.dataset.mobile
+  //   wx.makePhoneCall({
+  //     phoneNumber: m,
+  //   })
+  // },
+
+
+  //联系方式 start
+  contactCarder: function (e) {
+    var that = this
+    var i = e.currentTarget.dataset.ii
+    if (that.data.lists[i].card.wx != '') {
+      wx.showActionSheet({
+        itemList: ['发消息', '加微信', '拨打电话'],
+        success: function (res) {
+          //console.log(res.tapIndex)
+          var index = res.tapIndex;
+          switch (index) {
+            case 0:
+              console.log('发消息')
+
+              if (that.data.my_userCards.length < 1) {
+                wx.showModal({
+                  title: '系统提示',
+                  content: '您还没有创建名片，只有创建名片后才可以咨询哦',
+                  showCancel: false,
+                  confirmColor: '#f90',
+                  confirmText: '去创建',
+                  success: function (res) {
+                    wx.redirectTo({
+                      url: '../basic/basic',
+                    })
+                  }
+                });
+                return false
+              }
+
+              app.util.request({
+                'url': 'entry/wxapp/startChat',
+                //'cachetime': '30',
+                'data': { t_uid: that.data.lists[i].card.uid, t_card_id: that.data.lists[i].card.id, card_id: that.data.my_userCards[0].id },
+                success(res) {
+
+                  wx.navigateTo({
+                    url: '../chat/chat?chat_id=' + res.data.data + '&from=overt'
+                  })
+
+                }
+              })
+
+              break;
+            case 1:
+              console.log('加微信')
+              console.log(that.data.lists[i].card.wx)
+              wx.setClipboardData({
+                data: that.data.lists[i].card.wx,
+                success: function (res) {
+
+                  wx.getClipboardData({
+                    success: function (res) {
+
+                      wx.showToast({
+                        title: '微信复制成功',
+                      })
+                    }
+                  })
+
+                }
+              })
+              break;
+            case 2:
+              console.log('拨打电话')
+              console.log(that.data.lists[i].card.mobile)
+              wx.makePhoneCall({
+                phoneNumber: that.data.lists[i].card.mobile,
+              })
+              break;
+
+          }
+        },
+        fail: function (res) {
+          console.log(res.errMsg)
+        }
+      });
+    } else {
+      wx.showActionSheet({
+        itemList: ['发消息', '拨打电话'],
+        success: function (res) {
+          //console.log(res.tapIndex)
+          var index = res.tapIndex;
+          switch (index) {
+            case 0:
+              console.log('发消息')
+
+              if (that.data.my_userCards.length < 1) {
+                wx.showModal({
+                  title: '系统提示',
+                  content: '您还没有创建名片，只有创建名片后才可以咨询哦',
+                  showCancel: false,
+                  confirmColor: '#f90',
+                  confirmText: '去创建',
+                  success: function (res) {
+                    wx.redirectTo({
+                      url: '../basic/basic',
+                    })
+                  }
+                });
+                return false
+              }
+
+              app.util.request({
+                'url': 'entry/wxapp/startChat',
+                //'cachetime': '30',
+                'data': { t_uid: that.data.lists[i].card.uid, t_card_id: that.data.lists[i].card.id, card_id: that.data.my_userCards[0].id },
+                success(res) {
+
+                  wx.navigateTo({
+                    url: '../chat/chat?chat_id=' + res.data.data + '&from=overt'
+                  })
+
+                }
+              })
+
+              break;
+            case 1:
+              console.log('拨打电话')
+              console.log(that.data.lists[i].card.mobile)
+              wx.makePhoneCall({
+                phoneNumber: that.data.lists[i].card.mobile,
+              })
+              break;
+
+          }
+        },
+        fail: function (res) {
+          console.log(res.errMsg)
+        }
+      });
+    }
+},
+
+  //联系方式 end
+
+
+  // //获取当前用户名片
+  getMyUserCards: function () {
+
+    var that = this
+    app.util.request({
+      'url': 'entry/wxapp/getUserCard',
+      'data': { 'no_need_whole': 1 },
+      success(res) {
+        var data = res.data.data
+        that.setData({ my_userCards: data })
+      }
+      
     })
+
   },
+
+
+
 
   swtichListSort: function(e){
     console.log(e)
@@ -672,6 +830,7 @@ Page({
             that.initSquarePage()
           }
      })
+     that.getMyUserCards()    
 
   },
 
@@ -714,6 +873,7 @@ Page({
             that.setData({ hei: swiperH })
           }
         })
+        console.log('2222', that.data.lists)
       }
       
     })

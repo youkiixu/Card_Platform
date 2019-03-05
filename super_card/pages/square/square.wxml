@@ -114,7 +114,8 @@
       <view class='cf-bot on' wx:if="{{ recommendedDisplay === true }}"></view>
     <block wx:for="{{ lists }}" wx:key="lists" wx:for-index="idx">
     <view class='act'>
-      <view class='act-top' data-index="{{ idx }}" data-sid="{{ item.id }}" bindtap='toDetailPage'>
+    <!-- bindtap='toDetailPage' -->
+      <view class='act-top' data-index="{{ idx }}" data-sid="{{ item.id }}"  >
           <view catchtap="toCardPage" data-card_id="{{ item.card.id }}" class='act-top-info'>
             <image class='top-img' src='{{ item.card.picture }}'></image>
             <view class='top-info'>
@@ -128,7 +129,8 @@
               <view>{{ item.time_str }}</view>
             </view>
           </view>
-        <text class='top-lx' catchtap='callPhone' data-mobile="{{ item.card.mobile }}" style='border-color:{{ themeColor }};color:{{ themeColor }};'>联系TA</text>
+        <!-- <text class='top-lx' catchtap='callPhone' data-mobile="{{ item.card.mobile }}"  style='border-color:{{ themeColor }};color:{{ themeColor }};'>联系TA</text> -->
+        <view class='top-lx' bindtap="contactCarder" data-ii="{{ idx }}"  style='border-color:{{ themeColor }};color:{{ themeColor }};'>联系TA</view>
       </view>
 
       <view bindtap='toDetailPage' data-index="{{ idx }}" data-sid="{{ item.id }}" class='act-content'>

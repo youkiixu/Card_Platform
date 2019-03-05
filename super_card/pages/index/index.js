@@ -492,6 +492,15 @@ Page({
 
   },
 
+  //预览别人看到自己的名片显示的样子
+  previewCard:function(){
+    console.log('this.data.card_id ', this.data.card_id )
+    wx.redirectTo({
+      url: '../overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    })
+    
+  },
+
   // 一键回到顶部
   goTop: function (e) {
     if (wx.pageScrollTo) {

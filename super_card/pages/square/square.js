@@ -711,12 +711,18 @@ Page({
           that.showModal()
 
         } else {
-
-          var uInfo = res.data.data
-          console.log(uInfo)
-          wx.navigateTo({
-            url: '../../pagess/payment/payment-square?umoney=' + uInfo.money + '&card_id=' + that.data.card_id
+          wx.showModal({
+            title: '系统提示',
+            content: res.data.message , 
+            showCancel: false,
+            confirmText: '知道了'
           })
+
+          // var uInfo = res.data.data
+          // console.log(uInfo)
+          // wx.navigateTo({
+          //   url: '../../pagess/payment/payment-square?umoney=' + uInfo.money + '&card_id=' + that.data.card_id
+          // })
 
         }
       }
@@ -782,7 +788,7 @@ Page({
         confirmColor: '#f90',
         confirmText: '去开通',
         success: function (res) {
-          wx.redirectTo({
+          wx.navigateTo({
             url: '../opt-version/opt-version',
           })
         }
@@ -876,6 +882,7 @@ Page({
         app.initSquarePage = false
         console.log(res)
         var data = res.data.data
+        console.log('data',data)
         for (var x in data.lists) {
           if (data.lists[x].label)
             data.lists[x].label = data.lists[x].label.split(',')
@@ -894,7 +901,6 @@ Page({
             that.setData({ hei: swiperH })
           }
         })
-        console.log('2222', that.data.lists)
       }
       
     })

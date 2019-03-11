@@ -56,7 +56,7 @@ Page({
   },
 
   selectAll:function (e){
-    //console.log(e)
+    console.log('e',e)
     var len = e.detail.value.length
     if(len > 0){
 
@@ -79,7 +79,7 @@ Page({
 
   deleteChoosen: function (){
     var that = this
-
+    console.log('that.data.ids', that.data.ids)
     if(that.data.ids === false){
 
       wx.showToast({

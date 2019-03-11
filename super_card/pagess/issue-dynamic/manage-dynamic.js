@@ -152,7 +152,7 @@ Page({
         confirmText: '去开通',
         success: function (res) {
           wx.redirectTo({
-            url: '../opt-version/opt-version',
+            url: '../../pages/opt-version/opt-version',
           })
         }
       });

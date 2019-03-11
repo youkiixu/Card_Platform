@@ -287,7 +287,7 @@ Page({
       app.formIds.push(e.detail.formId)
     }
     wx.navigateTo({
-      url: '../website-edit/website-edit?card_id=' + this.data.card_id
+      url: '../../pagess/website-edit/website-edit?card_id=' + this.data.card_id
     })
   },
 
@@ -309,7 +309,7 @@ Page({
       app.formIds.push(e.detail.formId)
     }
     wx.navigateTo({
-      url: '../issue-dynamic/manage-dynamic?card_id=' + this.data.card_id
+      url: '../../pagess/issue-dynamic/manage-dynamic?card_id=' + this.data.card_id
     })
   },
 

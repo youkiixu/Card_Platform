@@ -63,7 +63,7 @@
 
   <view class='btn-re'>
     <view class='btn-release'>
-      <navigator url="../../pages/issue-dynamic/issue-dynamic?card_id={{ card_id }}">
+      <navigator url="../../pagess/issue-dynamic/issue-dynamic?card_id={{ card_id }}">
         <button form-type='submit' class='b-r-l'>
           <view class='b-r-c'>
             <text class='iconfont icon-bianji'></text>

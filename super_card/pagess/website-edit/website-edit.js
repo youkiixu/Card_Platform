@@ -575,7 +575,7 @@ Page({
       app.formIds.push(e.detail.formId)
     }
     wx.navigateTo({
-      url: '../overt/website?card_id=' + this.data.card_id,
+      url: '../../pages/overt/website?card_id=' + this.data.card_id,
     })
 
   },
@@ -608,7 +608,7 @@ Page({
         confirmText: '去开通',
         success: function (res) {
           wx.redirectTo({
-            url: '../opt-version/opt-version',
+            url: '../../pages/opt-version/opt-version',
           })
         }
       });

@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 37,
+			"current": 38,
 			"list": [
 				{
 					"id": -1,
@@ -285,7 +285,15 @@
 				{
 					"id": -1,
 					"name": "test",
-					"pathName": "super_card/pages/mall-manage/mall-manage"
+					"pathName": "super_card/pages/mall-manage/mall-manage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "删除动态",
+					"pathName": "super_card/pages/home/demand",
+					"query": "card_id=3",
+					"scene": null
 				}
 			]
 		}

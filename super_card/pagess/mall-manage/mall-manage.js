@@ -42,6 +42,7 @@ Page({
     wx.navigateTo({
       url: '../../pages/overt/mall?card_id=' + this.data.card_id,
     })
+    
 
   },
 

@@ -51,10 +51,7 @@ Page({
     
     uInfo.agent_limit == uInfo.team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码',showCancel: false,confirmText: '知道了'}) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
 
-    // wx.navigateTo({ 
-    //   url: '../spread/spread?qrType= ' + qrType 
-    //   })
-
+ 
    
   },   
 
@@ -65,10 +62,6 @@ Page({
     var uInfo = that.data.uInfo
   
     uInfo.high_agent_limit == uInfo.high_team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买代理码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
-
-      // wx.navigateTo({ 
-    //   url: '../spread/spread?qrType= ' + qrType 
-    //   })
 
 
   },   
@@ -400,7 +393,7 @@ Page({
 
     app.util.getUserInfo(function (res) {
 
-      //console.log(res)
+     
 
       var wxInfo = res.wxInfo
 
@@ -410,10 +403,10 @@ Page({
         success(res) {
 
           typeof cb == "function" && cb()
-          //console.log(res)
+         
           var uInfo = res.data.data
 
-          console.log('uInfo', uInfo)
+    
 
 
           if (uInfo.agent == 0) {
@@ -448,7 +441,7 @@ Page({
           var agent_name = agentGrade[parseInt(uInfo.agent) - 1].name
           var agent = uInfo.agent
 
-          console.log('agentGrade', agentGrade)
+        
 
           that.setData({ wxInfo: wxInfo, agent_name: agent_name, agent: agent, uInfo: uInfo, agentGrade: agentGrade })
           

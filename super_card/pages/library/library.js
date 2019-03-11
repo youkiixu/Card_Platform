@@ -55,7 +55,7 @@ Page({
   },  
 
   toFilterPage: function (e){
-      console.log(e)
+      
       var val = e.currentTarget.dataset.val
       wx.navigateTo({
         url: '../../pagess/library/filter?industry=' + val,
@@ -77,7 +77,7 @@ Page({
       'url': 'entry/wxapp/overtSets',
       'method': 'POST',
       success(res) {
-        console.log(res)
+      
         that.setData({
           lbpicture: res.data.data
         })
@@ -88,7 +88,6 @@ Page({
 
   makeLinkWork: function (e) {
     var that = this
-    console.log(e)
     var data = e.currentTarget.dataset
 
     if (!data.type) return
@@ -152,7 +151,7 @@ Page({
   },
 
   toViewVideo: function (url) {
-    console.log(url)
+    
     var that = this
     wx.navigateTo({
       url: '../card-book/view-video?url=' + encodeURIComponent(url),
@@ -183,7 +182,7 @@ Page({
   },
 
   toCreateCard: function (e) {
-    console.log(e)
+ 
 
     if (typeof e.detail.formId != 'undefined') app.formIds.push(e.detail.formId)
 
@@ -191,14 +190,14 @@ Page({
       'url': 'entry/wxapp/isCanCreate',
       success(res) {
 
-        //console.log(res)
+       
         if (res.data.message === 'ok') {
           wx.navigateTo({
             url: '../basic/basic'
           })
         } else {
           var uInfo = res.data.data
-          console.log(uInfo)
+       
           wx.navigateTo({
             url: '../payment/payment?umoney=' + uInfo.money + '&cardnum=' + uInfo.card_num
           })
@@ -228,7 +227,7 @@ Page({
 
   //监听页面滚动
   onPageScroll: function (e) {
-    // Do something when page scroll
+    
     if (e.scrollTop >= this.data.tabsTop){
       if(this.tabfixed == 'tab-fixed') return
       this.setData({ tabfixed: 'tab-fixed' })
@@ -264,7 +263,7 @@ Page({
 
   //设置搜索关键字
   setSearchKey: function (e) {
-    //console.log(e)
+
     var key = e.detail.value
     this.setData({ searchKey: key })
     this.data.lastPage = false
@@ -312,7 +311,7 @@ Page({
       },
       onDone(p) {
 
-        console.log(p)
+      
         var province = p.value[0]
         var city = p.value[1]
         var dict = p.value[2] == '市辖区' ? '' : p.value[2]
@@ -407,10 +406,9 @@ Page({
             that.data.lastPage = true
             return false
           }
-          console.log(res.data.data)
-          console.log('cardList', that.data.cardList)
+        
           that.data.cardList = that.data.cardList.concat(res.data.data)
-          console.log(that.data.cardList)
+         
           if (!that.data.searchKey) that.data.cardListCopy = that.data.cardList
 
         }else{
@@ -495,7 +493,6 @@ Page({
       success: function (res) {
         var latitude = res.latitude
         var longitude = res.longitude
-        console.log(latitude, longitude)
         that.data.userPosLat = latitude
         that.data.userPosLng = longitude
         that.data.page = 1
@@ -570,7 +567,7 @@ Page({
 
         typeof cb == "function" && cb()
         //app.initSquarePage = false
-        console.log(res)
+
         var data = res.data.data
 
         //行业分类
@@ -662,7 +659,6 @@ Page({
       success: function (res) {
         var latitude = res.latitude
         var longitude = res.longitude
-        console.log(latitude, longitude)
         that.data.userPosLat = latitude
         that.data.userPosLng = longitude
         that.setData({ showDistanceSort: true })

@@ -17,7 +17,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('options', options)
     var that = this
 
     if (!options.card_id) {
@@ -94,10 +93,8 @@ Page({
   onShareAppMessage: function () {
     
     var title = this.data.dynamic.content.substr(0, 20)
-    // var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
     var path = '/super_card/pages/overt/dynamic-details?card_id=' + this.data.card_id + '&dyList=' + this.data.dyList
     var imgUrl = ''
-    console.log('在dynamic-details的path:', path)
 
     app.config.cardTrack(this.data.card_id, 4, 'praise')
 

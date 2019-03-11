@@ -97,7 +97,6 @@ Page({
   },
 
   copyInfo: function (e) {
-    //console.log(e)
     var plate = e.target.dataset.plate
     var id = e.target.dataset.id
 
@@ -115,7 +114,6 @@ Page({
   contactCarder: function () {
 
     var that = this
-    //console.log(that.data.card.uid)
     if(that.data.card.uid == 0){
       wx.makePhoneCall({
         phoneNumber: that.data.card.mobile,
@@ -260,7 +258,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('options', options)
     var that = this
 
     
@@ -383,10 +380,8 @@ Page({
   onShareAppMessage: function () {
 
     var title = this.data.goods.goods_name
-    // var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
     var path = '/super_card/pages/overt/mall-details?card_id=' + this.data.card_id + '&goods_id=' + this.data.goods_id
     var imgUrl = ''
-    console.log('path:', path)
     
     app.config.cardTrack(this.data.card_id, 4, 'praise')
 

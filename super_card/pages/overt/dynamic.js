@@ -27,7 +27,6 @@ Page({
    */
   onLoad: function (options) {
     
-    console.log('options', options)
     var that = this
 
     if (!options.card_id) {
@@ -57,7 +56,6 @@ Page({
   },
 
   showPingZan: function (e){
-    //console.log(e)
 
     var animation = wx.createAnimation({
       duration: 500,         
@@ -310,11 +308,8 @@ Page({
   onShareAppMessage: function () {
 
     var title = this.data.dyList.length > 0 ? '欢迎查看"' + this.data.dyList[0].company +'"的名片动态' : ''
-    // var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
     var path = '/super_card/pages/overt/dynamic?card_id=' + this.data.card_id 
     var imgUrl = ''
-
-    console.log('在dynamic的path:', path)
     
 
     app.config.cardTrack(this.data.card_id, 4, 'praise')

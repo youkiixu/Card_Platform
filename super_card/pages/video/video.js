@@ -38,7 +38,6 @@ Page({
   },
 
   setVqqLink: function (e){ 
-    console.log('VqqLink', this.data.VqqLink)
     var that = this
     var userInfo = wx.getStorageSync('userInfo');
     var isVip = userInfo.memberInfo.vip;
@@ -66,7 +65,6 @@ Page({
 
 //重新上传视频
   newUploadVideo: function (e) {
-    console.log('重新上传视频e', e)
 
     var that = this
 
@@ -83,7 +81,6 @@ Page({
       camera: 'back',
       success: function (res) {
 
-        console.log('res3:', res)
 
         if (Math.floor(res.duration) < 10)
         {
@@ -129,11 +126,7 @@ Page({
             setTimeout(function () {
               wx.navigateBack()
             }, 2000)
-            console.log('视频上传成功')
-
-            // that.setData({ arrvideo: arrvideo })
-            // console.log('上传后', that.data.arrvideo)
-
+        
           },
           fail: function () {
             console.log('接口上传失败')
@@ -161,7 +154,6 @@ Page({
    * 删除视频
    */
   delCardVideo: function (e) {
-    console.log('删除视频e', e)
     var that = this
 
     var id = e.target.dataset.id
@@ -215,8 +207,6 @@ Page({
  * 修改视频名称
  */
   updateVideoName: function (e) {
-    //console.log($wuxDialog)
-    console.log('修改视频名称e', e)
     var that = this
 
     var id = e.target.dataset.id
@@ -339,8 +329,6 @@ Page({
           path: arr,
           res: res
         })
-          console.log('path:', that.data.path)
-        //  console.log('res:', that.data.res)
       },
       fail: function (res) {
 
@@ -396,11 +384,6 @@ Page({
     //遍历上传
      
       var tempFilePaths = that.data.path;
-      console.log('tempFilePaths', tempFilePaths)
-
-      // var tempFilePaths = that.data.arrvideo;
-      // tempFilePaths.concat(that.data.path);
-
       var uploadImgCount = 0; 
       for (var i = 0; i < tempFilePaths.length; i++) {
         var dd = tempFilePaths[i];
@@ -419,15 +402,7 @@ Page({
             'width': dd.width,
             'height': dd.height
           },
-          success: function (res) {
-            // if (tempFilePaths.length>5){
-            //   wx.showToast({
-            //     title: '最多只可上传5个！',
-            //     icon: 'none',
-            //     duration: 2000
-            //   })
-            //   return false
-            // }
+          success: function (res) {      
             uploadImgCount++;  
             app.freshIndex = true
             wx.hideLoading()
@@ -475,17 +450,6 @@ Page({
       }
     }else if(that.data.catalogSelect == 1){
      
-     //判断视频是否大于上传个数
-      // var length = that.data.arrvideo.length + that.data.path.length;
-
-      // if ((isVip == 0 && length > 1) || (isVip > 0 && length >= 5)) {
-
-      //   wx.showToast({
-      //     title: '您只能上传' + that.data.path.length + '个视频',
-      //   })
-      //   return;
-      // }   
-
       if(!that.data.VqqLink){
           wx.showToast({
             title: '请粘贴腾讯视频链接',
@@ -518,8 +482,7 @@ Page({
         success(res) {
 
           app.freshIndex = true
-         
-          //that.setData({ res: {} })
+
           wx.showToast({
             title: res.data.message,
             icon: 'success',
@@ -617,9 +580,9 @@ Page({
              that.setData({
                arrvideo: data
              })
-             console.log('VqqId', that.data.VqqId)
+            
              wx.setStorageSync('arrvideo', that.data.arrvideo)
-             console.log('arrvideo', that.data.arrvideo)
+            
            }
            ;
          }

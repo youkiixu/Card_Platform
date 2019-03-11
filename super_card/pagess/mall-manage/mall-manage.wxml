@@ -92,7 +92,7 @@
           </swiper-item>
         </block>
       </swiper>
-      <navigator url="../edit-page/edit-sizepic?from=store_banner">
+      <navigator url="../../pages/edit-page/edit-sizepic?from=store_banner">
       <view class='banner-edit'>
         <text class='iconfont icon-tupianweijihuo'></text>
         <text class='edit-img'>编辑图片</text>

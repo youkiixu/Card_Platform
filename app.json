@@ -51,13 +51,11 @@
     "super_card/pages/overt/mall",
     "super_card/pages/overt/mall-details",
     "super_card/pages/issue-dynamic/issue-dynamic",
-    "super_card/pages/mall-manage/mall-manage",
     "super_card/pages/website-edit/website-edit",
     "super_card/pages/edit-page/edit-picture",
     "super_card/pages/edit-page/edit-text",
     "super_card/pages/edit-page/cropper-pic",
     "super_card/pages/edit-page/edit-sizepic",
-    "super_card/pages/mall-manage/edit-goods",
     "super_card/pages/opt-version/opt-version",
     "super_card/pages/issue-dynamic/manage-dynamic"
   ],
@@ -105,7 +103,9 @@
         "cash-details/cash-details",
         "spread/spread",
         "open-membership/open-membership",
-        "about/about"
+        "about/about",
+        "mall-manage/edit-goods",
+        "mall-manage/mall-manage"
       ]
     }
   ],

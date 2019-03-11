@@ -190,7 +190,7 @@ Page({
     that.delDmb()
     that.data.type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: '../edit-page/edit-picture?type=' + that.data.type + '&index=' + that.data.index,
+      url: '../../pages/edit-page/edit-picture?type=' + that.data.type + '&index=' + that.data.index,
     })
   },
 
@@ -304,14 +304,14 @@ Page({
             console.log('标题')
             //var obj = { type: 'title', val: '标题' }
             wx.navigateTo({
-              url: '../edit-page/edit-text?index=' + index + '&type=title'
+              url: '../../pages/edit-page/edit-text?index=' + index + '&type=title'
             })
             break;
           case 1:
             console.log('文本')
             //var obj = { type: 'content', val: '内容' }
             wx.navigateTo({
-              url: '../edit-page/edit-text?index=' + index + '&type=content'
+              url: '../../pages/edit-page/edit-text?index=' + index + '&type=content'
             })
             break;
           case 2:
@@ -346,12 +346,12 @@ Page({
     switch (type) {
       case 'title':
         wx.navigateTo({
-          url: '../edit-page/edit-text?index=' + index + '&type=' + type + '&is_edit=1'
+          url: '../../pages/edit-page/edit-text?index=' + index + '&type=' + type + '&is_edit=1'
         })
         break
       case 'content':
         wx.navigateTo({
-          url: '../edit-page/edit-text?index=' + index + '&type=' + type + '&is_edit=1'
+          url: '../../pages/edit-page/edit-text?index=' + index + '&type=' + type + '&is_edit=1'
         })
         break
       case 'map':
@@ -359,17 +359,17 @@ Page({
         break
       case 'pic':
         wx.navigateTo({
-          url: '../edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
+          url: '../../pages/edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
         })
         break
       case 'grid_pic':
         wx.navigateTo({
-          url: '../edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
+          url: '../../pages/edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
         })
         break
       case 'more_pic':
         wx.navigateTo({
-          url: '../edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
+          url: '../../pages/edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
         })
         break
     }

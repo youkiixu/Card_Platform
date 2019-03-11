@@ -40,7 +40,7 @@ Page({
 
   toPreviewStore: function () {
     wx.navigateTo({
-      url: '../overt/mall?card_id=' + this.data.card_id,
+      url: '../../pages/overt/mall?card_id=' + this.data.card_id,
     })
 
   },
@@ -449,7 +449,7 @@ Page({
         confirmText: '去开通',
         success: function (res) {
           wx.redirectTo({
-            url: '../opt-version/opt-version',
+            url: '../../pages/opt-version/opt-version',
           })
         }
       });

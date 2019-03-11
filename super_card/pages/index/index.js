@@ -298,7 +298,7 @@ Page({
       app.formIds.push(e.detail.formId)
     }
     wx.navigateTo({
-      url: '../mall-manage/mall-manage?card_id=' + this.data.card_id
+      url: '../../pagess/mall-manage/mall-manage?card_id=' + this.data.card_id
     })
   },
 

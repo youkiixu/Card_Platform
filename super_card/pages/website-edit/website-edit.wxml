@@ -20,8 +20,9 @@
         <!-- 设置后 -->
         <image  wx:if="{{ website_logo }}" src='{{ website_logo }}'></image>
       </view>
+      <view class='text-logo'>点击上传logo</view>
     </view>
-    <view class='zd-bt'>
+    <!-- <view class='zd-bt'>
       <view class='zd-tit'>公司名称</view>
       <view class='zd-must' style='color:{{ themeColorV }};'>*</view>
     </view>
@@ -41,7 +42,7 @@
     </view>
     <view class='zd-fill'>
       <input placeholder='请输入店铺所有者' name="owner" value="{{ owner }}" data-field="owner" maxlength="8"  bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
-    </view>
+    </view> -->
     <view class='zd-bt'>
       <view class='zd-tit'>banner图</view>
       <view class='zd-must' style='color:{{ themeColorV }};'>*</view>

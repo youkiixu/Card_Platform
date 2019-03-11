@@ -22,6 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options', options)
     var that = this
   
     if (typeof options.card_id != 'undefined') {
@@ -195,7 +196,7 @@ Page({
   onShareAppMessage: function () {
 
     var title = '欢迎查看 "' + this.data.storeInfo.store_name + '" 的名片商城'
-    var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    var path = '/super_card/pages/overt/mall?card_id=' + this.data.card_id
     var imgUrl = ''
     app.config.cardTrack(this.data.card_id, 4, 'praise')
 

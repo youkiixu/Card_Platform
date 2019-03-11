@@ -836,5 +836,16 @@
     </view>
 </view>
 </view>
+
+<!-- 右边预览名片按钮 -->
+    <view class='return-back' bindtap='previewCard'>
+      <view class='return-index {{ showText === true ? "right-show2" : "right-hide2" }}'>
+        <view class='tips'> 预览名片</view>  
+      </view>
+        <view class='ove-btn btn-return {{ showbtn === true ? "right-show2" : "right-hide2" }} {{ showFilter === true ? "show-filter" : "" }}'>
+          <text class='fmp-pyq iconfont icon-yanjing' style='color:{{ themeColor }};font-size:60rpx;'></text>    
+        </view>
+    </view>
+
 <import src="/super_card/pages/templates/tab-bar.wxml"/>
 <template is="footerWx" data="{{...tabBar}}"/>

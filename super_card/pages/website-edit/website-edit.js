@@ -59,54 +59,56 @@ Page({
       })
       return
     }
+//修改start
+    // if (!that.data.company_name) {
+    //   wx.showToast({
+    //     title: '请输入公司名称',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (!that.data.company_name) {
-      wx.showToast({
-        title: '请输入公司名称',
-        icon: 'none'
-      })
-      return
-    }
+    // if(that.data.company_name.length < 4 || that.data.company_name.length > 16) {
+    //   wx.showToast({
+    //     title: '公司名称长度应该在4至16个字符之内',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if(that.data.company_name.length < 4 || that.data.company_name.length > 16) {
-      wx.showToast({
-        title: '公司名称长度应该在4至16个字符之内',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!that.data.contact) {
+    //   wx.showToast({
+    //     title: '请输入联系方式',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (!that.data.contact) {
-      wx.showToast({
-        title: '请输入联系方式',
-        icon: 'none'
-      })
-      return
-    }
+    // var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+    // if (!myreg.test(that.data.contact)) {
+    //   wx.showToast({
+    //     title: '请输入正确的联系方式(手机号)',
+    //     icon: 'none',
+    //   })
+    //   return
+    // }
 
-    var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-    if (!myreg.test(that.data.contact)) {
-      wx.showToast({
-        title: '请输入正确的联系方式(手机号)',
-        icon: 'none',
-      })
-      return
-    }
+    // if (!that.data.owner) {
+    //   wx.showToast({
+    //     title: '请输入官网所有者',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+    // if (that.data.owner.length < 2 || that.data.owner.length > 8) {
+    //   wx.showToast({
+    //     title: '官网所有者长度应该在2至8个字符之内',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (!that.data.owner) {
-      wx.showToast({
-        title: '请输入官网所有者',
-        icon: 'none'
-      })
-      return
-    }
-    if (that.data.owner.length < 2 || that.data.owner.length > 8) {
-      wx.showToast({
-        title: '官网所有者长度应该在2至8个字符之内',
-        icon: 'none'
-      })
-      return
-    }
+    //修改end
 
     if (!that.data.banner) {
       wx.showToast({
@@ -116,15 +118,26 @@ Page({
       return
     }
 
+    // var data = {
+    //     card_id : that.data.card_id,
+    //     website_name: that.data.website_name,
+    //     website_logo: that.data.website_logo,
+    //     company_name: that.data.company_name,
+    //     contact: that.data.contact,
+    //     owner: that.data.owner,
+    //     banner: that.data.banner,
+    //     pageData: JSON.stringify(that.data.pageData)
+    // }
+
     var data = {
-        card_id : that.data.card_id,
-        website_name: that.data.website_name,
-        website_logo: that.data.website_logo,
-        company_name: that.data.company_name,
-        contact: that.data.contact,
-        owner: that.data.owner,
-        banner: that.data.banner,
-        pageData: JSON.stringify(that.data.pageData)
+      card_id: that.data.card_id,
+      website_name: that.data.website_name,
+      website_logo: that.data.website_logo,
+      company_name: '',
+      contact: '',
+      owner: '',
+      banner: that.data.banner,
+      pageData: JSON.stringify(that.data.pageData)
     }
     
     app.util.request({
@@ -181,7 +194,68 @@ Page({
     }
   },
 
-  choosePic:function (e){
+  // choosePic:function (e){
+  //   var field = e.currentTarget.dataset.field
+  //   var that = this
+  //   wx.chooseImage({
+  //     count: 1, // 默认9
+  //     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+  //     success: function (res) {
+  //       var src = res.tempFilePaths[0]
+  //       wx.compressImage({
+  //         src: src, // 图片路径
+  //         quality: 80, // 压缩质量
+  //         complete: function (){
+
+  //           wx.uploadFile({
+  //             url: app.util.url('entry/wxapp/uploadTempPic'),
+  //             filePath: src,
+  //             name: 'pic',
+  //             header: {
+  //               'content-type': 'multipart/form-data' // 默认值
+  //             },
+  //             formData: {
+  //               'card_id': that.data.card_id
+  //             },
+  //             success: function (res) {
+
+  //               console.log(res)
+  //               res = JSON.parse(res.data)
+  //               if (res.errno == 0) {
+                  
+  //                 if(field == 'banner')
+  //                   that.setData({ banner: res.data.path })
+  //                 else
+  //                   that.setData({ website_logo: res.data.path })
+
+  //               } else {
+
+  //                 wx.showToast({
+  //                   title: res.message,
+  //                   icon: 'none',
+  //                   duration: 2000
+  //                 })
+
+  //               }
+
+
+  //             }
+
+  //           })
+
+
+
+  //         }
+  //       })
+
+  //     }
+  //   })
+
+  // },
+
+
+  choosePic: function (e) {
     var field = e.currentTarget.dataset.field
     var that = this
     wx.chooseImage({
@@ -190,56 +264,56 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         var src = res.tempFilePaths[0]
-        wx.compressImage({
-          src: src, // 图片路径
-          quality: 80, // 压缩质量
-          complete: function (){
+        //wx.compressImage(Object object) 基础库 2.4.0 开始支持，低版本需做兼容处理。
+        if (wx.compressImage) {
+            wx.compressImage({
+              src: src, // 图片路径
+              quality: 80, // 压缩质量
+              complete: function () {
 
-            wx.uploadFile({
-              url: app.util.url('entry/wxapp/uploadTempPic'),
-              filePath: src,
-              name: 'pic',
-              header: {
-                'content-type': 'multipart/form-data' // 默认值
-              },
-              formData: {
-                'card_id': that.data.card_id
-              },
-              success: function (res) {
+                wx.uploadFile({
+                  url: app.util.url('entry/wxapp/uploadTempPic'),
+                  filePath: src,
+                  name: 'pic',
+                  header: {
+                    'content-type': 'multipart/form-data' // 默认值
+                  },
+                  formData: {
+                    'card_id': that.data.card_id
+                  },
+                  success: function (res) {
+                    console.log(res)
+                    res = JSON.parse(res.data)
+                    if (res.errno == 0) {
+                      if (field == 'banner')
+                        that.setData({ banner: res.data.path })
+                      else
+                        that.setData({ website_logo: res.data.path })
+                    } else {
+                      wx.showToast({
+                        title: res.message,
+                        icon: 'none',
+                        duration: 2000
+                      })
 
-                console.log(res)
-                res = JSON.parse(res.data)
-                if (res.errno == 0) {
-                  
-                  if(field == 'banner')
-                    that.setData({ banner: res.data.path })
-                  else
-                    that.setData({ website_logo: res.data.path })
+                    }
+                  }
 
-                } else {
-
-                  wx.showToast({
-                    title: res.message,
-                    icon: 'none',
-                    duration: 2000
-                  })
-
-                }
-
-
+                })
               }
-
             })
-
-
-
-          }
-        })
-
+        } else {
+            wx.showModal({
+              title: '提示',
+              content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+            })
+        }        
       }
     })
 
   },
+
+
 
   //隐藏选择图片展示方式
   delDmb:function(){
@@ -501,7 +575,7 @@ Page({
       app.formIds.push(e.detail.formId)
     }
     wx.navigateTo({
-      url: '../overt/website',
+      url: '../overt/website?card_id=' + this.data.card_id,
     })
 
   },

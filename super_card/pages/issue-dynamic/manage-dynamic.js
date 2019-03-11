@@ -253,7 +253,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
+  onShareAppMessage: function () {
 
-  // }
+    var title = '欢迎查看我的名片动态'
+    var path = '/super_card/pages/overt/dynamic?card_id=' + this.data.card_id
+    var imgUrl = ''
+
+    console.log('path:', path)
+
+
+    app.config.cardTrack(this.data.card_id, 4, 'praise')
+
+    return {
+      title: title,
+      path: path,
+      imageUrl: imgUrl
+    }
+
+  }
 })

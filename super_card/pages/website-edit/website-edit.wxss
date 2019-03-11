@@ -45,16 +45,17 @@
   display: flex;
   align-items: center;
   justify-content:flex-start;
-  padding: 0 30rpx;
-  height: 100rpx;
+  padding: 35rpx 30rpx;
+  /* height: 100rpx; */
   font-size:30rpx;
+  position: relative;
 }
 .zd-fill input{
   flex: 1;
 }
 .ad-logo{
-  width:80rpx;
-  height:80rpx;
+  width:150rpx;
+  height:150rpx;
   border:1px solid #dbdbdb;
   border-radius:10rpx;
   margin-left:20rpx;
@@ -64,13 +65,20 @@
 }
 .ad-logo .iconfont{
   color: #dbdbdb;
-  font-size: 50rpx;
-  line-height: 50rpx;
+  font-size: 120rpx;
+  line-height: 120rpx;
 }
 .ad-logo image{
-  width: 80rpx;
-  height: 80rpx;
+  width: 150rpx;
+  height: 150rpx;
   border-radius: 10rpx;
+}
+.text-logo{
+  color: #dbdbdb;
+  font-size: 24rpx;
+  position: absolute;
+  right: 40rpx;
+  bottom: 0rpx;
 }
 .zd-banner{
   padding: 30rpx;

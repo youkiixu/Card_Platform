@@ -9,27 +9,39 @@ Page({
     card_id : 0,
     dy_index: 0,
 
-    dynamic:{}
+    dynamic:{},
+    dyList:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options', options)
     var that = this
 
     if (!options.card_id) {
       wx.navigateBack()
       return false
     }
-    that.setData({ card_id: options.card_id, dy_index: options.dy_index })
-    
-    var pages = getCurrentPages();
-    that.data.prevPage = pages[pages.length - 2]; // 上一级页
-    
+
+    var dynamic = JSON.parse(options.dyList)
+
     that.setData({
-      dynamic: that.data.prevPage.data.dyList[that.data.dy_index]
-         })
+      card_id: options.card_id,
+      dynamic: dynamic,
+      dyList: options.dyList
+    })
+    console.log('dynamic', that.data.dynamic)
+    // that.setData({ card_id: options.card_id, dy_index: options.dy_index })
+    
+    // var pages = getCurrentPages();
+    // that.data.prevPage = pages[pages.length - 2]; // 上一级页
+    
+    // that.setData({
+    //   dynamic: that.data.prevPage.data.dyList[that.data.dy_index]
+    //      })
+    
 
     app.config.cardTrack(that.data.card_id, 7, 'view', that.data.dynamic.id)
   },
@@ -82,8 +94,10 @@ Page({
   onShareAppMessage: function () {
     
     var title = this.data.dynamic.content.substr(0, 20)
-    var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    // var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    var path = '/super_card/pages/overt/dynamic-details?card_id=' + this.data.card_id + '&dyList=' + this.data.dyList
     var imgUrl = ''
+    console.log('在dynamic-details的path:', path)
 
     app.config.cardTrack(this.data.card_id, 4, 'praise')
 

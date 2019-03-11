@@ -769,6 +769,27 @@ Page({
 
 
   toPostPage: function (e){
+
+    //判断是否为会员，非会员不能开通商城
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
+
+    if (isVip == 0) {
+      wx.showModal({
+        title: '系统提示',
+        content: '您还不是会员，请先开通会员',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '去开通',
+        success: function (res) {
+          wx.redirectTo({
+            url: '../opt-version/opt-version',
+          })
+        }
+      });
+      return
+    }
+
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)

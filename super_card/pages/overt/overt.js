@@ -69,7 +69,8 @@ Page({
     //guideHide:false,
 
     plate_id: '',
-    shownc:false,
+    // shownc:false,
+    shownc: true,
 
     recordingSec: 0,
     recordingSecIntval: false,
@@ -81,7 +82,15 @@ Page({
 
     animationXX:"",
     showecp:true,
-    isAnimationIng:false
+    isAnimationIng:false,
+    showWebBtn:false, //显示红点
+    openWeb:true, //判断是否显示商城在名片信息上
+
+    showbtn: false,
+    showText:false,
+    showFilter:false,
+
+
   },
 
 
@@ -702,7 +711,7 @@ Page({
         
 
         that.setData({ my_userCards: data, my_card_id: data[0].id })
-
+        
       }
     })
 
@@ -807,23 +816,42 @@ Page({
   onLoad: function (options) {
 
     console.log('options', options)
+    var that = this
+
+    //控制返回按钮样式改变 进去页面2秒钟显示，又过了3秒隐藏
+    setTimeout(function () {
+      that.setData({  
+        showbtn: true,
+        showText:true
+      })
+    }, 2000)
+
+    setTimeout(function () {
+      that.setData({
+        showbtn: true,
+        showText: false,
+        showFilter:true
+      })
+    }, 5000)
+
+
   
     var userInfo = wx.getStorageSync('userInfo');
 
     
    //加号返回按钮和小房子返回按钮的切换
-    var pages = getCurrentPages()
-    console.log('pages', pages)
-    var url = pages[0].route
-    console.log('url', url)
-    if (typeof options.from_act !== 'undefined' || url == 'super_card/pages/overt/overt'){
-      this.setData({
-        showBackIndex: true,
-        showHouseIndex: false
-      })
-    }
-    
-    var that = this
+    // var pages = getCurrentPages()
+    // console.log('pages', pages)
+    // var url = pages[0].route
+    // console.log('url', url)
+    // if (typeof options.from_act !== 'undefined' || url == 'super_card/pages/overt/overt'){
+    //   this.setData({
+    //     showBackIndex: true,
+    //     showHouseIndex: false
+    //   })
+    // }
+
+
     
     if (typeof options.scene !== 'undefined') options = app.util.urlToJson(decodeURIComponent(options.scene))
     if(!options.card_id){
@@ -1070,7 +1098,10 @@ Page({
 
            //未开通商城或已开通商城但把商城屏蔽后需要显示的按钮
           if (res.data.data.agent_status == 0 || res.data.data.store_status == 0){
-            that.setData({ noOpen: true })
+            that.setData({ 
+              noOpen: true ,
+              openWeb: false  //已开通商城需要显示的内容
+            })
           }
          
           that.data.isFresh = false
@@ -1090,6 +1121,14 @@ Page({
           that.setData({ cardVideo: that.data.card.video })
 
           var getItemFlag = res.data.message
+          
+
+          //判断用户是否是第一次浏览该名片
+          if (getItemFlag == 'first_view'){
+            that.setData({ showWebBtn: true })
+          }else{
+            that.setData({ showWebBtn: false })
+          }
 
 
 
@@ -1142,6 +1181,7 @@ Page({
             success(res) {
               //console.log(res)
               that.setData({ is_collect: res.data.data, loadingDone: true })
+
               
               if(getItemFlag == 'first_view' && that.data.card.no_perfect != 1){
                 

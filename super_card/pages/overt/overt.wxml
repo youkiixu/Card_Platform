@@ -28,11 +28,29 @@
   <!--view wx:if="{{ showBackIndex === false && show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view-->
 
 <!-- 发送名片显示加号返回首页 -->
-  <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
+  <!-- <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
     <button form-type='submit' class='returnIndex'>
      <text class='suca iconfont icon-add-pluss-'></text>     
     </button>
-  </form>
+  </form> -->
+
+   <!-- 小房子返回首页 -->
+  <!-- <view wx:if="{{ showHouseIndex }}" class='ove-btn' bindtap='toReturnIndex'>
+     <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>
+  </view> -->
+
+  <!-- 返回首页 -->
+    <view class='return-back' bindtap='toReturnIndex'>
+      <view class='return-index {{ showText === true ? "right-show" : "right-hide" }}'>
+        <view class='tips'>{{ my_userCards.length > 0 ? '返回名片后台' : '创建我的名片'}}</view>  
+      </view>
+        <view class='ove-btn btn-return {{ showbtn === true ? "right-show" : "right-hide" }} {{ showFilter === true ? "show-filter" : "" }}'>
+          <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>    
+        </view>
+    </view>
+   
+  
+   
 
 
   <!-- <view wx:if="{{ showCreateBtn === true }}" class="establish-card {{ showecp === true ? 'establish-card-padding' : '' }}" style='background-color:{{ themeColorV }};' animation="{{animationXX}}">
@@ -53,10 +71,7 @@
     <text class='suca iconfont icon-add-pluss-'></text>
   </view>-->
 
-  <!-- 小房子返回首页 -->
-  <view wx:if="{{ showHouseIndex }}" class='ove-btn' bindtap='toReturnIndex'>
-     <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>
-  </view>
+ 
 
   <!--form report-submit='true' wx:if="{{ showCreateBtn === true }}" bindsubmit="toCreateCard">
     <button  class='icon-creation-prompts' form-type='submit'>
@@ -197,6 +212,40 @@
         <text id='card-Tips-job-no' bindtap='showTips' data-plate='{{ card.job_no }}' class='grey'>{{ card.job_no }}</text>
       </view>
     </view>
+
+    <!-- 增加内容start -->
+    <!-- <view class='web-btn' wx:if="{{openWeb == true}}">
+      <view class='file'>
+        <view class='file-top'>
+          <image class='iconfont icon-tag blue' style="color:{{ card.bg_color }};"></image>
+          
+        </view>
+        <view class='file-bottom'>
+          <text id='card-Tips-job-no' bindtap='showTips' class='grey' wx:if="{{ showWebBtn == true }}">商城</text>
+        </view>
+      </view>
+      <view class='file'>
+        <view class='file-top'>
+          <image class='iconfont icon-tag blue' style="color:{{ card.bg_color }};"></image>
+          
+        </view>
+        <view class='file-bottom'>
+          <text id='card-Tips-job-no' bindtap='showTips' class='grey' wx:if="{{ showWebBtn == true }}">动态</text>
+        </view>
+      </view>
+      <view class='file'>
+        <view class='file-top'>
+          <image class='iconfont icon-tag blue' style="color:{{ card.bg_color }};"></image>
+          
+        </view>
+        <view class='file-bottom'>
+          <text id='card-Tips-job-no' bindtap='showTips' class='grey' wx:if="{{ showWebBtn == true }}">官网</text>
+        </view>
+      </view>
+    </view>   -->
+    <!-- 增加内容end -->
+
+
     </block>
     <view style="border-color:{{card.bg_color}};" wx:if="{{card.bg_music}}" class='music'>
           <text style="color:{{card.bg_color}};" bindtap="{{ playMusic === false ? 'playMusicAct' : 'stopMusicAct' }}" class="music-i {{ playMusic === true ? 'music-run' : '' }}">♬</text>
@@ -386,12 +435,41 @@
           <view class='new-card-copy' data-id='card-Tips-job-no' data-copytent='{{ card.job_no }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
         </view>
       </view>
+
+    <!-- 增加内容satrt -->
+
+    <!-- <view class='web-btn' wx:if="{{openWeb == true}}">
+      <view class='new-card-act'>
+        <view class='new-card-act-l'>商城</view>
+        <view class='new-card-act-r'>
+          <view class='new-card-content'  wx:if="{{ showWebBtn == true }}">商城</view>
+        </view>
+      </view>
+
+      <view class='new-card-act'>
+        <view class='new-card-act-l'>动态</view>
+        <view class='new-card-act-r'>
+          <view class='new-card-content'  wx:if="{{ showWebBtn == true }}">动态</view>
+        </view>
+      </view>
+
+      <view class='new-card-act'>
+        <view class='new-card-act-l'>官网</view>
+        <view class='new-card-act-r'>
+          <view class='new-card-content'  wx:if="{{ showWebBtn == true }}">官网</view>
+        </view>
+      </view>
+    </view> -->
+
+    <!-- 增加内容end -->
+
     </view>
+
   </view>
   <!-- 全部信息  横排-->
   <view class='new-card-xx' wx:if="{{  card.style == 2  }}">
     <view class='new-card-act-top' bindtap='showNewCard'>
-      <view class='new-card-sh'>展开全部名片信息</view>
+      <view class='new-card-sh'>{{ shownc === false ? '展开' : '收起' }}全部名片信息</view>
       <text class="{{ shownc ===false?'trans':'' }} iconfont icon-jiantouarrow483"></text>
     </view>
     <!-- 横排 -->

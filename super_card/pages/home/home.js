@@ -190,7 +190,7 @@ Page({
       app.formIds.push(e.detail.formId)
     }
     wx.navigateTo({
-      url: '../about/about'
+      url: '../../pagess/about/about'
     })
   },
 

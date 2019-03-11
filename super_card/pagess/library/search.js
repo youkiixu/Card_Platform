@@ -92,17 +92,6 @@ Page({
     this.data.page = 1
     this.setData({ showHistory: false, searchKey: e.currentTarget.dataset.key })
     this.getPubAll() //全部数据
-    //清空一次数据，防止搜索的时候重复加载
-    this.setData({
-      cateCardList: [],
-      cateWebsite: [],
-      cateProduct: [],
-      cateDemand: [],
-      cateCardListDataCopy: [],
-      cateWebsiteDataCopy: [],
-      cateProductDataCopy: [],
-      cateDemandDataCopy: []
-    })
     this.getCardInfo() //名片数据
     this.getPubStore() //商城数据
     this.getPubProduct()//产品数据
@@ -113,7 +102,9 @@ Page({
   tabClick: function (e) { 
     var id = e.target.dataset.id 
     this.setData({
-      activeCategoryId: id
+      activeCategoryId: id,
+      page: 1,
+      lastPage:false
     });
   },
 
@@ -347,7 +338,7 @@ Page({
 
 
 // 名片数据方法start  渲染的时候记得写对相对于的数据进行渲染 即cateCardListDataCopy
-  getCardInfo: function () {
+  getCardInfo: function (isload) {
     var that = this;
     var data = {
       page: that.data.page,
@@ -367,8 +358,15 @@ Page({
           that.data.lastPage = true
           return false
         }
-        that.data.cateCardList = that.data.cateCardList.concat(res.data.data)
-
+        //isload==true表示是在页面上拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
+        if (isload == true) {
+          that.data.cateCardList = that.data.cateCardList.concat(res.data.data)
+        } else {
+          that.setData({
+            cateCardList: []
+          })
+          that.data.cateCardList = res.data.data
+        }   
         that.setData({
           cateCardList: that.data.cateCardList,
           cateCardListDataCopy: that.data.cateCardList
@@ -397,7 +395,7 @@ Page({
   // 名片数据方法end
 
   // 商城列表数据方法start
-  getPubStore: function () {
+  getPubStore: function (isload) {
     var that = this;
     var data = {
       page: that.data.page,
@@ -417,8 +415,15 @@ Page({
           that.data.lastPage = true
           return false
         }
-        that.data.cateWebsite = that.data.cateWebsite.concat(res.data.data)
-
+        //isload==true表示是在页面上拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
+        if (isload == true) {
+          that.data.cateWebsite = that.data.cateWebsite.concat(res.data.data)
+        } else {
+          that.setData({
+            cateWebsite: []
+          })
+          that.data.cateWebsite = res.data.data
+        }   
         that.setData({
           cateWebsite: that.data.cateWebsite,
           cateWebsiteDataCopy: that.data.cateWebsite
@@ -445,7 +450,7 @@ Page({
   // 商城列表数据方法end
 
   // 产品列表数据方法start
-  getPubProduct: function () {
+  getPubProduct: function (isload) {
     var that = this;
     var data = {
       page: that.data.page,
@@ -465,8 +470,15 @@ Page({
           that.data.lastPage = true
           return false
         }
-        that.data.cateProduct = that.data.cateProduct.concat(res.data.data)
-
+        //isload==true表示是在页面上拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
+        if (isload == true) {
+          that.data.cateProduct = that.data.cateProduct.concat(res.data.data)
+        } else {
+          that.setData({
+            cateProduct: []
+          })
+          that.data.cateProduct = res.data.data
+        }         
         that.setData({
           cateProduct: that.data.cateProduct,
           cateProductDataCopy: that.data.cateProduct
@@ -492,7 +504,7 @@ Page({
 
 
   // 需求信息数据方法start
-  getPubSquare: function () {
+  getPubSquare: function (isload) {
     var that = this;
     var data = {
       page: that.data.page,
@@ -512,8 +524,15 @@ Page({
           that.data.lastPage = true
           return false
         }
-        that.data.cateDemand = that.data.cateDemand.concat(res.data.data)
-
+        //isload==true表示是在页面上拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
+        if (isload == true) {
+          that.data.cateDemand = that.data.cateDemand.concat(res.data.data)
+        } else {
+          that.setData({
+            cateDemand: []
+          })
+          that.data.cateDemand = res.data.data
+        }              
         that.setData({
           cateDemand: that.data.cateDemand,
           cateDemandDataCopy: that.data.cateDemand
@@ -582,17 +601,7 @@ Page({
       this.setData({ showHistory: false })
       this.data.lastPage = false
       this.data.page = 1
-      //清空一次数据，防止搜索的时候重复加载
-      this.setData({
-        cateCardList: [],
-        cateWebsite: [],
-        cateProduct: [],
-        cateDemand: [],
-        cateCardListDataCopy: [],
-        cateWebsiteDataCopy: [],
-        cateProductDataCopy: [],
-        cateDemandDataCopy: []
-      })
+      
       this.getPubAll() //原本的  全部数据
       this.getCardInfo() //名片数据
       this.getPubStore() //商城数据
@@ -619,17 +628,7 @@ Page({
       this.setData({ showHistory: false })
       this.data.lastPage = false
       this.data.page = 1
-      //清空一次数据，防止搜索的时候重复加载
-      this.setData({
-        cateCardList: [],
-        cateWebsite: [],
-        cateProduct: [],
-        cateDemand: [],
-        cateCardListDataCopy: [],
-        cateWebsiteDataCopy: [],
-        cateProductDataCopy: [],
-        cateDemandDataCopy: []
-      })
+      
       this.getPubAll() //原本的  全部数据
       this.getCardInfo() //名片数据
       this.getPubStore() //商城数据
@@ -718,19 +717,6 @@ Page({
     this.getPubAll(function () {
       wx.stopPullDownRefresh()
     })  //全部数据
-
-    //清空一次数据，防止下拉的时候重复加载
-    this.setData({
-      cateCardList: [],
-      cateWebsite: [],
-      cateProduct: [],
-      cateDemand: [],
-      cateCardListDataCopy: [],
-      cateWebsiteDataCopy: [],
-      cateProductDataCopy: [],
-      cateDemandDataCopy: []
-    })
-    
      this.getCardInfo() //名片数据
      this.getPubStore() //商城数据
      this.getPubProduct()//产品数据
@@ -758,10 +744,11 @@ Page({
 
     }, 'append')
 
-     this.getCardInfo() //名片数据
-     this.getPubStore() //商城数据
-     this.getPubProduct()//产品数据
-     this.getPubSquare()//需求数据
+     this.getCardInfo(true) //名片数据
+    this.getPubStore(true) //商城数据
+    this.getPubProduct(true)//产品数据
+    this.getPubSquare(true)//需求数据
+     
 
   },
 

@@ -50,14 +50,17 @@
 .basic-jb{
   margin-top: 5px;
   background-color: #fff;
-  padding: 20rpx 30rpx;
+  padding: 40rpx 30rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .s-logo{
-  width: 80rpx;
-  height: 80rpx;
+  /* width: 80rpx;
+  height: 80rpx; */
+  width: 150rpx;
+  height: 150rpx;
   border: 1px solid #dbdbdb;
   border-radius: 50%;
   margin-right: 20rpx;
@@ -67,17 +70,24 @@
 }
 .s-logo .iconfont{
   color: #dbdbdb;
-  font-size: 50rpx;
-  line-height: 50rpx;
+  font-size: 120rpx;
+  line-height: 120rpx;
 }
 .s-logo image{
-  width: 80rpx;
-  height: 80rpx;
+  width: 150rpx;
+  height: 150rpx;
   border-radius: 50%;
 }
 .basic-name{
   flex: 1;
-  font-size: 28rpx;
+  font-size: 34rpx;
+}
+.text-logo{
+  color: #dbdbdb;
+  font-size: 24rpx;
+  position: absolute;
+  left: 35rpx;
+  bottom: 0rpx;
 }
 .explain{
   font-size: 30rpx;

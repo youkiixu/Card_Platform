@@ -77,12 +77,17 @@ Page({
     hideSwitchCard : true,
     hideSwitchStyle: true,
 
-    shownc: false,
+    // shownc: false,
+    shownc: true,
     plate_id: '',
 
     cardStyle: 1,
     recordingSec:0,
-    recordingSecIntval:false
+    recordingSecIntval:false,
+
+    showbtn: false,
+    showText: false,
+    showFilter: false,
   },
 
   toPerfectCard:function (){
@@ -907,6 +912,23 @@ Page({
     
     var that = this;
 
+    //控制预览名片按钮样式改变 进去页面2秒钟显示，又过了3秒隐藏
+    setTimeout(function () {
+      that.setData({
+        showbtn: true,
+        showText: true
+      })
+    }, 2000)
+
+    setTimeout(function () {
+      that.setData({
+        showbtn: true,
+        showText: false,
+        showFilter: true
+      })
+    }, 5000)
+
+
 
     //console.log(options)
 
@@ -1100,9 +1122,29 @@ Page({
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
     }
-    wx.navigateTo({
-      url: '../pat-card/pat-card'
-    })
+    //判断是否为会员，非会员不能开通商城
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
+    if (isVip == 0) {
+      wx.showModal({
+        title: '系统提示',
+        content: '您还不是会员，请先开通会员',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '去开通',
+        success: function (res) {
+          wx.redirectTo({
+            url: '../opt-version/opt-version',
+          })
+        }
+      });
+      return
+    }else{
+      wx.navigateTo({
+        url: '../pat-card/pat-card'
+      })
+    }
+    
   },
 
   /**

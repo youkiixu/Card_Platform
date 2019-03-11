@@ -185,11 +185,9 @@ Page({
         duration: 300
       })
     } else {
-
       wx.showToast({
         title: '暂不支持',
       })
-
     }
   },
 

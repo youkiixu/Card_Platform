@@ -72,6 +72,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options', options)
     var that = this
 
 
@@ -182,11 +183,10 @@ Page({
   onShareAppMessage: function () {
 
     var title = '欢迎查看"' + this.data.website.website_name +'"的名片官网'
-    var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    var path = '/super_card/pages/overt/website?card_id=' + this.data.card_id
     var imgUrl = ''
 
     app.config.cardTrack(this.data.card_id, 4, 'praise')
-
     return {
       title: title,
       path: path,

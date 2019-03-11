@@ -26,6 +26,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+    console.log('options', options)
     var that = this
 
     if (!options.card_id) {
@@ -38,6 +40,7 @@ Page({
     app.config.cardTrack(that.data.card_id, 3, 'view')
 
     that.getCardDynamic();
+    
   },
 
   //监听页面滚动
@@ -218,8 +221,19 @@ Page({
         that.setData({
           dyList: that.data.dyList,
         })
+        console.log('dyList', that.data.dyList)
 
       }
+    })
+
+  },
+  toDetails:function(e){
+    var that = this;
+    var id = e.currentTarget.dataset.id
+    var dyList = that.data.dyList[id]
+    dyList = JSON.stringify(dyList)
+    wx.navigateTo({
+      url: 'dynamic-details?card_id=' + that.data.card_id + '&dyList=' + dyList
     })
 
   },
@@ -296,8 +310,12 @@ Page({
   onShareAppMessage: function () {
 
     var title = this.data.dyList.length > 0 ? '欢迎查看"' + this.data.dyList[0].company +'"的名片动态' : ''
-    var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    // var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+    var path = '/super_card/pages/overt/dynamic?card_id=' + this.data.card_id 
     var imgUrl = ''
+
+    console.log('在dynamic的path:', path)
+    
 
     app.config.cardTrack(this.data.card_id, 4, 'praise')
     

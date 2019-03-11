@@ -20,8 +20,8 @@
           </view>      
           <button class='dy-share' open-type='share' style='color:{{ themeColor }};'>转发</button>
         </view>
-        <navigator url='../../pages/overt/dynamic-details?card_id={{ card_id }}&dy_index={{ dydx }}'>
-          <view class='dy-content'>
+        
+          <view class='dy-content' bindtap='toDetails' data-id="{{ dydx }}">
             <!-- 单张 -->
             <view class='img-alone' wx:if="{{ dy.pics.length < 2 }}">
               <image lazy-load="true" class='dy-con-img'  wx:key="dyPics" wx:for="{{ dy.pics }}" wx:for-index="dypdx" wx:for-item="pic" src='{{ pic }}' mode='widthFix'></image>
@@ -33,8 +33,7 @@
             </view>
             <text class='dy-con-in'>{{ dy.list_content }}</text>
             <text class='sjx'></text>
-          </view>
-        </navigator>
+          </view> 
         <view class='dy-ckxq'>
           <view class='dy-ckxq-l'>
             <view class='dy-ckxq-con'>

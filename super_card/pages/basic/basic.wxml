@@ -21,10 +21,10 @@
           <icon class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-right:10rpx;'></icon>
           <input placeholder="姓名 2~8个字" maxlength="8"  type="text" name="name" value="{{ name }}"/>
         </view>
-        <view class='base_phone'>
+        <view class='base_phone' bindtap='showTelType'>
           <icon class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-right:10rpx;'></icon>
           <input type="number" maxlength="11" disabled="{{ mobileInputDisable }}" placeholder="{{ mobileInputHolder }}" name="mobile" value="{{ mobile }}" bindinput='setUserMobile' />
-          <text wx:if="{{ showMobileTypeArrow }}" class="cl img_down iconfont icon-caret-right-copy-copy" style='color:{{ themeColor }};' bindtap='showTelType'></text>
+          <text wx:if="{{ showMobileTypeArrow }}" class="cl img_down iconfont icon-caret-right-copy-copy" style='color:{{ themeColor }};' ></text>
           <!-- <image class='img_down' src='../../resource/icon/group.png' bindtap='showTelType'></image> -->
         </view>
       </view>

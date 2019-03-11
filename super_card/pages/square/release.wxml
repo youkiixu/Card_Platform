@@ -8,7 +8,8 @@
           <text class='iconfont icon-jiaxing'></text>
         </view>
         <view class='type-r' bindtap='showTypesSelection'>
-          <input disabled='true' placeholder='选择类型' type='text' value='{{ typeKey }}' placeholder-style="color: {{ themeColor }}"></input>
+          <!-- <input disabled='true' placeholder='选择类型' type='text' value='{{ typeKey }}' placeholder-style="color: {{ themeColor }}"></input> -->
+          <input disabled='true'  type='text' value='{{ typeKey }}' placeholder-style="color: {{ themeColor }}"></input>
           <text class='trans iconfont icon-jiantouarrow483'></text>
         </view>
       </view>

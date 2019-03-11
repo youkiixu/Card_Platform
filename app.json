@@ -22,7 +22,6 @@
     "super_card/pages/preview/preview",
     "super_card/pages/group-manage/group-manage",
     "super_card/pages/group-modify/group-modify",
-    "super_card/pages/about/about",
     "super_card/pages/pat-card/pat-card",
     "super_card/pages/return-record/return-record",
     "super_card/pages/recognition/recognition",
@@ -105,7 +104,8 @@
         "company-login/company-login",
         "cash-details/cash-details",
         "spread/spread",
-        "open-membership/open-membership"
+        "open-membership/open-membership",
+        "about/about"
       ]
     }
   ],

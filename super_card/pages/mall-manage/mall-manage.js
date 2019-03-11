@@ -40,7 +40,7 @@ Page({
 
   toPreviewStore: function () {
     wx.navigateTo({
-      url: '../overt/mall',
+      url: '../overt/mall?card_id=' + this.data.card_id,
     })
 
   },
@@ -192,7 +192,7 @@ Page({
 
     if (that.data.store_name.length < 2 || that.data.store_name.length > 16) {
       wx.showToast({
-        title: '官网名称长度应该在2至16个字符之内',
+        title: '店铺名称长度应该在2至16个字符之内',
         icon: 'none'
       })
       return
@@ -207,88 +207,92 @@ Page({
       return
     }
 
-    if (!that.data.store_introduce) {
-      wx.showToast({
-        title: '请输入店铺简介',
-        icon: 'none'
-      })
-      return
-    }
+    //修改start
+    // if (!that.data.store_introduce) {
+    //   wx.showToast({
+    //     title: '请输入店铺简介',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (that.data.store_introduce.length < 4 || that.data.store_introduce.length > 140) {
-      wx.showToast({
-        title: '公司简介长度应该在4至140个字符之内',
-        icon: 'none'
-      })
-      return
-    }
+    // if (that.data.store_introduce.length < 4 || that.data.store_introduce.length > 140) {
+    //   wx.showToast({
+    //     title: '公司简介长度应该在4至140个字符之内',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (!that.data.add_date) {
-      wx.showToast({
-        title: '请选择成立日期',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!that.data.add_date) {
+    //   wx.showToast({
+    //     title: '请选择成立日期',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (!that.data.address) {
-      wx.showToast({
-        title: '请选择店铺地址',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!that.data.address) {
+    //   wx.showToast({
+    //     title: '请选择店铺地址',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
 
 
-    if (!that.data.store_business) {
-      wx.showToast({
-        title: '请输入您的主营业务',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!that.data.store_business) {
+    //   wx.showToast({
+    //     title: '请输入您的主营业务',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (that.data.store_business.length < 4 || that.data.store_business.length > 200) {
-      wx.showToast({
-        title: '主营业务长度应该在4至200个字符之内',
-        icon: 'none'
-      })
-      return
-    }
+    // if (that.data.store_business.length < 4 || that.data.store_business.length > 200) {
+    //   wx.showToast({
+    //     title: '主营业务长度应该在4至200个字符之内',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (!that.data.store_contact) {
-      wx.showToast({
-        title: '请输入联系方式',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!that.data.store_contact) {
+    //   wx.showToast({
+    //     title: '请输入联系方式',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-    if (!myreg.test(that.data.store_contact)) {
-      wx.showToast({
-        title: '请输入正确的联系方式(手机号)',
-        icon: 'none',
-      })
-      return
-    }
+    // var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+    // if (!myreg.test(that.data.store_contact)) {
+    //   wx.showToast({
+    //     title: '请输入正确的联系方式(手机号)',
+    //     icon: 'none',
+    //   })
+    //   return
+    // }
 
-    if (!that.data.store_owner) {
-      wx.showToast({
-        title: '请输入店铺所有者',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!that.data.store_owner) {
+    //   wx.showToast({
+    //     title: '请输入店铺所有者',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
-    if (that.data.store_owner.length < 2 || that.data.store_owner.length > 8) {
-      wx.showToast({
-        title: '店铺所有者长度应该在2至8个字符之内',
-        icon: 'none'
-      })
-      return
-    }
+    // if (that.data.store_owner.length < 2 || that.data.store_owner.length > 8) {
+    //   wx.showToast({
+    //     title: '店铺所有者长度应该在2至8个字符之内',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+
+    //修改end
+
 
     /*if (that.data.store_banner.length < 1) {
       wx.showToast({
@@ -298,18 +302,33 @@ Page({
       return
     }*/
 
+    // var data = {
+    //   card_id: that.data.card_id,
+    //   store_name: that.data.store_name,
+    //   store_logo: that.data.store_logo,
+    //   store_introduce: that.data.store_introduce,
+    //   add_date: that.data.add_date,
+    //   address: that.data.address,
+    //   latitude: that.data.latitude,
+    //   longitude: that.data.longitude,
+    //   store_business: that.data.store_business,
+    //   store_contact: that.data.store_contact,
+    //   store_owner: that.data.store_owner,
+    //   store_banner: that.data.store_banner,
+    // }
+
     var data = {
       card_id: that.data.card_id,
       store_name: that.data.store_name,
       store_logo: that.data.store_logo,
-      store_introduce: that.data.store_introduce,
-      add_date: that.data.add_date,
-      address: that.data.address,
-      latitude: that.data.latitude,
-      longitude: that.data.longitude,
-      store_business: that.data.store_business,
-      store_contact: that.data.store_contact,
-      store_owner: that.data.store_owner,
+      store_introduce: '',
+      add_date: '',
+      address: '',
+      latitude: '',
+      longitude: '',
+      store_business: '',
+      store_contact: '',
+      store_owner: '',
       store_banner: that.data.store_banner,
     }
 
@@ -529,36 +548,116 @@ Page({
     })
   },
 
+//原始代码
+  // setField: function (e) {
+  //   //console.log(e)
+  //   var that = this
+  //   var field = e.target.dataset.field
+  //   console.log(field)
+  //   switch (field) {
+  //     case 'store_name':
+  //       that.data.store_name = e.detail.value
+  //       break
+  //     case 'store_introduce':
+  //       that.data.store_introduce = e.detail.value
+  //       break
+  //     case 'address':
+  //       that.data.address = e.detail.value
+  //       break
+  //     case 'store_business':
+  //       that.data.store_business = e.detail.value
+  //       break
+  //     case 'store_contact':
+  //       that.data.store_contact = e.detail.value
+  //       break
+  //     case 'store_owner':
+  //       that.data.store_owner = e.detail.value
+  //       break
+  //   }
+  // },
+
+
+  //修改后
   setField: function (e) {
     //console.log(e)
     var that = this
     var field = e.target.dataset.field
-    console.log(field)
-    switch (field) {
-      case 'store_name':
-        that.data.store_name = e.detail.value
-        break
-      case 'store_introduce':
-        that.data.store_introduce = e.detail.value
-        break
-      case 'address':
-        that.data.address = e.detail.value
-        break
-      case 'store_business':
-        that.data.store_business = e.detail.value
-        break
-      case 'store_contact':
-        that.data.store_contact = e.detail.value
-        break
-      case 'store_owner':
-        that.data.store_owner = e.detail.value
-        break
-    }
+    console.log(field) 
+    that.data.store_name = e.detail.value  
   },
 
-  choosePic:function (e){
-    console.log('选择图片：',e)
+//原始代码
+  // choosePic:function (e){
+  //   console.log('选择图片：',e)
 
+  //   var field = e.currentTarget.dataset.field
+  //   var that = this
+  //   wx.chooseImage({
+  //     count: 1, // 默认9
+  //     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+  //     success: function (res) {
+  //       var src = res.tempFilePaths[0]
+  //       console.log('chooseImage-res:',res)
+  //       wx.compressImage({
+  //         src: src, // 图片路径
+  //         quality: 80, // 压缩质量
+  //         complete: function (){
+  //           wx.showLoading({
+  //             title: '正在上传...',
+  //           })
+
+  //           wx.uploadFile({
+  //             url: app.util.url('entry/wxapp/uploadTempPic'),
+  //             filePath: src,
+  //             name: 'pic',
+  //             header: {
+  //               'content-type': 'multipart/form-data' // 默认值
+  //             },
+  //             formData: {
+  //               'card_id': that.data.card_id
+  //             },
+  //             success: function (res) {
+  //               wx.hideLoading()
+
+  //               console.log(res)
+  //               res = JSON.parse(res.data)
+  //               if (res.errno == 0) {
+                
+  //                   that.setData({ store_logo: res.data.path })
+
+  //               } else {
+  //                 wx.showToast({
+  //                   title: res.message,
+  //                   icon: 'none',
+  //                   duration: 2000
+  //                 })
+
+  //               }
+
+                
+
+
+  //             }
+
+  //           })
+
+
+
+  //         }
+  //       })
+
+  //     }
+  //   })
+
+  // },
+
+  
+
+
+
+  //修改后
+  choosePic: function (e) {
     var field = e.currentTarget.dataset.field
     var that = this
     wx.chooseImage({
@@ -567,49 +666,61 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         var src = res.tempFilePaths[0]
-        console.log('chooseImage-res:',res)
-        wx.compressImage({
-          src: src, // 图片路径
-          quality: 80, // 压缩质量
-          complete: function (){
+        //wx.compressImage(Object object) 基础库 2.4.0 开始支持，低版本需做兼容处理。
+        if (wx.compressImage) {
+            wx.compressImage({
+              src: src, // 图片路径
+              quality: 80, // 压缩质量
+              complete: function () {
+                wx.showLoading({
+                  title: '正在上传...',
+                })
 
-            wx.uploadFile({
-              url: app.util.url('entry/wxapp/uploadTempPic'),
-              filePath: src,
-              name: 'pic',
-              header: {
-                'content-type': 'multipart/form-data' // 默认值
-              },
-              formData: {
-                'card_id': that.data.card_id
-              },
-              success: function (res) {
+                wx.uploadFile({
+                  url: app.util.url('entry/wxapp/uploadTempPic'),
+                  filePath: src,
+                  name: 'pic',
+                  header: {
+                    'content-type': 'multipart/form-data' // 默认值
+                  },
+                  formData: {
+                    'card_id': that.data.card_id
+                  },
+                  success: function (res) {
+                    wx.hideLoading()
 
-                console.log(res)
-                res = JSON.parse(res.data)
-                if (res.errno == 0) {
-                
-                    that.setData({ store_logo: res.data.path })
+                    console.log(res)
+                    res = JSON.parse(res.data)
+                    if (res.errno == 0) {
 
-                } else {
+                      that.setData({ store_logo: res.data.path })
 
-                  wx.showToast({
-                    title: res.message,
-                    icon: 'none',
-                    duration: 2000
-                  })
+                    } else {
+                      wx.showToast({
+                        title: res.message,
+                        icon: 'none',
+                        duration: 2000
+                      })
 
-                }
+                    }
+
+
+
+
+                  }
+
+                })
+
 
 
               }
-
             })
-
-
-
-          }
-        })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+          })
+        }
 
       }
     })

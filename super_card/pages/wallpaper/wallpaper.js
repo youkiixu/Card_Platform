@@ -55,9 +55,8 @@ Page({
         wx.downloadFile({
           url: res.data.data, //仅为示例，并非真实的资源
           success: function (res) {
-            wx.hideLoading()            
-            console.log('下载后')
-            console.log(res)
+            wx.hideLoading()       
+            console.log('下载后:',res)
             // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
             if (res.statusCode === 200) {
               that.setData({ btnDis: false })
@@ -70,6 +69,7 @@ Page({
                   })
                  }
               })
+              console.log(res.tempFilePath)
             }
             app.util.request({
               'url': 'entry/wxapp/delTempAudio',
@@ -81,7 +81,6 @@ Page({
 
           },
           fail: function (res){
-            console.log(res)
             wx.showToast({
               title: '获取海报图失败',
               icon: 'none'

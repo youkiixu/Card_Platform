@@ -88,6 +88,8 @@ Page({
     showbtn: false,
     showText: false,
     showFilter: false,
+    switchValue:true,
+    showCate:false,
   },
 
   toPerfectCard:function (){
@@ -99,6 +101,28 @@ Page({
   editAvatar: function (){
     wx.navigateTo({
       url: '../avatar/avatar?card_id='+ this.data.card_id + '&from_index=1',
+    })
+  },
+// 右边设置按钮的分类显示与隐藏
+  showHideCate:function(){
+    var that = this
+    if (that.data.showCate === false) {
+      that.setData({ showCate: true })
+    } else {
+      that.setData({ showCate: false })
+    }
+  },
+
+// 欢迎语音播报开关
+  switchChange(e) {
+    var that =this;
+    var switchValue = e.detail.value
+    that.setData({ 
+        switchValue: switchValue
+       })
+    wx.setStorage({
+      key: 'switchValue',
+      data: switchValue
     })
   },
 
@@ -208,10 +232,36 @@ Page({
   },
   //拍名片
   showTakeCard:function(){
-    wx.navigateTo({
-      url: '../pat-card/camera-card',
-    })
-    this.hideModal()
+    var that = this;
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+
+    //判断是否为会员，非会员不能拍名片
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
+    if (isVip == 0) {
+      wx.showModal({
+        title: '系统提示',
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
+        confirmColor: '#f90',
+        confirmText: iosPay ? '去开通' : '知道了',
+        success: function (res) {
+          if (res.confirm) {
+            iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }       
+        }
+      });
+      return
+    }else{
+      wx.navigateTo({
+        url: '../pat-card/camera-card',
+      })
+      that.hideModal()
+    }
+    
   },
 
   // 显示遮罩层  
@@ -500,7 +550,7 @@ Page({
   //预览别人看到自己的名片显示的样子
   previewCard:function(){
     console.log('this.data.card_id ', this.data.card_id )
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../overt/overt?card_id=' + this.data.card_id + '&from_act=other'
     })
     
@@ -988,8 +1038,25 @@ Page({
             that.setData({ recordingSec: 0, playMusic: false, playAudio: false })
           })
 
-          that.playWelcomeAudio()
+          wx.getStorage({
+            key: 'switchValue',
+            success(res) {
+              console.log('switchValue获取成功',res.data)
+              that.setData({ switchValue: res.data })
+            },
+            fail:function(res){
+              that.setData({ switchValue: true })
+              wx.setStorage({
+                key: 'switchValue',
+                data: that.data.switchValue
+              })
+              console.log('switchValue获取失败', that.data.switchValue)
+            }
+          })
 
+          if (that.data.switchValue == true) {
+            that.playWelcomeAudio()  //语音播报方法
+          }  
         }
       })
       
@@ -1061,8 +1128,17 @@ Page({
 
         console.log(res)
         if(res.data.message == 'ok'){
-          that.data.audioCtx.src = res.data.data
-          that.data.audioCtx.play()
+
+          
+            that.data.audioCtx.src = res.data.data
+            that.data.audioCtx.play()
+          
+          // if (that.data.switchValue == true){
+          //   that.data.audioCtx.src = res.data.data
+          //   that.data.audioCtx.play()
+          // }else{
+          //   console.log('语音播报按钮已关闭')
+          // }   
         }
 
       }
@@ -1118,24 +1194,31 @@ Page({
   },
 
   toPatCardPage: function (e) {
+    var that = this;
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
     }
-    //判断是否为会员，非会员不能开通商城
+
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+
+    //判断是否为会员，非会员不能拍名片
     var getUserInfo = wx.getStorageSync('getUserInfo');
     var isVip = getUserInfo.vip;
     if (isVip == 0) {
       wx.showModal({
         title: '系统提示',
-        content: '您还不是会员，请先开通会员',
-        showCancel: false,
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
         confirmColor: '#f90',
-        confirmText: '去开通',
+        confirmText: iosPay ? '去开通' : '知道了',
         success: function (res) {
-          wx.redirectTo({
-            url: '../opt-version/opt-version',
-          })
+          if (res.confirm) {
+            iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }
         }
       });
       return
@@ -1426,6 +1509,8 @@ Page({
           app.util.request({
             'url': 'entry/wxapp/isCanCreateBg',
             success(res) {
+              
+              console.log('uInfo', uInfo)
               //console.log(res)
               if (res.data.message === 'ok'){
                 wx.navigateTo({
@@ -1433,9 +1518,11 @@ Page({
                 })
               }else{
                 var uInfo = res.data.data
+                var money = 0
+                var bg_num = 0
                 console.log(uInfo)
                 wx.navigateTo({
-                  url: '../../pagess/payment/payment-custom?umoney='+ uInfo.money +'&bgnum='+ uInfo.bg_num +'&card_id=' + that.data.card_id
+                  url: '../../pagess/payment/payment-custom?umoney=' + (uInfo == null ? money : uInfo.money) + '&bgnum=' + (uInfo == null ? bg_num : uInfo.bg_num) +'&card_id=' + that.data.card_id
                 })
               }
               return

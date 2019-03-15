@@ -240,3 +240,13 @@
 .img-small .img-total:nth-child(even){
   margin-left: 2vw;
 }
+.b-i{
+  width: 750rpx;
+  color: #848692;
+  background-color: #fff;
+  padding:10rpx 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}

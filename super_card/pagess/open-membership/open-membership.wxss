@@ -97,7 +97,7 @@ page{
   line-height: 38rpx;
 }
 .act-lm-con{
-  font-size: 34rpx;
+  font-size: 32rpx;
   word-break:break-all;
   text-align: left;
 }

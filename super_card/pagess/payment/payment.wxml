@@ -1,12 +1,13 @@
 <!--super_card/pages/payment/payment.wxml-->
 <view class='contains'>
-  <view class='top'>创建名片需支付￥{{ total_fee }}/张</view>
-  <view class='change'>
+  <view class='top' wx:if="{{ iosPay == true }}">创建名片需支付￥{{ total_fee }}/张</view>
+  <view class='change' wx:if="{{ iosPay == true }}">
     <view class='up'>
       <checkbox-group bindchange="changeMoneyPay">
         <label>
-            <checkbox color="{{ themeColor }}" name="moneyPay" disabled='{{ uMoney > 0 ? false : true }}' value="1" checked = "{{ uMoney > 0 ? true : false }}"></checkbox>
-              <text>余额支付￥{{ money }}</text>
+            <!-- <checkbox color="{{ themeColor }}" name="moneyPay" disabled='{{ uMoney > 0 ? false : true }}' value="1" checked = "{{ uMoney > 0 ? true : false }}"></checkbox> -->
+            <checkbox color="{{ themeColor }}" name="moneyPay"  value="1" checked></checkbox>
+              <text>积分支付￥{{ money }}</text>
         </label>   
       </checkbox-group>
     </view>
@@ -15,16 +16,27 @@
     </view>
   </view>
 
-  <view class='btn-submit'>
+  <view class='iospay' style='padding: 20rpx;font-size: 30rpx;' wx:if="{{ iosPay == false }}">
+    不可服务
+  </view>
+
+  <view class='btn-submit' wx:if="{{ iosPay == true }}">
     <form report-submit='true' bindsubmit="confirmPay">
     <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>确认支付</button>
     </form>
   </view>
+
+  <view class='btn-submit' wx:if="{{ iosPay == false }}">
+    <form report-submit='true' bindsubmit="returnIndex">
+    <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>返回</button>
+    </form>
+  </view>
   <view class='card-method' bindtap='openCardSelect' style='color:{{ themeColor }};'>
     <text class="card-t iconfont icon-question" style='margin-right:6rpx;'></text>
-    <text>如何增长账户余额？</text>
+    <text>如何增长账户积分？</text>
   </view>
 </view>
+
 
 <view class="wux-backdrop {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}"></view>
 	<view class="wux-dialog {{ provideMethod.animateCss }}" wx:if="{{ provideMethod.visible }}">
@@ -36,5 +48,5 @@
     </view>
 </view>
 
-<import src="/super_card/pages/templates/iospay.wxml"/>
-<template is="iosPayWx" data="{{...iosPayDialog}}"/>
+<!-- <import src="/super_card/pages/templates/iospay.wxml"/>
+<template is="iosPayWx" data="{{...iosPayDialog}}"/> -->

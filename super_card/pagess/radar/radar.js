@@ -48,6 +48,7 @@ Page({
     noticeNum : 0,
 
     noVipTip: false,
+    noVipTipIOS:false,
     provideMethod: { visible: false, animateCss: 'wux-animate--fade-out' },
     is_audit: false,
 
@@ -55,7 +56,8 @@ Page({
 
     sliderOffset: 0,
     sliderLeft: 2,
-    currentX: 0
+    currentX: 0,
+    iosPay:false,
   },
 
   handleMovableChange: function (e) {
@@ -337,6 +339,7 @@ Page({
           var t = '24小时'
           break
       }
+      var noVipTipIOS = '可体验试用' + t;
       var noVipTip = '您还不是会员或者会员权限不足，无法使用雷达功能，请先开通会员或可体验试用' + t;
       var showTrialBtn = true
     }
@@ -352,7 +355,7 @@ Page({
     }
     
     var provideMethod = { visible: true, animateCss: 'wux-animate--fade-in' }
-    this.setData({ noVipTip: noVipTip, showTrialBtn: showTrialBtn, provideMethod: provideMethod, is_audit: is_audit})
+    this.setData({ noVipTip: noVipTip, noVipTipIOS: noVipTipIOS,showTrialBtn: showTrialBtn, provideMethod: provideMethod, is_audit: is_audit})
 
   },
 
@@ -410,6 +413,10 @@ Page({
 
     var that = this
 
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+    
+
     that.data.isLoading = true
     app.util.request({
       'url': 'entry/wxapp/getCardClients',
@@ -422,9 +429,29 @@ Page({
           that.setData({ clientList: that.data.clientList })
         } else {
           that.data.loadDone = true
+        }     
+      },
+      fail:function(res){
+        if (res.data.errno == 1) {
+          wx.showModal({
+            title: '系统提示',
+            content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+            cancelText: '返回',
+            confirmColor: '#f90',
+            confirmText: iosPay ? '去开通' : '知道了',
+            success: function (res) {
+              if (res.confirm) {
+                iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()
+              } else if (res.cancel) {
+                wx.navigateBack()
+              }
+            }
+          });
+          return
         }
 
       }
+
     })
 
   },
@@ -544,13 +571,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+    that.setData({ iosPay: iosPay })
+
     if(typeof options.card_id == 'undefined' || options.card_id < 1)
       wx.navigateBack()
 
-    this.setData({ card_id: options.card_id})
+    that.setData({ card_id: options.card_id})
 
-    this.getNoticeNum()
-    this.getTrackCardByTime()
+    that.getNoticeNum()
+    that.getTrackCardByTime()
     
   }, 
 

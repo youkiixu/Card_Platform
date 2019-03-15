@@ -18,6 +18,13 @@ Page({
 
   },
 
+  //跳到推荐记录页面
+  toRecommendRecord: function () {
+    wx.navigateTo({
+      url: '../recommend-record/recommend-record'
+    })
+  },  
+
   //选择地址信息
   getCurrentLocation: function () {
     var that = this;
@@ -121,10 +128,9 @@ Page({
       province: that.data.province,
       city: that.data.city,
       area: that.data.area,
-      enter_name: con.enter_name,
       name:con.name,
       phone: con.phone,
-      num:con.num,
+      industry: con.industry,
     }
 
     app.util.request({
@@ -132,12 +138,15 @@ Page({
       'method': 'POST',
       'data': data,
       success(res) {
-        console.log(res)
-        // wx.showToast({
-        //   title: res.data.message,
-        //   icon: 'success',
-        //   duration: 2000
-        // })
+        console.log('提交成功',res)
+        wx.showToast({
+          title: '提交成功,'+res.data.message,
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail:function(res){
+        console.log('提交失败', res)
       },
     })
 

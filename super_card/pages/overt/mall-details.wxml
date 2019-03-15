@@ -108,14 +108,21 @@
 
   <view class='bottom'>
   <block wx:if="{{ preview === false }}">
-  <navigator open-type="navigateBack">
-    <view class='b-l'>
+    <navigator url='../../pages/overt/mall?card_id={{ card.id }}'>
+    <view  class="{{iosPay == false ? 'b-i' : 'b-l'}}">
       <text class='iconfont icon-jifenshangcheng'></text>
       <text class='b-sy'>返回商城</text>
     </view>
   </navigator>
+    
+  <!-- <navigator open-type="navigateBack">
+    <view  class="{{iosPay == false ? 'b-i' : 'b-l'}}">
+      <text class='iconfont icon-jifenshangcheng'></text>
+      <text class='b-sy'>返回商城</text>
+    </view>
+  </navigator> -->
   
-    <view class='b-r' bindtap="contactCarder" style='background-color:{{ themeColor }};'>
+    <view wx:if="{{ iosPay == true }}" class='b-r' bindtap="contactCarder" style='background-color:{{ themeColor }};'>
       <text>去咨询</text>
     </view>
   </block>

@@ -129,28 +129,59 @@ Page({
   
   //显示拍名片选项
   showTakeCard:function (e){
+
+    var that = this;
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
     }
-    /*var that = this
-    wx.showActionSheet({
-        itemList: ['拍照', '从手机相册选择'],
+    
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+
+    //判断是否为会员，非会员不能拍名片
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
+    if (isVip == 0) {
+      wx.showModal({
+        title: '系统提示',
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
+        confirmColor: '#f90',
+        confirmText: iosPay ? '去开通' : '知道了',
         success: function (res) {
-          console.log(res)
-          var index = res.tapIndex
-          switch(index){
-            case 0:*/
+          if (res.confirm) {
+            iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }          
+        }
+      });
+      return
+    } else {
+        // if (typeof e.detail.formId != 'undefined') {
+        //   console.log(e.detail.formId)
+        //   app.formIds.push(e.detail.formId)
+        // }
+        /*var that = this
+        wx.showActionSheet({
+            itemList: ['拍照', '从手机相册选择'],
+            success: function (res) {
+              console.log(res)
+              var index = res.tapIndex
+              switch(index){
+                case 0:*/
               wx.navigateTo({
                 url: '../pat-card/camera-card',
               })
-              /*break;
-            case 1:
-              that.identifyCard()
-              break;
+                /*break;
+              case 1:
+                that.identifyCard()
+                break;
+            }
           }
-        }
-    })*/
+      })*/
+    }  
   },
 
   //点击回传名片处理

@@ -15,8 +15,12 @@ Page({
     pay_method: 0,
 
     account_intro: '',
+    iosPay:false,
   },
 
+  returnIndex:function(){
+    wx.switchTab({ url: '../../pages/index/index' })
+  },
   //确认支付
   confirmPay: function (e){
     var formId = e.detail.formId;
@@ -136,6 +140,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that =this;
+    var iosPay = app.config.iosPay(that)
+    that.setData({ iosPay: iosPay})
 
     if (typeof options.umoney == 'undefined' || typeof options.cardnum == 'undefined') {
       wx.navigateBack({ delta: 1 })
@@ -144,12 +151,12 @@ Page({
 
     var uMoney = parseFloat(options.umoney)
     var cardNum = parseInt(options.cardnum)
-    this.setData({ cardNum: cardNum, uMoney: uMoney, account_intro: app.config.getConf('account_intro') })
+    that.setData({ cardNum: cardNum, uMoney: uMoney, account_intro: app.config.getConf('account_intro') })
 
-    if(this.data.uMoney > 0)
-      this.showMoneyPay(1)
+    if (that.data.uMoney > 0)
+      that.showMoneyPay(1)
     else
-      this.showMoneyPay(0)
+      that.showMoneyPay(0)
   },
 
   changeMoneyPay: function (e){

@@ -15,7 +15,8 @@ Page({
     uInfo:false,
 
     currentStyle : 0,
-    price: false
+    price: false,
+    iosPay:false,
   },
 
   /**
@@ -24,6 +25,9 @@ Page({
   onLoad: function (options) {
 
     var that = this
+    //ios支付判断
+    var iosPay = app.config.iosPay(that)
+    that.setData({ iosPay: iosPay })
 
     if (typeof options.card_id != 'undefined' && typeof options.card_style != 'undefined')
       that.setData({ card_id: options.card_id, card_style: options.card_style })

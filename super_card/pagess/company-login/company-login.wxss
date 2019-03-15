@@ -103,3 +103,9 @@ button::after{
   font-size: 70rpx;
   line-height: 70rpx;
 }
+.record{
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 60rpx;
+  color: #aaaaaa;
+}

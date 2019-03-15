@@ -58,7 +58,7 @@
           </view>
           <!-- <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }} 将于 {{ uInfo.vip_last_time }} 到期</view> -->
           <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }}  到期时间：永久</view>
-          <view class='bit-yx' bindtap='toOpenVip' wx:if="{{ uInfo.vip == 0 }}" style="color:{{ themeColor }};">开通会员 享受至尊服务</view>
+          <view class='bit-yx' bindtap='toOpenVip' wx:if="{{ uInfo.vip == 0 && iosPay == true }}" style="color:{{ themeColor }};">开通会员 享受至尊服务</view>
         </view>
       </view>
       <view class='basic-info-bot'>
@@ -132,7 +132,7 @@
               <view class=''>会员中心</view>
             </view>
             <view class='safe-act-r'>
-              <view class='safe-act-know'>{{ uInfo.vip == 0 ? '您还不是会员' : '' }}</view>
+              <!-- <view class='safe-act-know'>{{ uInfo.vip == 0 ? '您还不是会员' : '' }}</view> -->
               <text class='iconfont icon-jiantou'></text>
             </view>
           </button>

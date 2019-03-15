@@ -429,7 +429,7 @@
 .weui-navbar{ height: 100%; border-bottom:none;}
 .weui-navbar__item { height: 100%; padding:0;}
 .weui-navbar__title{ height: 100%; line-height: 40px; font-size:30rpx;color:#666; }
-.tab-fixed{ position: fixed; top:0px;left:0; z-index: 99;width:100%; }
+.tab-fixed{ position: fixed; top:0px;left:0; z-index: 99;width:100%;}
 .tab-blank{ width:100%;height: 40px; }
 
 /*Notice Css*/

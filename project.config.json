@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 38,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -45,23 +45,11 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "开通会员支付页",
-					"pathName": "super_card/pagess/payment/payment-vip",
-					"query": ""
-				},
-				{
-					"id": 2,
-					"name": "开通会员",
-					"pathName": "super_card/pages/opt-version/opt-version",
-					"query": "spread_member=39&from_act=other",
-					"scene": null
-				},
-				{
-					"id": 3,
-					"name": "overt",
+					"id": 1,
+					"name": "overt把名片分享给他人，他人进到自己名片页的显示",
 					"pathName": "super_card/pages/overt/overt",
-					"query": "card_id=1&from_act=other"
+					"query": "card_id=1&from_act=other",
+					"scene": null
 				},
 				{
 					"id": 4,
@@ -70,70 +58,10 @@
 					"query": "card_id=2&from_act=share"
 				},
 				{
-					"id": -1,
-					"name": "名片夹",
-					"pathName": "super_card/pages/card-book/card-book",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "视频编辑",
-					"pathName": "super_card/pages/video/video",
-					"query": "card_id=1&from_act=other"
-				},
-				{
-					"id": -1,
-					"name": "上传视频",
-					"pathName": "super_card/pages/video/video",
-					"query": ""
-				},
-				{
 					"id": 8,
 					"name": "非会员的分享",
 					"pathName": "super_card/pages/overt/overt",
 					"query": "card_id=7&from_act=other"
-				},
-				{
-					"id": -1,
-					"name": "代言人中心",
-					"pathName": "super_card/pagess/agent/agent",
-					"query": "card_id=7&from_act=other"
-				},
-				{
-					"id": -1,
-					"name": "搜索",
-					"pathName": "super_card/pagess/library/search",
-					"query": "card_id=7&from_act=other"
-				},
-				{
-					"id": -1,
-					"name": "搜索页",
-					"pathName": "super_card/pagess/library/search",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "搜索页",
-					"pathName": "super_card/pagess/library/search",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "免费开通会员",
-					"pathName": "super_card/pages/open-membership/open-membership",
-					"query": "agent_id=39&&sign=y59axa14z"
-				},
-				{
-					"id": 14,
-					"name": "分享",
-					"pathName": "super_card/pages/video-watch/video-watch",
-					"query": "card_id=1&Msgs={\"id\":\"2\",\"path\":\"https://yun.s280.com/attachment/audios/2/2019/01/Zy79dO4J7cCcA7aEc4yDg45Z4EeBC4.mp4\",\"thumb\":\"\",\"name\":\"\",\"duration\":\"00:12\",\"views\":\"38\"}&from_act=share&forwarding=1"
-				},
-				{
-					"id": -1,
-					"name": "名片页",
-					"pathName": "super_card/pages/overt/overt",
-					"query": ""
 				},
 				{
 					"id": -1,
@@ -144,155 +72,9 @@
 				},
 				{
 					"id": -1,
-					"name": "个人中心",
-					"pathName": "super_card/pages/home/home",
-					"query": "spread_member=39&from_act=other",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "会员中心",
-					"pathName": "super_card/pagess/member-core/member-core",
-					"query": "spread_member=39&from_act=other",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的团队",
-					"pathName": "super_card/pagess/team/team",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "开通会员",
-					"pathName": "super_card/pagess/open-membership/open-membership",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 21,
-					"name": "partner-index",
-					"pathName": "super_card/pagess/partner-index/partner-index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "会员中心",
-					"pathName": "super_card/pagess/member-core/member-core",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的团队",
-					"pathName": "super_card/pagess/team/team",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "官网",
-					"pathName": "super_card/pages/overt/website",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "创建名片组",
-					"pathName": "super_card/pages/group-modify/group-modify",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "编辑名片信息",
-					"pathName": "super_card/pages/basic/basic",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "修改头像",
-					"pathName": "super_card/pages/avatar/avatar",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "商城管理",
-					"pathName": "super_card/pages/mall-manage/mall-manage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "预览我的名片",
-					"pathName": "super_card/pages/overt/overt",
-					"query": "card_id=2&from_act=other",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "企业版申请",
-					"pathName": "super_card/pagess/company-login/company-login",
+					"name": "推荐记录",
+					"pathName": "super_card/pagess/recommend-record/recommend-record",
 					"query": "agent_id=39&&sign=y59axa14z",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "分享进入商品",
-					"pathName": "super_card/pages/overt/mall-details",
-					"query": "card_id=3&goods_id=50",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "动态分享",
-					"pathName": "super_card/pages/overt/dynamic",
-					"query": "card_id=2",
-					"scene": null
-				},
-				{
-					"id": 33,
-					"name": "动态详情分享",
-					"pathName": "super_card/pages/overt/dynamic-details",
-					"query": "card_id=2&dyList={\"id\":\"76\",\"content\":\"AI智能名片代理招商火热进行中\",\"pics\":[\"https://yun.s280.com/attachment/images/2/2019/03/lVbv5yafyB1b9z1D411WtWt1WbxD9E.jpg\"],\"likes\":\"0\",\"comments\":\"0\",\"zan_data\":[],\"comments_data\":[],\"create_time\":\"1552269636\",\"name\":\"张雪娟\",\"avatar\":\"https://yun.s280.com/attachment/images/2/2019/03/h1Zp1Sar11GXpEaYRPtRScy3kyYTga.png\",\"company\":\"广东印生活网络科技有限公司\",\"list_content\":\"AI智能名片代理招商火热进行中\",\"showPingZan\":false,\"is_zan\":false,\"create_date\":\"2019.03.11\",\"create_date2\":\"2019年03月11日\"}",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "官网分享",
-					"pathName": "super_card/pages/overt/website",
-					"query": "card_id=3",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的动态分享",
-					"pathName": "super_card/pages/overt/dynamic",
-					"query": "card_id=2",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "商城分享",
-					"pathName": "super_card/pages/overt/mall",
-					"query": "card_id=3",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "test",
-					"pathName": "super_card/pages/mall-manage/mall-manage",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "删除动态",
-					"pathName": "super_card/pages/home/demand",
-					"query": "card_id=3",
 					"scene": null
 				}
 			]

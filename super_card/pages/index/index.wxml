@@ -588,7 +588,8 @@
     <view class='video' wx:if='{{ card.video }}'>
       <view wx:for="{{card.video}}"> 
         <view class='cardInfo' data-index="{{index}}" bindtap='toPlay'>
-        <video src="{{ item.path }}"></video> 
+        <!-- <video src="{{ item.path }}"></video>  -->
+        <video></video> 
         <view class='begin' style='display:none'>
         <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
         <text class='video-time'>{{ item.duration }}</text>
@@ -684,10 +685,10 @@
 </view>
 
 
-<view class='switch ind-switch {{ hideSwitchCard === false ? "right-show" : "right-hide" }}'  bindtap='{{ hideSwitchCard === false ? "showCardCut" : "showSwitchCard" }}'>
+<!-- <view class='switch ind-switch {{ hideSwitchCard === false ? "right-show" : "right-hide" }}'  bindtap='{{ hideSwitchCard === false ? "showCardCut" : "showSwitchCard" }}'>
   <text class='iconfont icon-fangxiang' style='color:{{ themeColor }};'></text>
   <view>切换名片</view>
-</view>
+</view> -->
 
 <view class='card-cut-mask' wx:if="{{ show_card_cut == true }}" bindtap='hideCardCut'></view>
 <view class='card-cut' animation="{{animationData}}" wx:if="{{ show_card_cut == true }}">
@@ -737,10 +738,10 @@
 </view>
 
 
-<view class='switch voice-switch {{ hideSwitchStyle === false ? "right-show" : "right-hide" }}' bindtap='{{ hideSwitchStyle === false ? "cardTypeChange" : "showSwitchStyle" }}'>
+<!-- <view class='switch voice-switch {{ hideSwitchStyle === false ? "right-show" : "right-hide" }}' bindtap='{{ hideSwitchStyle === false ? "cardTypeChange" : "showSwitchStyle" }}'>
   <text class='iconfont icon-fenggepitchon' style='color:{{ themeColor }};font-size:30rpx;'></text>
   <view>名片风格</view>
-</view>
+</view> -->
 
 <view class='fmp-share-mask' wx:if="{{ share_card_link == true }}" bindtap='hideFmpShare'></view>
 <view class='fmp-share' animation="{{animationData}}" wx:if="{{ share_card_link == true }}">
@@ -838,14 +839,42 @@
 </view>
 
 <!-- 右边预览名片按钮 -->
-    <view class='return-back' bindtap='previewCard'>
+    <!-- <view class='return-back' bindtap='previewCard'>
       <view class='return-index {{ showText === true ? "right-show2" : "right-hide2" }}'>
-        <view class='tips'> 预览名片</view>  
+        <view class='tips'> 预览我的名片</view>  
       </view>
         <view class='ove-btn btn-return {{ showbtn === true ? "right-show2" : "right-hide2" }} {{ showFilter === true ? "show-filter" : "" }}'>
           <text class='fmp-pyq iconfont icon-yanjing' style='color:{{ themeColor }};font-size:60rpx;'></text>    
         </view>
+    </view> -->
+
+<!-- 多功能按钮 -->
+<view class='functionAll'>
+    <view class='ove-btn sehzhi' bindtap='showHideCate'>
+      <text class='iconfont icon-shezhi' style='color:#00a1e9;'></text>
     </view>
+
+    <view class='functionCate' wx:if="{{ showCate }}">
+    <!-- 名片风格 -->
+      <view class='ove-btn cardStyle' bindtap='cardTypeChange'>
+        <text class='iconfont icon-fenggepitchon' style='color:#00a1e9;'></text>
+      </view>
+      <!-- 切换名片 -->
+      <view class='ove-btn cardSwitch' bindtap='showCardCut'>
+        <text class='iconfont icon-fangxiang' style='color:#00a1e9;'></text>
+      </view>
+      <!-- 预览名片 -->
+      <view class='ove-btn cardPreview' bindtap='previewCard'>
+        <text class='fmp-pyq iconfont icon-yanjing' style='color:#00a1e9;'></text>
+      </view>
+      <!-- 语音播报开关 -->
+      <view class="switchChange">
+        <switch class='switch-btn' checked='{{switchValue}}' bindchange="switchChange" color="#00a1e9" />
+        <text class='swit-txt'>语音开关</text> 
+      </view>
+    </view>
+</view>
+
 
 <import src="/super_card/pages/templates/tab-bar.wxml"/>
 <template is="footerWx" data="{{...tabBar}}"/>

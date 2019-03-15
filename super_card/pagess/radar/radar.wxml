@@ -180,13 +180,13 @@
     </view>
     <view class="i-info wux-dialog__bd">
       <view>
-        <text>{{ noVipTip }}</text>
+        <text>{{iosPay == true ? noVipTip : noVipTipIOS}}</text>
       </view>
     </view>
     <view class="wux-dialog__ft">
         <!-- <view wx:if="{{ showTrialBtn && is_audit === false }}" class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="bindToTrial" style='color:{{ themeColor }};'>去试用</view>
         <view  wx:if="{{ is_audit === false }}" class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="toOpenVip" style='color:{{ themeColorV }};'>开通/升级会员</view> -->
         <view  class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="bindToTrial" style='color:{{ themeColor }};'>去试用</view>
-        <view  class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="toOpenVip" style='color:{{ themeColorV }};'>开通/升级会员</view>
+        <view wx:if="{{ iosPay == true }}"  class="i-btn wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="toOpenVip" style='color:{{ themeColorV }};'>开通/升级会员</view>
     </view>
 </view>

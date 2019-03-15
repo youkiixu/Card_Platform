@@ -24,10 +24,18 @@
 
           <view wx:if="{{ item.buy == 0 && item.id != 1 }}" class='btn-submit'>
            <form report-submit='true' bindsubmit="buyCardStyle">
-            <button form-type='submit' disabled='{{ btnDis }}' class='btn-block btn-blue' style='background-color:{{ themeColor }};'>
+            <!-- <button form-type='submit' disabled='{{ btnDis }}' class='btn-block btn-blue' style='background-color:{{ themeColor }};'>
+              <view>￥{{ item.price }}元<text wx:if="{{  item.free == 1 }}">（会员免费）</text></view>
+              <view class='go-buy'>购买</view> -->
+              <button form-type='submit' disabled='{{ btnDis }}' class='btn-block btn-blue' style='background-color:{{ themeColor }};' wx:if="{{ iosPay == true }}">
               <view>￥{{ item.price }}元<text wx:if="{{  item.free == 1 }}">（会员免费）</text></view>
               <view class='go-buy'>购买</view>
             </button>
+
+            <button form-type='submit' disabled='false' class='btn-block btn-blue' style='background-color:{{ themeColor }};' wx:if="{{ iosPay == false }}">
+              <view>不可服务</view>
+            </button>
+
             </form>
           </view>
 

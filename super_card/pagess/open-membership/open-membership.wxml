@@ -16,18 +16,26 @@
   </view>
 
   <view class='ov-content'>
-    <view  class="{{qrType == 1 ? 'act-classify' : 'act-classify2' }}" >
-        <view class='act-name'>{{ qrType == 1 ? vipSetOnly.name : '个人代理' }}</view>
+    <view  class="{{qrType == 2 ? 'act-classify2' : 'act-classify' }}" >
+        <view class='act-name'>{{ qrType == 2 ? '个人代理' : (qrType == 1 ? 'VIP会员' : (qrType == 3 ? '5人绑VIP会员':'10人绑VIP会员'))}}</view>
         <view class='buttom-info'>
-        <text style="color:{{ themeColorV }};">{{ qrType == 1 ? '畅享12大特权' : '开通代理3大权益' }}</text>
+        <text style="color:{{ themeColorV }};">{{ qrType == 2 ? '开通代理3大权益' : (qrType == 1 ? '畅享9大特权' : '畅享10大特权')}}</text>
         </view>
 
-        <view class='act-lm' wx:key="vipdesc" wx:if="{{qrType == 1  }}" wx:for="{{ vipSetOnly.rules }}" wx:for-index="didx" wx:for-item="desc">
+        <view class='act-lm' wx:if="{{qrType == 3 || qrType == 4 }}">
+          <view class='act-item'>○ </view>
+              <view  wx:if="{{qrType == 3}}" class='act-lm-con'>5人团队营销功能</view>
+              <view  wx:if="{{qrType == 4}}" class='act-lm-con'>10人团队营销功能</view>
+              <view class='act-lm-con'>{{ desc.rule_name }}</view>
+        </view>
+
+        <view class='act-lm' wx:key="vipdesc" wx:if="{{qrType == 1 || qrType == 3 || qrType == 4 }}" wx:for="{{ vipSetOnly.rules }}" wx:for-index="didx" wx:for-item="desc">
           <view class='act-item'>○ </view>
           <block>
               <view class='act-lm-con'>{{ desc.rule_name }}</view>
           </block>
         </view>
+        
         <view class='act-agent'  wx:if="{{qrType == 2 }}" wx:for="{{ vipSetagent }}">
            <view class='act-lm2'>
             <view class='act-item act-item2'>○ </view>
@@ -48,8 +56,8 @@
     </view>
 
     <view class='ov-bottom'>
-      <form report-submit='true' bindsubmit="confirmPay" wx:if="{{qrType == 1  }}">
-        <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (alreadyOpen ? '已经开通' : '立即升级') : '立即开通' }}</button>
+      <form report-submit='true' bindsubmit="confirmPay" wx:if="{{qrType == 1 || qrType == 3 || qrType == 4 }}">
+        <button form-type='submit' disabled="{{ uInfo.vip > 0 ? 'disabled': '' }}"  class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ?  '已经开通' : '立即开通' }}</button>
       </form>
 
       <form report-submit='true' bindsubmit="confirmPayAgent" wx:if="{{qrType == 2  }}">

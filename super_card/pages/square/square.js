@@ -62,6 +62,7 @@ Page({
 
     loadingDone:false,
     hei: "",
+    iosPay:false,
   },
 
  
@@ -775,6 +776,9 @@ Page({
 
 
   toPostPage: function (e){
+    var that = this;
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
 
     //判断是否为会员，非会员不能开通商城
     var getUserInfo = wx.getStorageSync('getUserInfo');
@@ -783,14 +787,16 @@ Page({
     if (isVip == 0) {
       wx.showModal({
         title: '系统提示',
-        content: '您还不是会员，请先开通会员',
-        showCancel: false,
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
         confirmColor: '#f90',
-        confirmText: '去开通',
+        confirmText: iosPay ? '去开通' : '知道了',
         success: function (res) {
-          wx.navigateTo({
-            url: '../opt-version/opt-version',
-          })
+          if (res.confirm) {
+            iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }
         }
       });
       return
@@ -800,7 +806,6 @@ Page({
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
     }
-    var that = this
 
     if(that.data.user_cards.length  > 0){
 
@@ -837,6 +842,11 @@ Page({
   onLoad: function (options) {
 
     var that = this
+
+    //ios支付判断
+    var iosPay = app.config.iosPay(that)
+    that.setData({ iosPay: iosPay })
+
 
     //console.log(response)
     that.setData({ uid: app.UID })

@@ -29,9 +29,11 @@ Page({
     preview: false,
     swiperHeight: 0,
     currIndex: 0,
-    imgHeights: []
+    imgHeights: [],
+    iosPay:false,
     
   },
+
 
   showPic: function (e) {
     console.log(e)
@@ -259,6 +261,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+
+    //ios支付判断
+    var iosPay = app.config.iosPay(that)
+    that.setData({ iosPay: iosPay })
 
     
     //为了能调起授权--新加代码start（bug：不在此页面调起授权，点击产品进这个详情页的时候就会报“非法进入”的错误，所以只能在这再调起一次授权）

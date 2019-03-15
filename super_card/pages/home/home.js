@@ -29,7 +29,8 @@ Page({
 
       member_entry_pic: false,
 
-      isAdmin: false
+      isAdmin: false,
+      iosPay:false,
 
   },
 
@@ -92,6 +93,28 @@ Page({
   },
 
   toMemPage:function (e){
+    var that = this;
+
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+   
+    if (this.data.uInfo.vip == 0) {
+      wx.showModal({
+        title: '系统提示',
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
+        confirmColor: '#f90',
+        confirmText: iosPay ? '去开通' : '知道了',
+        success: function (res) {
+          if (res.confirm) {
+            iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }
+        }
+      });
+      return
+    }
 
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
@@ -275,7 +298,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+
+    that.setData({ iosPay: iosPay })
+
     this.freshHome()
     
   },

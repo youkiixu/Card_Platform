@@ -326,7 +326,7 @@ Page({
     that.delDmb()
     that.data.type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: '../edit-page/edit-picture?type=' + that.data.type + '&index=' + that.data.index,
+      url: '../../pages/edit-page/edit-picture?type=' + that.data.type + '&index=' + that.data.index,
     })
   },
 
@@ -439,14 +439,14 @@ Page({
             console.log('标题')
             //var obj = { type: 'title', val: '标题' }
             wx.navigateTo({
-              url: '../edit-page/edit-text?index='+ index +'&type=title'
+              url: '../../pages/edit-page/edit-text?index='+ index +'&type=title'
             })
             break;
           case 1:
             console.log('文本')
             //var obj = { type: 'content', val: '内容' }
             wx.navigateTo({
-              url: '../edit-page/edit-text?index=' + index + '&type=content'
+              url: '../../pages/edit-page/edit-text?index=' + index + '&type=content'
             })
             break;
           case 2:
@@ -480,12 +480,12 @@ Page({
     switch(type){
         case 'title':
           wx.navigateTo({
-            url: '../edit-page/edit-text?index=' + index + '&type=' + type +'&is_edit=1'
+            url: '../../pages/edit-page/edit-text?index=' + index + '&type=' + type +'&is_edit=1'
           })
           break
         case 'content':
           wx.navigateTo({
-            url: '../edit-page/edit-text?index=' + index + '&type=' + type + '&is_edit=1'
+            url: '../../pages/edit-page/edit-text?index=' + index + '&type=' + type + '&is_edit=1'
           })
           break
         case 'map':
@@ -493,17 +493,17 @@ Page({
           break
         case 'pic':
           wx.navigateTo({
-            url: '../edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
+            url: '../../pages/edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
           })
           break
         case 'grid_pic':
         wx.navigateTo({
-          url: '../edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
+          url: '../../pages/edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
         })
           break
         case 'more_pic':
         wx.navigateTo({
-          url: '../edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
+          url: '../../pages/edit-page/edit-picture?type=' + type + '&index=' + index + '&is_edit=1',
         })
           break
     }
@@ -587,6 +587,10 @@ Page({
   onLoad: function (options) {
 
     var that = this
+    
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+
     if (typeof options.card_id == 'undefiend'){
       wx.navigateBack()
       return
@@ -602,14 +606,16 @@ Page({
     if (isVip == 0) {
       wx.showModal({
         title: '系统提示',
-        content: '您还不是会员，请先开通会员',
-        showCancel: false,
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
         confirmColor: '#f90',
-        confirmText: '去开通',
+        confirmText: iosPay ? '去开通' : '知道了',
         success: function (res) {
-          wx.redirectTo({
-            url: '../../pages/opt-version/opt-version',
-          })
+          if (res.confirm) {
+            iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }
         }
       });
       return

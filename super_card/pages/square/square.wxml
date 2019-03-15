@@ -10,11 +10,13 @@
       
       <block wx:if="{{ item.type == 2 }}">
             <swiper-item>
-            <navigator target="miniProgram" open-type="navigate" app-id="{{ item.appid }}" path="{{ item.value }}" version="release">
-              <view class='s-i'>
-                <image mode="widthFix" class='swiper-lb' src="{{ item.pic }}"></image>
-              </view>
-              </navigator>
+
+              <navigator  target="miniProgram" open-type="navigate" app-id="{{ item.appid }}" path="{{ item.value }}" version="release">
+                <view class='s-i'>
+                  <image mode="widthFix" class='swiper-lb' src="{{ item.pic }}"></image>
+                </view>
+                </navigator> 
+
             </swiper-item>
 
         </block>

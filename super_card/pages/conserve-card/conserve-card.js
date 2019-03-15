@@ -164,6 +164,7 @@ Page({
       'method': 'POST',
       'data': { card_id: that.data.card_id,  diff: that.data.diff},
       success(res) {
+        console.log('111',res)
 
         wx.showLoading({
           title: '加载中',
@@ -171,6 +172,7 @@ Page({
         wx.downloadFile({
           url: res.data.data,
           success: function (res) {
+            console.log(res)
 
 
             wx.hideLoading()
@@ -182,19 +184,20 @@ Page({
               success: function (res) {
                 //console.log(res)
 
+
+
                 wx.showToast({
                   title: '保存成功',
                   icon: 'success'
                 })
               },
               fail: function (res) {
-                console.log(res)
                 console.log('fail')
               }
             })
 
           },
-          fail: function () {
+          fail: function (res) {
             console.log('fail')
           }
           

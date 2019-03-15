@@ -13,7 +13,7 @@
       <checkbox-group bindchange="changeMoneyPay">
         <label>
             <checkbox color="#4752e8" name="moneyPay" disabled='{{ uMoney > 0 ? false : true }}' value="1" checked = "{{ uMoney > 0 ? true : false }}"></checkbox>
-              <text>余额支付￥{{ money }}</text>
+              <text>积分支付￥{{ money }}</text>
         </label>
       </checkbox-group>
     </view>
@@ -29,7 +29,7 @@
   </view>
   <view class='card-method' bindtap='openCardSelect' style='color:#4752e8;'>
     <text class="card-t iconfont icon-question" style='margin-right:6rpx;'></text>
-    <text>如何增长账户余额？</text>
+    <text>如何增长账户积分？</text>
   </view>
 
 </view>

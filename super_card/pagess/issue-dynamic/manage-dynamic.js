@@ -133,6 +133,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+
     if (!options.card_id) {
       return false  
     }
@@ -146,14 +150,16 @@ Page({
     if (isVip == 0) {
       wx.showModal({
         title: '系统提示',
-        content: '您还不是会员，请先开通会员',
-        showCancel: false,
+        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        cancelText: '返回',
         confirmColor: '#f90',
-        confirmText: '去开通',
+        confirmText: iosPay ? '去开通' : '知道了',
         success: function (res) {
-          wx.redirectTo({
-            url: '../../pages/opt-version/opt-version',
-          })
+          if (res.confirm) {
+            iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()
+          } else if (res.cancel) {
+            wx.navigateBack()
+          }
         }
       });
       return

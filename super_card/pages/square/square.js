@@ -63,6 +63,7 @@ Page({
     loadingDone:false,
     hei: "",
     iosPay:false,
+    chooseCards:{},//发动态时选择的名片
   },
 
  
@@ -734,8 +735,17 @@ Page({
 
   //选择名片处理
   cardChange: function (e) {
+    var card_id = e.detail.value
+    console.log('名片选择card_id:', this.data.card_id)
+    console.log('名片选择user_cards:', this.data.user_cards)
+    var user_cards = this.data.user_cards
+    for (var i = 0; i < user_cards.length; i++) {
+      if (card_id == user_cards[i].id) {
+        var chooseCards = user_cards[i]
+      }
+    }
 
-    this.setData({ card_id: e.detail.value })
+    this.setData({ card_id: e.detail.value, chooseCards: chooseCards})
   },
 
   //确认名片选择
@@ -755,8 +765,21 @@ Page({
           //this.setData({ card: this.data.user_cards[x] })
       //}
     //}
-    this.toggleCardPicker()
-    this.checkIsCanPost()
+
+   //判断该名片是否满足发布动态的权限
+    var chooseCards = this.data.chooseCards
+    if (chooseCards.dynamic == 0 && chooseCards.store == 0 && chooseCards.website == 0 ){
+      wx.showModal({
+        title: '系统提示',
+        content: '该名片没有发布动态的权限，请换一张名片',
+        showCancel: false,
+        confirmText: '知道了'
+      })
+    }else{
+      this.toggleCardPicker()
+      this.checkIsCanPost()
+    }
+   
   },
 
   //确认名片选择
@@ -783,8 +806,10 @@ Page({
     //判断是否为会员，非会员不能开通商城
     var getUserInfo = wx.getStorageSync('getUserInfo');
     var isVip = getUserInfo.vip;
+    //判断是否加入了推广组 proGroup == 0,则表示未加入
+    var proGroup = wx.getStorageSync('proGroup');
 
-    if (isVip == 0) {
+    if (isVip == 0 && proGroup == 0) {
       wx.showModal({
         title: '系统提示',
         content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',

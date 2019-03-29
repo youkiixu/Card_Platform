@@ -844,8 +844,8 @@
 </view>
 
 
-<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}"></view>
-<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}">
+<view wx:if="{{ cardPickerShow.visible  }}" class="wux-backdrop {{ cardPickerShow.animateCss }}" catchtouchmove='stopPageScroll' catchtouchmove='{{true}}'></view>
+<view wx:if="{{ cardPickerShow.visible }}" class="wux-dialog {{ cardPickerShow.animateCss }}" catchtouchmove='stopPageScroll' catchtouchmove='{{true}}'>
         <view class="wux-dialog__hd">
           <block wx:if="{{ isChat === false }}">
         	<view class="wux-dialog__title">请选择名片回传给“{{ card.name }}”</view>
@@ -875,8 +875,10 @@
             </radio-group>
           </scroll-view>
           <view wx:if="{{ isChat === false }}" class='frame-word'>
-            <text class='frame-word-tit'>留言：</text>
-            <input bindblur='setComeBackMsg' bindconfirm='setComeBackMsg' class='frame-word-info' type='text' name="type" maxlength='20' placeholder="20字以内" value="{{ comeBackMsg }}"></input>
+            <!-- <text class='frame-word-tit'>留言：</text>
+            <input bindblur='setComeBackMsg' bindconfirm='setComeBackMsg' class='frame-word-info' type='text' name="type" maxlength='20' placeholder="50字以内" value="{{ comeBackMsg }}"></input> -->
+             <view class='frame-word-tit'>留言：</view>
+             <textarea  bindblur='setComeBackMsg' bindconfirm='setComeBackMsg' show-confirm-bar="{{false}}" fixed="true" auto-height='true' class='frame-word-info' type='text' name="type" maxlength='50' placeholder="50字以内" value="{{ comeBackMsg }}"></textarea >      
           </view>
         </view>
         <view class="wux-dialog__ft">

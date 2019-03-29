@@ -18,6 +18,7 @@ Page({
 
     from_act : 'request',
     showBackIndex: true,
+    chooseCards:{},
   },
 
   //返回首页
@@ -29,32 +30,52 @@ Page({
 
   //选择名片处理
   cardChange: function (e) {
+    var card_id = e.detail.value
+    console.log('名片选择card_id:', this.data.card_id)
+    console.log('名片选择userCards:', this.data.userCards)
+    var userCards = this.data.userCards
+    for (var i = 0; i < userCards.length; i++) {
+      if (card_id == userCards[i].id) {
+        var chooseCards = userCards[i]
+      }
+    }
 
-    this.setData({ card_id: e.detail.value })
+    this.setData({ card_id: e.detail.value, chooseCards: chooseCards })
   },
 
 
   //确认名片选择
   confirmCardSelect: function () {
-    this.toggleCardPicker()
     var that = this
-    app.util.request({
-      'url': 'entry/wxapp/joinCardGroup',
-      'data': { group_id: that.data.group_id, card_id: that.data.card_id },
-      success(res) {
+    //判断该名片是否已经加入过营销群组
+    var chooseCards = that.data.chooseCards
+    if (chooseCards.dynamic == 1 && chooseCards.store == 1 && chooseCards.website == 1) {
+      wx.showModal({
+        title: '系统提示',
+        content: '该名片已经存在于推广组，不可重复加入',
+        showCancel: false,
+        confirmText: '知道了'
+      })
+    } else {
+      that.toggleCardPicker()
+      app.util.request({
+        'url': 'entry/wxapp/joinCardGroup',
+        'data': { group_id: that.data.group_id, card_id: that.data.card_id },
+        success(res) {
 
-        wx.showToast({
-          title: res.data.message,
-          icon:'success'
-        })
-        setTimeout(function (){
-          wx.reLaunch({
-            url: '../group/group',
+          wx.showToast({
+            title: res.data.message,
+            icon: 'success'
           })
-        }, 2000)
+          setTimeout(function () {
+            wx.navigateTo({
+              url: '../group/group',
+            })
+          }, 2000)
 
-      }
-    })
+        }
+      })
+    }
     
   },
 
@@ -150,12 +171,25 @@ Page({
                   success(res) {
 
                     if (res.data.data.length < 1) {
-                      wx.showToast({
-                        title: '请先创建名片',
-                        icon: 'none'
-                      })
-                      wx.navigateBack()
-                      return false
+                      wx.showModal({
+                        title: '系统提示',
+                        content: '请先创建名片',
+                        showCancel: false,
+                        confirmColor: '#f90',
+                        confirmText: '知道了',
+                        success: function (res) {
+                          wx.switchTab({
+                            url: '../index/index',
+                          })
+                        }
+                      });
+                      return
+                      // wx.showToast({
+                      //   title: '请先创建名片',
+                      //   icon: 'none',
+                      // })
+                      // wx.navigateBack()
+                      // return false
                     }
                     that.setData({ userCards: res.data.data, card_id: res.data.data[0].id })
                   }

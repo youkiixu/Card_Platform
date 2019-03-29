@@ -47,6 +47,15 @@
     <text>3.安卓用户，点屏幕右上角图标···，可将本小程序添加到桌面</text>
   </view>
 </view>
+
+<!-- 返回首页 -->
+   <form  report-submit='true' bindsubmit="backIndex">
+    <button form-type='submit' class='ove-btn'>
+      <text class='iconfont icon-daohangshouye' style='color:#4752e8;'></text>
+    </button>
+  </form>
+
+  
 <import src="/super_card/pages/templates/tab-bar.wxml"/>
 <template is="footerWx" data="{{...tabBar}}"/>
 

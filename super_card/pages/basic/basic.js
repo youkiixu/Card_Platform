@@ -30,8 +30,8 @@ Page({
     industryList: '',
     temp:[],
     showVcodeInput: false,
-    showWxPhoneBtn: false,
-    mobileInputHolder: '手机号 请点击右边箭头',
+    showWxPhoneBtn: true,
+    mobileInputHolder: '手机号 请点击微信获取',
     mobileInputDisable: true,
     sendBtnDisabled: false,
     sendBtnText: '发送验证码',
@@ -174,7 +174,7 @@ Page({
           cachetime: 0,
           success: function (res) {
             console.log(res)
-            that.setData({ mobile: res.data.data.phoneNumber, showWxPhoneBtn:false})
+            that.setData({ mobile: res.data.data.phoneNumber, showWxPhoneBtn:true})
           }
         });
 
@@ -182,49 +182,49 @@ Page({
   },
 
   //显示手机绑定类型选项
-  showTelType() {
-   var that = this
-   var itemList = []
+  // showTelType() {
+  //  var that = this
+  //  var itemList = []
    
-   if (app.config.getConf('sms_validate_switch') == 1) itemList.push('输入手机号')
-   if (app.config.getConf('wx_mobile_switch') == 1) itemList.push('绑定微信手机号')
+  //  if (app.config.getConf('sms_validate_switch') == 1) itemList.push('输入手机号')
+  //  if (app.config.getConf('wx_mobile_switch') == 1) itemList.push('绑定微信手机号')
    
-   wx.showActionSheet({
-      itemList: itemList,
-      success: function (res) {
-        console.log(res)
-        var index = res.tapIndex;
-        if(itemList[index] == '绑定微信手机号'){
-          that.setData({
-            showVcodeInput: false, showWxPhoneBtn: true, mobile: '', mobileInputHolder: '请点击下方按钮',
-            mobileInputDisable: true, mobile_type: 1
-          })
-        }else if (itemList[index] == '输入手机号'){
-          that.setData({
-            showVcodeInput: true, showWxPhoneBtn: false, mobile: '', mobileInputHolder: '请输入手机号',
-            mobileInputDisable: false, mobile_type: 2
-          })
-        }
-        /*switch(index){
-          case 0:
-            console.log('绑定微信手机号')
-            that.setData({
-              showVcodeInput: false, showWxPhoneBtn: true, mobile: '', mobileInputHolder: '请点击下方按钮',
-              mobileInputDisable: true , mobile_type: 1})
-          break;
-          case 1:
-            console.log('输入手机号')
-            that.setData({
-              showVcodeInput: true, showWxPhoneBtn: false, mobile: '', mobileInputHolder: '请输入手机号',
-              mobileInputDisable: false, mobile_type: 2})
-          break;
-        }*/
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      }
-    });
-  },
+  //  wx.showActionSheet({
+  //     itemList: itemList,
+  //     success: function (res) {
+  //       console.log(res)
+  //       var index = res.tapIndex;
+  //       if(itemList[index] == '绑定微信手机号'){
+  //         that.setData({
+  //           showVcodeInput: false, showWxPhoneBtn: true, mobile: '', mobileInputHolder: '请点击下方按钮',
+  //           mobileInputDisable: true, mobile_type: 1
+  //         })
+  //       }else if (itemList[index] == '输入手机号'){
+  //         that.setData({
+  //           showVcodeInput: true, showWxPhoneBtn: false, mobile: '', mobileInputHolder: '请输入手机号',
+  //           mobileInputDisable: false, mobile_type: 2
+  //         })
+  //       }
+  //       /*switch(index){
+  //         case 0:
+  //           console.log('绑定微信手机号')
+  //           that.setData({
+  //             showVcodeInput: false, showWxPhoneBtn: true, mobile: '', mobileInputHolder: '请点击下方按钮',
+  //             mobileInputDisable: true , mobile_type: 1})
+  //         break;
+  //         case 1:
+  //           console.log('输入手机号')
+  //           that.setData({
+  //             showVcodeInput: true, showWxPhoneBtn: false, mobile: '', mobileInputHolder: '请输入手机号',
+  //             mobileInputDisable: false, mobile_type: 2})
+  //         break;
+  //       }*/
+  //     },
+  //     fail: function (res) {
+  //       console.log(res.errMsg)
+  //     }
+  //   });
+  // },
 
   //切换行业类型选项状态
   toggleIndustryItem: function (e){
@@ -568,6 +568,8 @@ Page({
 
             }
 
+        },fail:function(res){
+          console.log('保存失败：',res)
         }
     })
 

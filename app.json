@@ -106,7 +106,8 @@
         "issue-dynamic/manage-dynamic",
         "issue-dynamic/issue-dynamic",
         "website-edit/website-edit",
-        "recommend-record/recommend-record"
+        "recommend-record/recommend-record",
+        "group-modify/group-modify"
       ]
     }
   ],

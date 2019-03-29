@@ -480,13 +480,42 @@ Page({
     that.getPulicCard()
   },
 
+  //获取当前用户名片
+  getMyUserCards: function () {
+    var that = this
+    app.util.request({
+      'url': 'entry/wxapp/getUserCard',
+      'data': { 'no_need_whole': 1 },
+      success(res) {
+        var data = res.data.data
+        if (data.length < 1) {
+          wx.showModal({
+            title: '系统提示',
+            content: '您还没有创建名片，只有创建名片后才可以浏览哦！',
+            showCancel: false,
+            confirmColor: '#f90',
+            confirmText: '去创建',
+            success: function (res) {
+              wx.navigateTo({
+                url: '../basic/basic',
+              })
+            }
+          });
+          return false
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
     var that = this
-   
+    
+    that.getMyUserCards()
+
    
     wx.getLocation({
       type: 'wgs84',
@@ -513,7 +542,7 @@ Page({
   showTabSort:function (){
     var that = this
     if(that.data.sortType == 1)
-      that.setData({tabs : [{ name: "推荐", value: 'recommend', code: 1 }, { name: "人气", value: 'views', code: 2 }, { name: "附近", value: 'distance', code: 3 }, { name: '时间', value: 'create_time', code: 5 }] })
+      that.setData({ tabs: [{ name: "推荐", value: 'recommend', code: 1 }, { name: "人气", value: 'views', code: 2 }, { name: '时间', value: 'create_time', code: 5 },{ name: "附近", value: 'distance', code: 3 }] })
     else
       that.setData({ tabs: [{ name: "推荐", value: 'recommend', code: 1 }, { name: "人气", value: 'views', code: 2 }, { name: '时间', value: 'create_time', code: 5 }] })
 

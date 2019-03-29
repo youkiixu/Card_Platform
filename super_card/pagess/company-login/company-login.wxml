@@ -28,7 +28,7 @@
       <view class='btn-submit'>
         <button class='btn-block btn-yellow'  style='background:{{ themeColorV }};' form-type='submit'>立即提交</button>
       </view>
-      <view class='record' bindtap='toRecommendRecord'>推荐记录</view>
+      <view class='record' bindtap='toRecommendRecord'>查看推荐记录</view>
       <!-- <view class='apply-sum'>已经<text style='color:{{ themeColorV }};'>{{ total }}</text>个企业参与申请</view> -->
     </view>
   </form>

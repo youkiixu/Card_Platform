@@ -1,0 +1,201 @@
+/* super_card/pages/group-modify/group-modify.wxss */
+.contains{
+  color: #6f6f6f;
+  font-size: 36rpx;
+}
+.title{
+  font-weight:600;
+  color:#000;
+  display:block;
+  font-size: 34rpx;
+  margin:50rpx 20rpx 20rpx 20rpx;
+}
+.info{
+  background-color:#fff;
+  display:flex;
+  display:-webkit-flex;
+  padding:25rpx 20rpx 25rpx 50rpx;
+}
+.info input{
+  flex:1;
+  -webkit-flex:1;
+}
+.info image{
+  width:50rpx;
+  height:50rpx;
+  text-align: center;
+}
+.info-rad{
+  background-color:#fff;
+}
+.act{
+  display:flex;
+  display:-webkit-flex;
+  margin:0 20rpx;
+  padding:20rpx 0;
+  border-bottom:1px solid #d9d9d9;
+}
+.act:last-of-type{
+  border:0;
+}
+.radio-group{
+  font-size:30rpx;
+}
+.radio{
+  display:inline-block;
+  width:100%;
+}
+radio{
+  padding-left:20rpx;
+}
+/*radio .wx-radio-input-checked{
+  background-color:#00a1e9 !important;
+  border:1px solid #00a1e9 !important;
+}*/
+textarea{
+  width: 100%;
+  margin-right: 30rpx;
+}
+.btn-submit{
+  margin:40rpx 20rpx;
+}
+.btn-block{
+  line-height:90rpx;
+  letter-spacing:2px;
+  border-radius:50rpx;
+}
+.btn-white{
+  color:#00a1e9;
+  border:1px solid #00a1e9;
+}
+.btn-blue{
+  background:#00a1e9;
+  color:#fff;
+}
+.info-choice{
+  background-color: #fff;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content:space-between;
+}
+.info-img{
+  display: flex;
+  display: -webkit-flex;
+}
+.info-img image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5px;
+  background-color: #000;
+}
+
+.card-change text{
+  background-color: #00a1e9;
+  border-radius: 4px;
+  color: #fff;
+  padding: 4rpx 14rpx;
+  font-size:34rpx;
+}
+.info-card{
+  flex: 1;
+  display: flex;
+  flex-flow:column;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-flex-flow:column;
+  margin-left:20rpx;
+}
+.card-name{
+  color: #000;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp: 1;    
+  overflow: hidden;
+  word-break:break-all;
+}
+.card-phone,.card-company{
+  color: #9f9f9f;
+  font-size: 28rpx; 
+  height: 50rpx;
+  line-height: 50rpx;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp: 1;    
+  overflow: hidden;
+  word-break:break-all;
+}
+.card-change{
+  display: flex;
+  display: -webkit-flex;
+}
+.cue{
+  font-size:26rpx;
+  color:#919191;
+  display:flex;
+  display:-webkit-flex;
+  margin-top:40rpx;
+  padding:0 10px;
+}
+
+.info-choices{
+  background-color:#f2f2f2;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content:space-between;
+  border-radius: 10rpx;
+  margin-bottom: 16rpx;
+}
+.info-choices:last-child{
+  margin-bottom: 0;
+}
+.info-bg-color{
+  border:1px solid #2fb9f8;
+}
+.info-no-bg-color{
+  border:1px solid #f2f2f2;
+}
+.radio-group{text-align:center;}
+.radio-t{
+ padding-left:0rpx; 
+}
+.info-card{
+  align-items: flex-start;
+  -webkit-align-items: flex-start;
+  height:150rpx;
+  overflow:hidden;
+  justify-content:space-between;
+  -webkit-justify-content:space-between;
+}
+.card-company{
+  text-align:left;
+}
+
+.radio-group{
+  font-size:30rpx;
+}
+.radio{
+  display:inline-block;
+  width:100%;
+}
+radio{
+  padding-left:20rpx;
+}
+/*radio .wx-radio-input-checked{
+  background-color:#00a1e9 !important;
+  border:1px solid #00a1e9 !important;
+}*/
+
+/*弹框*/
+.wux-dialog__bd scroll-view{
+  max-height: 582rpx;
+}

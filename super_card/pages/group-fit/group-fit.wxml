@@ -26,5 +26,20 @@
       <text wx:if="{{ group.allow_collect == 1 }}">允许收藏组内名片</text>
       <text wx:if="{{ group.allow_collect == 0 }}">不允许直接收藏</text>
     </view>
+    <view class='act'>
+      <text class="trb iconfont icon-icon-test1 {{ group.allow_mall == 1 ? 'yes' : '' }}" style='color:#ff9593;'></text>
+      <text wx:if="{{ group.allow_mall == 1 }}">共用管理员商城</text>
+      <text wx:if="{{ group.allow_mall == 0 }}">不共用管理员商城</text>
+    </view>
+    <view class='act'>
+      <text class="trb iconfont icon-87 {{ group.allow_website == 1 ? 'yes' : '' }}" style="color:#78caf5;"></text>
+      <text wx:if="{{ group.allow_website == 1 }}">共用管理员官网</text>
+      <text wx:if="{{ group.allow_website == 0 }}">不共用管理员官网</text>
+    </view>
+    <view class='act'>
+      <text class="trb iconfont icon-pengyouquan {{ group.allow_dynamic == 1 ? 'yes' : '' }}" style="color:##ffc816;"></text>
+      <text wx:if="{{ group.allow_dynamic == 1 }}">共用管理员动态</text>
+      <text wx:if="{{ group.allow_dynamic == 0 }}">不共用管理员动态</text>
+    </view>
   </view>
 </view>

@@ -153,20 +153,19 @@ Page({
               app.util.request({
                 'url': 'entry/wxapp/startChat',
                 //'cachetime': '30',
-                'data': { t_uid: that.data.goods.uid, t_card_id: that.data.goods.card_id, card_id: that.data.my_userCards[0].id },
+                'data': { t_uid: that.data.goods.uid, t_card_id: that.data.card.id, card_id: that.data.my_userCards[0].id },
                 success(res) {
-
                   wx.navigateTo({
                     url: '../chat/chat?chat_id=' + res.data.data + '&from=overt'
                   })
 
+                },fail:function(res){
+                  console.log('fail', res)
                 }
               })
 
               break;
             case 1:
-              console.log('加微信')
-              console.log(that.data.card.wx)
               wx.setClipboardData({
                 data: that.data.card.wx,
                 success: function (res) {
@@ -184,8 +183,6 @@ Page({
               })
               break;
             case 2:
-              console.log('拨打电话')
-              console.log(that.data.card.mobile)
               wx.makePhoneCall({
                 phoneNumber: that.data.card.mobile,
               })
@@ -226,9 +223,9 @@ Page({
               app.util.request({
                 'url': 'entry/wxapp/startChat',
                 //'cachetime': '30',
-                'data': { t_uid: that.data.goods.uid, t_card_id: that.data.goods.card_id, card_id: that.data.my_userCards[0].id },
+                'data': { t_uid: that.data.goods.uid, t_card_id: that.data.card.id, card_id: that.data.my_userCards[0].id },
                 success(res) {
-
+                  console.log('res22', res)
                   wx.navigateTo({
                     url: '../chat/chat?chat_id=' + res.data.data + '&from=overt'
                   })
@@ -238,7 +235,7 @@ Page({
 
               break;
             case 1:
-              console.log('拨打电话')
+              console.log('拨打电话',that.data.card)
               console.log(that.data.card.mobile)
               wx.makePhoneCall({
                 phoneNumber: that.data.card.mobile,
@@ -267,15 +264,6 @@ Page({
     that.setData({ iosPay: iosPay })
 
     
-    //为了能调起授权--新加代码start（bug：不在此页面调起授权，点击产品进这个详情页的时候就会报“非法进入”的错误，所以只能在这再调起一次授权）
-    var userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      app.util.getUserInfo(function (response) {
-        app.config.init()
-      });
-      return
-    }
-    //为了能调起授权--新加代码end
 
     if (typeof options.card_id != 'undefined') {
       

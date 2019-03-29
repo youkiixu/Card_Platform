@@ -1825,8 +1825,8 @@ filter:none;
 }
 
 .functionAll{
-width:300rpx;
-height:200rpx;
+/* width:300rpx;
+height:200rpx; */
 padding:0;
 margin:0;
 position:fixed;
@@ -1838,27 +1838,231 @@ z-index:999;
   width: 300rpx;
   height: 200rpx;
 }
+.ove-btn2 {
+width:75rpx;
+height:75rpx;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+display:-webkit-flex;
+-webkit-align-items:center;
+-webkit-justify-content:center;
+padding:0;
+margin:0;
+position:fixed;
+right:10px;
+bottom:21%;
+z-index:999;
+filter:drop-shadow(0px 0px 5px #ccc);
+background-color:#fff;
+}
+
 .sehzhi{
-  bottom: 32%;
+  bottom: 30%;
 }
 .cardStyle{
-  right: 120rpx;
-  bottom: 38%;
+  right: 125rpx;
+  bottom: 35%;
 }
 .cardSwitch{
-  right: 10rpx;
-  bottom: 42%;
+  right: 30rpx;
+  bottom: 40%;
 }
 .cardPreview{
-  right: 150rpx;
-  bottom: 28%;
+  right: 125rpx;
+  bottom: 26%;
 }
 .switchChange{
   position: fixed;
-  right: 20rpx;
+  right: 30rpx;
   bottom: 21%;
 }
 .swit-txt{
   font-size: 22rpx;
   display: block;
+}
+/* 营销组 */
+.marketingGroup{
+  width: 750rpx;
+  margin-top:24rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  height: 120rpx;
+  background:#fff;
+  font-size: 30rpx;
+}
+.noOpenTen{
+  height: 120rpx;
+  display: flex;
+  display: -webkit-flex;
+}
+.noOpenTen-l{
+  width: 50rpx;
+  line-height: 120rpx;
+}
+.noOpenTen-m{
+  flex: 2;
+  display:flex;
+  flex-flow:column;
+  align-items:flex-start;
+  -webkit-flex:2;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-align-items:flex-start;
+  margin-left: 10rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+  line-height: 40rpx;
+}
+.noOpenTen-m .m-t{
+  color: #020202;
+}
+.noOpenTen-r{
+  width: 130rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+  font-size: 26rpx;
+  background: #00a1e9;
+  color: #fff;
+}
+.noOpenTen-mF{
+  flex: 2;
+  margin-left: 10rpx;
+  line-height: 120rpx;
+}
+.toGroupFive,.toModifyFive{
+  display:flex;
+  flex-flow:column;
+  align-items:flex-start;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-align-items:flex-start;
+  margin-left: 10rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+  line-height: 40rpx;
+}
+.mF-t{
+  color: #020202;
+}
+
+.alreadyOpen{
+  height: 120rpx;
+  display: flex;
+  display: -webkit-flex;
+}
+.alreadyOpen-l{
+  width: 50rpx;
+  line-height: 120rpx;
+}
+.alreadyOpen-r{
+  flex: 2;
+  margin-left: 10rpx;
+  line-height: 120rpx;
+}
+.toGroupTen,.toModifyTen{
+  display:flex;
+  flex-flow:column;
+  align-items:flex-start;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-align-items:flex-start;
+  margin-left: 10rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+  line-height: 40rpx;
+}
+.a-t{
+  color: #020202;
+}
+/* 弹框 */
+.mask{
+  position: fixed;
+   z-index: 1000;
+   background: rgba(0, 0, 0, .5);
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+}
+.noOpenAll{
+  width: 650rpx;
+  height: 286rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -143rpx 0 0 -325rpx;
+  border-radius: 15rpx;
+  background-color: #fff;
+}
+.box-content{
+  height: 235rpx;  
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+}
+.noOpenAll-item{
+  flex: 1;
+  display:flex;
+  flex-flow:column;
+  align-items:center;
+  display:-webkit-flex;
+  -webkit-flex-flow:column;
+  -webkit-align-items:center;
+  padding-top: 30rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+}
+.item-active{
+  border: 1rpx solid #479ee3;
+}
+.choice_box button{
+  background: #479ee3;
+  color: #fff;
+  border-radius: 0;
+}
+.choice_box button::after{
+    border-radius: 0;
+}
+.choice-no{
+  width: 162rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #479ee3;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  border: 1rpx solid #479ee3;
+}
+.choice-active{
+  background: #479ee3;
+  color: #fff;
+}
+.upToTen{
+  width: 326rpx;
+  /* height: 386rpx; */
+  height: 286rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -143rpx 0 0 -163rpx;
+  border-radius: 15rpx;
+  background-color: #fff;
+}
+.upToTen-item{
+  /* height: 305rpx; */
+  height: 205rpx;
+  width: 100%;
 }

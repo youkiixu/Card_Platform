@@ -27,11 +27,15 @@
       <text class='iconfont icon-fankuiyijian'></text>
     </view>
     <view class='si-act'>
-      <input class='si-act-price' maxlength='10'  data-field="goods_price" style="color:{{ themeColorV }};" type='number' value="{{ goods_price }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='￥输入价格' placeholder-style="color:{{ themeColorV }};"></input>
+      <input class='si-act-price' maxlength='10'  data-field="goods_price" style="color:{{ themeColorV }};"  value="{{ goods_price }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='￥输入价格' placeholder-style="color:{{ themeColorV }};"></input>
       <text class='iconfont icon-fankuiyijian'></text>
     </view>
      <view class='si-act'>
       <input class='si-act-stock' maxlength='10' data-field="goods_stock" type='number' value="{{ goods_stock }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='输入库存'></input>
+      <text class='iconfont icon-fankuiyijian'></text>
+    </view>
+     <view class='si-act'>
+      <input class='si-act-stock' maxlength='10' data-field="order_sort" type='number' value="{{ order_sort }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' placeholder='输入商品排序'></input>
       <text class='iconfont icon-fankuiyijian'></text>
     </view>
   </view>

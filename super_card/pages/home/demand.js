@@ -53,6 +53,8 @@ Page({
       this.setData({ selectAllChecked: true })
     else
       this.setData({ selectAllChecked: false })
+
+    console.log('this.data.ids111', this.data.ids)
   },
 
   selectAll:function (e){
@@ -96,7 +98,7 @@ Page({
         app.util.request({
           'url': 'entry/wxapp/squareDel',
           'method': 'POST',
-          'data': { id: that.data.ids.join(',') },
+          'data': { id: that.data.ids.join(',') },  //join() 方法用于把数组中的所有元素放入一个字符串,元素是通过指定的分隔符进行分隔的。
           success(res) {
 
             wx.showToast({

@@ -243,14 +243,17 @@
        <form report-submit='true' bindsubmit="goQuickReply">
       <button form-type='submit' class='nbm'>快捷回复</button>
       </form>
+       <text class="bot-rbq iconfont {{ showEmojiView === true?'icon-jianpan':'icon-xiaolian'  }} " catchtap='toggleShowEmoji'></text>  
+        <text class='bot-r2  iconfont icon-fl-tupian' style='font-size: 40rpx;' bindtap='choosePic'></text>
     </view>
     <view class='bot-in'>
       <!-- <textarea placeholder='和客户说点什么吧' show-confirm-bar="false" class='bot-l' bindinput="setMsgContent" bindconfirm="sendMsg" value="{{ msgContent }}" adjust-position="true"></textarea> -->
       <input class='bot-l' bindinput="setMsgContent" bindblur="blurInput" bindconfirm="sendMsg" value="{{ msgContent }}" adjust-position="true" placeholder='和TA说点什么吧'></input>
-      <text class="bot-rbq iconfont {{ showEmojiView === true?'icon-jianpan':'icon-xiaolian'  }} " catchtap='toggleShowEmoji'></text>
+      <text class='sendMess' bindtap='sendMsg'>发送</text>
+      <!-- <text class="bot-rbq iconfont {{ showEmojiView === true?'icon-jianpan':'icon-xiaolian'  }} " catchtap='toggleShowEmoji'></text>
       <view class='bot-r' bindtap='choosePic'>
         <text class='iconfont icon-fl-tupian'></text>
-      </view>
+      </view> -->
     </view>
 
     <view class='expression-manage' wx:if="{{ showEmojiView === true }}">

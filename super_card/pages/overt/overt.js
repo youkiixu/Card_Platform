@@ -90,7 +90,14 @@ Page({
     showText:false,
     showFilter:false,
 
+    agent_id: 0,
 
+
+  },
+
+  //防止弹窗穿透
+  stopPageScroll() {
+    return
   },
 
 
@@ -266,15 +273,6 @@ Page({
 
   toChat: function (e){
     var that = this;
-    //为了能调起授权--新加代码start
-    var userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      app.util.getUserInfo(function (response) {
-        that.freshCurrentPage()
-      });
-      return
-    }
-    //为了能调起授权--新加代码end
 
     if (that.checkUserIsCreate('和她/他聊天') === false) return
 
@@ -567,18 +565,6 @@ Page({
 
     var that = this;
 
-    //为了能调起授权--新加代码start
-    var userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      app.util.getUserInfo(function (response) {
-        that.freshCurrentPage()
-      });
-      return
-    }
-//为了能调起授权--新加代码end
-
-
-
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
@@ -723,17 +709,6 @@ Page({
   addPhoneContact:function (e){
 
     var that = this;
-
-    //为了能调起授权--新加代码start
-    var userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      app.util.getUserInfo(function (response) {
-        that.freshCurrentPage()
-      });
-      return
-    }
-    //为了能调起授权--新加代码end
-
     
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
@@ -834,62 +809,34 @@ Page({
       })
     }, 5000)
 
-
-  
-    var userInfo = wx.getStorageSync('userInfo');
+    setTimeout(function () {
+      that.playAudioAct() //语音播放
+    }, 2000)
 
     
-   //加号返回按钮和小房子返回按钮的切换
-    // var pages = getCurrentPages()
-    // console.log('pages', pages)
-    // var url = pages[0].route
-    // console.log('url', url)
-    // if (typeof options.from_act !== 'undefined' || url == 'super_card/pages/overt/overt'){
-    //   this.setData({
-    //     showBackIndex: true,
-    //     showHouseIndex: false
-    //   })
-    // }
-
-
     
     if (typeof options.scene !== 'undefined') options = app.util.urlToJson(decodeURIComponent(options.scene))
     if(!options.card_id){
        wx.navigateBack()
        return false
     }
+
+    //agent_id为扫码进入到该页面所解析返回的数据
+    if (typeof options.agent_id != 'undefined') {
+      that.setData({
+        agent_id: options.agent_id
+      })
+    }
+
+    
     that.setData({ card_id: options.card_id })
-    if(!userInfo) {
-      // that.getChatNum()
 
-      if (typeof options.allow_collect !== 'undefined') {
-        var showRmBtn = options.allow_remove == 1 ? true : false
-        that.setData({
-          allow_collect: options.allow_collect,
-          showRmBtn: showRmBtn,
-          fromGroupId: options.from_group_id,
-        })
-      }
-
-      // console.log('allow_collect', that.data.allow_collect)
-      // console.log('showRmBtn', that.data.showRmBtn)
-      // console.log('fromGroupId', that.data.fromGroupId)
-
-      if (typeof options.from_act !== 'undefined') {
-
-        if (app.shareOrScanIsValide === true)
-          that.setData({ from_act: options.from_act })
-      }
-      console.log('from_act', that.data.from_act)
-
-      that.freshCurrentPage(false, 1)
-    } else {
       //获取当前用户ID
       app.util.getUserInfo(function (response) {
 
         that.setData({ uid: response.memberInfo.uid })
 
-        that.getChatNum()
+        //that.getChatNum()
 
         if (typeof options.allow_collect !== 'undefined') {
           var showRmBtn = options.allow_remove == 1 ? true : false
@@ -909,12 +856,14 @@ Page({
           if (app.shareOrScanIsValide === true)
             that.setData({ from_act: options.from_act })
         }
-        console.log('from_act', that.data.from_act)
+        
 
-        that.freshCurrentPage(false, 1)
+        that.freshCurrentPage(false, 1) 
+
+        that.getChatNum()
 
       })
-    }
+    
 
   },
 
@@ -988,17 +937,6 @@ Page({
   toggleCollectStatus: function (e) {
     var that = this;
     
-    //为了能调起授权--新加代码start
-    var userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      app.util.getUserInfo(function (response) {
-        that.freshCurrentPage()
-      }); 
-      return 
-    }
-  //为了能调起授权--新加代码end
-
-
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
@@ -1084,7 +1022,6 @@ Page({
 
   //刷新当前页面
   freshCurrentPage: function (cb, watch){
-    var userInfo = wx.getStorageSync('userInfo');
     var that = this
     if (typeof that.data.audioCtx.destroy != 'undefined')
       that.data.audioCtx.destroy()
@@ -1092,7 +1029,7 @@ Page({
     app.util.request({
         'url': 'entry/wxapp/getCardItem',
         //'cachetime': '30',
-      'data': { card_id: that.data.card_id, watch: watch, from_act: that.data.from_act },//, state:false
+      'data': { card_id: that.data.card_id, watch: watch, from_act: that.data.from_act, agent_id: that.data.agent_id},//, state:false
         success(res) {
            console.log('getCardItem.res',res)
 
@@ -1120,6 +1057,8 @@ Page({
                
           that.setData({ cardVideo: that.data.card.video })
 
+          // that.playAudioAct() //语音播放
+
           var getItemFlag = res.data.message
           
 
@@ -1129,9 +1068,8 @@ Page({
           }else{
             that.setData({ showWebBtn: false })
           }
-
-
-
+          
+        //判断是否显示商城、动态、官网等底部tabBar
           var have_card_store = parseInt(that.data.card.store)
           var have_card_dynamic = parseInt(that.data.card.dynamic)
           var have_card_website = parseInt(that.data.card.website)
@@ -1167,11 +1105,7 @@ Page({
             wx.hideShareMenu()
           else
             wx.showShareMenu()
-          if(!userInfo){
-            that.setData({ loadingDone: true })
-             that.showViewsCardUser()
-            return
-          }
+          
           that.checkIsComeback(watch)
           
           app.util.request({
@@ -1357,6 +1291,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    
     this.audioCtx = wx.createAudioContext('myAudio')
   },
 
@@ -1373,7 +1308,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+ 
     if(typeof this.data.audioCtx.stop != 'undefined')
       this.data.audioCtx.stop()
 
@@ -1383,6 +1318,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+   
     if (typeof this.data.audioCtx.destroy != 'undefined')
       this.data.audioCtx.destroy()
   },

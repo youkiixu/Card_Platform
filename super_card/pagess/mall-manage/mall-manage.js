@@ -35,6 +35,9 @@ Page({
     batchStatus:false,
     batchIds:[],
 
+    marketingGroup:false,//判断是否加入营销群组，共用群主商城
+
+
 
   },
 
@@ -445,7 +448,10 @@ Page({
     var getUserInfo = wx.getStorageSync('getUserInfo');
     var isVip = getUserInfo.vip;
 
-    if (isVip == 0 ) {  
+    //判断是否加入了推广组 proGroup == 0,则表示未加入
+    var proGroup = wx.getStorageSync('proGroup');
+
+    if (isVip == 0 && proGroup == 0) {  
       wx.showModal({
         title: '系统提示',
         content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
@@ -457,18 +463,16 @@ Page({
             iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()         
           } else if (res.cancel) {
              wx.navigateBack()         
-          }      
+          }  
         }
       });
       return
     }
+    
+     //that.getUserInfo()  //之前代码调用函数that.getUserInfo()，默认是需要进行认证的
 
     //获取商城信息
     that.getStoreInfo()
-
-    //that.getUserInfo()  //之前代码调用函数that.getUserInfo()，默认是需要进行认证的
-
-    
   },
 
   getUserInfo:function (){
@@ -512,6 +516,22 @@ Page({
         typeof callback === `function` && callback()
 
         var data = res.data.data
+
+       //判断是否加入群组营销
+        var isJoin = res.data.data.isJoin
+        if (isJoin == true) {
+          wx.showModal({
+            title: '系统提示',
+            content: '您已加入营销群组，共用群主商城',
+            showCancel: false,
+            confirmColor: '#f90',
+            confirmText: '知道了',
+            success: function (res) {
+              wx.navigateBack()
+            }
+          });
+          return
+        }
 
         if (data === false)
           that.setData({ have_store: false })

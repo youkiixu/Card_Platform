@@ -1,15 +1,14 @@
 <!--super_card/pages/group-modify/group-modify.wxml-->
 <view class='contains'>
-  <text class='title'>1.请输入名片组名称</text>
+  <text class='title'>1.请输入推广组名称</text>
   <view class='info'>
     <input type='text' name="name" maxlength="30" placeholder="4~30字 如：某某集团通讯录" value="{{ name }}" bindconfirm='setGroupName' bindblur='setGroupName' bindinput='setGroupName'></input>
   </view>
-  <text class='title'>2.请选择名片组类型</text>
-  <view class='info' bindtap='showTypeSelect'>
-    <input disabled='true' type='text' name="type" placeholder="请选择" value="{{ typeVal }}"></input>
-    <image class='iconfont icon-jiantouarrow483'></image>
+  <text class='title'>2.请选择推广组类型</text>
+  <view class='info'>
+   <input disabled='false' type='text' name="type" placeholder="请选择" value="{{ typeVal }}"></input>
   </view>
-  <text class='title'>3.名片组隐私权限设置</text>
+  <text class='title'>3.推广组隐私权限设置</text>
   <view class='info-rad'>
     <view class='act'>
       <text>3.1</text>
@@ -69,13 +68,13 @@
   </view>
 
   <block wx:if="{{ group_id > 0 }}">
-  <text class='title'>4.请输入名片组备注</text>
+  <text class='title'>4.请输入推广组备注</text>
   <view class='info'>
     <textarea placeholder="0~200字，可为空" maxlength="200" value="{{ note }}" name="note" bindconfirm='setGroupNote' bindblur='setGroupNote' bindinput='setGroupNote' />
   </view>
   </block>
   <block wx:else>
-  <text class='title'>4.请确定我在此名片组中显示的名片</text>
+  <text class='title'>4.请确定我在此推广组中显示的名片</text>
   <view class='info-choice'>
     <view class='info-img'>
       <image src="{{ card.picture }}"></image>
@@ -89,11 +88,11 @@
       <text style="background-color:{{ themeColor }};">换个名片</text>
     </view>
   </view>
-  <text class='cue'>注：名片组创建者自动成为该组管理员</text>
+  <text class='cue'>注：推广组创建者自动成为该组管理员</text>
   </block>
 
   <view class='btn-submit'>
-    <button class='btn-block btn-blue' bindtap='saveGroup' style='background:{{ themeColor }};'>{{ group_id > 0 ? '保存' : '创建名片组' }}</button>
+    <button class='btn-block btn-blue' bindtap='saveGroup' style='background:{{ themeColor }};'>{{ group_id > 0 ? '保存' : '创建推广组' }}</button>
   </view>
   <view class='btn-submit'>
     <button bindtap='navBack' class='btn-block btn-white' style='color:{{ themeColor }};border-color:{{ themeColor }};'>取 消</button>

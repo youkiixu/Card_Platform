@@ -41,11 +41,14 @@
     <text class="iconfont notice-s icon-xiazai41" style='color:{{ themeColor }};font-size:50rpx;line-height:50rpx;'></text>
     <swiper class="swiper_container notice-s" vertical="true" autoplay="true" circular="true" interval="2000">
       <block wx:for="{{msgList}}" wx:key="msg">
-        <navigator url="../../pages/spot-news/spot-news" open-type="navigate">
+        <!-- <navigator url="../../pages/spot-news/spot-news" open-type="navigate">
           <swiper-item>
             <view class="swiper_item">公告：{{ item.name }}/{{ item.title }} {{item.content}}</view>
           </swiper-item>
-        </navigator>
+        </navigator> -->
+          <swiper-item>
+            <view class="swiper_item">公告：{{ item.name }}/{{ item.title }} {{item.content}}</view>
+          </swiper-item>
       </block>
     </swiper>
   </view>

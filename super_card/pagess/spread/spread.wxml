@@ -6,6 +6,6 @@
         <!-- canvas 绘制完成后显示的图片 -->
         <image class="shareimg" src="{{shareImgPath}}"></image>
           <!-- 保存二维码按钮 -->
-         <button class="share-btn" type="default" size="defaultSize" bindtap="savePosterPic" hover-class="defaultTap">分享二维码</button>
+         <button class="share-btn" type="default" size="defaultSize" bindtap="savePosterPic" hover-class="defaultTap">保存二维码</button>
     </view>
 </view>

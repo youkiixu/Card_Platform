@@ -1,6 +1,7 @@
 @import 'we7/resource/style/we7.wxss';
 @import 'we7/resource/style/weui.wxss';
 @import 'super_card/components/wux.wxss';
+@import 'super_card/resource/style/iconfont5.wxss';
 @import 'super_card/resource/style/iconfont4.wxss';
 @import 'super_card/resource/style/iconfont3.wxss';
 @import 'super_card/resource/style/iconfont2.wxss';

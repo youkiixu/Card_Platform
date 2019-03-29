@@ -42,13 +42,21 @@ Page({
     var userInfo = wx.getStorageSync('userInfo');
     var isVip = userInfo.memberInfo.vip;
     var length = that.data.arrvideo.length + that.data.path.length;
-    if ((isVip == 0 && length >= 1) || (isVip > 0 && length >= 5)) {
+     if (isVip > 0 && length >= 5) {
       wx.showToast({
         title: '您只能上传' + length + '个视频',
         icon:'none'
       })
       return;
     }   
+
+    // if ((isVip == 0 && length >= 1) || (isVip > 0 && length >= 5)) {
+    //   wx.showToast({
+    //     title: '您只能上传' + length + '个视频',
+    //     icon:'none'
+    //   })
+    //   return;
+    // }   
       that.data.VqqLink = e.detail.value
 
   },
@@ -384,7 +392,7 @@ Page({
     //遍历上传
      
       var tempFilePaths = that.data.path;
-      var uploadImgCount = 0; 
+      //var uploadImgCount = 0; 
       for (var i = 0; i < tempFilePaths.length; i++) {
         var dd = tempFilePaths[i];
         wx.uploadFile({
@@ -402,8 +410,8 @@ Page({
             'width': dd.width,
             'height': dd.height
           },
-          success: function (res) {      
-            uploadImgCount++;  
+          success: function (res) {    
+            //uploadImgCount++;  
             app.freshIndex = true
             wx.hideLoading()
             that.setData({ disabledBtn: false })

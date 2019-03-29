@@ -36,7 +36,7 @@ Page({
   },
 
   getWxAavatar:function (){
-   
+   console.log('哈哈哈')
     var that = this
     var from_index = this.data.fromIndex ? 1 : 0
 
@@ -64,6 +64,7 @@ Page({
         wx.downloadFile({
           url: avatar,
           success: function (res) {
+            console.log('哈哈哈successs')
 
             console.log(res.tempFilePath)
 
@@ -83,6 +84,7 @@ Page({
                 'card_id': that.data.card_id
               },
               success: function (res) {
+                console.log('哈哈哈successs222')
 
       
                 console.log(res)
@@ -102,12 +104,17 @@ Page({
 
                 }
 
+              },
+              fail:function(res){
+                console.log('哈哈哈fail11')
               }
 
 
             })
 
 
+          },fail:function(res){
+            console.log('哈哈哈fail222')
           }
         })
 
@@ -266,6 +273,7 @@ Page({
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+        console.log('success1111')
         console.log(res)
         // that.setData({ src:true})
         var src = res.tempFilePaths[0]
@@ -290,6 +298,8 @@ Page({
           }
         })*/
 
+      },fail:function(res){
+        console.log('fail1111')
       }
     })
 

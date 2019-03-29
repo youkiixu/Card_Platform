@@ -17,6 +17,7 @@ Page({
     goods_content: [],
     status:0,
     pageData: [],
+    order_sort:'',
 
     prevPage:{},
     card:{},
@@ -90,6 +91,14 @@ Page({
       return
     }
 
+    if (that.data.order_sort.length < 1) {
+      wx.showToast({
+        title: '请输入商品排序',
+        icon: 'none'
+      })
+      return
+    }
+
     var data = {
       goods_id: that.data.goods_id,
       card_id: that.data.prevPage.data.card_id,
@@ -99,7 +108,8 @@ Page({
       goods_stock: that.data.goods_stock,
       goods_pics: that.data.goods_pics,
       pageData: that.data.pageData,
-      status: (act == 'savepush' ? 1 : 0)
+      status: (act == 'savepush' ? 1 : 0),
+      order_sort: that.data.order_sort,
     }
 
     app.util.request({
@@ -118,6 +128,7 @@ Page({
           goods_pics: data.goods_pics,
           goods_content: data.pageData,
           status: data.status,
+          order_sort: data.order_sort
         }
 
         if (that.data.index !== false) {
@@ -144,6 +155,7 @@ Page({
             goods_pics: [],
             pageData: [],
             status: 0,
+            order_sort:'',
           })
 
         }else{
@@ -159,10 +171,8 @@ Page({
 
 
   setGoodsInfo: function (e) {
-    //console.log(e)
     var that = this
     var field = e.target.dataset.field
-    console.log(field)
     switch (field) {
       case 'goods_name':
         that.data.goods_name = e.detail.value
@@ -175,6 +185,9 @@ Page({
         break
       case 'goods_stock':
         that.data.goods_stock = e.detail.value
+        break
+      case 'order_sort':
+        that.data.order_sort = e.detail.value
         break
     }
   },
@@ -430,6 +443,7 @@ Page({
           goods_stock: goods.goods_stock,
           goods_pics: goods.goods_pics,
           pageData: goods.goods_content,
+          order_sort: goods.order_sort,
         })
     }
 

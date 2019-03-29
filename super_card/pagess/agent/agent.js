@@ -12,6 +12,7 @@ Page({
     wxInfo: '',
     uInfo: '',
     agent_name: '',
+    agentGrade:[],
 
     animationData: "",
     showModalRecommend: false,
@@ -23,16 +24,19 @@ Page({
     buyNumMin: 1,
     price: 2.00,
     memberPrice: 0.00, //会员码价格
-    fivePrice: 0.00, //5人营销码价格
-    tenPrice: 0.00, //10人营销码价格
-    agentPrice: 0.00,//代理码价格
+    fivePrice: 0.00, //5人推广码价格
+    tenPrice: 0.00, //10人推广码价格
+    agentPrice: 0.00,//代理码价格（服务商）
+    channelPrice: 0.00,//渠道商码价格
     qrType: '',
     agent: '',
-    codeCategory: [
-      { id: 1, name: "会员码" },
-      { id: 2, name: "5人营销码" },
-      { id: 3, name: "10人营销码" },
-    ],
+    codeCategory: [],
+    // codeCategory: [
+    //   { id: 1, name: "会员码" },
+    //   { id: 2, name: "推广码" },
+    //   { id: 3, name: "服务商码" },
+    //   { id: 4, name: "渠道商码" },
+    // ],
     activeCategoryId: 1,
     itemChioce: 1,
   },
@@ -75,7 +79,7 @@ Page({
     var qrType = params.currentTarget.dataset.qrtype
     var uInfo = that.data.uInfo
 
-    uInfo.agent_limit == uInfo.team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+    uInfo.agent_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
   },
 
   //跳到生成5人营销员码页面
@@ -84,7 +88,7 @@ Page({
     var qrType = params.currentTarget.dataset.qrtype
     var uInfo = that.data.uInfo
 
-    uInfo.five_peo_limit == uInfo.five_team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+    uInfo.five_peo_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
   },
 
   //跳到生成10人营销员码页面
@@ -93,17 +97,26 @@ Page({
     var qrType = params.currentTarget.dataset.qrtype
     var uInfo = that.data.uInfo
 
-    uInfo.ten_peo_limit == uInfo.ten_team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+    uInfo.ten_peo_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买会员码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
   },
 
-  //跳到生成代理码页面
+  //跳到生成代理码（服务商码）页面
   toSpreadPageAgent: function (params) {
     var that = this
     var qrType = params.currentTarget.dataset.qrtype
     var uInfo = that.data.uInfo
 
-    uInfo.high_agent_limit == uInfo.high_team_num ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买代理码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+    uInfo.high_agent_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买服务商码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
 
+  },
+
+  //跳到生成渠道码页面
+  toSpreadPageChannel: function (params) {
+    var that = this
+    var qrType = params.currentTarget.dataset.qrtype
+    var uInfo = that.data.uInfo
+//字段未改
+    uInfo.high_agent_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买渠道商码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
 
   },
 
@@ -232,10 +245,13 @@ Page({
     var statu = this.data.agent  //statu == 1表示"个人代理"，statu==2表示"渠道代理"，statu==3表示"至尊合伙人"
     var itemChioce = this.data.itemChioce
     var number = this.data.buyNumber
-    var personalMemberPrice = 6.0 * number //个人代理的会员码价格，个人代理没有代理码购买权限
+
+    var personalMemberPrice = 6.0 * number //个人代理的会员码价格
     var channelMenberPrice = 3.0 * number //渠道代理的会员码价格
+    var superPartnerMenberPrice = 1.0 * number //至尊合伙人的会员码价格
+
+    var personalAgentPrice = 380.0 * number //个人代理的代理码价格
     var channelAgentPrice = 280.0 * number //渠道代理的代理码价格
-    var superPartnerMenberPrice = 2.0 * number //至尊合伙人的会员码价格
     var superPartnerAgentPrice = 180.0 * number //至尊合伙人的代理码价格
 
     var perFiveMarketing = 30.0 * number //个人代理的5人营销码价格
@@ -246,6 +262,8 @@ Page({
     var channelTenMarketing = 30.0 * number //渠道代理的10人营销码价格
     var superTenMarketing = 10.0 * number //至尊合伙人的10人营销码价格
 
+    var channelChannelPrice = 2300.0 * number //渠道代理的渠道码价格
+    var superPartnerChannelPrice = 1800.0 * number //至尊合伙人的渠道码价格
 
 
     // price = price.toFixed(2) //js浮点计算bug，取两位小数精度
@@ -253,20 +271,23 @@ Page({
     var fivePrice = statu > 1 ? (statu > 2 ? superFiveMarketing : channelFiveMarketing) : perFiveMarketing //5人营销码价格
     var tenPrice = statu > 1 ? (statu > 2 ? superTenMarketing : channelTenMarketing) : perTenMarketing //5人营销码价格
 
-    // var memberPriceAll = itemChioce > 1 ? (itemChioce > 2 ? (statu > 1 ? (statu > 2 ? superTenMarketing : channelTenMarketing) : perTenMarketing) : (statu > 1 ? (statu > 2 ? superFiveMarketing : channelFiveMarketing) : perFiveMarketing)) : (statu > 1 ? (statu > 2 ? superPartnerMenberPrice : channelMenberPrice) : personalMemberPrice) //会员码与5人和10人营销码的价格判断
+    var agentPrice = statu > 1 ? (statu > 2 ? superPartnerAgentPrice : channelAgentPrice) : personalAgentPrice //代理码价格
+    //var agentPrice = statu > 2 ? superPartnerAgentPrice : channelAgentPrice //代理码价格
 
-    var agentPrice = statu > 2 ? superPartnerAgentPrice : channelAgentPrice //代理码价格
+    var channelPrice = statu > 2 ? superPartnerChannelPrice : channelChannelPrice //渠道码价格
+
     memberPrice = memberPrice.toFixed(2)
     fivePrice = fivePrice.toFixed(2)
     tenPrice = tenPrice.toFixed(2)
     agentPrice = agentPrice.toFixed(2)
+    channelPrice = channelPrice.toFixed(2)
 
     this.setData({
       memberPrice: memberPrice,
       fivePrice: fivePrice,
       tenPrice: tenPrice,
       agentPrice: agentPrice,
-      agentGrade: statu
+      channelPrice: channelPrice
     })
   },
 
@@ -473,9 +494,9 @@ Page({
 
           var uInfo = res.data.data
 
-
-
-
+          //只有渠道代理和合伙人有渠道码
+          var codeCategory = uInfo.agent > 1 ?  [{ id: 1, name: "会员码" },{ id: 2, name: "推广码" },{ id: 3, name: "服务商码" },{ id: 4, name: "渠道商码" }] : [{ id: 1, name: "会员码" },{ id: 2, name: "推广码" },{ id: 3, name: "服务商码" }]
+          
           if (uInfo.agent == 0) {
             wx.showModal({
               title: '系统通知',
@@ -510,7 +531,9 @@ Page({
 
 
 
-          that.setData({ wxInfo: wxInfo, agent_name: agent_name, agent: agent, uInfo: uInfo, agentGrade: agentGrade })
+          that.setData({ wxInfo: wxInfo, agent_name: agent_name, agent: agent, uInfo: uInfo, agentGrade: agentGrade, codeCategory: codeCategory})
+
+         
 
         }
 

@@ -58,10 +58,60 @@
     </block>
 
   </view>
+
+
+<!-- 移除成员 -->
+  <view class='edit-member' wx:if="{{uid == group.card_list[0].uid && group.card_list.length > 1 }}">
+    <view class='edit-l'>
+      <view class='edit-inner' wx:if="{{ deleteShow }}">  
+        <view class='inner-l'>
+          <checkbox-group bindchange="selectAll" >
+                  <checkbox  checked='{{ selectAllChecked }}' name="memberBox" value="1"></checkbox>
+                  <text class='all-c'>全选</text>
+            </checkbox-group>
+        </view>
+        <view class='inner-r' bindtap='deleteChoosen'>移除</view>   
+      </view>
+    </view>
+    <view class='edit-r' bindtap="editMember">{{ deleteShow == true ? '完成' : '编辑'}}</view>
+  </view>
+  
+  
+  
   <view class='content'>
-    <!-- 循环体 -->
-    <block wx:key="cards" wx:for="{{ group.card_list }}" x:for-index="ccIdx" wx:for-item="card">
-    <navigator url="../overt/overt?card_id={{ card.id }}&allow_collect={{ uid == card.uid ? 0 : group.allow_collect }}&allow_remove={{ (uid == group.card_list[0].uid && uid != card.uid ) ? 1 : 0 }}&from_group_id={{ group.id }}" >
+
+    <checkbox-group bindchange="dealWithIds">
+
+      <!-- 循环体 -->
+        <block wx:key="cards" wx:for="{{ group.card_list }}" x:for-index="ccIdx" wx:for-item="card">
+          <view class='content-item'>
+            <view class='item-l'>
+              <checkbox  class='l-checkbox'  name="memberBox" checked="{{ checked }}" value="{{ card.id }}" wx:if="{{deleteShow && card.name != group.admin_name}}"></checkbox>
+            </view>
+            
+            <view class='item-r'>
+              <navigator url="../overt/overt?card_id={{ card.id }}&allow_collect={{ uid == card.uid ? 0 : group.allow_collect }}&allow_remove={{ (uid == group.card_list[0].uid && uid != card.uid ) ? 1 : 0 }}&from_group_id={{ group.id }}" >
+                <view class='card-holder' >
+                  <image class='img' src='{{ card.picture }}' style="position:relative;"><text wx:if="{{ card.is_v == 1 }}" class='rz-v'>V</text></image>
+                  <view class='card-info'>
+                    <view class='card-name'>
+                      <view class='card-icon'>
+                        <text>{{ card.name }}</text>
+                        <icon wx:if="{{ card.name == group.admin_name }}" class='cl iconfont icon-user-star' style='color:{{ themeColor }}'></icon>
+                      </view>
+                      <text>{{ card.create_date }}</text>
+                    </view>
+                    <text class='job'>{{ card.title }}</text>
+                    <text class='company'>{{ card.company }}</text>
+                  </view>
+                </view>
+                </navigator>
+            </view> 
+          </view>
+        </block>      
+    </checkbox-group>
+    
+    <!-- <navigator url="../overt/overt?card_id={{ card.id }}&allow_collect={{ uid == card.uid ? 0 : group.allow_collect }}&allow_remove={{ (uid == group.card_list[0].uid && uid != card.uid ) ? 1 : 0 }}&from_group_id={{ group.id }}" >
     <view class='card-holder' >
       <image class='img' src='{{ card.picture }}' style="position:relative;"><text wx:if="{{ card.is_v == 1 }}" class='rz-v'>V</text></image>
       <view class='card-info'>
@@ -76,8 +126,9 @@
         <text class='company'>{{ card.company }}</text>
       </view>
     </view>
-    </navigator>
-    </block>
+    </navigator> -->
+
+    
 
      <view class='bottom' wx:if="{{ showBackIndex }}">
     <view class='btn-submit'>
@@ -86,7 +137,9 @@
   </view>
 
   </view>
+   
   <view class='fix' wx:if="{{ group.anyone_request == 1 || uid == group.card_list[0].uid }}">
     <button id="requestJoinBtn" open-type="share">邀请新成员<icon class="iconfont icon-renyuanzengjia1" style='padding-left:10rpx;'></icon></button>
   </view>
+
 </view>

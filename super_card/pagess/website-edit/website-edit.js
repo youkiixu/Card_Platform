@@ -24,7 +24,8 @@ Page({
     card:{},
 
     type: '',
-    index: 0
+    index: 0,
+    marketingGroup: false,//判断是否加入营销群组，共用群主官网
   },
 
   createCardWebsite: function (e){
@@ -602,8 +603,10 @@ Page({
     //判断是否为会员，非会员不能开通官网
     var getUserInfo = wx.getStorageSync('getUserInfo'); 
     var isVip = getUserInfo.vip;
+    //判断是否加入了推广组 proGroup == 0,则表示未加入
+    var proGroup = wx.getStorageSync('proGroup');
     
-    if (isVip == 0) {
+    if (isVip == 0 && proGroup == 0) {
       wx.showModal({
         title: '系统提示',
         content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
@@ -620,11 +623,26 @@ Page({
       });
       return
     } 
+    // that.getUserInfo()
 
     //获取官网信息
     that.getWebSite()
+  //  console.log('marketingGroup2222', that.data.marketingGroup)
+    // //判断是否共用群主官网
+    // if (that.data.marketingGroup == true) {
+    //   wx.showModal({
+    //     title: '系统提示',
+    //     content: '您已加入营销群组，共用群主官网',
+    //     showCancel: false,
+    //     confirmColor: '#f90',
+    //     confirmText: '知道了',
+    //     success: function (res) {
+    //       wx.navigateBack()
+    //     }
+    //   });
+    //   return
+    // }
 
-   // that.getUserInfo()
   },
 
   getUserInfo: function () {
@@ -671,6 +689,23 @@ Page({
 
         console.log(res)
         var data = res.data.data
+
+        //判断是否加入群组营销
+        var isJoin = res.data.data.isJoin
+        if (isJoin == true) {
+          wx.showModal({
+            title: '系统提示',
+            content: '您已加入营销群组，共用群主官网',
+            showCancel: false,
+            confirmColor: '#f90',
+            confirmText: '知道了',
+            success: function (res) {
+              wx.navigateBack()
+            }
+          });
+          return
+        }
+
 
         if (data === false)
           that.setData({ have_website: false })

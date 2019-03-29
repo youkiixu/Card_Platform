@@ -48,7 +48,7 @@
 					"id": 1,
 					"name": "overt把名片分享给他人，他人进到自己名片页的显示",
 					"pathName": "super_card/pages/overt/overt",
-					"query": "card_id=1&from_act=other",
+					"query": "card_id=3&from_act=other",
 					"scene": null
 				},
 				{
@@ -75,6 +75,34 @@
 					"name": "推荐记录",
 					"pathName": "super_card/pagess/recommend-record/recommend-record",
 					"query": "agent_id=39&&sign=y59axa14z",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "创建名片组",
+					"pathName": "super_card/pages/group-modify/group-modify",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "邀请",
+					"pathName": "super_card/pages/group-request/group-request",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "group",
+					"pathName": "super_card/pages/group/group",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "聊天界面",
+					"pathName": "super_card/pages/chat/chat",
+					"query": "card_id=3&from_act=other",
 					"scene": null
 				}
 			]

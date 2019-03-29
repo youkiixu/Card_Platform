@@ -17,6 +17,7 @@ Page({
     currentStyle : 0,
     price: false,
     iosPay:false,
+    proGroup:0,
   },
 
   /**
@@ -27,7 +28,9 @@ Page({
     var that = this
     //ios支付判断
     var iosPay = app.config.iosPay(that)
-    that.setData({ iosPay: iosPay })
+    //判断是否加入了推广组 proGroup == 0,则表示未加入
+    var proGroup = wx.getStorageSync('proGroup');
+    that.setData({ iosPay: iosPay, proGroup: proGroup })
 
     if (typeof options.card_id != 'undefined' && typeof options.card_style != 'undefined')
       that.setData({ card_id: options.card_id, card_style: options.card_style })
@@ -109,71 +112,77 @@ Page({
 
   },
 
+  toOpenVip:function(){
+    wx.navigateTo({
+       url: '../../pages/opt-version/opt-version'
+     })
+  },
+
 
   //确认支付
-  buyCardStyle: function (e) {
+  // buyCardStyle: function (e) {
 
-    var that = this
+  //   var that = this
 
-    var iosPay = app.config.iosPay(that)
-    if(iosPay === false) return
+  //   var iosPay = app.config.iosPay(that)
+  //   if(iosPay === false) return
 
-    if (app.config.getConf('style_open_balance') == 1) {
+  //   if (app.config.getConf('style_open_balance') == 1) {
 
-      wx.navigateTo({
-        url: '../payment/payment-style?umoney=' + that.data.uInfo.money + '&choiceCardStyle=' + that.data.choiceCardStyle + '&price=' + that.data.price,
+  //     wx.navigateTo({
+  //       url: '../payment/payment-style?umoney=' + that.data.uInfo.money + '&choiceCardStyle=' + that.data.choiceCardStyle + '&price=' + that.data.price,
 
-      })
+  //     })
 
-    } else {
+  //   } else {
 
-      var formId = e.detail.formId;
-      that.setData({ btnDis: true })
-      app.util.request({
-        'url': 'entry/wxapp/buyCardStyle',
-        data: {
-          choiceCardStyle: that.data.choiceCardStyle,
-          price: that.data.price,
-          form_id: formId
-        },
-        success(res) {
+  //     var formId = e.detail.formId;
+  //     that.setData({ btnDis: true })
+  //     app.util.request({
+  //       'url': 'entry/wxapp/buyCardStyle',
+  //       data: {
+  //         choiceCardStyle: that.data.choiceCardStyle,
+  //         price: that.data.price,
+  //         form_id: formId
+  //       },
+  //       success(res) {
 
-          if (res.data.message == 'ok')
-            wx.requestPayment({
-              'timeStamp': res.data.data.timeStamp,
-              'nonceStr': res.data.data.nonceStr,
-              'package': res.data.data.package,
-              'signType': 'MD5',
-              'paySign': res.data.data.paySign,
-              'success': function (res) {
-                console.log('succ:');
-                console.log(res);
-                that.successPayAfter()
-                //支付成功后，系统将会调用payResult() 方法，此处不做支付成功验证，只负责提示用户
-              },
-              'fail': function (res) {
-                console.log('fail:');
-                console.log(res);
-                that.failPayAfter('支付失败')
-                //支付失败后，
-              }
-            })
+  //         if (res.data.message == 'ok')
+  //           wx.requestPayment({
+  //             'timeStamp': res.data.data.timeStamp,
+  //             'nonceStr': res.data.data.nonceStr,
+  //             'package': res.data.data.package,
+  //             'signType': 'MD5',
+  //             'paySign': res.data.data.paySign,
+  //             'success': function (res) {
+  //               console.log('succ:');
+  //               console.log(res);
+  //               that.successPayAfter()
+  //               //支付成功后，系统将会调用payResult() 方法，此处不做支付成功验证，只负责提示用户
+  //             },
+  //             'fail': function (res) {
+  //               console.log('fail:');
+  //               console.log(res);
+  //               that.failPayAfter('支付失败')
+  //               //支付失败后，
+  //             }
+  //           })
 
-          else
-            that.failPayAfter('')
+  //         else
+  //           that.failPayAfter('')
 
 
-        },
-        fail(err) {
-          console.log('errNO:');
-          console.log(err);
-          that.failPayAfter(err.data.message)
-        }
-      })
+  //       },
+  //       fail(err) {
+  //         console.log('errNO:');
+  //         console.log(err);
+  //         that.failPayAfter(err.data.message)
+  //       }
+  //     })
 
-    }
+  //   }
 
-  },
+  // },
 
 
   successPayAfter: function () {

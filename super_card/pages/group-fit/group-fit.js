@@ -23,6 +23,8 @@ Page({
 
     this.getGroupType()
 
+    console.log('group', this.data.group)
+
   },
 
   //获取名片组类型

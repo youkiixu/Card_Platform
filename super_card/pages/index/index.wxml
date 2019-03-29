@@ -54,8 +54,10 @@
 </block>
 
 
+
 <block wx:else>
 
+  <!-- wx:if="{{ card_id == card.id }}" -->
 <block wx:key="unique" wx:for="{{cardLists}}" wx:for-index="idx" wx:for-item="card" wx:if="{{ card_id == card.id }}">
 
 <view class='index-top-bg' wx:if="{{ card.style == 1 }}">
@@ -477,7 +479,7 @@
   <button form-type='submit' class='menu-item'>
     <block wx:if="{{ item.img === false }}">
     <view class='menu-item-img' style='background-color:{{ themeColor }};'>
-      <text class='iconfont {{ item.icon }} {{ btdx == 7 ? "music-run" : "" }}'></text>
+      <text class='iconfont {{ item.icon }} {{ btdx == 3 ? "music-run" : "" }}'></text>
     </view>
     </block>
     <block wx:else>
@@ -489,8 +491,54 @@
   </button>
   </form>
   </block>
- 
+
 </view>
+
+<!-- 五人、十人全民推广组start -->
+
+<view class='marketingGroup' wx:if="{{iosPay == true}}">
+
+   <view class='noOpenTen' wx:if="{{ openTenVip == false }}">
+      <view class='noOpenTen-l'>
+        <text class="iconfont notice-s icon-xiazai41"style="color:#f9d863;font-size:25px;"></text>
+      </view>
+      <view class='noOpenTen-m' bindtap="toOpenPage" wx:if="{{ noOpenAll }}">
+        <text class='m-t'>立即开通，全员推广VIP</text>
+        <text>邀请员工加入，体验全员帮您推广</text>
+      </view>
+      <view class='noOpenTen-mF' wx:if="{{ openFiveVip }}">
+        <view class='toGroupFive' bindtap="toGroupManage" wx:if="{{buildFiveGroup == true}}">
+          <text class='mF-t'>查看5人推广组</text>
+          <text>邀请员工加入，体验全员帮您推广</text>
+        </view>
+        <view class='toModifyFive' bindtap="toModifyFive" wx:if="{{buildFiveGroup == false}}">
+          <text class='mF-t'>创建5人推广组</text>
+          <text>邀请员工加入，体验全员帮您推广</text>
+        </view>
+      </view> 
+
+      <view class='noOpenTen-r' bindtap="toOpenPage" wx:if="{{ openTenVip == false}}">立即升级</view>
+   </view>
+
+   <view class='alreadyOpen' wx:if="{{openTenVip}}">
+      <view class='alreadyOpen-l'>
+        <text class="iconfont notice-s icon-xiazai41"style="color:#f9d863;font-size:25px;"></text>
+      </view>
+       <view class='alreadyOpen-r'>
+          <view class='toGroupTen' bindtap="toGroupManage" wx:if="{{buildTenGroup == true}}">
+            <text class='a-t'>查看10人推广组</text>
+            <text>邀约员工加入，体验全员帮您推广</text>
+          </view>
+          <view class='toModifyTen' bindtap="toModifyTen" wx:if="{{buildTenGroup == false}}">
+            <text class='a-t'>创建10人推广组</text>
+            <text>邀约员工加入，体验全员帮您推广</text>
+          </view>
+      </view> 
+   </view> 
+
+</view>
+<!-- 五人、十人全民推广组end -->
+
 
 <form wx:if="{{ identify_card_switch == 1 }}" report-submit='true' bindsubmit="toPatCardPage">
 <button form-type='submit' class='contains quick-read'>
@@ -855,22 +903,21 @@
     </view>
 
     <view class='functionCate' wx:if="{{ showCate }}">
-    <!-- 名片风格 -->
-      <view class='ove-btn cardStyle' bindtap='cardTypeChange'>
-        <text class='iconfont icon-fenggepitchon' style='color:#00a1e9;'></text>
-      </view>
-      <!-- 切换名片 -->
-      <view class='ove-btn cardSwitch' bindtap='showCardCut'>
+    <!-- 切换名片 -->
+      <view class='ove-btn2 cardSwitch' bindtap='showCardCut'>
         <text class='iconfont icon-fangxiang' style='color:#00a1e9;'></text>
       </view>
+    <!-- 名片风格 -->
+      <view class='ove-btn2 cardStyle' bindtap='cardTypeChange'>
+        <text class='iconfont icon-fenggepitchon' style='color:#00a1e9;'></text>
+      </view>
       <!-- 预览名片 -->
-      <view class='ove-btn cardPreview' bindtap='previewCard'>
-        <text class='fmp-pyq iconfont icon-yanjing' style='color:#00a1e9;'></text>
+      <view class='ove-btn2 cardPreview' bindtap='previewCard'>
+        <text class='fmp-pyq iconfont icon-yanjing' style='color:#00a1e9;font-size: 50rpx;'></text>
       </view>
       <!-- 语音播报开关 -->
-      <view class="switchChange">
-        <switch class='switch-btn' checked='{{switchValue}}' bindchange="switchChange" color="#00a1e9" />
-        <text class='swit-txt'>语音开关</text> 
+       <view class="ove-btn2 switchChange" bindtap="switchChange">
+       <text class='iconfont notice-s icon-xiazai41' style='color:{{switchValue == true ? "#00a1e9" :"#778899" }};font-size: 40rpx;'></text>
       </view>
     </view>
 </view>

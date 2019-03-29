@@ -21,6 +21,14 @@
   flex:1;
   -webkit-flex:1;
 }
+.order-sort{
+  height:45px;
+  line-height: 45px;
+  background-color: #fff;
+  padding: 0 20rpx;
+  margin:25px 0;
+  font-size:18px;
+}
 .entry{
   flex:2;
   -webkit-flex:2;

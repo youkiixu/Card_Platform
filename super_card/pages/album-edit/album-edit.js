@@ -27,6 +27,7 @@ Page({
     isFresh:false,
 
     album_pic_limit: 0,
+    orderSort:'',
   },
 
   clickPic: function (e){
@@ -303,7 +304,19 @@ Page({
    */
   setAlbumName: function (e){
     //console.log(e)
-    this.setData({ album_name : e.detail.value })
+    var that = this
+    var album_name = e.detail.value
+    that.setData({ album_name: album_name })
+  },
+
+  /**
+     * 设置用户输入的相册排序
+     */
+  setOrderSort: function (e) {
+    console.log('e排序',e)
+    var that = this
+    var order_sort = e.detail.value
+    that.setData({ order_sort: order_sort })
   },
 
   /**
@@ -373,7 +386,8 @@ Page({
         var data = {
                     card_id : that.data.card_id,
                     album_id : that.data.album_id,
-                    name : name
+                    name : name,
+                    sort: that.data.order_sort
                    }
 
         app.util.request({
@@ -408,7 +422,7 @@ Page({
       'url': 'entry/wxapp/saveCardAlbum',
       //'cachetime': '30',
       'method': 'POST',
-      'data': { 'card_id': that.data.card_id, 'album_id': that.data.album_id , 'name' : that.data.album_name},
+      'data': { 'card_id': that.data.card_id, 'album_id': that.data.album_id, 'name': that.data.album_name, 'sort': that.data.order_sort},
       success(res) {
         console.log(res)
 
@@ -478,7 +492,7 @@ Page({
       success(res) {
         console.log(res)
         var album = res.data.data
-        that.setData({ album_name: album.name, pics: album.pic_list, isFresh : false })
+        that.setData({ album_name: album.name, order_sort: album.sort, pics: album.pic_list, isFresh : false })
         wx.setNavigationBarTitle({
           title: album.name
         });

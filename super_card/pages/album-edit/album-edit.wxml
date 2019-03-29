@@ -19,6 +19,15 @@
       <text class="trans iconfont icon-jiantouarrow483"></text>
     </view>
   </view>
+  <view class='order-sort'>
+     <view class='title-content'>
+      <text>相册排序</text>
+      <view class='entry'>
+        <input type="text" maxlength='12' name="order_sort" type='number' placeholder="请输入排序标号" value="{{ order_sort }}" bindblur='setOrderSort'></input>
+      </view>
+  </view>
+  </view>
+ 
   <text class='ico'>图片<text class='color'>（最多{{ album_pic_limit }}张）</text></text>
   <view class='pictures' style="position:relative;">
   
@@ -44,7 +53,8 @@
     </view>
   </view>
   <text class='color'>*可按住图片拉拽，调整图片顺序</text>
-  <view class='btn-submit' wx:if="{{ album_id == 0 }}">
+  <view class='btn-submit'>
+  <!-- wx:if="{{ album_id == 0 }}" -->
     <button class='btn-block btn-blue' form-type='submit' bindtap='saveCardAlbum' style='background:{{ themeColor }};'>保 存</button>
   </view>
   <view class='btn-submit' wx:if="{{ album_id > 0 }}">

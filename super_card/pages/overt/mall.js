@@ -75,17 +75,11 @@ Page({
       wx.hideShareMenu()
     }
 
+    that.getCardGoods()
+
   },
   toDetail:function(){
-    //为了能调起授权--新加代码start
-    var userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      app.util.getUserInfo(function (response) {
-        app.config.init()
-      });
-      return 
-    }
-    //为了能调起授权--新加代码end
+    console.log('11')
   },
 
   getCardGoods: function (callback = false, mode = 'cover') {

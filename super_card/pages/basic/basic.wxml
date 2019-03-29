@@ -23,8 +23,9 @@
         </view>
         <view class='base_phone' bindtap='showTelType'>
           <icon class="iconfont icon-jiaxing" style='color:red;font-size:20rpx;padding-right:10rpx;'></icon>
-          <input type="number" maxlength="11" disabled="{{ mobileInputDisable }}" placeholder="{{ mobileInputHolder }}" name="mobile" value="{{ mobile }}" bindinput='setUserMobile' />
-          <text wx:if="{{ showMobileTypeArrow }}" class="cl img_down iconfont icon-caret-right-copy-copy" style='color:{{ themeColor }};' ></text>
+          <input type="number" maxlength="11" disabled="{{ mobileInputDisable }}" placeholder-style="font-size: 28rpx;"  placeholder="{{ mobileInputHolder }}" name="mobile" value="{{ mobile }}" bindinput='setUserMobile' />
+          <!-- <text wx:if="{{ showMobileTypeArrow }}" class="cl img_down iconfont icon-caret-right-copy-copy" style='color:{{ themeColor }};' ></text> -->
+           <button wx:if="{{ showWxPhoneBtn }}" class='gain_phone' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信获取</button>
           <!-- <image class='img_down' src='../../resource/icon/group.png' bindtap='showTelType'></image> -->
         </view>
       </view>
@@ -42,7 +43,7 @@
     </view>
     <button bindtap="sendMobileVcode" disabled="{{ sendBtnDisabled }}" class='v_code_right' style='background-color:{{ themeColor }};'>{{ sendBtnText }}</button>
   </view>
-  <button wx:if="{{ showWxPhoneBtn }}" class='gain_phone' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击获取微信手机号</button>
+  <!-- <button wx:if="{{ showWxPhoneBtn }}" class='gain_phone' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击获取微信手机号</button> -->
 </view> 
 
 <view>
@@ -89,8 +90,8 @@
         <text class='hide'>详细地址</text>
         <text class="card-t iconfont icon-dingwei1" style='color:{{ themeColor }};'></text>
       </view>
-      <view class='add_bto'>
-        <input type="text" name="address" maxlength="40" placeholder="详细地址 5~40字 可空" value="{{ address }}"/>
+      <view class='add_bto' bindtap='getCurrentLocation'>
+        <input type="text" name="address" disabled='false' maxlength="40" placeholder="详细地址 5~40字 可空" value="{{ address }}"/>
         <!-- <input type="text" name="address" maxlength="25" placeholder="详细地址 5~25字 可空" value="{{ address }}"/> -->
       </view>
     </view>

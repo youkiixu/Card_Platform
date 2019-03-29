@@ -149,7 +149,7 @@
 .change{
   display: flex;
   display: -webkit-flex;
-  padding: 20rpx 0;
+  padding-top: 20rpx;
   align-items:center;
   -webkit-align-items:center;
 }
@@ -305,4 +305,74 @@
   background: #fff;
   color: #00a1e9;
   border: 1px solid #00a1e9;
+}
+
+/* 移除成员修改 */
+.content-item{
+  display: flex;
+  display: -webkit-flex;
+  border-top:1px solid #e2e2e2;
+}
+.l-checkbox{
+  line-height: 200rpx;
+  margin-left: 20rpx;
+}
+/*checkbox 选项框大小  */
+checkbox .wx-checkbox-input {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 100%;
+}
+/*checkbox选中后样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #FF525C;
+}
+/*checkbox选中后图标样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+.edit-member{
+  height: 80rpx;
+  width: 100%;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  color: #999999;
+  background: #fff;
+  display: flex;
+  display: -webkit-flex;
+}
+.edit-l{
+  flex: 2;
+}
+.edit-r{
+  text-align: right;
+  margin-left: 200rpx;
+  padding: 0 20rpx;
+}
+.edit-inner{
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+.inner-l{
+  flex: 1;
+}
+.inner-r{
+  width: 150rpx;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  height: 75rpx;
+  background: #FF525C;
 }

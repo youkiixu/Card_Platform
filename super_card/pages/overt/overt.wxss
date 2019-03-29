@@ -561,24 +561,26 @@ button.iconfont{
 /*弹框留言  */
 .frame-word{
   margin-top: 0.8em;
-  display: flex;
+  /* display: flex;
   align-items: center;
   display: -webkit-flex;
-  -webkit-align-items: center;
+  -webkit-align-items: center; */
   font-size: 34rpx;
   color: #000;
 }
 .frame-word-tit{
   color: #7f7f7f;
+  text-align: left;
 }
 .frame-word-info{
-  flex: 1;
+  /* flex: 1;
   display: flex;
   align-items: flex-start;
   -webkit-flex: 1;
   display: -webkit-flex;
-  -webkit-align-items: flex-start;
+  -webkit-align-items: flex-start; */
   text-align:left;
+  width: 500rpx;
 }
 .wux-dialog__bd scroll-view{
   max-height: 582rpx;

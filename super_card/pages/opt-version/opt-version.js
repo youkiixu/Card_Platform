@@ -124,7 +124,7 @@ Page({
 
       app.freshHome = true
       wx.reLaunch({
-        url: '../home/home',
+        url: '../index/index',
       })
 
     }, 2000)
@@ -266,7 +266,6 @@ Page({
     this.setData({ btnDis: false, alreadyOpen:false, current: cIndex, choiceVipLevel: cIndex + 1, price: price.toFixed(2), timeYear: 1, time_array: this.data.time_array })
 
 
-
   },
 
 
@@ -274,10 +273,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    console.log('options', options);
     
     //console.log(app.UID)
     var that = this
+
     app.util.getUserInfo(function (res) {
 
       console.log(res)
@@ -291,6 +291,7 @@ Page({
           //console.log(res)
           console.log('res:',res)
           var uInfo = res.data.data.uInfo
+          console.log('uInfo', uInfo)
           if (uInfo.vip == 3){
             wx.showModal({
               title: '系统提示',
@@ -314,13 +315,19 @@ Page({
             //vipSet[x].checked = x == 0 ? true : false
           }*/
           var vipLen = vipSet.length
+          //var price = parseFloat(vipSet[0].price)
 
-          var price = parseFloat(vipSet[0].price)
+          var price = uInfo.vip == 0 ? '98' : (uInfo.vip == 1 ? '198' : '298')
+
+          var choiceVipLevel = uInfo.vip == 0 ? '1' : (uInfo.vip == 1 ? '2' : '3')
+
           // var current = parseInt(uInfo.vip)
           //根据返回数据判断当前选中的swiper
           var current = parseInt(vipLen === 1 ? 0 : uInfo.vip)
-          that.setData({ wxInfo: wxInfo, uInfo: uInfo, vipSet: vipSet, price: price.toFixed(2), current: current })
+          that.setData({ wxInfo: wxInfo, uInfo: uInfo, vipSet: vipSet, price: price, current: current, choiceVipLevel: choiceVipLevel})
           //app.freshHome = false
+
+         
         }
       });
 

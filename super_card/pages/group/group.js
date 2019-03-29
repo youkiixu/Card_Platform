@@ -22,6 +22,13 @@ Page({
 
   },
 
+  //返回首页
+  backIndex: function (e) {
+    wx.switchTab({
+      url: '../index/index',
+    });
+  },
+
 
   //刷新当前页
   freshCurrPage: function (cb){

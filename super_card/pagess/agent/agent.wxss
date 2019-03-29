@@ -504,7 +504,7 @@
 .bug_num{
  width: 60rpx;
  height: 60rpx;
- line-height: 48rpx;
+ line-height: 55rpx;
  margin: 40rpx 12rpx;
  font-size: 50rpx;
  background-color:#e9a944;
@@ -518,12 +518,12 @@
 /* 黑色透明弹层 */
 .mask{
   position: fixed;
-   z-index: 1;
    background: rgba(0, 0, 0, .5);
    top: 0;
    left: 0;
    bottom: 0;
    right: 0;
+   z-index: 1000;
 }
 .choice_box{
     width: 580rpx;
@@ -576,7 +576,7 @@
 .buy-num-box .num-box .num-jia{
   width: 60rpx;
   height: 60rpx;
-  line-height: 48rpx;
+  line-height: 55rpx;
   font-size: 50rpx;
   color:#fff;
   border-radius:30rpx;
@@ -668,4 +668,7 @@
 .category_active{
   color: #4951df;
   height: 82rpx;
+}
+.memberCodeTen{
+  border-top: 1rpx solid #eee;
 }

@@ -41,7 +41,8 @@
               </view>
 
               <view class='act-lm' wx:key="vipdesc" wx:for="{{ item.rules }}" wx:for-index="didx" wx:for-item="desc">
-                <view class='act-item'>○ </view>
+                <!-- <view class='act-item'>○ </view> -->
+                <view class='act-item' style='font-size:32rpx;margin-right:10rpx;'>·</view>
                 <block wx:if="{{ didx == 0 }}">
                   <view class='act-lm-con' ><text style='color:{{ themeColor }};'>{{ desc.rule_name }}</text></view>
                 </block>
@@ -79,7 +80,7 @@
         <!-- <text class='trans iconfont icon-jiantouarrow483' style='color:{{ themeColor }};'></text> -->
       </view>
       <form report-submit='true' bindsubmit="confirmPay">
-        <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (alreadyOpen ? '已经开通' : '立即升级') : '立即开通' }}</button>
+        <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (uInfo.vip > 2 ? '已经开通' : '立即升级') : '立即开通' }}</button>
       </form>
     </view>
   </view>

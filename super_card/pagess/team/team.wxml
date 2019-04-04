@@ -3,7 +3,7 @@
 
   <!-- 搜索类别标题 -->
   <view class='category'>
-    <block wx:for="{{ category }}">
+    <block wx:for="{{ category }}" wx:key="c">
       <view class="category_item {{activeCategoryId == item.id ? 'category_active' : ''}}"  data-id="{{item.id}}" bindtap="tabClick">{{item.name}}
       </view>
     </block>
@@ -11,98 +11,106 @@
 
    <!--循环体  -->
 
-     <!-- 全部分类start -->
-    <view class='category_all' wx:if="{{ activeCategoryId == 1 }}">
-        <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
-          <block wx:for="{{ allInfo }}" wx:for-index="idr">
-              <view class='info_item'>
-                <view class='info_itemImg'>
-                  <image class='img' src='{{ item.avatar }}'></image>
-                </view>
-                <view class='info_itemInfo'>
-                  <view class='info_name'>
-                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
-                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
-                    <view class='name'>{{item.nickname}}</view>
-                  </view>
-                  <view class='info-date'>注册时间：{{item.create_date}}</view>
-                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
-                </view>
-              </view>
-          </block>
-        </view>
-    </view>
-  <!-- 全部分类end -->
-
   <!-- 推荐分类start -->
-    <view class='category_recommend' wx:if="{{ activeCategoryId == 2 }}">
+    <view class='category_recommend' wx:if="{{ activeCategoryId == 1 }}">
         <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
-          <block wx:for="{{ allInfo }}" wx:for-index="idr">
-              <view class='info_item'>
-                <view class='info_itemImg'>
-                  <image class='img' src='{{ item.avatar }}'></image>
-                </view>
-                <view class='info_itemInfo'>
-                  <view class='info_name'>
-                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
-                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
-                    <view class='name'>{{item.nickname}}</view>
+          <block wx:for="{{ allInfo }}" wx:for-index="idr" wx:key="t">
+              <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+                  <view class='info_item'>
+                    <view class='info_itemImg'>
+                      <image class='img' src='{{ item.avatar }}'></image>
+                    </view>
+                    <view class='info_itemInfo'>
+                      <view class='info_name'>
+                        <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                        <view class='vip' wx:if="{{ item.vip > 0 }}">{{ item.vip == 1 ? 'VIP' : (item.vip == 2 ? '5人VIP':'10人VIP')}}</view>
+                        <view class='name'>{{item.nickname}}</view>
+                      </view>
+                      <view class='info-date'>注册时间：{{item.create_date}}</view>
+                      <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                    </view>
                   </view>
-                  <view class='info-date'>注册时间：{{item.create_date}}</view>
-                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
-                </view>
-              </view>
+              </navigator> 
           </block>
         </view>
     </view>
   <!-- 推荐分类end -->
 
   <!-- 会员分类start -->
-    <view class='category_member' wx:if="{{ activeCategoryId == 3 }}">
+    <view class='category_member' wx:if="{{ activeCategoryId == 2 }}">
       <view class='memberAgent' wx:if="{{ allInfo.length > 0 }}">
-         <block wx:for="{{ allInfo }}" wx:for-index="idm">
-               <view class='info_item'>
-                <view class='info_itemImg'>
-                  <image class='img' src='{{ item.avatar }}'></image>
-                </view>
-                <view class='info_itemInfo'>
-                  <view class='info_name'>
-                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
-                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
-                    <view class='name'>{{item.nickname}}</view>
+         <block wx:for="{{ allInfo }}" wx:for-index="idm" wx:key="h">
+              <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+                  <view class='info_item'>
+                    <view class='info_itemImg'>
+                      <image class='img' src='{{ item.avatar }}'></image>
+                    </view>
+                    <view class='info_itemInfo'>
+                      <view class='info_name'>
+                        <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                        <view class='vip' wx:if="{{ item.vip > 0 }}">{{ item.vip == 1 ? 'VIP' : (item.vip == 2 ? '5人VIP':'10人VIP')}}</view>
+                        <view class='name'>{{item.nickname}}</view>
+                      </view>
+                      <view class='info-date'>注册时间：{{item.create_date}}</view>
+                      <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                    </view>
                   </view>
-                  <view class='info-date'>注册时间：{{item.create_date}}</view>
-                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
-                </view>
-              </view>
+              </navigator> 
           </block>
         </view>
     </view>
   <!-- 会员分类end -->
 
-  <!-- 代理分类start -->
-    <view class='category_agent' wx:if="{{ activeCategoryId == 4 }}">
+  <!-- 服务商分类start -->
+    <view class='category_agent' wx:if="{{ activeCategoryId == 3 }}">
        <view class='memberAgent' wx:if="{{ allInfo.length > 0 }}">
-           <block wx:for="{{ allInfo }}" wx:for-index="idm">
-               <view class='info_item'>
-                <view class='info_itemImg'>
-                  <image class='img' src='{{ item.avatar }}'></image>
-                </view>
-                <view class='info_itemInfo'>
-                  <view class='info_name'>
-                    <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
-                    <view class='vip' wx:if="{{ item.vip > 0 }}">VIP</view>
-                    <view class='name'>{{item.nickname}}</view>
+           <block wx:for="{{ allInfo }}" wx:for-index="idm" wx:key="f">
+             <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+                  <view class='info_item'>
+                    <view class='info_itemImg'>
+                      <image class='img' src='{{ item.avatar }}'></image>
+                    </view>
+                    <view class='info_itemInfo'>
+                      <view class='info_name'>
+                        <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                        <view class='vip' wx:if="{{ item.vip > 0 }}">{{ item.vip == 1 ? 'VIP' : (item.vip == 2 ? '5人VIP':'10人VIP')}}</view>
+                        <view class='name'>{{item.nickname}}</view>
+                      </view>
+                      <view class='info-date'>注册时间：{{item.create_date}}</view>
+                      <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                    </view>
                   </view>
-                  <view class='info-date'>注册时间：{{item.create_date}}</view>
-                  <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
-                </view>
-              </view>
+             </navigator> 
           </block>
         </view>
     </view>
-  <!-- 代理分类end -->
+  <!-- 服务商分类end -->
 
+
+  <!-- 渠道商分类start -->
+      <view class='category_all' wx:if="{{ activeCategoryId == 4 }}">
+          <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
+            <block wx:for="{{ allInfo }}" wx:for-index="idr" wx:key="q">
+                <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+                  <view class='info_item'>
+                    <view class='info_itemImg'>
+                      <image class='img' src='{{ item.avatar }}'></image>
+                    </view>
+                    <view class='info_itemInfo'>
+                      <view class='info_name'>
+                        <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
+                        <view class='vip' wx:if="{{ item.vip > 0 }}">{{ item.vip == 1 ? 'VIP' : (item.vip == 2 ? '5人VIP':'10人VIP')}}</view>
+                        <view class='name'>{{item.nickname}}</view>
+                      </view>
+                      <view class='info-date'>注册时间：{{item.create_date}}</view>
+                      <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
+                    </view>
+                  </view>
+                </navigator> 
+            </block>
+          </view>
+      </view>
+    <!-- 渠道商分类end -->
 
    <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
  

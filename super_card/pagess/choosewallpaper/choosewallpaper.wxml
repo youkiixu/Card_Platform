@@ -1,0 +1,57 @@
+<!--super_card/pagess/team/team.wxml-->
+<view class='contains'>
+
+  <!-- 搜索类别标题 -->
+  <view class='category'>
+    <block wx:for="{{ category }}">
+      <view class="category_item {{activeCategoryId == item.id ? 'category_active' : ''}}"  data-id="{{item.id}}" bindtap="tabClick">{{item.name}}
+      </view>
+    </block>
+  </view>
+
+   <!--循环体  -->
+
+     <!-- 励志start -->
+    <view class='category_all clearfix' wx:if="{{ activeCategoryId == 1 }}">
+         <block>
+             <view class='item_inner' bindtap='chooseWallpaper' data-ii='2'>
+                <image class='img'></image>
+             </view>
+          </block>
+        <!-- <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
+          <block wx:for="{{ allInfo }}" wx:for-index="idr">
+             
+          </block>
+        </view> -->
+    </view>
+  <!-- 励志end -->
+
+  <!-- 推广start -->
+    <view class='category_all clearfix' wx:if="{{ activeCategoryId == 2 }}">
+         <block>
+             <view class='item_inner' bindtap='chooseWallpaper'>
+                <image class='img'></image>
+             </view>
+          </block>
+    </view>
+  <!-- 推广end -->
+
+  <!-- 自定义start -->
+    <view class='category_all clearfix' wx:if="{{ activeCategoryId == 3 }}">
+       <view class='item_inner add' bindtap='uploadAlbumPic'>
+            <text class='iconfont icon-plus'></text>
+            <view class='chooseSize'>尺寸：750*1070</view>
+       </view>
+        <block>
+             <view class='item_inner' bindtap='chooseWallpaper'>
+                <image class='img'></image>
+             </view>
+          </block>
+    </view>
+  <!-- 自定义end -->
+
+ 
+
+   <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+ 
+</view>

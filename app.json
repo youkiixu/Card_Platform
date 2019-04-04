@@ -107,7 +107,8 @@
         "issue-dynamic/issue-dynamic",
         "website-edit/website-edit",
         "recommend-record/recommend-record",
-        "group-modify/group-modify"
+        "group-modify/group-modify",
+        "choosewallpaper/choosewallpaper"
       ]
     }
   ],

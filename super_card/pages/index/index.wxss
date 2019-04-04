@@ -2066,3 +2066,45 @@ background-color:#fff;
   height: 205rpx;
   width: 100%;
 }
+
+/* 视频修改 */
+.fit{
+  display: flex;
+  display: -webkit-flex;
+  padding: 5rpx 0;
+  border-bottom: 1px solid #dfdfdf;
+}
+.fit2{
+ margin-top: 30rpx;
+}
+
+.fit .left,.fit .right,.fit .middle{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  -webkit-flex: 1;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+.fit .right{
+  justify-content:flex-end;
+  -webkit-justify-content:flex-end;
+}
+.fit .middle{
+  font-size: 24rpx;
+  padding-left: 80rpx;
+  box-sizing: border-box;
+}
+.fit .share{
+  margin: 0;
+}
+.fit image{
+  width: 50rpx;
+  height: 50rpx;
+  line-height:50rpx;
+}
+.goods-video{
+  position:static;
+  top: 0;
+  /* border: 1rpx solid transparent; */
+}

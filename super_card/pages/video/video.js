@@ -585,6 +585,7 @@ Page({
                   })
                }
 
+
              that.setData({
                arrvideo: data
              })

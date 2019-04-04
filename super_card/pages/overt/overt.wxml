@@ -731,31 +731,17 @@
       <text class="intro_content" id='card-Tips-intro-content' bindtap='showTips' data-plate='{{ card.intro_content }}'>{{ card.intro_content }}</text>
     </view>
     <!--视频  -->
-
-     <view class='video' wx:if='{{ card.video }}'>
-      <view wx:for="{{card.video}}"> 
-        <view class='cardInfo' data-index="{{index}}" bindtap='toPlay'>
-        <video src="{{ item.path }}"></video> 
-        <view class='begin' style='display:none'>
-        <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
-        <text class='video-time'>{{ item.duration }}</text>
-        </view>
-        <view class='video-title' wx:if='{{ item.name }}'>{{ item.name }}</view>
-      </view> 
+    <view class='video' wx:if='{{ videoInfo }}'>
+      <view wx:for="{{videoInfo}}" wx:for-index="index"> 
+        <view class='cardInfo'>
+          <txv-video  wx:if="{{  VqqId[index] != ''}}" class="goods-video"  vid="{{ VqqId[index] }}" playerid="txv1" ></txv-video>
+          <video wx:if="{{ VqqId[index] == '' }}"  src="{{ item.path }}" muted="{{ muted }}" controls binderror="videoErrorCallback"></video>
+            <view wx:if="{{  VqqId[index] != ''}}" class='video-title'>{{ item.name }}</view>
+            <view wx:if="{{ VqqId[index] == '' }}" class='video-title2'>{{ item.name }}</view>
+        </view> 
       </view>
     </view>
 
-
-    <!-- <view class='video' wx:if='{{ card.video }}'>
-      <navigator url="../../pages/video-watch/video-watch?card_id={{ card.id }}&forwarding={{ card.forwarding }}">
-        <image class='video-img' src='{{ card.video.thumb }}' mode='aspectFit'></image>     
-        <view class='begin'>
-          <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
-          <text class='video-time'>{{ card.video.duration }}</text>
-        </view>
-        <view class='video-title' wx:if='{{ card.video.name }}'>{{ card.video.name }}</view>
-      </navigator>
-    </view> -->
 
     <block wx:key="albums" wx:for="{{card.albums}}" wx:for-index="albumIdx" wx:for-item="album">
     <!-- <view class='person_box' wx:if='{{ album.name }}'>

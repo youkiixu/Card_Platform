@@ -303,7 +303,7 @@ video{
   display: flex;
   display: -webkit-flex;
 }
-.video-title,.img-title,.img-titles{
+.img-title,.img-titles{
   text-align: center;
   height: 60rpx;
   line-height: 60rpx;
@@ -1702,4 +1702,16 @@ filter:none;
   color:#00a1e9;
   text-align: center;
   margin-left: 30rpx;
+}
+
+
+/* 视频修改 */
+.video-title{
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+.video-title2{
+  text-align: center;
+  font-size: 28rpx;
 }

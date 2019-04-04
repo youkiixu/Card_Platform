@@ -449,11 +449,11 @@ Page({
       this.errTips()
       return false
     } 
-    if (e.detail.value.address.length > 0 && e.detail.value.address.length < 5) {
-      this.setData({ errtips: '详细地址不能少于5个字且可为空' })
-      this.errTips()
-      return false
-    } 
+    // if (e.detail.value.address.length > 0 && e.detail.value.address.length < 5) {
+    //   this.setData({ errtips: '详细地址不能少于5个字且可为空' })
+    //   this.errTips()
+    //   return false
+    // } 
     
 
     var values = e.detail.value

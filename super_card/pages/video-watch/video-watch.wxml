@@ -16,7 +16,7 @@
     </view>
   </view>
 
-  <view class='bottom' wx:if="{{ showBackIndex }}">
+  <view class='bottom'>
     <view class='btn-submit'>
       <button class='btn-block btn-white' bindtap='backIndex'  style='color:{{ themeColor }};border-color:{{ themeColor }};'>返回首页</button>
     </view>

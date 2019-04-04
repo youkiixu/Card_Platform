@@ -91,7 +91,7 @@
         <text class="card-t iconfont icon-dingwei1" style='color:{{ themeColor }};'></text>
       </view>
       <view class='add_bto' bindtap='getCurrentLocation'>
-        <input type="text" name="address" disabled='false' maxlength="40" placeholder="详细地址 5~40字 可空" value="{{ address }}"/>
+        <input type="text" name="address" disabled='false' maxlength="40" placeholder="详细地址 0~40字 可空" value="{{ address }}"/>
         <!-- <input type="text" name="address" maxlength="25" placeholder="详细地址 5~25字 可空" value="{{ address }}"/> -->
       </view>
     </view>

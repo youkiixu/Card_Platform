@@ -53,8 +53,12 @@ Page({
 
     msgNum: 0,
 
-    arrvideo:[],//存放视频信息
-    videoInfo:{}, //存放跳转到播放页面的视频信息
+    // arrvideo:[],//存放视频信息
+    videoInfo: [], //存放视频信息
+
+    VqqId: [],
+
+    muted: false,
 
 
     show_card_cut:false,
@@ -186,6 +190,19 @@ Page({
       showToMask: false
     })
   },
+
+
+  //切换视频静音开关
+  toggleMuted: function () {
+    this.data.muted ? this.setData({ muted: false }) : this.setData({ muted: true })
+    
+  },
+  //视频显示错误回调
+  videoErrorCallback: function (e) {
+    console.log('视频错误信息:')
+    console.log(e.detail.errMsg)
+  },
+
 
   toPerfectCard:function (){
     wx.navigateTo({
@@ -990,7 +1007,7 @@ Page({
             dynamic = data[i].dynamic
           }
         }
-        if (website == 1 && website == 1 && website == 1){
+        if (website == 1 && store == 1 && dynamic == 1){
           proGroup = 1 //表示加入了推广组，并拥有推广组赋有的权限功能
         }
         wx.setStorageSync('proGroup', proGroup);
@@ -1039,12 +1056,43 @@ Page({
             for (var x in that.data.cardLists) {
               if (that.data.cardLists[x].is_default == 1) {
                 var card = that.data.cardLists[x]
+                that.setData({ card_id: card.id, cardStyle: card.style })
                 break
               } 
             }
-            that.setData({ card_id: card.id, cardStyle: card.style })
           }     
         }
+
+
+
+        // 新增代码start
+        var cardLists = that.data.cardLists
+        var videoInfo = []
+        for (var i = 0; i < cardLists.length; i++) {
+          if (cardLists[i].id == that.data.card_id) {
+            videoInfo = cardLists[i].video
+            break;
+          }
+        }
+        if (videoInfo) {
+          //判断腾讯视频
+          var linkReg = /v.qq.com\/x\/page/
+          var VId = []
+          for (var i = 0; i < videoInfo.length; i++) {
+            var temId = ''
+            if (linkReg.test(videoInfo[i].path)) {
+              var temp = videoInfo[i].path.match(/page\/(.*)\.html/)
+              temId = temp[1]
+            }  
+            VId.push(temId)
+          }
+          that.setData({
+            videoInfo: videoInfo,
+            VqqId: VId
+          })
+
+        }
+      // 新增代码end
 
 
 
@@ -1399,16 +1447,27 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    //console.log(res)
+    console.log('分享res',res)
+
+
     this.hideFmpShare()
+    console.log('videoindex:', res.target.dataset.videoindex)
     
-    if (res.from != 'menu' && res.target.id != 'sendCardBtn') {
 
-      var title = '点击查看全图'
-      var path = '/super_card/pages/photo-watch/photo-watch?card_id=' + this.data.card_id + '&album_id=' + res.target.dataset.album_id + '&pic_id=' + res.target.dataset.pic_id + '&from_act=share'
-      var imgUrl = res.target.dataset.src
-
-
+     if (res.from != 'menu' && res.target.id != 'sendCardBtn') {
+       var videoIndex = res.target.dataset.videoindex
+      //  视频分享
+       if (typeof videoIndex !== 'undefined') {
+         var title = '点击浏览视频'
+         var msg = this.data.videoInfo[videoIndex]
+         msg = JSON.stringify(msg)
+         var path = '/super_card/pages/video-watch/video-watch?card_id=' + this.data.card_id + '&Msgs=' + msg + '&forwarding=' + 1
+       }else{
+         //  照片分享
+         var title = '点击查看全图'
+         var path = '/super_card/pages/photo-watch/photo-watch?card_id=' + this.data.card_id + '&album_id=' + res.target.dataset.album_id + '&pic_id=' + res.target.dataset.pic_id + '&from_act=share'
+         var imgUrl = res.target.dataset.src
+       } 
     }else{
 
       if(this.data.card_id < 1){

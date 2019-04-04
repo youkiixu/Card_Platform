@@ -6,27 +6,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    itemChioce:1,
-    
-    sliderOffset: 0,
-    sliderLeft: 2,
-
-    list:false,
-    page:1,
-    lastPage:false,
-    child_num:0,
-
-    agent_grade:'',
-    lv:'',
+    itemChioce: 1,
+    page: 1,
+    lastPage: false,
 
     show_goTop: false,
 
-    category: [],
-
+    category: [
+      { id: 1, name: "励志" },
+      { id: 2, name: "推广" },
+      { id: 3, name: "自定义" }
+    ],
     activeCategoryId: 1,
 
     allInfo: [],
 
+    pic:'',
 
   },
 
@@ -38,35 +33,71 @@ Page({
       activeCategoryId: id,
       itemChioce: id
     });
-    this.getUserTeam() 
+    this.getWallpaper()
   },
 
-  toOvertPage:function(){
-    console.log('hahahah')
+  chooseWallpaper:function(e){
+    var id = e.currentTarget.dataset.ii
+    // var allInfo = this.data.allInfo
+    // var picPath = allInfo[id].path
+  
+    // var pages = getCurrentPages();
+    // // var Page = pages[pages.length - 1];//当前页
+    // var prevPage = pages[pages.length - 2];  //上一个页面
+    // //var info = prevPage.data //取上页data里的数据也可以修改
+    // prevPage.setData({ bgimg: picPath })//设置数据
+    // setTimeout(function () {
+    //   wx.navigateBack()
+    // }, 2000)
+      
+  },
+
+  /**
+  * 上传自定义图片
+  */
+  uploadAlbumPic: function () {
+
+    var that = this
+    var pics = []
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        console.log('chooseImage-res',res)
+        var tempFilePaths = res.tempFilePaths[0]
+        console.log('tempFilePaths：', tempFilePaths)
+        // wx.uploadFile({
+        //   url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+        //   filePath: tempFilePaths,
+        //   name: 'pic',//这里根据自己的实际情况改
+        //   formData: {
+        //     user: 'test'
+        //   },
+        //   success(res) {
+        //     var data = res.data
+        //     that.data.pics.push(data)
+        //     console.log('uploadFile-res',res)
+        //   }
+        // })
+
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({ lv:options.agent })
-    this.getUserTeam() 
+    this.getWallpaper()
     var agentGrade = app.config.getConf('agent_grade')
-
-    var getUserInfo = wx.getStorageSync('getUserInfo');
-    var agent = getUserInfo.agent;
-    
-    //只有渠道代理和合伙人有渠道商显示
-    var category = agent > 1 ? [{ id: 1, name: "推荐" },{ id: 2, name: "会员" },{ id: 3, name: "服务商" },{ id: 4, name: "渠道商" },] : [{ id: 1, name: "推荐" },{ id: 2, name: "会员" },{ id: 3, name: "服务商" },]
-
-    this.setData({ agent_grade: agentGrade, category: category})
-
+    this.setData({ agent_grade: agentGrade })
   },
 
 
 
-// 全部列表
-  getUserTeam: function (isload) {
+  // 全部列表
+  getWallpaper: function (isload) {
     var that = this;
     var data = {
       page: that.data.page,
@@ -83,9 +114,9 @@ Page({
         // }
 
         //isload==true表示是在页面上拉加载的函数里面执行的方法，则不清空数据，继续再原有数据的基础上追加
-        if (isload==true){
+        if (isload == true) {
           that.data.allInfo = that.data.allInfo.concat(res.data.data)
-        }else{
+        } else {
           that.setData({
             allInfo: []
           })
@@ -94,7 +125,7 @@ Page({
         that.setData({
           allInfo: that.data.allInfo
         })
-        
+
       }
     })
   },
@@ -159,9 +190,9 @@ Page({
   onPullDownRefresh: function () {
     this.data.page = 1
     this.data.lastPage = false
-    this.getUserTeam()
+    this.getWallpaper()
     wx.stopPullDownRefresh() //处理完数据刷新后，wx.stopPullDownRefresh可以停止当前页面的下拉刷新。
-    
+
   },
 
   /**
@@ -178,7 +209,7 @@ Page({
 
     that.data.page++
 
-    that.getUserTeam(true) //传值过去，表示页面上拉加载的就不清空数据
+    that.getWallpaper(true) //传值过去，表示页面上拉加载的就不清空数据
 
   },
 

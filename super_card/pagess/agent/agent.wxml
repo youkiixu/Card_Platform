@@ -136,7 +136,7 @@
           </view>
       </view>
       <view class='memberCode_num'>
-        <view class='member_num'>渠道商人数<text>0/0</text></view>
+        <view class='member_num'>渠道商人数<text>{{uInfo.channel_team_num}}/{{uInfo.channel_agent_limit}}</text></view>
         <view class='bug_num' bindtap="memberShowMask" data-type='5'>+</view>
       </view>
     </view>

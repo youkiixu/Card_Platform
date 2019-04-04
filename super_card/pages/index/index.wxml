@@ -632,46 +632,31 @@
     </view>
     <!--视频  -->
 
-
-    <view class='video' wx:if='{{ card.video }}'>
-      <view wx:for="{{card.video}}"> 
-        <view class='cardInfo' data-index="{{index}}" bindtap='toPlay'>
-        <!-- <video src="{{ item.path }}"></video>  -->
-        <video></video> 
-        <view class='begin' style='display:none'>
-        <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
-        <text class='video-time'>{{ item.duration }}</text>
-        </view>
-        <view class='video-title' wx:if='{{ item.name }}'>{{ item.name }}</view>
-      </view> 
+    <view class='video' wx:if='{{ videoInfo }}'>
+       <!-- wx:for="{{card.video}}" -->
+      <view wx:for="{{videoInfo}}" wx:for-index="index" wx:key="ii"> 
+      <!-- bindtap='toPlay' -->
+        <view class='cardInfo'>
+        <!-- 记得在index.json里面引用该自定义的视频组件 -->
+          <txv-video  wx:if="{{  VqqId[index] != ''}}" class="goods-video"  vid="{{ VqqId[index] }}" playerid="txv1" ></txv-video>
+          <video wx:if="{{ VqqId[index] == '' }}"  src="{{ item.path }}" muted="{{ muted }}" controls binderror="videoErrorCallback"></video>
+  
+            <view class="fit {{VqqId[index] != '' ? 'fit2' : '' }}">
+              <view class='left' bindtap='toggleMuted'>
+                <image class="iconfont {{ muted == false ? 'icon-sound-' : 'icon-sound-1'}}" style='font-size:50rpx;line-height:50rpx;'></image>
+              </view>
+              <view class='middle'>{{ item.name }}</view>
+              <view class='right'>
+                <image class="read iconfont icon-yanjing" style='font-size:40rpx;'></image>
+                <text>{{ views }}</text>
+                <button  open-type='share' class='share iconfont icon-fenxiang' data-videoIndex="{{index}}"></button>
+              </view>
+            </view>
+        </view> 
       </view>
     </view>
-   
-    <!-- <view class='video' wx:if='{{ card.video }}'>
-    <view wx:for="{{card.video}}">   
-        <video  src="{{ item.path }}" controls></video>   
-        <view class='begin' style='display:none'>
-          <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
-          <text class='video-time'>{{ item.duration }}</text>
-        </view>
-        <view class='video-title' wx:if='{{ item.name }}'>{{ item.name }}</view>
-    </view>
-    </view> -->
 
 
- <!-- <view class='video' wx:if='{{ card.video  }}'> 
-     <navigator url="../../pages/video-watch/video-watch?card_id={{ card.id }}&forwarding=1">
-        <image class='video-img' src="{{ !card.video.thumb ? card.video.path + '?x-oss-process=video/snapshot,t_50000,f_jpg,m_fast' : card.video.thumb }}" mode='aspectFit'></image>     
-        <view class='begin'>
-          <icon class='begin-icon iconfont icon-caret-right-copy-copy'></icon>
-          <text class='video-time'>{{ card.video.duration }}</text>
-        </view>
-        <view class='video-title' wx:if='{{ card.video.name }}'>{{ card.video.name }}</view>
-      </navigator> 
-    </view> -->
-
-
-  
 
     <!-- <block wx:key="albums" wx:for="{{card.albums}}" wx:for-index="albumIdx" wx:for-item="album">
      <view class='person_box' wx:if='{{ album.name }}'>

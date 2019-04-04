@@ -32,9 +32,7 @@ Page({
 
   //切换静音开关
   toggleMuted: function (){
-
     this.data.muted ? this.setData({ muted: false }) : this.setData({ muted: true })
-
   },
   //视频显示错误回调
   videoErrorCallback: function (e) {

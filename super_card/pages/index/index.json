@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "我的名片"
+  "navigationBarTitleText": "名片后台",
+  "usingComponents": {
+    "txv-video": "plugin://tencentVideo/video"
+  }
 }

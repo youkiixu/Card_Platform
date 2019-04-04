@@ -35,7 +35,11 @@ Page({
    * 切换展示背景图片
    */
   changeBackdrop:function(){
-    this.getWallPaper()
+     this.getWallPaper()
+     
+    // wx.navigateTo({
+    //   url: '../../pagess/choosewallpaper/choosewallpaper'
+    // })
   }, 
 
   getPosterPic:function (){

@@ -115,8 +115,8 @@ Page({
     var that = this
     var qrType = params.currentTarget.dataset.qrtype
     var uInfo = that.data.uInfo
-//字段未改
-    uInfo.high_agent_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买渠道商码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
+
+    uInfo.channel_agent_limit == 0 ? wx.showModal({ title: '系统提示', content: '次数不足，请点击+号购买渠道商码', showCancel: false, confirmText: '知道了' }) : wx.navigateTo({ url: '../spread/spread?qrType= ' + qrType })
 
   },
 
@@ -246,21 +246,21 @@ Page({
     var itemChioce = this.data.itemChioce
     var number = this.data.buyNumber
 
-    var personalMemberPrice = 6.0 * number //个人代理的会员码价格
-    var channelMenberPrice = 3.0 * number //渠道代理的会员码价格
-    var superPartnerMenberPrice = 1.0 * number //至尊合伙人的会员码价格
+    var personalMemberPrice = 8.0 * number //个人代理的会员码价格
+    var channelMenberPrice = 5.0 * number //渠道代理的会员码价格
+    var superPartnerMenberPrice = 3.0 * number //至尊合伙人的会员码价格
 
     var personalAgentPrice = 380.0 * number //个人代理的代理码价格
     var channelAgentPrice = 280.0 * number //渠道代理的代理码价格
     var superPartnerAgentPrice = 180.0 * number //至尊合伙人的代理码价格
 
     var perFiveMarketing = 30.0 * number //个人代理的5人营销码价格
-    var channelFiveMarketing = 15.0 * number //渠道代理的5人营销码价格
-    var superFiveMarketing = 5.0 * number //至尊合伙人的5人营销码价格
+    var channelFiveMarketing = 20.0 * number //渠道代理的5人营销码价格
+    var superFiveMarketing = 12.0 * number //至尊合伙人的5人营销码价格
 
     var perTenMarketing = 60.0 * number //个人代理的10人营销码价格
-    var channelTenMarketing = 30.0 * number //渠道代理的10人营销码价格
-    var superTenMarketing = 10.0 * number //至尊合伙人的10人营销码价格
+    var channelTenMarketing = 40.0 * number //渠道代理的10人营销码价格
+    var superTenMarketing = 24.0 * number //至尊合伙人的10人营销码价格
 
     var channelChannelPrice = 2300.0 * number //渠道代理的渠道码价格
     var superPartnerChannelPrice = 1800.0 * number //至尊合伙人的渠道码价格

@@ -34,7 +34,12 @@ Page({
     isComeBack: false,
     comeBackMsg: '您好，很高兴认识您！',
 
-     cardVideo:[], //存放用户视频信息
+    videoInfo:[], //存放用户视频信息
+
+    VqqId: [],
+
+    muted: false,
+
 
     from_act: '',
     showBackIndex: false,
@@ -1054,8 +1059,27 @@ Page({
           //console.log(res)
           typeof cb == "function" && cb()
           that.setData({ card: res.data.data, from_act: '' })
-               
-          that.setData({ cardVideo: that.data.card.video })
+
+          // 新增代码start
+          var videoInfo = that.data.card.video
+          if (videoInfo) {
+            //判断腾讯视频
+            var linkReg = /v.qq.com\/x\/page/
+            var VId = []
+            for (var i = 0; i < videoInfo.length; i++) {
+              var temId = ''
+              if (linkReg.test(videoInfo[i].path)) {
+                var temp = videoInfo[i].path.match(/page\/(.*)\.html/)
+                temId = temp[1]
+              }
+              VId.push(temId)
+            }
+            that.setData({
+              videoInfo: videoInfo,
+              VqqId: VId
+            })
+          }
+      // 新增代码end
 
           // that.playAudioAct() //语音播放
 

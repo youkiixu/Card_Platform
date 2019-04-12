@@ -8,7 +8,7 @@
       <button class='btn-block btn-blue addVideo' bindtap='addVideo' style='background:{{  themeColor }};'>添加更多视频</button>
     <view class='vidoeInfo' wx:for="{{arrvideo}}" wx:for-index="index">
       <view>
-      <view wx:if="{{ item.name }}" class='title2'>{{ item.name }}</view>
+      <view wx:if="{{ item.name }}" class='title2'>{{ item.name != '' ? item.name : '' }}</view>
       <view class="video-bg">
       <txv-video wx:if="{{ showVideo === true &&  VqqId[index] != ''}}" class="goods-video"  vid="{{ VqqId[index] }}" playerid="txv1" ></txv-video>
       <video wx:if="{{ showVideo === true && VqqId[index] == '' }}" class="video2" src="{{ item.path }}" controls></video>

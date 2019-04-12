@@ -115,7 +115,8 @@ Page({
     openType: 4,
     choiceF:false,
     choiceT:true,
-    uid:0,
+
+    agent_id: 0 ,
 
   },
 
@@ -972,6 +973,7 @@ Page({
     var that = this
     wx.request({
       url: app.util.url('entry/wxapp/ChatMsgNum'),
+      data: { agent_id: that.data.agent_id},
       success: function (res) {
         console.log(res)
         that.setData({ msgNum: res.data.data })
@@ -1184,9 +1186,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     
     var that = this;
+
+    console.log('options', options)
+
+    if (typeof options.agent_id != 'undefined') {
+      that.setData({
+        agent_id: options.agent_id  //扫推荐码进来携带的参数
+      })
+    }
+
     //ios支付判断
     var iosPay = app.config.iosPay(that)
     that.setData({
@@ -1451,8 +1462,7 @@ Page({
 
 
     this.hideFmpShare()
-    console.log('videoindex:', res.target.dataset.videoindex)
-    
+   
 
      if (res.from != 'menu' && res.target.id != 'sendCardBtn') {
        var videoIndex = res.target.dataset.videoindex
@@ -1489,6 +1499,9 @@ Page({
       var imgUrl = item_forward_pic ? item_forward_pic : ''
 
     }
+
+
+    
     console.log('分享路径',path)
     return {
       title: title,
@@ -1506,7 +1519,6 @@ Page({
             title: '分享失败',
             icon: 'none'
           })
-        console.log('分享路径：', path)
       },
       fail: function (res) {
         

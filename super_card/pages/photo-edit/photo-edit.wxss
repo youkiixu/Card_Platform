@@ -40,10 +40,10 @@
   padding-left: 50rpx;
 }
 .btn-submit{
-  margin:40rpx 20rpx;
+  margin:20rpx;
 }
 .btn-block{
-  line-height: 90rpx;
+  line-height: 80rpx;
   border-radius:50rpx;
 }
 .btn-blue{
@@ -53,4 +53,8 @@
 .btn-white{
   color: #00a1e9;
   border: 1px solid #00a1e9;
+}
+.sort{
+  flex:1;
+  -webkit-flex:1;
 }

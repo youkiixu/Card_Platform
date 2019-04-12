@@ -5,7 +5,7 @@
       <text class='name'>{{ card.name }}</text>
       <text style="color:{{ themeColor }};">的专属名片小程序码</text>
     </view>
-    <image class='top-img' src='{{ qrcode }}' bindtap='previewQrcode'></image>
+    <image class='top-img' src='{{ picCode }}' bindtap='previewQrcode'></image>
     <image class='top-img-solid' mode='widthFix' src='/super_card/resource/images/conserve.png'></image>
     <view class='trg'>
       <text>此名片码可印刷在</text>

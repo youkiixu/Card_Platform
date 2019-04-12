@@ -22,6 +22,8 @@ Page({
 
       isFresh: false,
       tisFresh: false,
+
+      sort: '',
   },
 
   changePic: function (e){
@@ -95,7 +97,7 @@ Page({
           }
         }
         //console.log('%c' + currIndex, 'font-size:30px;color:blue')
-        that.setData({ pic_id: pic_list[currIndex].id, currIndex: parseInt(currIndex), pic_name: pic_list[currIndex].name, pic_views: pic_list[currIndex].views, pics: pic_list, isFresh: false })
+        that.setData({ pic_id: pic_list[currIndex].id, currIndex: parseInt(currIndex), pic_name: pic_list[currIndex].name, sort: pic_list[currIndex].sort,pic_views: pic_list[currIndex].views, pics: pic_list, isFresh: false })
 
       }
     })
@@ -155,6 +157,66 @@ Page({
     })
 
   },
+
+  /**
+     * 设置用户输入的相片排序
+     */
+  // setPicSort: function (e) {
+  //   console.log('e排序', e)
+  //   var that = this
+  //   var order_sort = e.detail.value
+  //   that.setData({ order_sort: order_sort })
+  // },
+
+  /**
+ * 修改图片排序--接口未有
+ */
+  updatePicSort: function () {
+    //console.log($wuxDialog)
+    var that = this
+
+    $wuxDialog.prompt({
+      title: '',
+      content: '图片排序为',
+      fieldtype: 'text',
+      password: false,
+      defaultText: that.data.sort,
+      placeholder: '请输入整数值(数值越大越靠前)：',
+      maxlength: 12,
+      onConfirm(e) {
+        var sort = that.data.$wux.dialog.prompt.response
+        var data = {
+          card_id: that.data.card_id,
+          album_id: that.data.album_id,
+          pic_id: that.data.pic_id,
+          sort: sort
+        }
+
+        app.util.request({
+          'url': 'entry/wxapp/saveCardPicSort',
+          //'cachetime': '30',
+          'method': 'POST',
+          'data': data,
+          success(res) {
+
+            console.log('修改排序成功',res)
+
+            app.freshIndex = true
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; // 上一级页
+            prevPage.setData({ isFresh: true })
+
+            //console.log(res)
+            that.setData({ sort: sort })
+          }
+
+        })
+
+      },
+    })
+
+  },
+
 
   /**
  * 修改图片名称

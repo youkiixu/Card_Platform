@@ -11,6 +11,7 @@ Page({
     uid: 0,
     wxInfo:{},
     uInfo: {},
+    pInfo: {},
     vipSet:[],
 
     vipName: '',
@@ -33,7 +34,13 @@ Page({
     btnDis: false,
 
     type: 1,
-    alreadyOpen: false
+    alreadyOpen: false,
+    mobile: '',
+    chat_id:'',
+    card_id:'',
+    my_userCards: [],
+    bg_img:'https://yun.s280.com/attachment/images/2/2019/01/deTyZ7eJZVjhUKV77N571zj41GkVNv.jpg',
+    bg_color:'#434343',
   },
 
   toProPage: function (e){
@@ -43,6 +50,74 @@ Page({
       url: '../square/protocol?t=' + t,
     })
   },
+
+  //跳转到上级名片页
+  toOvertPage:function(){
+    wx.navigateTo({
+      url: '../overt/overt?card_id=' +  this.data.pInfo.id,
+    })
+  },
+
+  //拨打名片手机号 未完成
+  callMobile: function (e) {
+
+    wx.makePhoneCall({
+      phoneNumber: this.data.pInfo.mobile
+    })
+    // app.config.cardTrack(this.data.card_id, 2, 'copy')
+  },
+
+  
+  //去聊天界面 未完成
+  startChat:function(){
+
+    var that = this
+
+    if (that.data.my_userCards.length < 1) {
+      wx.showModal({
+        title: '系统提示',
+        content: '您还没有创建名片，只有创建名片后才可以咨询哦',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '去创建',
+        success: function (res) {
+          wx.redirectTo({
+            url: '../basic/basic',
+          })
+        }
+      });
+      return false
+    }
+
+    app.util.request({
+      'url': 'entry/wxapp/startChat',
+      //'cachetime': '30',
+      'data': { t_uid: that.data.pInfo.uid, t_card_id: that.data.pInfo.id, card_id: that.data.my_userCards[0].id },
+      success(res) {
+        wx.navigateTo({
+          url: '../chat/chat?chat_id=' + res.data.data + '&from=opt'
+        })
+      }
+    })
+   
+  },
+
+  // //获取当前用户名片
+  getMyUserCards: function () {
+
+    var that = this
+    app.util.request({
+      'url': 'entry/wxapp/getUserCard',
+      'data': { 'no_need_whole': 1 },
+      success(res) {
+        var data = res.data.data
+        that.setData({ my_userCards: data })
+      }
+
+    })
+
+  },
+
 
   //确认支付
   confirmPay: function (e) {
@@ -290,6 +365,8 @@ Page({
           //typeof cb == "function" && cb()
           //console.log(res)
           console.log('res:',res)
+          var pInfo = res.data.data.pInfo //上级信息
+
           var uInfo = res.data.data.uInfo
           console.log('uInfo', uInfo)
           if (uInfo.vip == 3){
@@ -324,14 +401,17 @@ Page({
           // var current = parseInt(uInfo.vip)
           //根据返回数据判断当前选中的swiper
           var current = parseInt(vipLen === 1 ? 0 : uInfo.vip)
-          that.setData({ wxInfo: wxInfo, uInfo: uInfo, vipSet: vipSet, price: price, current: current, choiceVipLevel: choiceVipLevel})
+          that.setData({ wxInfo: wxInfo, pInfo: pInfo, uInfo: uInfo, vipSet: vipSet, price: price, current: current, choiceVipLevel: choiceVipLevel})
           //app.freshHome = false
-
          
         }
       });
 
+      that.getMyUserCards() 
+
     });
+
+    
 
   },
 

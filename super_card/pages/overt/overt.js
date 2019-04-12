@@ -97,6 +97,8 @@ Page({
 
     agent_id: 0,
 
+    userInfo:{},
+
 
   },
 
@@ -794,10 +796,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    console.log('options', options)
     var that = this
-
+    console.log('options', options)
+    
     //控制返回按钮样式改变 进去页面2秒钟显示，又过了3秒隐藏
     setTimeout(function () {
       that.setData({  
@@ -820,21 +821,12 @@ Page({
 
     
     
-    if (typeof options.scene !== 'undefined') options = app.util.urlToJson(decodeURIComponent(options.scene))
-    if(!options.card_id){
-       wx.navigateBack()
-       return false
-    }
-
-    //agent_id为扫码进入到该页面所解析返回的数据
-    if (typeof options.agent_id != 'undefined') {
-      that.setData({
-        agent_id: options.agent_id
-      })
-    }
-
+    // if (typeof options.scene !== 'undefined') options = app.util.urlToJson(decodeURIComponent(options.scene))
+    // if(!options.card_id){
+    //    wx.navigateBack()
+    //    return false
+    // }
     
-    that.setData({ card_id: options.card_id })
 
       //获取当前用户ID
       app.util.getUserInfo(function (response) {
@@ -843,30 +835,47 @@ Page({
 
         //that.getChatNum()
 
-        if (typeof options.allow_collect !== 'undefined') {
-          var showRmBtn = options.allow_remove == 1 ? true : false
+        if (typeof options.scene !== 'undefined') {
+
+          const scene = decodeURIComponent(options.scene)
+          var param = scene.split('_') //split() 方法用于把一个字符串分割成字符串数组,此处是根据字符串中的"_"来分割
           that.setData({
-            allow_collect: options.allow_collect,
-            showRmBtn: showRmBtn,
-            fromGroupId: options.from_group_id,
+            card_id: param[0],
+            agent_id: param[1], //agent_id为扫码进入到该页面所解析返回的数据
+            from_act: param[2]
           })
-        }
-
-        // console.log('allow_collect', that.data.allow_collect)
-        // console.log('showRmBtn', that.data.showRmBtn)
-        // console.log('fromGroupId', that.data.fromGroupId)
-
-        if (typeof options.from_act !== 'undefined') {
          
-          if (app.shareOrScanIsValide === true)
-            that.setData({ from_act: options.from_act })
-        }
-        
+        }else{
 
-        that.freshCurrentPage(false, 1) 
+            that.setData({ card_id: options.card_id })
+         
+            if (typeof options.agent_id != 'undefined') {
+              that.setData({
+                agent_id: options.agent_id  //分享功能携带的参数
+              })
+            }
+
+            if (typeof options.allow_collect !== 'undefined') {
+              var showRmBtn = options.allow_remove == 1 ? true : false
+              that.setData({
+                allow_collect: options.allow_collect,
+                showRmBtn: showRmBtn,
+                fromGroupId: options.from_group_id,
+              })
+            }
+
+            if (typeof options.from_act !== 'undefined') {
+
+              if (app.shareOrScanIsValide === true)
+                that.setData({ from_act: options.from_act })
+            } 
+
+        }
+
+        that.freshCurrentPage(false, 1)
 
         that.getChatNum()
-
+       
       })
     
 
@@ -1036,8 +1045,7 @@ Page({
         //'cachetime': '30',
       'data': { card_id: that.data.card_id, watch: watch, from_act: that.data.from_act, agent_id: that.data.agent_id},//, state:false
         success(res) {
-           console.log('getCardItem.res',res)
-
+           
            //未开通商城或已开通商城但把商城屏蔽后需要显示的按钮
           if (res.data.data.agent_status == 0 || res.data.data.store_status == 0){
             that.setData({ 
@@ -1382,7 +1390,7 @@ Page({
       //var title = '这是 "' + this.data.card.name + '" 的' + (app_name ? app_name : '名片') +'，请惠存'
       
       var title = '您好，这是 "' + this.data.card.name + '" 的名片，请惠存'
-      var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other'
+      var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other&agent_id=' + this.data.agent_id
       var imgUrl = ''
 
       app.config.cardTrack(this.data.card_id, 4, 'praise')

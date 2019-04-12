@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 16,
 			"list": [
 				{
 					"id": -1,
@@ -131,6 +131,27 @@
 					"name": "照片分享查看",
 					"pathName": "super_card/pages/photo-watch/photo-watch",
 					"query": "card_id=2&album_id=496&pic_id=4179&from_act=share",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员开通页面",
+					"pathName": "super_card/pages/opt-version/opt-version",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 15,
+					"name": "首页右上角menu分享",
+					"pathName": "super_card/pages/overt/overt",
+					"query": "card_id=2&from_act=share&agent_id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "编辑相册图片",
+					"pathName": "super_card/pages/photo-edit/photo-edit",
+					"query": "",
 					"scene": null
 				}
 			]

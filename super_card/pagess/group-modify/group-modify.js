@@ -30,7 +30,9 @@ Page({
 
   //取消创建或修改名片组
   navBack: function () {
-    wx.navigateBack()
+    wx.switchTab({
+      url: '../../pages/index/index'
+    })
   },
 
   //选择名片处理

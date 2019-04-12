@@ -1,14 +1,41 @@
 <!--super_card/pages/opt-version/opt-version.wxml-->
 <view class='contains'>
   <view class='top'>
-    <!-- 有图片 -->
-    <image class='top-logo' src='{{ wxInfo.avatarUrl }}'></image>
-    <!-- 无图片 -->
-    <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
-    <view class='company-name'>{{ wxInfo.nickName }}</view>
-    <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
-    <!-- <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view> -->
-     <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：永久</view>
+
+    <view class='member-info'>
+       <!-- 有图片 -->
+      <image class='top-logo' src='{{ wxInfo.avatarUrl }}'></image>
+      <view class='top-right'>
+         <!-- 无图片 -->
+          <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
+          <view class='company-name'>{{ wxInfo.nickName }}</view>
+          <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
+          <!-- <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view> -->
+          <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：永久</view>
+      </view>
+    </view>
+
+    <!-- style="background:url({{card.bg_img}}) #fff no-repeat center; background-size:cover; color:{{card.bg_color}}" wx:if="{{ card.style == 1 }}" -->
+    <view class='superior-info' wx:if="{{ pInfo != ''}}" style="background:url({{bg_img}}) #fff no-repeat center; background-size:cover; color:{{bg_color}}" bindtap='toOvertPage'>
+      <view class='superior-left'>
+        <view class='superior-name'>
+          {{pInfo.name}} <text class='toChat' catchtap='startChat'>立即沟通</text>
+        </view>
+        <view class='superior-phone'>
+          <text class='iconfont icon-lvzhou_zhongduan_shouji'></text> {{pInfo.mobile}} <text class='toCall' catchtap='callMobile'>拨打</text>
+        </view>
+        <view class='superior-address'>
+         <text class='iconfont icon-dingwei1'></text> {{pInfo.company}}
+        </view>
+      </view>
+      <view class='superior-right'>
+        <view class='superior-badge'><text class='iconfont icon-huiyuan'></text>专享服务商</view>
+        <navigator url="../overt/overt?card_id={{ pInfo.id }}">
+          <view class='superior-more'>了解更多<text class='iconfont icon-jiantou' style='font-size: 24rpx;'></text></view>
+        </navigator>
+      </view>
+    </view>
+   
   </view>
 
   <view class='ov-content'>
@@ -86,7 +113,7 @@
   </view>
 
   <!-- 选择年限 -->
-  <view class='ov-time-bgc' bindtap="cancelTimeChoice" wx:if="{{showModalStatus}}"></view>
+<view class='ov-time-bgc' bindtap="cancelTimeChoice" wx:if="{{showModalStatus}}"></view>
   <view class='ov-time' animation="{{animationData}}" wx:if="{{showModalStatus}}">
     <view class='ov-time-top'>
       <view>{{ vipSet[choiceVipLevel - 1].name }}</view>

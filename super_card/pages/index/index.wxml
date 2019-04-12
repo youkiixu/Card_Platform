@@ -88,7 +88,11 @@
         <text class="card-iconimg iconfont icon-dingwei1"></text>
       </view>
       <view class='card-alike-buttom'>
-        <text class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text>
+        <view class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>
+              <text style='display: block;'>{{ card.province }}{{ card.city }}{{ card.dict }}</text>
+              <text style='display: block;'>{{ card.address }}</text>
+        </view>
+        <!-- <text class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>{{ card.province }}{{ card.city }}{{ card.dict }} {{ card.address }}</text> -->
       </view>
     </view>
     <block wx:if="{{ card.tel }}">

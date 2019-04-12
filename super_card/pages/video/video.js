@@ -39,8 +39,9 @@ Page({
 
   setVqqLink: function (e){ 
     var that = this
-    var userInfo = wx.getStorageSync('userInfo');
-    var isVip = userInfo.memberInfo.vip;
+
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
     var length = that.data.arrvideo.length + that.data.path.length;
      if (isVip > 0 && length >= 5) {
       wx.showToast({
@@ -287,18 +288,28 @@ Page({
 
   //上传多个视频
   chooseCardVideo: function () {
-    var userInfo = wx.getStorageSync('userInfo');
-    var isVip = userInfo.memberInfo.vip;
+   
     var that = this;
+   
+    var getUserInfo = wx.getStorageSync('getUserInfo');
+    var isVip = getUserInfo.vip;
     var length = that.data.arrvideo.length + that.data.path.length ;
-    if ((isVip == 0 && length >= 1) || (isVip > 0 && length>= 5) ){
-
+    console.log('length', length)
+    if (isVip > 0 && length >= 5) {
       wx.showToast({
-        title: '您只能上传' + length+'个视频',
+        title: '您只能上传' + length + '个视频',
         icon: 'none'
       })
       return;
     }   
+    // if ((isVip == 0 && length >= 1) || (isVip > 0 && length>= 5) ){
+
+    //   wx.showToast({
+    //     title: '您只能上传' + length+'个视频',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }   
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
@@ -328,9 +339,11 @@ Page({
 
         var arr = that.data.path;
         var len = that.data.path.length;
-        if(len==0){ 
-           res.name = that.data.name; 
-        }
+        // if(len==0){ 
+        //    res.name = that.data.name; 
+        // }
+
+        res.name = that.data.name; 
         
         arr.push(res) ;
         that.setData({
@@ -392,6 +405,8 @@ Page({
     //遍历上传
      
       var tempFilePaths = that.data.path;
+
+      console.log('tempFilePaths上传视频', tempFilePaths)
       //var uploadImgCount = 0; 
       for (var i = 0; i < tempFilePaths.length; i++) {
         var dd = tempFilePaths[i];
@@ -589,8 +604,8 @@ Page({
              that.setData({
                arrvideo: data
              })
-            
-             wx.setStorageSync('arrvideo', that.data.arrvideo)
+             console.log('arrvideo视频', that.data.arrvideo)
+            //  wx.setStorageSync('arrvideo', that.data.arrvideo)
             
            }
            ;

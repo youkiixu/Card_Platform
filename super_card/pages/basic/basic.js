@@ -622,8 +622,9 @@ Page({
     wx.chooseLocation({
       success: function (res) {
         console.log('选择地址信息', res)
-        // var address = res.address + '(' + res.name + ')'
-        that.setData({ address: res.name,  latitude: res.latitude, longitude: res.longitude })
+        // if (res.address)
+        //  var address = res.address + '(' + res.name + ')'
+        that.setData({ address: res.address,  latitude: res.latitude, longitude: res.longitude })
         console.log('address:', that.data.address)
       }
     })

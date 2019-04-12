@@ -402,7 +402,7 @@
       </view>
       <view class='new-card-act' wx:if="{{ card.fax }}">
         <view class='new-card-act-l'>传真</view>
-        <view class='new-card-act-r'>22222
+        <view class='new-card-act-r'>
           <view class='new-card-content'>{{ card.fax }}</view>
           <view class='new-card-copy' data-id='card-Tips-fax' data-copytent='{{ card.fax }}' bindtap='copyThis' style='color:{{ themeColor }};border-color:{{ themeColor }};'>复制</view>
         </view>

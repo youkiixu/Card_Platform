@@ -52,7 +52,7 @@
 
     </view>
   </view>
-  <text class='color'>*可按住图片拉拽，调整图片顺序</text>
+  <text class='color'>*点击图片，即可编辑标题、排序、删除图片</text>
   <view class='btn-submit'>
   <!-- wx:if="{{ album_id == 0 }}" -->
     <button class='btn-block btn-blue' form-type='submit' bindtap='saveCardAlbum' style='background:{{ themeColor }};'>保 存</button>

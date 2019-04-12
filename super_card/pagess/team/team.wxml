@@ -15,7 +15,7 @@
     <view class='category_recommend' wx:if="{{ activeCategoryId == 1 }}">
         <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
           <block wx:for="{{ allInfo }}" wx:for-index="idr" wx:key="t">
-              <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+              <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}&&from_act=team">
                   <view class='info_item'>
                     <view class='info_itemImg'>
                       <image class='img' src='{{ item.avatar }}'></image>
@@ -40,7 +40,7 @@
     <view class='category_member' wx:if="{{ activeCategoryId == 2 }}">
       <view class='memberAgent' wx:if="{{ allInfo.length > 0 }}">
          <block wx:for="{{ allInfo }}" wx:for-index="idm" wx:key="h">
-              <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+              <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}&&from_act=team">
                   <view class='info_item'>
                     <view class='info_itemImg'>
                       <image class='img' src='{{ item.avatar }}'></image>
@@ -65,7 +65,7 @@
     <view class='category_agent' wx:if="{{ activeCategoryId == 3 }}">
        <view class='memberAgent' wx:if="{{ allInfo.length > 0 }}">
            <block wx:for="{{ allInfo }}" wx:for-index="idm" wx:key="f">
-             <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+             <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}&&from_act=team">
                   <view class='info_item'>
                     <view class='info_itemImg'>
                       <image class='img' src='{{ item.avatar }}'></image>
@@ -91,7 +91,7 @@
       <view class='category_all' wx:if="{{ activeCategoryId == 4 }}">
           <view class='recommend' wx:if="{{ allInfo.length > 0 }}">
             <block wx:for="{{ allInfo }}" wx:for-index="idr" wx:key="q">
-                <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}">
+                <navigator url="../../pages/overt/overt?card_id={{ item.card_id }}&&from_act=team">
                   <view class='info_item'>
                     <view class='info_itemImg'>
                       <image class='img' src='{{ item.avatar }}'></image>

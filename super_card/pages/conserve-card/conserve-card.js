@@ -18,6 +18,8 @@ Page({
       card: {},
       qrcode : '',
 
+      picCode:'',
+
       animationData: "",
       showModalStatus: false,
 
@@ -105,26 +107,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+     console.log('options', options)
       if(options.card_id < 1){
         wx.navigateBack()
         return
       }
 
-      this.getExPic()
+    var that = this
 
-      this.data.card_id = options.card_id
+    app.util.request({
+      'url': 'entry/wxapp/getCardNewQrcode',
+      'method': 'POST',
+      'data': { card_id: options.card_id },
+      success(res) {
+        var data = res.data.data
+        that.setData({ picCode: data })
+      }
+    })
+
+     that.getExPic()
+
+     that.data.card_id = options.card_id
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
       var cardLists = prevPage.data.cardLists
 
       for(var x in cardLists)
-        if(cardLists[x].id == this.data.card_id)
-            this.setData({ card: cardLists[x] })
+        if (cardLists[x].id == that.data.card_id)
+          that.setData({ card: cardLists[x] })
 
-      if(this.data.card.qrcode) 
-        this.setData({ qrcode : this.data.card.qrcode })
+    if (that.data.card.qrcode) 
+        that.setData({ qrcode: that.data.card.qrcode })
       else
-        this.getCardQr()
+      that.getCardQr()
   },
 
   //获取名片小程序码
@@ -164,7 +179,6 @@ Page({
       'method': 'POST',
       'data': { card_id: that.data.card_id,  diff: that.data.diff},
       success(res) {
-        console.log('111',res)
 
         wx.showLoading({
           title: '加载中',

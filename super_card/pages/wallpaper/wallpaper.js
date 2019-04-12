@@ -35,11 +35,11 @@ Page({
    * 切换展示背景图片
    */
   changeBackdrop:function(){
-     this.getWallPaper()
+    // this.getWallPaper()
      
-    // wx.navigateTo({
-    //   url: '../../pagess/choosewallpaper/choosewallpaper'
-    // })
+    wx.navigateTo({
+      url: '../../pagess/choosewallpaper/choosewallpaper'
+    })
   }, 
 
   getPosterPic:function (){
@@ -51,7 +51,7 @@ Page({
       'url': 'entry/wxapp/getQrWallpaper',
       'data': { card_id: that.data.card_id, wp_id: that.data.wp_id },
       success(res) {
-        console.log(res.data.data)
+        console.log('保存海报',res.data.data)
 
         wx.showLoading({
           title: '加载中',
@@ -73,7 +73,7 @@ Page({
                   })
                  }
               })
-              console.log(res.tempFilePath)
+              console.log('保存相册成功',res.tempFilePath)
             }
             app.util.request({
               'url': 'entry/wxapp/delTempAudio',
@@ -101,7 +101,7 @@ Page({
     
     var that = this
     app.util.request({
-      'url': 'entry/wxapp/wallPaperLists',
+      'url': 'entry/wxapp/getWallPaper',
       success(res) {
         console.log(res.data.data)
         var date = new Date();

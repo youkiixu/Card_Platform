@@ -26,17 +26,18 @@
   color: #479ee3;
 }
 .item_inner{
-  width: 235rpx;
+  width: 238rpx;
   height: 340rpx;
   margin: 8rpx 0 0 8rpx;
   float: left;
   border-radius: 15rpx;
-  border: 1rpx solid green;
 }
 .item_inner .img{
   width: 100%;
   height: 100%;
+  text-align: center;
   overflow: hidden;
+  border-radius: 15rpx;
 }
 .add{
   background: #959595;
@@ -61,4 +62,13 @@
   position: absolute;
   bottom: 0;
   background-color: #6f6f6f;
+}
+.add_inner{
+  position: relative;
+}
+.add_inner icon{
+  position:absolute;
+  top:-5rpx;
+  right:-10rpx;
+  z-index: 2;
 }

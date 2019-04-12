@@ -42,6 +42,10 @@
       </block>
       </button>
   </view>
+
+  <view class='btn-submit'>
+    <button class='btn-block btn-blue' bindtap='updatePicSort' style='background:{{ themeColor }};'>修改排序</button>
+  </view>
   <view class='btn-submit'>
     <button class='btn-block btn-white' bindtap='delCardPic' style='color:{{ themeColor }};border-color:{{ themeColor }};'>删除该图片</button>
   </view>

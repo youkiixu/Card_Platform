@@ -27,7 +27,7 @@ Page({
     isFresh:false,
 
     album_pic_limit: 0,
-    orderSort:'',
+    order_sort:'',
   },
 
   clickPic: function (e){
@@ -74,61 +74,61 @@ Page({
   },
 
   //移动相册图片开始
-  moveStart: function (e) {
+  // moveStart: function (e) {
 
-    console.log('拖动开始')
-    //console.log(e)
-    currindex = e.currentTarget.dataset.index
-    x = e.touches[0].clientX
-    y = e.touches[0].clientY
-    x1 = e.currentTarget.offsetLeft
-    y1 = e.currentTarget.offsetTop
+  //   console.log('拖动开始')
+  //   //console.log(e)
+  //   currindex = e.currentTarget.dataset.index
+  //   x = e.touches[0].clientX
+  //   y = e.touches[0].clientY
+  //   x1 = e.currentTarget.offsetLeft
+  //   y1 = e.currentTarget.offsetTop
 
-  },
-  //移动相册图片中
-  moveIng: function (e) {
+  // },
+  // //移动相册图片中
+  // moveIng: function (e) {
 
-    console.log('拖动进行中')
-    //console.log(e)
+  //   console.log('拖动进行中')
+  //   //console.log(e)
 
-    x2 = e.touches[0].clientX - x + x1;
-    y2 = e.touches[0].clientY - y + y1;
+  //   x2 = e.touches[0].clientX - x + x1;
+  //   y2 = e.touches[0].clientY - y + y1;
 
-    var xLimit = dWidth - this.data.picWH
-    var yLimit = this.data.picArearHeight - this.data.picWH
+  //   var xLimit = dWidth - this.data.picWH
+  //   var yLimit = this.data.picArearHeight - this.data.picWH
 
-    x2 = x2 < 0 ? 0 : (x2 > xLimit ? xLimit : x2) 
-    y2 = y2 < 0 ? 0 : (y2 > yLimit ? yLimit : y2)
+  //   x2 = x2 < 0 ? 0 : (x2 > xLimit ? xLimit : x2) 
+  //   y2 = y2 < 0 ? 0 : (y2 > yLimit ? yLimit : y2)
     
-    this.setData({
-      mainx: currindex,
-      start: { x: x2, y: y2 }
-    })
+  //   this.setData({
+  //     mainx: currindex,
+  //     start: { x: x2, y: y2 }
+  //   })
 
-  },
+  // },
 
-  //移动相册图片结束
-  moveEnd: function (e){
+  // //移动相册图片结束
+  // moveEnd: function (e){
   
-    console.log('拖动结束')
-    //console.log(e)   
+  //   console.log('拖动结束')
+  //   //console.log(e)   
 
-    var posIndex = this.getPositionDomByXY({ x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY })
-    //console.log('%c'+ currindex + '****' + posIndex, 'font-size:30px;color:blue')
-    if (posIndex !== false && posIndex != currindex){
+  //   var posIndex = this.getPositionDomByXY({ x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY })
+  //   //console.log('%c'+ currindex + '****' + posIndex, 'font-size:30px;color:blue')
+  //   if (posIndex !== false && posIndex != currindex){
       
-      var temp = this.data.pics.splice(currindex , 1)
-      this.data.pics.splice(posIndex, 0, temp[0])
-      this.savePicsSort()
+  //     var temp = this.data.pics.splice(currindex , 1)
+  //     this.data.pics.splice(posIndex, 0, temp[0])
+  //     this.savePicsSort()
 
-    }
+  //   }
 
-    this.setData({ 
-        mainx: false,
-        pics: this.data.pics,
-    })
+  //   this.setData({ 
+  //       mainx: false,
+  //       pics: this.data.pics,
+  //   })
     
-  },
+  // },
 
   //保存相册图片排序
   savePicsSort: function (){

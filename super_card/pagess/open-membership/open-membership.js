@@ -53,7 +53,7 @@ Page({
         showBackIndex: false,
 
         vipSetOnly: '',
-        agent_id: 0,
+        agent_id: '',
         qrcode_sign: '',
         qrType:'',
         vipSetagent:[
@@ -217,17 +217,31 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      console.log('options', options)
+
+      if (typeof options.scene !== 'undefined'){
+        const scene = decodeURIComponent(options.scene)
+        var param = scene.split('_') //split() 方法用于把一个字符串分割成字符串数组,此处是根据字符串中的"_"来分割
+        this.setData({
+          agent_id: param[0],
+          qrcode_sign: param[1], 
+          qrType: param[2]
+        })
+      }else{
+        // options : {agent_id: '' , sign: ''}
+        if (typeof options.agent_id != 'undefined') {
+          this.setData({
+            agent_id: options.agent_id,
+            qrcode_sign: options.sign,
+            qrType: options.qrType
+          })
+        }
+      } 
 
       
-      console.log('options', options)
-        // options : {agent_id: '' , sign: ''}
-        if(typeof options.agent_id != 'undefined') {
-            this.setData({
-                agent_id: options.agent_id,
-                qrcode_sign: options.sign,
-                qrType: options.qrType 
-            })
-        }
+        
+
+
         //console.log(app.UID)
         var that = this
         app.util.getUserInfo(function (res) {

@@ -15,6 +15,8 @@ Page({
         shareImgPath: '',
         canvasHidden:true,
         qrType:'',
+        sWidth:277, //保存的画布宽度大小，PX
+        sHeight: 382, //保存的画布高度大小，PX
     },
 
 
@@ -59,6 +61,7 @@ Page({
                   })
                 }
               })
+              
               // 由于canvas不能使用网络图片，所以此处进行头像临时路径存储，下载文件下来
               wx.downloadFile({
                 url: qrPic,
@@ -108,10 +111,10 @@ Page({
                     wx.canvasToTempFilePath({
                       x: 0,
                       y: 0,
-                      width: screenWidth,
-                      height: winHeight,
-                      destWidth: ratio * screenWidth,
-                      destHeight: ratio * winHeight,
+                      width: that.data.sWidth,
+                      height: that.data.sHeight,
+                      destWidth: ratio * that.data.sWidth,
+                      destHeight: ratio * that.data.sHeight,
                       fileType: 'jpg',//保存为jpg，不然默认是png，就没有底图
                       canvasId: 'canvas',
                       quality: 1,

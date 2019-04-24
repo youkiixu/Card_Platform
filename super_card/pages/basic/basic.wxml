@@ -119,3 +119,11 @@
                 <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary"  bindtap="confirmIndustrySelect" style='color:{{ themeColor }};'>确定</view>
         </view>
 </view>
+
+
+<!-- 返回首页 -->
+   <form  report-submit='true' bindsubmit="backIndex">
+    <button form-type='submit' class='ove-btn'>
+      <text class='iconfont icon-daohangshouye' style='color:#4752e8;'></text>
+    </button>
+  </form>

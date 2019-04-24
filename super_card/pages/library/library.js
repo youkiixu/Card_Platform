@@ -488,15 +488,15 @@ Page({
       'data': { 'no_need_whole': 1 },
       success(res) {
         var data = res.data.data
-        if (data.length < 1) {
+        if (data.length == 1 && data[0].no_perfect == 1) {
           wx.showModal({
             title: '系统提示',
-            content: '您还没有创建名片，只有创建名片后才可以浏览哦！',
+            content: '您还没有完善名片，只有完善名片后才可以浏览哦！',
             showCancel: false,
             confirmColor: '#f90',
-            confirmText: '去创建',
+            confirmText: '去完善',
             success: function (res) {
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '../basic/basic',
               })
             }
@@ -506,6 +506,8 @@ Page({
       }
     })
   },
+
+ 
 
   /**
    * 生命周期函数--监听页面加载
@@ -659,6 +661,7 @@ Page({
     app.config.setAd(that)
 
     app.config.setUserComeback()
+    
   },
 
   /**

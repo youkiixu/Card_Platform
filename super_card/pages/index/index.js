@@ -116,7 +116,7 @@ Page({
     choiceF:false,
     choiceT:true,
 
-    agent_id: 0 ,
+    agent_id: '' ,
 
   },
 
@@ -1192,11 +1192,23 @@ Page({
 
     console.log('options', options)
 
-    if (typeof options.agent_id != 'undefined') {
+
+    if (typeof options.scene !== 'undefined') {
+      const scene = decodeURIComponent(options.scene)
       that.setData({
-        agent_id: options.agent_id  //扫推荐码进来携带的参数
+        agent_id: scene  
       })
-    }
+    } else {
+      if (typeof options.agent_id != 'undefined') {
+        that.setData({
+          agent_id: options.agent_id  //扫推荐码进来携带的参数
+        })
+      }
+    } 
+
+    console.log('agent_id', that.data.agent_id)
+
+    
 
     //ios支付判断
     var iosPay = app.config.iosPay(that)
@@ -1501,7 +1513,6 @@ Page({
     }
 
 
-    
     console.log('分享路径',path)
     return {
       title: title,
@@ -1734,6 +1745,13 @@ Page({
       }
     });
 
+  },
+
+  
+  toFresh:function(){
+    wx.reLaunch({
+      url: '../index/index',
+    });
   },
 
 

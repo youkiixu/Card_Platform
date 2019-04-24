@@ -158,18 +158,10 @@ Page({
 
   },
 
-  /**
-     * 设置用户输入的相片排序
-     */
-  // setPicSort: function (e) {
-  //   console.log('e排序', e)
-  //   var that = this
-  //   var order_sort = e.detail.value
-  //   that.setData({ order_sort: order_sort })
-  // },
+ 
 
   /**
- * 修改图片排序--接口未有
+ * 修改图片排序
  */
   updatePicSort: function () {
     //console.log($wuxDialog)
@@ -193,7 +185,7 @@ Page({
         }
 
         app.util.request({
-          'url': 'entry/wxapp/saveCardPicSort',
+          'url': 'entry/wxapp/saveCardPicName',
           //'cachetime': '30',
           'method': 'POST',
           'data': data,

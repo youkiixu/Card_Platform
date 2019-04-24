@@ -33,7 +33,6 @@ Page({
 
   //删除自定义海报
   delWallpaper:function(e){
-    console.log('shanchue',e)
     var that = this
     var index = e.currentTarget.dataset.dd
     var id = that.data.allInfo[index].id

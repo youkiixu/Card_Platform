@@ -77,5 +77,6 @@
 .shareimg{
   width: 554rpx;
   height: 764rpx;
+  /* height: 764rpx; */
   margin: 0 auto;
 }

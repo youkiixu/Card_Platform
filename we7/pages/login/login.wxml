@@ -1,10 +1,28 @@
 <!--we7/pages/login/login.wxml-->
 
-<view  wx:if="{{canIUse}}" class='sqinfo'>
+<!-- <view  wx:if="{{canIUse}}" class='sqinfo'>
   <icon color='' size='60' type='info'></icon>
   <view class='sq-words'>接受授权</view>
   <view class='sq-introduce'>为了更好地提供服务，此应用需要您的授权</view>
   <button class='sq-btn' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录 </button>
+</view> -->
+
+
+<view  wx:if="{{canIUse}}" class='sqinfo'>
+  <view class='top'>
+    <image class='img' src='/super_card/resource/images/logo.png'></image>
+    <view class='sq-words'>商桥智能名片登录</view>
+  </view>
+
+  <view class='middle'>
+    <view class='middle-introduce'>商桥智能名片小程序正使用微信登录的服务，微信登录将使用：</view>
+    <view class='middle-info'>
+      <view class='des'>·</view>
+      <view class='txt'>你的公开信息（昵称、头像、地区及性别）</view>
+    </view>
+  </view>
+  
+  <button class='sq-btn' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">允许使用 </button>
 </view>
 
 <view wx:else>请升级微信版本</view>

@@ -25,29 +25,30 @@
     </block>
   </block>
 
-  <!--view wx:if="{{ showBackIndex === false && show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view-->
-
-<!-- 发送名片显示加号返回首页 -->
-  <!-- <form wx:if="{{ showBackIndex }}" report-submit='true' bindsubmit="backIndex">
-    <button form-type='submit' class='returnIndex'>
-     <text class='suca iconfont icon-add-pluss-'></text>     
-    </button>
-  </form> -->
-
-   <!-- 小房子返回首页 -->
-  <!-- <view wx:if="{{ showHouseIndex }}" class='ove-btn' bindtap='toReturnIndex'>
-     <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>
-  </view> -->
 
   <!-- 返回首页 -->
-    <view class='return-back' bindtap='toReturnIndex'>
+
+
+    <block wx:if="{{ my_userCards[0].no_perfect == 1 && !my_userCards[0].mobile }}">
+       <button  class='return-back'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber2" wx:if="{{ my_userCards[0].no_perfect == 1}}">
       <view class='return-index {{ showText === true ? "right-show" : "right-hide" }}'>
-        <view class='tips'>{{ my_userCards.length > 0 ? '返回名片后台' : '创建我的名片'}}</view>  
+        <view class='tips'>返回名片后台</view>  
+      </view>
+        <view class='ove-btn btn-return {{ showbtn === true ? "right-show" : "right-hide" }} {{ showFilter === true ? "show-filter" : "" }}'>
+          <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>    
+        </view>
+    </button>
+    </block>
+    <block wx:else>
+      <view class='return-back' bindtap='toReturnIndex'>
+      <view class='return-index {{ showText === true ? "right-show" : "right-hide" }}'>
+        <view class='tips'>返回名片后台</view>  
       </view>
         <view class='ove-btn btn-return {{ showbtn === true ? "right-show" : "right-hide" }} {{ showFilter === true ? "show-filter" : "" }}'>
           <text class='iconfont icon-daohangshouye' style='color:{{ themeColor }};'></text>    
         </view>
     </view>
+    </block>
    
   
    
@@ -137,7 +138,8 @@
         <image class='iconfont icon-dingwei1 blue' style="color:{{ card.bg_color }};"></image>
       </view>
       <view class='file-bottom'>
-        <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text>
+        <!-- <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text> -->
+        <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.address }}</text>
       </view>
     </view>
     <block wx:if="{{ isComeBack === true || card.public == 1 }}">
@@ -330,7 +332,8 @@
             </view>
             <view class='new-card-info-act'>
               <text class='iconfont icon-dingwei'></text>
-              <view class='new-card-address' id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+              <!-- <view class='new-card-address' id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view> -->
+              <view class='new-card-address' id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation'>{{ card.address }}</view>
             </view>
           </view>
 
@@ -382,7 +385,8 @@
       <view class='new-card-act' wx:if="{{ card.address }}">
         <view class='new-card-act-l'>地址</view>
         <view class='new-card-act-r'>
-          <view class='new-card-content'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+          <!-- <view class='new-card-content'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view> -->
+          <view class='new-card-content'>{{ card.address }}</view>
           <view class='new-card-copy' bindtap='showMapLocation' style='color:{{ themeColor }};border-color:{{ themeColor }};'>显示</view>
         </view>
       </view>
@@ -504,7 +508,8 @@
                 <text class='iconfont icon-dingwei1' style='color:{{ themeColor }};'></text>
                 <view class='act-con-infoname'>定位</view>
               </view>
-              <view class='act-con-jtinfo'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view>
+              <view class='act-con-jtinfo'>{{ card.address }}</view>
+              <!-- <view class='act-con-jtinfo'>{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</view> -->
             </view>
           </view>
           <view class='people-act' wx:if="{{ card.email }}">
@@ -760,14 +765,14 @@
           <image class='img-album' lazy-load="true" data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='widthFix'></image>
           <view class='img-titles' data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
           <!--/navigator-->
-          <view class='img-info'>
+          <!-- <view class='img-info'>
             <text class='img-num'>{{ picIdx + 1 }}/{{ album.pic_list.length }}</text>
             <view class='rest-info'>
               <text class='iconfont icon-yanjing' style='font-size:20px;margin-right:6rpx;'></text>
               <text class='rin'>{{ pic.views }}</text>
               <button wx:if="{{ card.forwarding == 1 }}" open-type='share' data-album_id="{{ album.id }}" data-pic_id="{{ pic.id }}" data-src="{{ pic.path }}" class='iconfont icon-fenxiang'></button>
             </view>
-          </view>
+          </view> -->
            
         </view>        
         <view wx:if="{{ album.pic_list.length > 0 }}" bindtap="togglePicShow" class='large'  style='border-color:{{ themeColor }};'>
@@ -874,9 +879,20 @@
 </view>
 
 <!-- 未开通商城/官网的创建名片按钮的显示 -->
- <view wx:if="{{ noOpen }}" class='return-btn' bindtap='noOpenReturn'>
-    创建我的名片
-  </view>
+ <!-- <view wx:if="{{ noOpen }}" class='return-btn' bindtap='noOpenReturn'>
+    返回名片后台
+  </view> -->
+
+  <block wx:if="{{ my_userCards[0].no_perfect == 1 && !my_userCards[0].mobile && noOpen }}">
+     <button  class='return-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber2">
+    返回名片后台
+    </button>
+    </block>
+    <block wx:else>
+      <view  class='return-btn' bindtap='noOpenReturn'>
+        返回名片后台
+      </view>
+    </block>
 
 </view>
 <import src="/super_card/pages/templates/footer.wxml"/>

@@ -12,11 +12,22 @@ Page({
     withdrawal_method: app.config.getConf('withdrawal_method'),
     agent_balance: false,
     btnDis:false,
-    withdrawal_qrcode: false
+    withdrawal_qrcode: false,
+    actual_money:'', //实际到账金额
   },
 
   setMoney: function (e){
     this.data.money = e.detail.value
+    var money = e.detail.value
+    money = parseFloat(money)
+    var rate = parseFloat(this.data.withdrawal_apply_rate / 100) 
+    var actual_money = parseFloat(money - money * rate)
+    actual_money = actual_money.toFixed(2)
+    this.setData({ 
+      money: money,
+      actual_money: actual_money
+     })
+
   },
 
   choosePic: function (e) {

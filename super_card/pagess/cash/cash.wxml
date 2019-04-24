@@ -6,6 +6,7 @@
       <view class='top-num'>
         <text class='top-num-zs'>￥</text>
         <input type='digit' placeholder-class='top-num-input' placeholder='0' onblur="setMoney" onconfirm="setMoney" bindinput='setMoney'></input>
+         <view class='top-num-tip'>实际到账金额：<text class='top-num-a'>￥{{actual_money}}</text></view>
       </view>
       <view class='top-info'>
         <text class='top-info-l'>当前余额:</text>

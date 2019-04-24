@@ -1,22 +1,52 @@
 /* we7/pages/login/login.wxss */
-
+page{
+  background: #fff;
+}
 .sqinfo{
   text-align: center;
-  margin-top: 100rpx;
+  margin-top: 130rpx;
+  padding: 45rpx;
+  box-sizing: border-box;
+}
+.top{
+  padding-bottom: 45rpx;
+  border-bottom: 1rpx solid #d2d2d2;
+}
+.img{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 20rpx;
 }
 .sq-words{
-  margin-top: 20rpx;
-  color: #49b82d;
+  font-size: 38rpx;
+  color: #000;
 }
-.sq-introduce{
-  margin-top: 50rpx;
-  font-size: 26rpx;
-  color:#6b6a6a;
+.middle{
+  padding: 45rpx 0;
+}
+.middle-introduce{
+  text-align: left;
+  font-size: 32rpx;
+  color: #000;
+}
+.middle-info{
+  display: flex;
+  line-height: 70rpx;
+}
+.des{
+  font-size: 90rpx;
+  color: #888888;
+  display: inline-block;
+}
+.txt{
+  margin-left: 10rpx;
+  font-size: 32rpx;
+  color: #888888;
 }
 .sq-btn{
-  background-color: #49b82d;
+  width: 100%;
+  background-color: #00a1e9;
   color: #fff;
   letter-spacing: 2rpx;
   font-size: 30rpx;
-  margin: 50rpx 100rpx;
 }

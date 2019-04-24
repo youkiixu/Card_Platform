@@ -158,3 +158,11 @@
   font-size:30rpx;
 }
 
+.top-num-tip{
+  font-size: 28rpx;
+  width: 300rpx;
+  text-align: center;
+}
+.top-num-a{
+  font-size: 32rpx;
+}

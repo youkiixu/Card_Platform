@@ -1,0 +1,118 @@
+<view class='cate-nav'>
+  <scroll-view scroll-x="true"  class='category' scroll-left="{{scrollLeft}}">
+      <block wx:for="{{ categories }}" wx:for-index="index">
+        <view class="category_item {{currentTab == index ? 'category_active' : ''}}"  data-current="{{index}}"  bindtap="tabClick">{{item.name}}</view>
+    </block>
+  </scroll-view>
+  <!-- 显示更多分类按钮 -->
+   <view class="category_itemMore"  bindtap="tabMore">
+        <text class="iconfont icon-liebiao" style='font-size:70rpx;'></text>
+    </view>
+</view>
+
+<!-- 展开显示更多分类 -->
+  <view class='showMoreCate' wx-if="{{showMoreCate}}">
+    <view class='moreCate-content'>
+      <icon color="rgba(0,0,0,.5)" class='more-close'  size="24" type="clear" bindtap="moreClose"></icon>
+      <view class='allCate clearfix'>
+          <block wx:for="{{ categories }}" wx:for-index="index">
+            <view class="allCate_item" data-current="{{index}}"   bindtap="tabClick">{{item.name}}</view>
+          </block>
+      </view>
+    </view>
+  </view>
+
+
+ <!--循环体  -->
+    <view class='category_all'>
+
+      <!-- 全面、免费、付费三类 -->
+      <view class='chargeList'>
+        <block wx:for="{{ chargeList }}">
+              <view class="chargeList_item {{activeChargeId == item.id ? 'charge_active' : ''}}" data-id="{{item.id}}"   bindtap="chargeClick">{{item.name}}</view>
+        </block>
+      </view>
+
+      <!-- wx:if="{{ allInfo.length > 0 }}" -->
+        <view class='courseContent'>
+         <block>
+            <view class='info_item'  bindtap='chooseCourse'>
+              <view class='info_itemImg'>
+                <image class='img' src='{{  }}'></image>
+              </view>
+              <view class='info_itemInfo'>
+                  <view class='info_name'>项目管理实战指南</view>
+                  <view class='info-bottom'>
+                    <view class='info-price'>￥299</view>
+                    <view class='study-num'>120人学习过</view>
+                  </view>
+              </view>
+            </view>
+          </block>
+        </view>
+    </view>
+
+    <view wx:if="{{ show_goTop }}" bindtap='goTop' class='iconfont icon-huidaodingbu goTop'></view>
+
+
+
+    <!-- 课程详情页 -->
+
+    <view class='course-content'>
+      <view class='course-banner'></view>
+      <view class='content'>
+        <view class='content-top'>
+           <view class='content-title'>
+            <view class='title-inner clearfix'>
+                <view class="title-introduce  {{activeTitleId == 1 ? 'title_active' : ''}}" bindtap='titleClick' data-id='1'>介绍</view>
+                <view class="title-catalog  {{activeTitleId == 2 ? 'title_active' : ''}}" bindtap='titleClick' data-id='2'>目录</view>
+            </view>
+          </view>
+        </view>
+       
+        <!-- 介绍 -->
+        <view class='introduce' wx:if="{{ activeTitleId == 1 }}">
+          <view class='introduce-top'>
+            <view class='introduce-name'>区块链政务应用-档案与身份管理</view>
+            <view class='introduce-num'>120在学习</view>
+            <view class='introduce-price'>免费</view>
+          </view>
+
+          <view class='introduce-course'>
+            <view class='course-title'>课程介绍</view>
+            <view class='course-detail'>区块链（Blockchain）是比特币的一个重要概念，它本质上是一个去中心化的数据库，同时作为比特币的底层技术。区块链是一串使用密码学方法相关联产生的数据块，每一个数据块中包含了一次比特币网络交易的信息，用于验证其信息的有效性（防伪）和生成下一个区块。</view>
+          </view>
+        </view>
+
+
+
+         <!-- 目录 -->
+        <view class='catalog' wx:if="{{ activeTitleId == 2 }}">
+            <view class='catalog-item'>01、课程介绍、资源获取</view>
+            <view class='catalog-item'>02、货币发展史与比特币特性</view>
+            <view class='catalog-item'>03、中心化与去中心化介绍</view>
+            <view class='catalog-item'>04、区块链概念介绍</view>
+            <view class='catalog-item'>05、POW、POS、DPOS</view>
+            <view class='catalog-item'>06、比特币产生的分配</view>
+        </view>
+
+
+        <view class='blank'></view>
+        <view class='bottom' >
+          <view class='b-l'>
+            <button class='touch-kf' open-type='contact'>
+              <text class='iconfont icon-kefu' style='color:{{ themeColorV }};'></text>
+              <text class='b-sy'>咨询</text>
+            </button>
+          </view>
+
+         <view  class='b-r' bindtap="toStudy" style='background-color:{{ themeColor }};'>
+           <text>去学习</text>
+         </view>
+        
+        </view>
+
+
+        
+      </view>
+    </view>

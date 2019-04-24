@@ -103,6 +103,7 @@ config.footer = function (obj) {
 
   }
 
+
   for (var i in tabBar['list']) {
     //tabBar['list'][i]['redirect'] = (tabBar['list'][i]['pagePath'].indexOf('card-book') > -1 ? true : false )
     tabBar['list'][i]['pageUrl'] = tabBar['list'][i]['pagePath'].replace(/(\?|#)[^"]*/g, '')

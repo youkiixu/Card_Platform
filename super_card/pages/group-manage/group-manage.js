@@ -408,19 +408,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onload加载函数')
     console.log('options', options)
+    var that = this
+
+    if (typeof options.scene !== 'undefined') {
+      const scene = decodeURIComponent(options.scene)
+      var param = scene.split('_') //split() 方法用于把一个字符串分割成字符串数组,此处是根据字符串中的"_"来分割
+      that.setData({
+        group_id: param[0],
+        from_act: param[1]
+      })
+    }else{
+      that.setData({ group_id: options.group_id }) 
+      if (typeof options.from_act !== 'undefined'){
+        that.setData({ from_act: options.from_act })
+      }
+    }
     
-    if (options.group_id < 1){
-       wx.navigateBack()
-       return   
+    // if (options.group_id < 1){
+    //    wx.navigateBack()
+    //    return   
+    // }
+
+    if (that.data.group_id < 1) {
+      wx.navigateBack()
+      return
     }
 
-    var that = this
+    
 
     that.getMyUserCards()
 
-    that.setData({ group_id: options.group_id })
+    
     
     //获取当前用户ID
     app.util.getUserInfo(function (response) {
@@ -437,9 +456,12 @@ Page({
               return false
             }
 
-            if (typeof options.from_act !== 'undefined'){
+            
 
-              that.setData({ showBackIndex: true, from_act: options.from_act })
+
+            if (typeof that.data.from_act !== 'undefined'){
+
+              that.setData({ showBackIndex: true})
               
               that.freshCurrPage()
             }else{
@@ -464,6 +486,8 @@ Page({
                 wx.hideShareMenu()
 
             }
+
+
           }
         })
     })

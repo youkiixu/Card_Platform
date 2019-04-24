@@ -2108,4 +2108,9 @@ background-color:#fff;
   top: 0;
   /* border: 1rpx solid transparent; */
 }
-
+.cardInfo{
+  z-index: 0;
+}
+.cardInfo .video--mod_player{
+  z-index: 0;
+}

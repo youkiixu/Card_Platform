@@ -241,3 +241,7 @@ button::after{
   margin-top:5rpx; */
   margin-right:10rpx;
 }
+
+.ove-btn{
+  bottom: 12%;
+}

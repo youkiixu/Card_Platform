@@ -891,3 +891,25 @@ button.safe-act::after{
   color: #d83e3e;
 }
 
+
+
+.bit-out{
+  display: flex;
+  display: -webkit-flex;
+}
+.bib-out{
+  display: flex;
+  display: -webkit-flex;
+  margin-left: 30rpx;
+}
+.bib-act-w,.bib-act-s{
+  line-height: 36rpx;
+  font-size:28rpx;
+  margin-top: 0;
+}
+.bib-act-w{
+  color:#989898;
+}
+.bib-act-s{
+  color: red;
+}

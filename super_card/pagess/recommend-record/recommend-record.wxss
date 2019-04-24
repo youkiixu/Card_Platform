@@ -39,13 +39,13 @@
   align-items:flex-start;
   -webkit-align-items:flex-start;
 }
-.info-l{
+.info_l{
    flex:1.5;
   -webkit-flex:1.5;
 }
 .info-r{
-   flex:1;
-  -webkit-flex:1;
+   flex:0.5;
+  -webkit-flex:0.5;
   text-align: right;
 }
 .info_name{
@@ -81,4 +81,46 @@
 }
 .fail{
   color:#8a8a8a;
+}
+
+.info_midd{
+  flex: 1.5;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  -webkit-flex: 1.5;
+  display: -webkit-flex;
+  -webkit-flex-flow: column;
+  -webkit-align-items: center;
+  overflow: hidden;
+}
+.droptRetract-info{
+  display:inline-flex;
+  width:100%;
+
+}
+.act-talk{
+  font-size: 30rpx;
+  width:100%;
+}
+.act-talk-act{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.act-talk-img{
+  width:50rpx;
+  height:40rpx;
+  line-height:40rpx;  
+  font-size:50rpx;
+  vertical-align:middle;  
+}
+.droptRetract-info{
+  display:inline-flex;
+  width:100%;
+}
+.rotate{
+  transform: rotate(180deg);
 }

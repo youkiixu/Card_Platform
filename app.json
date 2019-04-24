@@ -108,7 +108,8 @@
         "website-edit/website-edit",
         "recommend-record/recommend-record",
         "group-modify/group-modify",
-        "choosewallpaper/choosewallpaper"
+        "choosewallpaper/choosewallpaper",
+        "course/course"
       ]
     }
   ],

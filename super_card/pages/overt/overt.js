@@ -95,7 +95,8 @@ Page({
     showText:false,
     showFilter:false,
 
-    agent_id: 0,
+    // agent_id: 0,
+    agent_id: '',
 
     userInfo:{},
 
@@ -107,7 +108,7 @@ Page({
     return
   },
 
-
+  
   // 创建名片滑块宽度变小
   changeBigSetup: function () {
     var that = this
@@ -185,6 +186,40 @@ Page({
         that.setData({ msgNum: res.data.data })
       }
     })
+  },
+
+
+
+  //未完善名片的用户点击小房子返回首页并且获取微信绑定的手机号
+  getPhoneNumber2: function (e) {
+    var that = this
+    if (e.detail.iv) {
+      app.util.request({
+        url: 'entry/wxapp/updateCardMobile',
+        data: {
+          card_id: that.data.my_userCards[0].id,
+          iv: e.detail.iv,
+          encryptedData: e.detail.encryptedData
+        },
+        method: 'POST',
+        cachetime: 0,
+        success: function (res) {
+          wx.switchTab({
+            url: '../index/index',
+          });
+        }
+      });
+
+    }
+
+    // setTimeout(function () {
+    //   wx.switchTab({
+    //     url: '../index/index',
+    //   });
+    // }, 5000)
+    //console.log(e.detail)
+    
+
   },
 
 
@@ -844,6 +879,10 @@ Page({
             agent_id: param[1], //agent_id为扫码进入到该页面所解析返回的数据
             from_act: param[2]
           })
+
+          console.log('card_id--扫码进入', that.data.card_id)
+          console.log('agent_id--扫码进入', that.data.agent_id)
+          console.log('from_act--扫码进入', that.data.from_act)
          
         }else{
 
@@ -869,6 +908,11 @@ Page({
               if (app.shareOrScanIsValide === true)
                 that.setData({ from_act: options.from_act })
             } 
+
+
+          console.log('card_id--非扫码进入', that.data.card_id)
+          console.log('agent_id--非扫码进入', that.data.agent_id)
+          console.log('from_act--非扫码进入', that.data.from_act)
 
         }
 
@@ -1067,6 +1111,7 @@ Page({
           //console.log(res)
           typeof cb == "function" && cb()
           that.setData({ card: res.data.data, from_act: '' })
+
 
           // 新增代码start
           var videoInfo = that.data.card.video

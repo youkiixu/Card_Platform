@@ -29,7 +29,6 @@ Page({
     activeCategoryId: 1,
 
     allInfo: [],
-    statuInfo:'',
 
 
   },
@@ -52,6 +51,32 @@ Page({
     wx.switchTab({
       url: '../../pages/index/index',
     });
+  },
+
+  droptRetracts:function(e){
+    var that = this
+
+    //方法1：修改数组中的元素值 -- show_hide（show_hide为自己在获取数据的时候加上去的元素属性）
+    var index = e.currentTarget.dataset.index
+    if (that.data.allInfo[index].show_hide == 1){   
+      that.data.allInfo[index].show_hide = 2        
+    }else{
+      that.data.allInfo[index].show_hide = 1
+    }
+
+    that.setData({
+      allInfo: that.data.allInfo
+    })
+  
+    //方法2：修改数组中的元素值 -- show_hide（show_hide为自己在获取数据的时候加上去的元素属性）
+    // var index = e.currentTarget.dataset.index
+    // var Key = "allInfo[" + index + "].show_hide"
+    // if (that.data.allInfo[index].show_hide === 1) {
+    //   that.setData({ [Key]: 2 })
+    // } else {
+    //   that.setData({ [Key]: 1 })
+    // }
+
   },
 
   /**
@@ -100,11 +125,14 @@ Page({
                 statuInfo = "失败";
                 break;
             }
-          that.data.allInfo[i].statuInfo = statuInfo  //给数组增加属性值（字段） 
+          that.data.allInfo[i].statuInfo = statuInfo  //给数组增加属性值（字段）--- 在接口返回那里是看不到的，即改动不了接口数据库的数据，因为是自己增加的，所以要打印在控制台才可以看到增加的属性值，然后重新setData才会变更到视图层
+          that.data.allInfo[i].show_hide = 1  //给数组增加属性值（字段） 
         }
         that.setData({
           allInfo: that.data.allInfo
         })
+
+        console.log('allInfo', that.data.allInfo)
       }
     })
   },

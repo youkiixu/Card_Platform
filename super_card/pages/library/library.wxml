@@ -204,5 +204,8 @@
 
 </view>
 
+
+
+
 <import src="/super_card/pages/templates/tab-bar.wxml"/>
 <template is="footerWx" data="{{...tabBar}}"/>

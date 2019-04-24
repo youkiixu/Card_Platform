@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -152,6 +152,12 @@
 					"name": "编辑相册图片",
 					"pathName": "super_card/pages/photo-edit/photo-edit",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "赋能课程",
+					"pathName": "super_card/pagess/course/course",
 					"scene": null
 				}
 			]

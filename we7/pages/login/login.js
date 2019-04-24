@@ -9,7 +9,7 @@ Page({
 
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
-      backgroundColor: '#49b82d',
+      backgroundColor: '#00a1e9',
     })
     wx.setNavigationBarTitle({
       title: '授权登录'
@@ -38,7 +38,7 @@ Page({
     } else
       wx.reLaunch({ url: "/super_card/pages/index/index" })
 
-    console.log(e)
+    console.log('授权-e',e)
   }
 
 })

@@ -40,6 +40,13 @@ Page({
     errtips:''
   },
 
+  //返回首页
+  backIndex: function (e) {
+    wx.switchTab({
+      url: '../index/index',
+    });
+  },
+
 
 
   //设置用户输入的短信验证码
@@ -495,8 +502,6 @@ Page({
             console.log(res)
             
             if(that.data.card_id){
-
-
               wx.showToast({
                 title: res.data.message,
                 icon: 'success',
@@ -570,6 +575,11 @@ Page({
 
         },fail:function(res){
           console.log('保存失败：',res)
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            duration: 2000
+          })
         }
     })
 

@@ -139,7 +139,12 @@
       </view>
       <view class='file-bottom'>
         <!-- <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text> -->
-        <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.address }}</text>
+        <!-- <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.address }}</text> -->
+
+        <view class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">
+              <text style='display: block;'>{{ card.province }}{{ card.city }}{{ card.dict }}</text>
+              <text style='display: block;'>{{ card.address }}</text>
+        </view>
       </view>
     </view>
     <block wx:if="{{ isComeBack === true || card.public == 1 }}">

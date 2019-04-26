@@ -1,0 +1,65 @@
+
+page{
+  background-color: #fff;
+}
+.top{
+  padding-top: 100rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-bottom:10rpx;
+}
+.top-tit{
+  letter-spacing: 4rpx;
+  font-weight: 600;
+  font-size: 34rpx;
+  margin-bottom:10rpx;
+}
+.top-hr{
+  width: 80rpx;
+  height: 6rpx;
+  background-color: #cccccc;
+}
+.content{
+  padding: 10rpx 80rpx;
+  display: flex;
+  flex-flow: column;
+}
+.act{
+  margin: 20rpx 0;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+}
+.act label{
+  font-size: 30rpx;
+}
+.act input{
+  flex: 1;
+  padding: 0 20rpx;
+  margin-left: 10rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  border: 1px solid #cccccc;
+}
+.act-address{
+  margin-right: 20rpx;
+}
+
+button::after{
+  border:0;
+}
+.btn-submit{
+  margin-top: 30rpx;
+}
+.btn-block{
+  line-height: 80rpx;
+  border-radius:50rpx;
+}
+.btn-yellow{
+  background: #4752e8;
+  color: #fff;
+  font-size:30rpx;
+  letter-spacing:4rpx;
+}

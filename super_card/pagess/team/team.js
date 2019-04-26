@@ -28,6 +28,7 @@ Page({
     allInfo: [],
 
 
+
   },
 
 
@@ -38,11 +39,46 @@ Page({
       activeCategoryId: id,
       itemChioce: id
     });
-    this.getUserTeam() 
+    this.getUserTeam(id) //之前是不传值即直接this.getUserTeam()，然后在getUserTeam里面直接拿setdata里面的值传给后台，setdata一般都挺快的， 后面接方法一般没有影响， 就是可能特别卡的时候 比较容易出现异步的现象； 直接传值时即this.getUserTeam(id)，防止因为异步机制导致数据加载慢，防止会出现空白没有数据的情况。注意的是如果采用直接传值方法，就要每次调用该方法时都要传对应的id过去，这两种方法看情况而定，都可以用。
   },
 
-  toOvertPage:function(){
-    console.log('hahahah')
+  
+  libraryOpen:function(e){
+    var that = this
+    var index = e.currentTarget.dataset.index
+    if (that.data.allInfo[index].is_relation == 0){
+      that.data.allInfo[index].is_relation = 1  //修改数组中的元素值，is_relation是本来数组就有返回的元素
+    }else{
+      that.data.allInfo[index].is_relation = 0 //修改数组中的元素值
+    }
+    //修改数组中的元素值，最后要重新赋值
+    that.setData({
+      allInfo: that.data.allInfo
+    })
+
+    var data = {
+      uid: that.data.allInfo[index].id,
+      is_relation: that.data.allInfo[index].is_relation
+    }
+    app.util.request({
+      'url': 'entry/wxapp/saveRalation',
+      'method': 'POST',
+      'data': data,
+      success(res) {
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none',
+          duration: 1000
+        })
+      },
+      fail(res){
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
   },
 
   /**
@@ -50,7 +86,7 @@ Page({
    */
   onLoad: function (options) {
     // this.setData({ lv:options.agent })
-    this.getUserTeam() 
+    this.getUserTeam(1)  //默认第一个
     var agentGrade = app.config.getConf('agent_grade')
 
     var getUserInfo = wx.getStorageSync('getUserInfo');
@@ -61,16 +97,34 @@ Page({
 
     this.setData({ agent_grade: agentGrade, category: category})
 
+    //将时间戳转换成日期格式
+    // var ts = 1398250549123
+    // var date = new Date(ts); //获取一个时间对象
+    // console.log('date:', date)
+    // var Y = date.getFullYear() + '-';
+    // var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    // var D = date.getDate() + ' ';
+    // var h = date.getHours() + ':';
+    // var m = date.getMinutes() + ':';
+    // var s = date.getSeconds();
+
+    // var DT = Y + M + D
+    // var Time = h + m + s
+
+    // console.log('日期时间：', Y + M + D + h + m + s);
+    // console.log('日期：', DT);
+    // console.log('时间', Time);
+
   },
 
 
 
-// 全部列表
-  getUserTeam: function (isload) {
+// 全部列表 -----直接传值时（id），防止因为异步机制导致数据加载慢，防止会出现空白没有数据的情况。注意的是如果采用直接传值方法，就要每次调用该方法时都要传对应的id过去
+  getUserTeam: function (id,isload) {
     var that = this;
     var data = {
       page: that.data.page,
-      type: that.data.itemChioce
+      type: id
     }
     app.util.request({
       'url': 'entry/wxapp/getAgentTeam',
@@ -159,7 +213,7 @@ Page({
   onPullDownRefresh: function () {
     this.data.page = 1
     this.data.lastPage = false
-    this.getUserTeam()
+    this.getUserTeam(this.data.itemChioce)
     wx.stopPullDownRefresh() //处理完数据刷新后，wx.stopPullDownRefresh可以停止当前页面的下拉刷新。
     
   },
@@ -177,8 +231,7 @@ Page({
     })
 
     that.data.page++
-
-    that.getUserTeam(true) //传值过去，表示页面上拉加载的就不清空数据
+    that.getUserTeam(this.data.itemChioce,true) //传true过去，表示页面上拉加载的就不清空数据
 
   },
 

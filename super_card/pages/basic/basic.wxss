@@ -178,8 +178,11 @@
   font-size: 70rpx;
   line-height:70rpx;
 }
-.hide{
+/* .hide{
   visibility:hidden;
+} */
+.hide{
+  color: #00a1e9;
 }
 .btn-submit{
   padding:40rpx 20rpx;

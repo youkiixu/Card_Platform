@@ -109,7 +109,8 @@
         "recommend-record/recommend-record",
         "group-modify/group-modify",
         "choosewallpaper/choosewallpaper",
-        "course/course"
+        "course/course",
+        "account/account"
       ]
     }
   ],
@@ -148,5 +149,6 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

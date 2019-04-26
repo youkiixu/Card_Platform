@@ -38,7 +38,7 @@
    
   </view>
 
-  <view class='ov-content'>
+  <view class="ov-content {{pInfo == '' ? 'ov-content2' : '' }}" >
     <radio-group>
       <swiper class='ov-swiper' previous-margin="140rpx" next-margin="140rpx" indicator-dots="" autoplay="" current="{{ current }}" bindanimationfinish="choiceSwiper">
         <block wx:for="{{ vipSet }}"  wx:for-index="idx"  wx:for-item="item" wx:key="{{ index }}">

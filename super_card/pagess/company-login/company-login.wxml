@@ -10,16 +10,16 @@
         <input placeholder='企业名称' name='enter_name' type='text' value='{{ enter_name }}'></input>
       </view> -->
       <view class='act'>
-        <input placeholder='姓名'  type="text" name="name" value='{{ name }}'></input>
+        <input placeholder='客户姓名'  type="text" name="name" value='{{ name }}'></input>
       </view>
       <view class='act'>
-        <input type='number' placeholder='手机' name="phone" value='{{ phone }}'></input>
+        <input type='number' placeholder='客户手机' name="phone" value='{{ phone }}'></input>
       </view>
        <view class='act'>
-        <input placeholder='行业' name='industry' type='text' value='{{ industry }}'></input>
+        <input placeholder='需求描述' name='industry' type='text' value='{{ industry }}'></input>
       </view>
       <view class='act'>
-        <input placeholder='地址' name='address' value="{{ address }}"></input>
+        <input placeholder='详细地址' name='address' value="{{ address }}"></input>
         <view class='act-address' bindtap='getCurrentLocation' >获取地址</view>
       </view>
       <!-- <view class='act'>

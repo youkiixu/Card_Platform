@@ -20,7 +20,11 @@
         <image class='topu-l-img' src='{{ wxInfo.avatarUrl }}'></image>
         <view class='name-lv'>
           <view class='topu-l-name'>{{ wxInfo.nickName }}</view>
-          <view class='topu-l-lv'>{{ agent_name }}</view>
+          <!-- <view class='topu-l-lv'>{{ agent_name }}</view> -->
+          <view class='topu-l-all'>
+            <view class='topu-l-lv'>{{ agent_name }}</view>
+            <view class='topu-l-lv topu-l-la' bindtap='setAccount'>设置账号密码</view>
+          </view>
         </view>
       </view>
       <view class='topu-r'  bindtap='getAgentQrcode'>

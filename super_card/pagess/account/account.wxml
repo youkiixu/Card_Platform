@@ -1,0 +1,24 @@
+<view class='contains'>
+  <view class='top'>
+    <view class='top-tit'>账号密码</view>
+    <view class='top-hr'></view>
+  </view>
+  <form report-submit='true' bindsubmit='accountApply'>
+    <view class='content'>
+      <view class='act'>
+        <label>账号：</label>
+        <input type='number' placeholder='请输入手机号码' name="phone" value='{{ phone }}'></input>
+      </view>
+       <view class='act'>
+       <label>密码：</label>
+       <!-- <input  placeholder='请输入密码' name='password' type='password' value='{{ password }}'></input> -->
+        <input wx:if="{{ phone == '' }}" placeholder='请输入密码' name='password' type='password' value='{{ password }}'></input>
+        <input wx:if="{{ phone != '' }}" placeholder='请输入密码' name='defaultPWD' type='password' value='{{ defaultPWD }}'></input>
+      </view>
+      <view class='btn-submit'>
+        <button class='btn-block btn-yellow'  style='background:{{ themeColorV }};' form-type='submit'>保存</button>
+      </view>
+    </view>
+  </form>
+  
+</view>

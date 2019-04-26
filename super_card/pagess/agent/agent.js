@@ -31,12 +31,6 @@ Page({
     qrType: '',
     agent: '',
     codeCategory: [],
-    // codeCategory: [
-    //   { id: 1, name: "会员码" },
-    //   { id: 2, name: "推广码" },
-    //   { id: 3, name: "服务商码" },
-    //   { id: 4, name: "渠道商码" },
-    // ],
     activeCategoryId: 1,
     itemChioce: 1,
   },
@@ -54,6 +48,14 @@ Page({
     });
 
   },
+
+
+  setAccount: function(){
+    wx.navigateTo({
+      url: '../account/account'
+    })
+  },
+  
 
   // 点击会员码分类标题切换
   codeTabClick: function (e) {

@@ -11,6 +11,9 @@ Page({
       forwarding: 0,
 
       libShowCollected: 0,
+
+
+      is_relation:0,
   },
 
   saveCardSecret: function (){
@@ -94,9 +97,11 @@ Page({
         success(res) {
           //console.log(res)
           var res = res.data.data
+         
           that.setData({
             public: res.public,
             forwarding: res.forwarding,
+            is_relation: res.is_relation,
             libShowCollected: app.config.getConf('library_show_collected'),
           })
         }

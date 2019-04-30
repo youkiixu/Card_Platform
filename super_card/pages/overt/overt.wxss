@@ -1721,3 +1721,16 @@ filter:none;
 .cardInfo{
   z-index: 0;
 }
+
+
+/* 图片描述 */
+.img-top{
+  position: relative;
+}
+.img-desc{
+  margin: 15rpx 0;
+  font-size: 28rpx;
+}
+.img-titles{
+  bottom: 0;
+}

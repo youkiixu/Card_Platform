@@ -138,13 +138,11 @@
         <image class='iconfont icon-dingwei1 blue' style="color:{{ card.bg_color }};"></image>
       </view>
       <view class='file-bottom'>
-        <!-- <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text> -->
-        <!-- <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.address }}</text> -->
-
-        <view class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">
+        <text class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}</text>
+        <!-- <view class="blue" id='card-Tips-address' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}' bindtap='showMapLocation' style="color:{{ card.bg_color }};">
               <text style='display: block;'>{{ card.province }}{{ card.city }}{{ card.dict }}</text>
               <text style='display: block;'>{{ card.address }}</text>
-        </view>
+        </view> -->
       </view>
     </view>
     <block wx:if="{{ isComeBack === true || card.public == 1 }}">
@@ -767,8 +765,13 @@
         <!--循环体 class 为 img-total -->
         <view class='img-total' wx:key="pics" wx:for="{{ album.pic_list }}" wx:for-index="picIdx" wx:for-item="pic">
          <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
-          <image class='img-album' lazy-load="true" data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='widthFix'></image>
+         
+         <view class='img-top'>
+               <image class='img-album' lazy-load="true" data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='widthFix'></image>
           <view class='img-titles' data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            </view>
+            <view class='img-desc' wx:if='{{ pic.intro }}'>{{ pic.intro }}</view>
+
           <!--/navigator-->
           <!-- <view class='img-info'>
             <text class='img-num'>{{ picIdx + 1 }}/{{ album.pic_list.length }}</text>
@@ -790,8 +793,12 @@
         <!--循环体 class 为 img-small -->
         <view class='img-total'  wx:key="pics" wx:for="{{ album.pic_list }}" wx:for-index="picIdx" wx:for-item="pic">
           <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
-          <image lazy-load="true" class='img-album' data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='aspectFill'></image>
-          <view class='img-title' data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            <view class='img-top'>
+              <image lazy-load="true" class='img-album' data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='aspectFill'></image>
+              <view class='img-title' data-album_id='{{ album.id }}' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            </view>
+            <view class='img-desc' wx:if='{{ pic.intro }}'>{{ pic.intro }}</view>
+
           <!--/navigator-->
         </view>
         <view wx:if="{{ album.pic_list.length > 0 }}" bindtap="togglePicShow" class='small' style='border-color:{{ themeColor }};'>

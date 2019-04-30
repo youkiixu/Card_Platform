@@ -13,6 +13,7 @@ Page({
     uInfo: {},
     pInfo: {},
     vipSet:[],
+    vip_last_time:0,
 
     vipName: '',
     choiceVipLevel: 1,
@@ -368,6 +369,8 @@ Page({
           var pInfo = res.data.data.pInfo //上级信息
 
           var uInfo = res.data.data.uInfo
+          var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
+
           console.log('uInfo', uInfo)
           if (uInfo.vip == 3){
             wx.showModal({
@@ -401,7 +404,7 @@ Page({
           // var current = parseInt(uInfo.vip)
           //根据返回数据判断当前选中的swiper
           var current = parseInt(vipLen === 1 ? 0 : uInfo.vip)
-          that.setData({ wxInfo: wxInfo, pInfo: pInfo, uInfo: uInfo, vipSet: vipSet, price: price, current: current, choiceVipLevel: choiceVipLevel})
+          that.setData({ wxInfo: wxInfo, pInfo: pInfo, uInfo: uInfo, vip_last_time: vip_last_time, vipSet: vipSet, price: price, current: current, choiceVipLevel: choiceVipLevel})
           //app.freshHome = false
          
         }

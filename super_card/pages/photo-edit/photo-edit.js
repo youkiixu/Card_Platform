@@ -20,6 +20,8 @@ Page({
       pic_name: '',
       currPic: {},
 
+      pic_intro:'',
+
       isFresh: false,
       tisFresh: false,
 
@@ -97,7 +99,7 @@ Page({
           }
         }
         //console.log('%c' + currIndex, 'font-size:30px;color:blue')
-        that.setData({ pic_id: pic_list[currIndex].id, currIndex: parseInt(currIndex), pic_name: pic_list[currIndex].name, sort: pic_list[currIndex].sort,pic_views: pic_list[currIndex].views, pics: pic_list, isFresh: false })
+        that.setData({ pic_id: pic_list[currIndex].id, currIndex: parseInt(currIndex), pic_name: pic_list[currIndex].name, pic_intro: pic_list[currIndex].intro,sort: pic_list[currIndex].sort,pic_views: pic_list[currIndex].views, pics: pic_list, isFresh: false })
 
       }
     })
@@ -256,6 +258,54 @@ Page({
     })
 
   },
+
+
+
+/**
+ * 修改图片描述
+ */
+
+  recordfollow: function (e) {
+    this.data.pic_intro = e.detail.value
+  },
+
+  updatePicDesc: function (e) {
+    if (typeof e.detail.formId != 'undefined') {
+      console.log(e.detail.formId)
+      app.formIds.push(e.detail.formId)
+    }
+
+    var that = this
+    var data = {
+      card_id: that.data.card_id,
+      album_id: that.data.album_id,
+      pic_id: that.data.pic_id,
+      intro: that.data.pic_intro
+    }
+
+    app.util.request({
+      'url': 'entry/wxapp/saveCardPicName',
+      //'cachetime': '30',
+      'method': 'POST',
+      'data': data,
+      success(res) {
+        wx.showToast({
+          title: res.data.message,
+          icon: 'success',
+          duration: 2000
+        })
+        app.freshIndex = true
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2]; // 上一级页
+        prevPage.setData({ isFresh: true })
+
+      }
+
+    })
+  
+   
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

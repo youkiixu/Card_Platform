@@ -38,10 +38,18 @@
         <view class='topd-t'>今日收益</view>
         <view class='topd-b'>+{{ uInfo.today_profit }}</view>
       </view>
-      <view class='topd-r'>
+
+       <view class='topd-r'>
         <view class='topd-t'>全部收益</view>
         <view class='topd-b'>{{ uInfo.agent_profit }}</view>
       </view>
+
+
+      <!-- <view class='topd-m'>
+        <view class='topd-t'>到期时间</view>
+        <view class='topd-b'>{{ uInfo.vip_last_time }}</view>
+      </view> -->
+   
     </view>
     <view class="waveWrapperInner bgTop"> 
       <view class="wave waveTop" style="background-image: url('/super_card/resource/images/wave-top.png')"></view> 

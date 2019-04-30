@@ -31,7 +31,21 @@
         </view>
       </view>
     </view>
+
   </view>
+
+
+
+  <view class='fr-word'>
+    <textarea placeholder='请输入图片描述（0~100个字符）' placeholder-class='fr-textarea' value="{{ pic_intro }}" bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' maxlength="100"></textarea>
+  </view>
+  <view class='btn-submit'>
+    <form report-submit='true' bindsubmit="updatePicDesc">
+      <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>保存描述</button>
+      </form>
+  </view>
+
+
   <view class='btn-submit'>
     <button class='btn-block btn-blue' bindtap='updatePicName' style='background:{{ themeColor }};'>
       <block wx:if="{{ pic_name }}">
@@ -50,4 +64,23 @@
     <button class='btn-block btn-white' bindtap='delCardPic' style='color:{{ themeColor }};border-color:{{ themeColor }};'>删除该图片</button>
   </view>
 </view>
+
+
+
+
+
+
+
+<!-- <view  catchtouchmove='stopPageScroll' catchtouchmove='{{true}}'>
+      <view class="wux-dialog__bd">
+        <view wx:if="{{ isChat === false }}" class='frame-word'>
+            <view class='frame-word-tit'>图片描述</view>
+            <textarea  bindblur='setComeBackMsg' bindconfirm='setComeBackMsg' show-confirm-bar="{{false}}" fixed="true" auto-height='true' class='frame-word-info' type='text' name="type" maxlength='50' placeholder="50字以内" value="{{ comeBackMsg }}"></textarea >      
+        </view>
+      </view>
+      <view class="wux-dialog__ft">
+              <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view>
+        <form class='wux-form-qd' report-submit='true' bindsubmit="{{ isChat === false ? 'confirmCardSelect' :  'confirmCardChat' }}"><button class='wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary' style="color:{{ themeColor }};" form-type='submit'>确定</button></form>
+      </view>
+</view> -->
 

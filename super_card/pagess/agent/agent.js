@@ -26,7 +26,7 @@ Page({
     memberPrice: 0.00, //会员码价格
     fivePrice: 0.00, //5人推广码价格
     tenPrice: 0.00, //10人推广码价格
-    agentPrice: 0.00,//代理码价格（服务商）
+    agentPrice: 0.00,//服务商码价格
     channelPrice: 0.00,//渠道商码价格
     qrType: '',
     agent: '',
@@ -244,28 +244,28 @@ Page({
 
   //购买总价格
   totalPrice: function () {
-    var statu = this.data.agent  //statu == 1表示"个人代理"，statu==2表示"渠道代理"，statu==3表示"至尊合伙人"
+    var statu = this.data.agent  //statu == 1表示"服务商"，statu==2表示"渠道商"，statu==3表示"合伙人"
     var itemChioce = this.data.itemChioce
     var number = this.data.buyNumber
 
-    var personalMemberPrice = 8.0 * number //个人代理的会员码价格
-    var channelMenberPrice = 5.0 * number //渠道代理的会员码价格
-    var superPartnerMenberPrice = 3.0 * number //至尊合伙人的会员码价格
+    var personalMemberPrice = 36.0 * number //服务商的会员码价格
+    var channelMenberPrice = 24.0 * number //渠道商的会员码价格
+    var superPartnerMenberPrice = 12.0 * number //合伙人的会员码价格
 
-    var personalAgentPrice = 380.0 * number //个人代理的代理码价格
-    var channelAgentPrice = 280.0 * number //渠道代理的代理码价格
-    var superPartnerAgentPrice = 180.0 * number //至尊合伙人的代理码价格
+    var personalAgentPrice = 580.0 * number //服务商的服务商码价格
+    var channelAgentPrice = 430.0 * number //渠道商的服务商码价格
+    var superPartnerAgentPrice = 280.0 * number //合伙人的服务商码价格
 
-    var perFiveMarketing = 30.0 * number //个人代理的5人营销码价格
-    var channelFiveMarketing = 20.0 * number //渠道代理的5人营销码价格
-    var superFiveMarketing = 12.0 * number //至尊合伙人的5人营销码价格
+    var perFiveMarketing = 60.0 * number //服务商的5人营销码价格
+    var channelFiveMarketing = 40.0 * number //渠道商的5人营销码价格
+    var superFiveMarketing = 20.0 * number //合伙人的5人营销码价格
 
-    var perTenMarketing = 60.0 * number //个人代理的10人营销码价格
-    var channelTenMarketing = 40.0 * number //渠道代理的10人营销码价格
-    var superTenMarketing = 24.0 * number //至尊合伙人的10人营销码价格
+    var perTenMarketing = 120.0 * number //服务商的10人营销码价格
+    var channelTenMarketing = 80.0 * number //渠道商的10人营销码价格
+    var superTenMarketing = 40.0 * number //合伙人的10人营销码价格
 
-    var channelChannelPrice = 2300.0 * number //渠道代理的渠道码价格
-    var superPartnerChannelPrice = 1800.0 * number //至尊合伙人的渠道码价格
+    var channelChannelPrice = 3200.0 * number //渠道商的渠道商码价格
+    var superPartnerChannelPrice = 2400.0 * number //合伙人的渠道码商价格
 
 
     // price = price.toFixed(2) //js浮点计算bug，取两位小数精度
@@ -273,10 +273,10 @@ Page({
     var fivePrice = statu > 1 ? (statu > 2 ? superFiveMarketing : channelFiveMarketing) : perFiveMarketing //5人营销码价格
     var tenPrice = statu > 1 ? (statu > 2 ? superTenMarketing : channelTenMarketing) : perTenMarketing //5人营销码价格
 
-    var agentPrice = statu > 1 ? (statu > 2 ? superPartnerAgentPrice : channelAgentPrice) : personalAgentPrice //代理码价格
-    //var agentPrice = statu > 2 ? superPartnerAgentPrice : channelAgentPrice //代理码价格
+    var agentPrice = statu > 1 ? (statu > 2 ? superPartnerAgentPrice : channelAgentPrice) : personalAgentPrice //服务商码价格
+    //var agentPrice = statu > 2 ? superPartnerAgentPrice : channelAgentPrice //服务商码价格
 
-    var channelPrice = statu > 2 ? superPartnerChannelPrice : channelChannelPrice //渠道码价格
+    var channelPrice = statu > 2 ? superPartnerChannelPrice : channelChannelPrice //渠道商码价格
 
     memberPrice = memberPrice.toFixed(2)
     fivePrice = fivePrice.toFixed(2)

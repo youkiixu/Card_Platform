@@ -17,7 +17,7 @@
             <view class='tb-bottom-t'>
               <view class='tb-bottom-name'>{{ wxInfo.nickName }}</view>
               <!-- <view class='tb-bottom-time'>{{ uInfo.vip_last_time }}到期</view> -->
-              <view class='tb-bottom-time'>到期时间：永久</view>
+              <view class='tb-bottom-time'>到期时间：{{ vip_last_time }}</view>
             </view>
             <view class='tb-bottom-b'>{{ vipSet[uInfo.vip - 1].name }}</view>
           </view>

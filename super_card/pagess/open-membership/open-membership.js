@@ -12,6 +12,7 @@ Page({
         wxInfo: {},
         uInfo: {},
         vipSet: [],
+        vip_last_time:0,
 
         vipName: '',
         choiceVipLevel: 1,
@@ -261,6 +262,8 @@ Page({
                         //typeof cb == "function" && cb()
                         //console.log(res)
                         var uInfo = res.data.data.uInfo
+
+                      var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
                         console.log('uInfo', uInfo)
 
                         //因为还有服务商码和渠道码需要开通，跟vip等级无关
@@ -294,7 +297,8 @@ Page({
                             price: price.toFixed(2),
                             current: current,
                             vipSetOnly: vipSet[0],
-                            showBackIndex: true
+                            showBackIndex: true,
+                            vip_last_time: vip_last_time
                         })
 
                       

@@ -9,9 +9,8 @@
          <!-- 无图片 -->
           <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
           <view class='company-name'>{{ wxInfo.nickName }}</view>
-          <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
-          <!-- <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ uInfo.vip_last_time }}</view> -->
-          <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：永久</view>
+          <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户</view>
+          <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ vip_last_time }}</view>
       </view>
     </view>
 
@@ -63,7 +62,7 @@
               <view class='buttom-info'>
                 <text>——</text>
                 <!-- <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text> -->
-                <text style="color:{{ themeColorV }};">{{ item.price }}元/永久</text>
+                <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text>
                 <text>——</text>
               </view>
 
@@ -103,7 +102,7 @@
       </view> -->
        <view class='ov-b-left'>
         <view>￥{{ price }}元</view>
-        <view class='ov-b-time' style='color:{{ themeColor }};'>永久</view>
+        <view class='ov-b-time' style='color:{{ themeColor }};'>1年</view>
         <!-- <text class='trans iconfont icon-jiantouarrow483' style='color:{{ themeColor }};'></text> -->
       </view>
       <form report-submit='true' bindsubmit="confirmPay">

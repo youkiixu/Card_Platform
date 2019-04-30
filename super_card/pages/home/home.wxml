@@ -59,7 +59,7 @@
           </view>
           <!-- <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }} 将于 {{ uInfo.vip_last_time }} 到期</view> -->
           <view class='bit-out'>
-            <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }}  到期时间：永久</view>
+            <view class='bit-yx' bindtap="toOpenVip" wx:if="{{ uInfo.vip > 0 }}" style="font-size:12px;">{{ vipSet[uInfo.vip - 1].name }}  到期时间：{{ vip_last_time }}</view>
             <view class='jifen'>
                 <form class='bib-form-bor' report-submit='true' bindsubmit="toBalancePage">
                   <button class='bib-act' form-type='submit'>

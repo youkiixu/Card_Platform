@@ -680,3 +680,15 @@
   margin-left: 10rpx;
   z-index:20;
 }
+
+
+.topu-m{
+  flex: 1;
+  -webkit-flex: 1;
+  display: flex;
+  /* flex-flow: column; */
+  display: -webkit-flex;
+  /* -webkit-flex-flow: column; */
+  align-items: center;
+  -webkit-align-items: center;
+}

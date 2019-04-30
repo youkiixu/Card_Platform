@@ -11,7 +11,8 @@ Page({
     wxInfo: '',
     privilege:false,
 
-    cardExpert:false
+    cardExpert:false,
+    vip_last_time: 0,
   },
 
 
@@ -40,13 +41,15 @@ Page({
           var uInfo = res.data.data.uInfo
           var vipSet = res.data.data.vipSet
 
+          var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
+
           var rules = vipSet[uInfo.vip - 1].rules
           var privilege = []
           for (var i = 0, len = rules.length; i < len; i += 4)
             privilege.push(rules.slice(i, i + 4))
 
           console.log(privilege)
-          that.setData({ uInfo: uInfo, vipSet: vipSet, privilege: privilege })
+          that.setData({ uInfo: uInfo, vipSet: vipSet, privilege: privilege, vip_last_time: vip_last_time})
           console.log('privilege', that.data.privilege)
         }
       })

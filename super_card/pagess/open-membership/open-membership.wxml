@@ -11,8 +11,8 @@
     <!-- 无图片 -->
     <!-- <view class='top-logo-not' style='background-color:{{ themeColor }};'>景</view> -->
     <view class='company-name'>{{ wxInfo.nickName }}</view>
-    <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户 | 到期时间：永久</view>
-    <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：永久</view>
+    <view class='explain' wx:if="{{ uInfo.vip == 0 }}">当前会员等级：普通用户</view>
+    <view class='explain' wx:if="{{ uInfo.vip > 0 }}">当前会员等级：{{ vipSet[uInfo.vip - 1].name }} | 到期时间：{{ vip_last_time }}</view>
   </view>
 
   <view class='ov-content'>

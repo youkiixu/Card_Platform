@@ -19,11 +19,11 @@
   <image mode='widthFix' src='{{ holiday_wishes_pic }}'></image>
 </view>
 
-<block wx:if="{{ cardLists[0].no_perfect == 1 }}">
+<block wx:if="{{ cards.no_perfect == 1 }}">
   <view class='contains'>
 
     <view class='avatar_img'>
-      <image src='{{ cardLists[0].picture }}' mode='widthFix'></image>
+      <image src='{{ cards.picture }}' mode='widthFix'></image>
     </view>
     <view class='state'>
       <text>完善名片，开通更多高级功能</text>
@@ -58,7 +58,7 @@
 <block wx:else>
 
   <!-- wx:if="{{ card_id == card.id }}" -->
-<block wx:key="unique" wx:for="{{cardLists}}" wx:for-index="idx" wx:for-item="card" wx:if="{{ card_id == card.id }}">
+ <block wx:key="unique" wx:for="{{cardLists}}" wx:for-index="idx" wx:for-item="card" wx:if="{{ card_id == card.id }}">
 
 <view class='index-top-bg' wx:if="{{ card.style == 1 }}">
   <view class='card-info' style="background:url({{card.bg_img}}) #fff no-repeat center; background-size:cover; color:{{card.bg_color}};">
@@ -88,11 +88,11 @@
         <text class="card-iconimg iconfont icon-dingwei1"></text>
       </view>
       <view class='card-alike-buttom'>
-        <!-- <text class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>{{ card.address }}</text> -->
-        <view class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>
+        <text class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>{{ card.address }}</text>
+        <!-- <view class="card-i" id='card-Tips-address' bindtap='showMapLocation' bindlongpress='showTips' data-plate='{{ card.province }}{{ card.city }}{{ card.dict }}{{ card.address }}'>
               <text style='display: block;'>{{ card.province }}{{ card.city }}{{ card.dict }}</text>
               <text style='display: block;'>{{ card.address }}</text>
-        </view>
+        </view> -->
        
       </view>
     </view>
@@ -504,7 +504,7 @@
 
 <!-- 五人、十人全民推广组start -->
 
-<view class='marketingGroup' wx:if="{{iosPay == true}}">
+<view class='marketingGroup'>
 
    <view class='noOpenTen' wx:if="{{ openTenVip == false }}">
       <view class='noOpenTen-l'>
@@ -681,9 +681,11 @@
         <view class='img-large' wx:if='{{ showLine === true }}'>
           <!--循环体 class 为 img-total -->
           <view class='img-total' wx:key="pics" wx:for="{{ album.pic_list }}" wx:for-index="picIdx" wx:for-item="pic">
-          <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
-            <image class='img-album' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='widthFix'></image>
-            <view class='img-titles' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+           <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
+            <view class='img-top'>
+               <image class='img-album' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='widthFix'></image>
+               <view class='img-titles' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            </view>
             <!--/navigator-->
             <view class='img-info'>
               <text class='img-num'>{{ picIdx + 1 }}/{{ album.pic_list.length }}</text>
@@ -693,6 +695,8 @@
                 <button open-type='share' data-album_id="{{ album.id }}" data-pic_id="{{ pic.id }}" data-src="{{ pic.path }}" class='iconfont icon-fenxiang'></button>
               </view>
             </view>
+
+            <view class='img-desc' wx:if='{{ pic.intro }}'>{{ pic.intro }}</view>
 
           </view>        
           <view wx:if="{{ album.pic_list.length > 0 }}" bindtap="togglePicShow" class='large' style='border-color:{{ themeColor }};'>
@@ -705,8 +709,11 @@
           <!--循环体 class 为 img-small -->
           <view class='img-total'  wx:key="pics" wx:for="{{ album.pic_list }}" wx:for-index="picIdx" wx:for-item="pic">
             <!--navigator url="../../pages/photo-watch/photo-watch?card_id={{ card.id }}&album_id={{ album.id }}&pic_id={{ pic.id }}"-->
-            <image class='img-album' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='aspectFill'></image>
-            <view class='img-title' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            <view class='img-top'>
+              <image class='img-album' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' src='{{ pic.path }}' mode='aspectFill'></image>
+              <view class='img-title' data-pic_id='{{ pic.id }}' bindtap='showAlbumPics' wx:if='{{ pic.name }}'>{{ pic.name }}</view>
+            </view>
+            <view class='img-desc' wx:if='{{ pic.intro }}'>{{ pic.intro }}</view>
             <!--/navigator-->
           </view>
           <view wx:if="{{ album.pic_list.length > 0 }}" bindtap="togglePicShow" class='small' style='border-color:{{ themeColor }};'>
@@ -731,6 +738,8 @@
   <view>切换名片</view>
 </view> -->
 
+
+<!-- 切换名片弹框 -->
 <view class='card-cut-mask' wx:if="{{ show_card_cut == true }}" bindtap='hideCardCut'></view>
 <view class='card-cut' animation="{{animationData}}" wx:if="{{ show_card_cut == true }}">
   <view class='card-cut-top'>
@@ -902,11 +911,11 @@
     </view>
 
     <view class='functionCate' wx:if="{{ showCate }}">
-    <!-- 切换名片 -->
+     <!-- 切换名片 -->
       <view class='ove-btn2 cardSwitch' bindtap='showCardCut'>
         <text class='iconfont icon-fangxiang' style='color:#00a1e9;'></text>
       </view>
-    <!-- 名片风格 -->
+     <!-- 名片风格 -->
       <view class='ove-btn2 cardStyle' bindtap='cardTypeChange'>
         <text class='iconfont icon-fenggepitchon' style='color:#00a1e9;'></text>
       </view>

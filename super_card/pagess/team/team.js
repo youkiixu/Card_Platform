@@ -27,6 +27,10 @@ Page({
 
     allInfo: [],
 
+    agent:'',
+
+    cate_nums:[],
+
 
 
   },
@@ -85,17 +89,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({ lv:options.agent })
-    this.getUserTeam(1)  //默认第一个
-    var agentGrade = app.config.getConf('agent_grade')
 
+    var that = this
+
+    that.getUserTeam(1)  //默认第一个
+    
     var getUserInfo = wx.getStorageSync('getUserInfo');
     var agent = getUserInfo.agent;
+
+    that.setData({ agent: agent })
+
+    app.util.request({
+      'url': 'entry/wxapp/getAgentNums',
+      'method': 'POST',
+      success(res) {
+        var data = res.data.data
+        that.setData({ cate_nums: data })
+      }
+    })
+
+
+    
+
+
     
     //只有渠道代理和合伙人有渠道商显示
-    var category = agent > 1 ? [{ id: 1, name: "推荐" },{ id: 2, name: "会员" },{ id: 3, name: "服务商" },{ id: 4, name: "渠道商" },] : [{ id: 1, name: "推荐" },{ id: 2, name: "会员" },{ id: 3, name: "服务商" },]
+    // var category = agent > 1 ? [{ id: 1, name: "推荐" },{ id: 2, name: "会员" },{ id: 3, name: "服务商" },{ id: 4, name: "渠道商" },] : [{ id: 1, name: "推荐" },{ id: 2, name: "会员" },{ id: 3, name: "服务商" },]
 
-    this.setData({ agent_grade: agentGrade, category: category})
+    // this.setData({ agent_grade: agentGrade, category: category})
 
     //将时间戳转换成日期格式
     // var ts = 1398250549123

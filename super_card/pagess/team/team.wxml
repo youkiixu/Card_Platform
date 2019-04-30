@@ -2,12 +2,25 @@
 <view class='contains'>
 
   <!-- 搜索类别标题 -->
-  <view class='category'>
+  <!-- <view class='category'>
     <block wx:for="{{ category }}" wx:key="c">
-      <view class="category_item {{activeCategoryId == item.id ? 'category_active' : ''}}"  data-id="{{item.id}}" bindtap="tabClick">{{item.name}}
+      <view class="category_item {{activeCategoryId == item.id ? 'category_active' : ''}}"  data-id="{{item.id}}" bindtap="tabClick">{{item.name}} ({{num}})
       </view>
     </block>
+  </view> -->
+
+  <view class='category'>
+    <view class="category_item {{activeCategoryId == 1 ? 'category_active' : ''}}" data-id="1" bindtap="tabClick">推荐({{cate_nums[0].num}})</view>
+    <view class="category_item {{activeCategoryId == 2 ? 'category_active' : ''}}" data-id="2" bindtap="tabClick">会员({{cate_nums[1].num}})</view>
+    <view class="category_item {{activeCategoryId == 3 ? 'category_active' : ''}}" data-id="3" bindtap="tabClick">
+      服务商({{cate_nums[2].num}})
+    </view>
+    <view class="category_item {{activeCategoryId == 4 ? 'category_active' : ''}}" data-id="4" bindtap="tabClick" wx:if="{{agent > 1}}">
+      渠道商({{cate_nums[3].num}})
+    </view>
   </view>
+
+
 
    <!--循环体  -->
 
@@ -24,7 +37,8 @@
                       <view class='info_name'>
                         <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
                         <view class='vip' wx:if="{{ item.vip > 0 }}">{{ item.vip == 1 ? 'VIP' : (item.vip == 2 ? '5人VIP':'10人VIP')}}</view>
-                        <view class='name'>{{item.nickname}}</view>
+                        <view wx:if="{{ item.vip > 0 }}" class="name {{ item.vip == 1 ? '' : (item.vip == 2 ? 'name2':'name2')}} ">{{item.nickname}}</view>
+                        <view wx:if="{{ item.vip == 0 }}" class="name">{{item.nickname}}</view>
                       </view>
                       <view class='info-date'>注册时间：{{item.create_date}}</view>
                       <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>
@@ -61,7 +75,8 @@
                       <view class='info_name'>
                         <view class='dai' wx:if="{{ item.agent > 0 }}">代</view>
                         <view class='vip' wx:if="{{ item.vip > 0 }}">{{ item.vip == 1 ? 'VIP' : (item.vip == 2 ? '5人VIP':'10人VIP')}}</view>
-                        <view class='name'>{{item.nickname}}</view>
+                        <view wx:if="{{ item.vip > 0 }}" class="name {{ item.vip == 1 ? '' : (item.vip == 2 ? 'name2':'name2')}} ">{{item.nickname}}</view>
+                        <view wx:if="{{ item.vip == 0 }}" class="name">{{item.nickname}}</view>
                       </view>
                       <view class='info-date'>注册时间：{{item.create_date}}</view>
                       <view class='info-b'><text class='payment'>消费：{{ item.order_fee }}元</text> <text class='order'>订单：{{ item.order_num }}个</text></view>

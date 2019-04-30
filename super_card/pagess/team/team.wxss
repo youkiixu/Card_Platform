@@ -81,6 +81,9 @@
   text-overflow:ellipsis;
   white-space:nowrap; 
 }
+.info_name .name2{
+  width: 150rpx;
+}
 .info_name .dai{
   height: 30rpx;
   line-height: 30rpx;

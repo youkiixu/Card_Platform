@@ -332,12 +332,14 @@ Page({
           //console.log(res)
           var uInfo = res.data.data.uInfo
 
+          var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
+          
           var isAdmin = uInfo.admin == 1 ? true : false
 
           var vipSet = res.data.data.vipSet
 
 
-          that.setData({ vipSet: vipSet, wxInfo: wxInfo, card_num: parseInt(uInfo.card_num), is_v: uInfo.is_v, uInfo: uInfo, member_entry_pic: app.config.getConf('member_entry_pic'), isAdmin: isAdmin })
+          that.setData({ vipSet: vipSet, wxInfo: wxInfo, card_num: parseInt(uInfo.card_num), is_v: uInfo.is_v, vip_last_time: vip_last_time,uInfo: uInfo, member_entry_pic: app.config.getConf('member_entry_pic'), isAdmin: isAdmin })
 
           app.freshHome = false
 

@@ -117,6 +117,7 @@ Page({
     choiceT:true,
 
     agent_id: '' ,
+    cards:{},
 
   },
 
@@ -171,16 +172,27 @@ Page({
   //跳去开通页面
   toOpenPage:function(e){
     var that = this
-    var formId = e.detail.formId;
-    console.log('立即开通-e', e)
-    console.log('formId', formId)
-    
-    //ios支付判断
-      if (that.data.iosPay === false) return
 
+    //ios系统判断是否可用
+    var iosPay = app.config.iosPay(that)
+    console.log('iosPay', iosPay)
+    if (iosPay === false) {
+      wx.showModal({
+        title: '系统提示',
+        content: '不可服务',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '知道了',
+        success: function (res) {
+          return
+        }
+      });
+    }else{
       wx.navigateTo({
-          url: '../opt-version/opt-version',
-          })
+        url: '../opt-version/opt-version',
+      })
+    } 
+
   },
 
  
@@ -402,7 +414,6 @@ Page({
 
   // 隐藏遮罩层  
   hideModal: function () {
-
     var animation = wx.createAnimation({
       duration: 500,
       timingFunction: "ease",
@@ -426,6 +437,7 @@ Page({
   showCardCut:function(){
     var that = this
     that.setData({ show_card_cut: true }, this.showModal())
+
   },
   //隐藏切换名片
   hideCardCut:function(){
@@ -1024,8 +1036,16 @@ Page({
           that.setData({ tabWidth: that.data.tabWidth})
 
         }
+        
+        var cards_data = res.data.data
+        var cards = {}
+        for (var i = 0; i < cards_data.length; i++){
+          if (cards_data[i].is_default == 1){
+            cards = cards_data[i]
+          }
+        }
 
-        that.setData({ cardLists: res.data.data })
+        that.setData({ cardLists: res.data.data, cards: cards })
 
         if (that.data.cardLists.length < 1){
           wx.hideShareMenu()

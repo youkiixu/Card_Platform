@@ -59,7 +59,7 @@ Page({
     })
   },
 
-  //拨打名片手机号 未完成
+  //拨打名片手机号
   callMobile: function (e) {
 
     wx.makePhoneCall({
@@ -69,7 +69,7 @@ Page({
   },
 
   
-  //去聊天界面 未完成
+  //去聊天界面 
   startChat:function(){
 
     var that = this
@@ -325,8 +325,9 @@ Page({
   //滑动选择
   choiceSwiper: function (event){
 
-    //console.log(event.detail.current)
+    console.log('event.detail.current:', event.detail.current)
     var cIndex = event.detail.current
+    
     
     if(this.data.uInfo.vip > 0 && cIndex <= (this.data.uInfo.vip - 1)){
       this.setData({ btnDis: true, alreadyOpen: true })
@@ -369,10 +370,13 @@ Page({
           var pInfo = res.data.data.pInfo //上级信息
 
           var uInfo = res.data.data.uInfo
-          var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
+          //注意：苹果手机不支持以“-”分割的时间形式，如2030-01-01，故必须进行格式转换。安卓手机支持“-”或者“/”分割的时间形式；日期之间的比较要转换成时间戳才能做比较
+          var t = uInfo.vip_last_time
+          var time = t.replace(/-/g, "/")
+          var vip_last_time = Date.parse(time) > Date.parse('2029/1/1') ? '永久' : uInfo.vip_last_time
 
           console.log('uInfo', uInfo)
-          if (uInfo.vip == 3){
+          if (uInfo.vip == 2){
             wx.showModal({
               title: '系统提示',
               content: '您当前会员等级已经为最高等级，无须再次开通',
@@ -386,7 +390,7 @@ Page({
             return
           }
 
-          var vipSet = res.data.data.vipSet
+          var vipSetOld = res.data.data.vipSet
         //  vipSet.push(new Array())
           
           /*for(var x in vipSet){
@@ -394,17 +398,24 @@ Page({
             //vipSet[x].value = x + 1
             //vipSet[x].checked = x == 0 ? true : false
           }*/
+         
+          //将map对象转化为lsit数组
+          var vipSet = []
+          for (var key in vipSetOld) {
+            vipSet.push(vipSetOld[key])
+          }
+         
           var vipLen = vipSet.length
-          //var price = parseFloat(vipSet[0].price)
-
-          var price = uInfo.vip == 0 ? '98' : (uInfo.vip == 1 ? '198' : '298')
-
           var choiceVipLevel = uInfo.vip == 0 ? '1' : (uInfo.vip == 1 ? '2' : '3')
 
-          // var current = parseInt(uInfo.vip)
           //根据返回数据判断当前选中的swiper
-          var current = parseInt(vipLen === 1 ? 0 : uInfo.vip)
-          that.setData({ wxInfo: wxInfo, pInfo: pInfo, uInfo: uInfo, vip_last_time: vip_last_time, vipSet: vipSet, price: price, current: current, choiceVipLevel: choiceVipLevel})
+          var current = parseInt(vipLen === 1 ? 0 : uInfo.vip) //vipLen === 1 表示是否只有一条数据，即是否只有一种vip，如果是就默认选中第一条数据，否则就根据当前的vip等级来选择需要开通的类别
+
+          var price = parseFloat(vipSet[current].price)
+
+         
+          
+          that.setData({ wxInfo: wxInfo, pInfo: pInfo, uInfo: uInfo, vip_last_time: vip_last_time, vipSet: vipSet, price: price.toFixed(2), current: current, choiceVipLevel: choiceVipLevel})
           //app.freshHome = false
          
         }

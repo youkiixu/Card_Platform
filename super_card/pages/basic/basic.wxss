@@ -93,16 +93,16 @@
 }
 .basict,.base{
   background-color: #fff;
-  font-size: 36rpx;
+  font-size: 30rpx;
   padding:0 30rpx;
-  margin: 30rpx 0;
+  margin: 15rpx 0;
 }
 .base{
   margin-bottom:0;
 }
 .coin{
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   display: -webkit-flex;
@@ -117,8 +117,8 @@
   
 }
 .coin2 definition{
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
 }
 .definition{
   /* display: inline-block; */
@@ -129,10 +129,10 @@
   -webkit-justify-content:flex-start;
   -webkit-align-items:center;
 }
-.definition text:first-child{
+/* .definition text:first-child{
   font-size:36rpx;
   line-height:36rpx;
-}
+} */
 
 .def-xxdz{
   justify-content:space-between;
@@ -157,8 +157,8 @@
   padding-right:30rpx;
 }
 .coin2 input{
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
   padding-right:30rpx;
   align-items:center;
   height:inherit;
@@ -175,8 +175,8 @@
 }
 .img_down{
   float:right;
-  font-size: 70rpx;
-  line-height:70rpx;
+  font-size: 60rpx;
+  line-height:60rpx;
 }
 /* .hide{
   visibility:hidden;
@@ -247,4 +247,189 @@ button::after{
 
 .ove-btn{
   bottom: 12%;
+}
+.container{
+  margin-top: 30rpx;
+  padding: 0 15rpx;
+}
+.basic{
+  background: #fff;
+  border: 1rpx solid transparent;
+  border-radius: 20rpx;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.2);
+}
+.blank{
+  height: 20rpx;
+  background: #f5f5f5;
+}
+.save-btn{
+  width: 225rpx;
+  height: 68rpx;
+  line-height: 70rpx;
+  font-size: 26rpx;
+  text-align: center;
+}
+.back-index{
+  bottom: 8%;
+}
+/* 上级信息 */
+.superior-info{
+  width: 100%;
+  padding: 15rpx 10rpx;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+  position: relative;
+}
+.superior-industry{
+  height: 35rpx;
+  display:flex;
+  display:-webkit-flex;
+  justify-content: flex-end;
+}
+.superior-industry-item{
+  margin-left:15rpx;
+  padding:0 15rpx;
+  height:35rpx;
+  text-align:center;
+  color:#fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  font-size:24rpx;
+}
+.superior-maininfo{
+  margin-left: 95rpx;
+  color: #fff;
+}
+.maininfo-detail{
+  margin-right: 200rpx;
+}
+.card-tion{
+  display: flex;
+  display: -webkit-flex;
+}
+.card-tion-name{
+  font-size:38rpx
+}
+.card-tion-post{
+  font-size:22rpx;
+  padding:0 10rpx;
+  height:28rpx;
+  line-height:28rpx;
+  margin-left:15rpx;
+  margin-top:12rpx;
+  border:1rpx solid #e9af06;
+  border-radius:10rpx;
+  color:#e9af06;
+}
+.card-tion-company{
+  font-size: 24rpx;
+}
+.company-introduce{
+  margin-top: 15rpx;
+  font-size: 22rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  align-content: center;
+}
+.superior-products{
+  margin-top: 30rpx;
+  position: relative;
+  padding-right: 35rpx;
+}
+.arrow-right{
+  position: absolute;
+  right: 0;
+  font-size: 28rpx;
+  color: #f5f5f5;
+  top: 22rpx;
+  opacity: 0.5;
+}
+.scroll-view{
+  height: 100rpx;
+  width:100%;
+  white-space:nowrap;
+}
+.product-item{
+  display:inline-block;
+  width:100rpx;
+  margin-left:20rpx;
+  overflow:hidden;
+}
+.product-item:first-child{
+  margin-left: 0;
+}
+.product-itemImg{
+  height:100rpx;
+  width:100rpx;
+  display:block;
+  overflow:hidden;
+  text-align: center;
+  background-size: cover;
+  border-radius:13rpx;
+  box-shadow: 0 8rpx 10rpx rgba(0,0,0,.2);
+  background: #fff;
+}
+.superior-homePage,.superior-phone{
+  width: 50rpx;
+  height: 50rpx;
+  border: 3rpx solid #fff;
+  position: absolute;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 50rpx;
+}
+.superior-homePage{
+  left: 15rpx;
+  top: 10rpx;
+}
+.superior-phone{
+  left: 15rpx;
+  bottom: 10rpx;
+}
+.superior-headImg{
+  width: 118rpx;
+  height: 150rpx;
+  position: absolute;
+  right: 15rpx;
+  top: 20%;
+  font-size: 22rpx;
+  color: #f6d96c;
+  text-align: center;
+}
+.superior-headImg-img{
+  width: 118rpx;
+  height: 118rpx;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+}
+.superior-headImg-img .img{
+  width: 118rpx;
+  height: 118rpx;
+}
+
+/* 当没有产品时 */
+.superior-maininfo2{
+  padding-top: 50rpx;
+  box-sizing: border-box;
+}
+/* 当产品和公司介绍都没有时 */
+.superior-maininfo3{
+  padding: 50rpx 0;
+}
+.superior-headImg2{
+  top: 28%;
+}
+/* 当没有公司介绍时 */
+.superior-maininfo2{
+  padding-top: 50rpx;
+  box-sizing: border-box;
+} 
+.superior-products2{
+  margin-top: 30rpx;
 }

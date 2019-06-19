@@ -116,7 +116,7 @@ Page({
     var that = this
 
     app.util.request({
-      'url': 'entry/wxapp/getCardNewQrcode',
+      'url': 'entry/wxapp/getCardQrcode',
       'method': 'POST',
       'data': { card_id: options.card_id },
       success(res) {

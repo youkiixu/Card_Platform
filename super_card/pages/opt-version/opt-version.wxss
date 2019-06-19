@@ -53,11 +53,11 @@ page{
   -webkit-justify-content: center;
   -webkit-align-items: center;
 }
-.buttom-info text:nth-child(2) {
+/* .buttom-info text:nth-child(2) {
   margin: 0 10rpx;
   color: #f90;
   font-size: 30rpx;
-}
+} */
 .act-lm{
   display: flex;
   align-items: flex-start;
@@ -215,6 +215,10 @@ radio .wx-radio-input-checked{
   display: flex;
   align-items: center;
 }
+.ov-b-left-text{
+  color:#f90;
+  font-size: 30rpx;
+}
 .ov-b-time{
   margin: 0 20rpx;
 }
@@ -226,6 +230,21 @@ radio .wx-radio-input-checked{
   border-radius: 10rpx;
   padding:10rpx 30rpx;
   margin: 0;
+}
+.ov-b-right2{
+  display: flex;
+  display: -webkit-flex;
+  font-size: 28rpx;
+  margin: 0;
+  color:#fff;
+}
+.ov-b-right-phone,.ov-b-right-chat{
+  padding: 10rpx 30rpx;
+  border-radius: 8rpx;
+  background-color: #00a1e9;
+}
+.ov-b-right-phone{
+   margin-right: 20rpx;
 }
 
 .blank{

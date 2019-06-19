@@ -84,7 +84,7 @@ page{
   .L-T-icon{
     position:fixed;
     right:10px;
-    bottom:12%;
+    bottom:50%;
     width:88rpx;
     height:88rpx;
     line-height: inherit;

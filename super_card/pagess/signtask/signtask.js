@@ -6,18 +6,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    itemChioce:1,
-    
+    itemChioce: 1,
+
     sliderOffset: 0,
     sliderLeft: 2,
 
-    list:false,
-    page:1,
-    lastPage:false,
-    child_num:0,
+    list: false,
+    page: 1,
+    lastPage: false,
+    child_num: 0,
 
-    agent_grade:'',
-    lv:'',
+    agent_grade: '',
+    lv: '',
 
     show_goTop: false,
 
@@ -27,9 +27,9 @@ Page({
 
     allInfo: [],
 
-    agent:'',
+    agent: '',
 
-    cate_nums:[],
+    cate_nums: [],
 
     searchKey: '',
     disabled: false,//要判断是否已经开通过会员试用
@@ -44,18 +44,18 @@ Page({
     this.setData({
       activeCategoryId: id,
       itemChioce: id,
-      searchKey:''
+      searchKey: ''
     });
     this.getUserTeam(id) //之前是不传值即直接this.getUserTeam()，然后在getUserTeam里面直接拿setdata里面的值传给后台，setdata一般都挺快的， 后面接方法一般没有影响， 就是可能特别卡的时候 比较容易出现异步的现象； 直接传值时即this.getUserTeam(id)，防止因为异步机制导致数据加载慢，防止会出现空白没有数据的情况。注意的是如果采用直接传值方法，就要每次调用该方法时都要传对应的id过去，这两种方法看情况而定，都可以用。
   },
 
   //开通共享人脉
-  libraryOpen:function(e){
+  libraryOpen: function (e) {
     var that = this
     var index = e.currentTarget.dataset.index
-    if (that.data.allInfo[index].is_relation == 0){
+    if (that.data.allInfo[index].is_relation == 0) {
       that.data.allInfo[index].is_relation = 1  //修改数组中的元素值，is_relation是本来数组就有返回的元素
-    }else{
+    } else {
       that.data.allInfo[index].is_relation = 0 //修改数组中的元素值
     }
     //修改数组中的元素值，最后要重新赋值
@@ -78,7 +78,7 @@ Page({
           duration: 1000
         })
       },
-      fail(res){
+      fail(res) {
         wx.showToast({
           title: res.data.message,
           icon: 'none',
@@ -134,7 +134,7 @@ Page({
     if (this.data.searchKey) {
       this.data.lastPage = false
       this.data.page = 1
-      this.getUserTeam(this.data.itemChioce)  
+      this.getUserTeam(this.data.itemChioce)
     } else {
       wx.showToast({
         title: '请输入搜索关键词',
@@ -148,7 +148,7 @@ Page({
     if (this.data.searchKey) {
       this.data.lastPage = false
       this.data.page = 1
-      this.getUserTeam(this.data.itemChioce) 
+      this.getUserTeam(this.data.itemChioce)
     } else {
       wx.showToast({
         title: '请输入搜索关键词',
@@ -245,7 +245,7 @@ Page({
     var that = this
 
     that.getUserTeam(1)  //默认第一个
-    
+
     var getUserInfo = wx.getStorageSync('getUserInfo');
     var agent = getUserInfo.agent;
 
@@ -325,7 +325,7 @@ Page({
     this.data.lastPage = false
     this.getUserTeam(this.data.itemChioce)
     wx.stopPullDownRefresh() //处理完数据刷新后，wx.stopPullDownRefresh可以停止当前页面的下拉刷新。
-    
+
   },
 
   /**
@@ -341,7 +341,7 @@ Page({
     })
 
     that.data.page++
-    that.getUserTeam(this.data.itemChioce,true) //传true过去，表示页面上拉加载的就不清空数据
+    that.getUserTeam(this.data.itemChioce, true) //传true过去，表示页面上拉加载的就不清空数据
 
   },
 

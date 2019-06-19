@@ -591,6 +591,35 @@ Page({
     that.hidePushGoods()
   },
 
+  // 索要名片默认信息
+  askForNum: function (chat_id){
+    var that = this;
+    var msgContent = '您好，我要免费创建名片，但你剩余名额不足，快快充名额送给你的粉丝吧！'
+    app.util.request({
+      'url': 'entry/wxapp/sendCardMsg',
+      'data': { chat_id: chat_id, msgContent: msgContent, msg_type: that.data.msg_type },
+      success(res) {
+
+        var data = res.data.data
+
+        if (data.type == 0 && data.msg != '::sayHi::') {
+          data.o_msg = data.msg
+          data.msg = that.parseEmoji(data.msg)
+        }
+
+        that.data.msgList.push(data)
+        that.setData({ msgList: that.data.msgList, msgContent: '' }, function () { that.pageScrollToBottom() })
+        that.data.last_time = that.data.msgList[that.data.msgList.length - 1].create_time
+
+        if (that.data.prevPage) that.data.prevPage.data.isFresh = true
+
+        that.data.msg_type = 0
+        that.fetchMsgList(true, chat_id)
+
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -600,6 +629,10 @@ Page({
     if (typeof options.chat_id == 'undefined'){
       wx.navigateBack()
       return
+    }
+    // 索要免费名额
+    if (typeof options.ask_for_num != 'undefined') {
+      this.askForNum(options.chat_id)
     }
     
     if(options.from == 'list'){
@@ -694,8 +727,9 @@ Page({
   },
 
 
-  fetchMsgList: function (){
+  fetchMsgList: function (askFor, chat_id){
     var that = this
+    var chat_id = askFor == true ? chat_id : that.data.chat_id
     
     that.data.fetchInterval = setInterval(function () {
       
@@ -705,7 +739,7 @@ Page({
       wx.request({
         url: app.util.url('entry/wxapp/getChatMsg'),
         method: 'get',
-        data: { chat_id: that.data.chat_id, last_time: that.data.last_time },
+        data: { chat_id: chat_id, last_time: that.data.last_time },
         success:function (res){
 
           var list = res.data.data

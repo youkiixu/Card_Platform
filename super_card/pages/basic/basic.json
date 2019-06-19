@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "创建名片",
-  "enablePullDownRefresh": false,
-  "disableScroll": true
+  "enablePullDownRefresh": true,
+  "disableScroll": false
 }

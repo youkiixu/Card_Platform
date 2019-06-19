@@ -41,14 +41,16 @@ Page({
           var uInfo = res.data.data.uInfo
           var vipSet = res.data.data.vipSet
 
-          var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
+          //注意：苹果手机不支持以“-”分割的时间形式，如2030-01-01，故必须进行格式转换。安卓手机支持“-”或者“/”分割的时间形式；日期之间的比较要转换成时间戳才能做比较
+          var t = uInfo.vip_last_time
+          var time = t.replace(/-/g, "/")
+          var vip_last_time = Date.parse(time) > Date.parse('2029/1/1') ? '永久' : uInfo.vip_last_time
 
           var rules = vipSet[uInfo.vip - 1].rules
           var privilege = []
           for (var i = 0, len = rules.length; i < len; i += 4)
             privilege.push(rules.slice(i, i + 4))
 
-          console.log(privilege)
           that.setData({ uInfo: uInfo, vipSet: vipSet, privilege: privilege, vip_last_time: vip_last_time})
           console.log('privilege', that.data.privilege)
         }

@@ -1,0 +1,85 @@
+/* super_card/pages/album/album.wxss */
+.contains{
+  font-size: 36rpx;
+}
+.info{
+  padding: 2.5vw;
+}
+.content,.coin{
+  width:42.5vw;
+  overflow: hidden;
+  display: inline-block;
+  margin: 2.5vw;
+}
+.line-one,.line-two{
+    height:1px;
+    margin:1px auto;
+}
+.line-one{
+    background:#ccc;
+    width: 80%;
+}
+.line-two{
+    background:#cecece;
+    width:90%;
+}
+.cover{
+  height: 42.5vw;
+  overflow: hidden;
+  position:relative;
+  border:1px solid #ccc;
+}
+.front{
+  width: 42.5vw;
+  height: 42.5vw;
+}
+.decorate{
+  display: none;
+  position:absolute;
+  width:140rpx;
+  height:140rpx;
+  right:0rpx;
+}
+.bottom{
+  display: flex;
+  display: -webkit-flex;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.name{
+  flex: 1;
+  -webkit-flex: 1;
+  text-align: left;
+  padding-left:10rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.total{ 
+  flex: 1;
+  -webkit-flex: 1;
+  text-align: right;
+  padding-right:10rpx;
+  font-size: 30rpx;
+  color: #949393;
+}
+.coin{
+  text-align: center;
+  vertical-align:top;
+}
+.con{
+  margin-top: 4px;
+  height: 42.5vw;
+  border: 1px solid #cecece;
+}
+.agin .agin-add{
+  width: 12.5vw;
+  height: 12.5vw;
+  margin-top:10vw;
+  display:inline-block;
+  line-height:12.5vw;
+}
+.tit{
+  color: #949393;
+}
+

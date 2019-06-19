@@ -12,11 +12,8 @@
     "super_card/pages/wx-cropper/index",
     "super_card/pages/more-info/more-info",
     "super_card/pages/secret-fit/secret-fit",
-    "super_card/pages/album/album",
-    "super_card/pages/album-edit/album-edit",
     "super_card/pages/video/video",
     "super_card/pages/video-watch/video-watch",
-    "super_card/pages/photo-edit/photo-edit",
     "super_card/pages/photo-watch/photo-watch",
     "super_card/pages/custom/custom",
     "super_card/pages/preview/preview",
@@ -110,7 +107,12 @@
         "group-modify/group-modify",
         "choosewallpaper/choosewallpaper",
         "course/course",
-        "account/account"
+        "account/account",
+        "forwarding_title/forwarding_title",
+        "album/album",
+        "album-edit/album-edit",
+        "photo-edit/photo-edit",
+        "signtask/signtask"
       ]
     }
   ],

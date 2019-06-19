@@ -27,7 +27,56 @@ Page({
     interval: 5000,
     duration: 500,
 
+    typeVal: '',
+    cate_id: 0,
+
+    category:[],
+
   },
+
+  // 获取商品分类
+  getGoodsCateList: function () {
+    var that = this;
+    app.util.request({
+      'url': 'entry/wxapp/getGoodsCate',
+      'method': 'POST',
+      'data': { card_id: that.data.prevPage.data.card_id },
+      success(res) {
+        that.setData({
+          category: res.data.data
+        })
+        if (that.data.cate_id > 0){
+          for (var x in that.data.category) {
+            if (that.data.category[x].id == that.data.cate_id)
+              that.setData({ typeVal: that.data.category[x].name })
+          }
+        }
+       
+         
+      }
+    })
+  },
+
+  //显示类型选择
+  showTypeSelect: function () {
+    var types = []
+    var typeIds = []
+    for (var x in this.data.category) {
+      if (x > 5) break
+      types.push(this.data.category[x].name)
+      typeIds.push(this.data.category[x].id)
+    }
+    var that = this
+    wx.showActionSheet({
+      itemList: types,
+      success: function (res) {
+        that.setData({ typeVal: types[res.tapIndex], cate_id: typeIds[res.tapIndex] })
+       
+      }
+    })
+
+  },
+
 
   saveCardGoods:function (e){
 
@@ -110,6 +159,7 @@ Page({
       pageData: that.data.pageData,
       status: (act == 'savepush' ? 1 : 0),
       order_sort: that.data.order_sort,
+      cate_id: that.data.cate_id
     }
 
     app.util.request({
@@ -128,7 +178,8 @@ Page({
           goods_pics: data.goods_pics,
           goods_content: data.pageData,
           status: data.status,
-          order_sort: data.order_sort
+          order_sort: data.order_sort,
+          cate_id: data.cate_id
         }
 
         if (that.data.index !== false) {
@@ -156,6 +207,7 @@ Page({
             pageData: [],
             status: 0,
             order_sort:'',
+            cate_id: ''
           })
 
         }else{
@@ -435,6 +487,7 @@ Page({
 
       that.data.index = options.index
       var goods = that.data.prevPage.data.goods[that.data.index]
+      
       that.setData({ 
           goods_id: goods.id, 
           goods_name: goods.goods_name,
@@ -444,10 +497,13 @@ Page({
           goods_pics: goods.goods_pics,
           pageData: goods.goods_content,
           order_sort: goods.order_sort,
+          cate_id: goods.cate_id
         })
     }
 
     that.setData({ card_id: that.data.prevPage.data.card_id, card : that.data.prevPage.data.card })
+
+    that.getGoodsCateList() //获取商品分类
     
   },
 

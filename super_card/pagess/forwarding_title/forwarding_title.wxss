@@ -1,0 +1,35 @@
+.top-content{
+  background-color: #fff;
+  padding: 0 80rpx 50rpx 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #888888;
+  font-weight: 200;
+}
+.top-icon{
+  line-height: 100rpx;
+  padding-top: 80rpx;
+}
+.fr-word{
+  margin-top: 20rpx;
+  background-color: #fff;
+  padding:20rpx;
+}
+.fr-word textarea{
+  width:100%;
+  height:150rpx;
+  font-size: 30rpx;
+}
+.btn-submit{
+  padding:30rpx 30rpx 50rpx 30rpx;
+}
+.btn-block{
+  line-height: 90rpx;
+  border-radius:50rpx;
+}
+.btn-blue{
+  background: #00a1e9;
+  color: #fff;
+  font-size:32rpx;
+  letter-spacing: 4rpx;
+}

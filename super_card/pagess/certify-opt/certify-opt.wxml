@@ -1,7 +1,8 @@
 <!--super_card/pages/certify-opt/certify-opt.wxml-->
 <view class='contains'>
   <view class='tip'>
-    <text>认证就是放心的环境、质量，是信誉的保障</text>
+    <!-- <text>认证就是放心的环境、质量，是信誉的保障</text> -->
+    <text>首次提现需进行身份认证</text>
   </view>
   <view class='content'>
     <text class='state'>选择以下任意一种方式，证明你的身份</text>

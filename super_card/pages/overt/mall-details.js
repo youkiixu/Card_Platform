@@ -19,6 +19,9 @@ Page({
     goods_id: 0,
 
 
+    uid:0,
+
+
     goods:{},
 
     my_userCards:[],
@@ -259,29 +262,38 @@ Page({
   onLoad: function (options) {
     var that = this
 
+    console.log('options', options)
+
     //ios支付判断
     var iosPay = app.config.iosPay(that)
     that.setData({ iosPay: iosPay })
 
-    
 
-    if (typeof options.card_id != 'undefined') {
-      
-      that.setData({ card_id: options.card_id, goods_id: options.goods_id })
-      app.config.cardTrack(that.data.card_id, 2, 'view', that.data.goods_id)
-      that.getGoodsItem()
-      that.getMyUserCards()
+    //获取当前用户ID
+    app.util.getUserInfo(function (response) {
 
-    }else{
+      that.setData({ uid: response.memberInfo.uid })
 
-      var pages = getCurrentPages();
-      that.data.prevPage = pages[pages.length - 2]; // 上一级页
-      var data =  that.data.prevPage.data
-      console.log(data)
+      if (typeof options.card_id != 'undefined') {
 
-      that.setData({ goods: data.goodsList[options.goods_index], card: data.card ,preview: true })
-      wx.hideShareMenu()
-    }
+        that.setData({ card_id: options.card_id, goods_id: options.goods_id })
+        app.config.cardTrack(that.data.card_id, 2, 'view', that.data.goods_id)
+        that.getGoodsItem()
+        that.getMyUserCards()
+
+      } else {
+
+        var pages = getCurrentPages();
+        that.data.prevPage = pages[pages.length - 2]; // 上一级页
+        var data = that.data.prevPage.data
+        console.log('上一级页的数据：',data)
+
+        that.setData({ goods: data.goodsList[options.goods_index], card: data.card, preview: true })
+        wx.hideShareMenu()
+      }
+
+    })
+
 
   },
 
@@ -299,7 +311,7 @@ Page({
 
         that.setData({ goods: data.goods, card: data.card })
         
-        console.log(that.data.goodsList)
+        console.log('that.data.goodsList',that.data.goodsList)
         wx.setNavigationBarTitle({
           title: that.data.goods.goods_name + ' - ' + app.config.getConf('app_name')
         })

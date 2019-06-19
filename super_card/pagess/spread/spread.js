@@ -94,7 +94,7 @@ Page({
                   context.setFillStyle('#000')
                   context.setTextAlign('center')
                   // qrType == 1 ? context.fillText('商桥智能名片VIP', unit * 130, unit * 50) : context.fillText('商桥智能名片个人代理', unit * 130, unit * 50)      
-                  qrType == 1 ? context.fillText('商桥智能名片VIP', unit * 130, unit * 50) : (qrType == 2 ? context.fillText('商桥智能名片服务商', unit * 130, unit * 50) : (qrType == 3 ? context.fillText('商桥智能名片5人推广VIP', unit * 130, unit * 50) : (qrType == 4 ? context.fillText('商桥智能名片10人推广VIP', unit * 130, unit * 50) : context.fillText('商桥智能名片渠道商', unit * 130, unit * 50)))) 
+                  qrType == 1 ? context.fillText('商桥智能名片个人展示版', unit * 130, unit * 50) : (qrType == 2 ? context.fillText('商桥智能名片推广商', unit * 130, unit * 50) : (qrType == 3 ? context.fillText('商桥智能名片10人展示版', unit * 130, unit * 50) : (qrType == 4 ? context.fillText('商桥智能名片百人展示版', unit * 130, unit * 50) : context.fillText('商桥智能名片渠道商', unit * 130, unit * 50)))) 
 
 
 
@@ -104,7 +104,7 @@ Page({
                   context.setTextAlign('center')
                   // qrType == 1 ? context.fillText('扫一扫二维码图案，即可开通会员！', unit * 140, unit * 350) : context.fillText('扫一扫二维码图案，即可开通个人代理！', unit * 140, unit * 350)
 
-                  qrType == 1 ? context.fillText('扫一扫二维码图案，即可开通会员！', unit * 140, unit * 350) : (qrType == 2 ? context.fillText('扫一扫二维码图案，即可开通成为服务商！', unit * 140, unit * 350) : (qrType == 3 ? context.fillText('扫一扫二维码图案，即可开通5人推广VIP！', unit * 140, unit * 350) : (qrType == 4 ? context.fillText('扫一扫二维码图案，即可开通10人推广VIP！', unit * 140, unit * 350) : context.fillText('扫一扫二维码图案，即可开通成为渠道商！', unit * 140, unit * 350)))) 
+                  qrType == 1 ? context.fillText('扫一扫二维码图案，即可开通个人展示版！', unit * 140, unit * 350) : (qrType == 2 ? context.fillText('扫一扫二维码图案，即可开通成为推广商！', unit * 140, unit * 350) : (qrType == 3 ? context.fillText('扫一扫二维码图案，即可开通10人展示版！', unit * 140, unit * 350) : (qrType == 4 ? context.fillText('扫一扫二维码图案，即可开通百人展示版！', unit * 140, unit * 350) : context.fillText('扫一扫二维码图案，即可开通成为渠道商！', unit * 140, unit * 350)))) 
 
                   //把画板内容绘制成图片，并回调 画板图片路径
                   context.draw(false, function () {
@@ -238,7 +238,7 @@ Page({
       var qrType = that.data.qrType
       // qrType == 1 ? wx.setNavigationBarTitle({ title: "推荐开会员" }) : wx.setNavigationBarTitle({ title: "推荐开代理" })
 
-      qrType == 1 ? wx.setNavigationBarTitle({ title: "推荐开会员" }) : (qrType == 2 ? wx.setNavigationBarTitle({ title: "服务商" }) : (qrType == 3 ? wx.setNavigationBarTitle({ title: "5人推广码" }) : (qrType == 4 ? wx.setNavigationBarTitle({ title: "10人推广码" }) : wx.setNavigationBarTitle({ title: "渠道商" })))) 
+      qrType == 1 ? wx.setNavigationBarTitle({ title: "个人展示版" }) : (qrType == 2 ? wx.setNavigationBarTitle({ title: "推广商" }) : (qrType == 3 ? wx.setNavigationBarTitle({ title: "10人展示版" }) : (qrType == 4 ? wx.setNavigationBarTitle({ title: "百人展示版" }) : wx.setNavigationBarTitle({ title: "渠道商" })))) 
       
       console.log('qrType:', that.data.qrType)
     

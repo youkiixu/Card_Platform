@@ -1,4 +1,7 @@
 <!--super_card/pages/mall-manage/mall-manage.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
 <view class='contains'>
 
   <view class='mall-t' style='background:linear-gradient(to bottom right,#fff, {{ themeColor }});'>
@@ -19,9 +22,28 @@
         <!-- 添加后 -->
         <image wx:if="{{ store_logo }}" src='{{ store_logo }}'></image>  
       </view>
-      <input class='basic-name' placeholder='店铺名称' placeholder-class='info-input' data-field="store_name" value="{{ store_name }}" maxlength='16' data-field="store_name" bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
+      <input class='basic-name' placeholder='店铺名称'  data-field="store_name" value="{{ store_name }}" maxlength='16' data-field="store_name" bindconfirm='setField' bindinput='setField' bindblur='setField'></input>
       <view class='text-logo'>点击上传logo</view>
     </view>
+
+
+    <!-- 商品分类start -->
+    <view class='productCate'>
+      <view class='productCate-top'>
+        <view class='productCate-topLeft'>店铺商品分类</view>
+        <view class='productCate-topRight' bindtap='addProductCate'>新增分类</view>
+      </view>
+      <view class='productCate-list'>
+        <block wx:for="{{ category }}" wx:for-index="index"> 
+          <view class='cateList-item'>
+            <view class='cateList-item-name'>{{ item.name }}</view>
+            <view class='cateList-item-edit' data-edit="{{index}}" bindtap='editProductCate'>编辑</view>
+            <view class='cateList-item-dele' data-dele="{{index}}" bindtap='deleteProductCate'>删除</view>
+         </view>
+        </block>
+      </view>   
+    </view>
+    <!-- 商品分类end -->
     
 
     

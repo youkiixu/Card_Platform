@@ -127,15 +127,44 @@ button.mt-share::after{
   margin-bottom: 10rpx;
 }
 
-.dh-info{
+/* .dh-info{
   display:flex;
   align-items:center;
   justify-content:space-between;
   font-size:28rpx;
-  padding:0 50rpx;
+  padding:0 20rpx;
+} */
+/* .dh-act{
+  color:#333;
+  height:60rpx;
+} */
+
+
+.type-navbar{
+  white-space: nowrap;
+  height: 80rpx;
+  width: 100%;
+  background-color: #fff;
+  color: #333;
+  font-size: 28rpx;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.type-box{
+  padding: 0 20rpx;
+  box-sizing: content-box;
+  line-height: 76rpx;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
 }
 .dh-act{
+  border-bottom: 4rpx solid #fff;
+}
+.category_active{
   color:#f90;
-  height:60rpx;
-  border-bottom:2px solid #f90;
+  border-bottom:4rpx solid #f90;
 }

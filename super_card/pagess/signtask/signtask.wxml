@@ -1,0 +1,43 @@
+<view class="container">
+  <view class='banner' style="background:url('http://yun.s280.com/attachment/group9.png')  no-repeat center; background-size:cover; "></view>
+  <view class='content'>
+    <view class='receive-points'>
+      <view class='receive-points-title'>
+        <view class='points-tips1'>签到领积分</view>
+        <view class='points-tips2'>积分更多用途</view>
+        <view class='sign-list'>
+          <view class='sign-listItem sign-active'>+5</view>
+          <view class='sign-listItem'>+5</view>
+          <view class='sign-listItem'>+5</view>
+          <view class='sign-listItem'>+5</view>
+          <view class='sign-listItem'>+5</view>
+          <view class='sign-listItem'>+5</view>
+          <view class='sign-listItem'>
+            <image class='img' src='http://yun.s280.com/attachment/liwu.png'></image>
+          </view>
+        </view>
+        <view class='sign-bottom'>
+          <form report-submit='true'  bindsubmit="confirmSign">
+              <button  form-type='submit' class='sign-btn'>签到</button>
+            </form>
+        </view>
+      </view>
+    </view>
+    <view class='forward-friends forward-friendsFive'>
+      <view class='forward-friends-tips'>转发五个好友即可获得1天免费使用机会</view>
+      <view class='forward-friends-todo'>去完成</view>
+    </view>
+    <view class='forward-friends'>
+      <view class='forward-friends-tips'>转发20个好友即可获得2天免费使用机会</view>
+      <view class='forward-friends-todo'>去完成</view>
+    </view>
+  </view>
+
+
+  <view class='integralMall'>
+    <view class='integralMall-inner'>
+      <text>积分</text>
+      <text>商城</text>
+    </view>
+  </view>
+</view>

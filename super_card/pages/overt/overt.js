@@ -74,8 +74,8 @@ Page({
     //guideHide:false,
 
     plate_id: '',
-    // shownc:false,
-    shownc: true,
+    shownc:false,
+    // shownc: true,
 
     recordingSec: 0,
     recordingSecIntval: false,
@@ -100,13 +100,95 @@ Page({
 
     userInfo:{},
 
+    videoThumb: 'http://yun.s280.com/attachment/20190517092205.jpg', //视频封面图
 
+    cards_industry: [],
+
+    checkMoreDown: true,
+    checkMoreUp: false,
+    showMoreCardInfo: false,
+    goodsList:[],
+    hiddenMask: true,
+
+    pInfo: '',//上级信息
+    showAskForMask: false, //索要弹框
+
+
+  },
+
+  // 发名片打开弹框选择
+  showFmpShare: function () {
+    console.log('222')
+    this.setData({
+      hiddenMask: false
+    })
+  },
+
+  //关闭弹框
+  boxClose: function () {
+    this.setData({
+      hiddenMask: true
+    })
+  },
+
+  //下拉查看更多名片信息
+  checkMoreDown: function () {
+    this.setData({
+      checkMoreDown: false,
+      checkMoreUp: true,
+      showMoreCardInfo: true,
+    })
+  },
+  //上拉收起更多名片信息
+  checkMoreUp: function () {
+    this.setData({
+      checkMoreDown: true,
+      checkMoreUp: false,
+      showMoreCardInfo: false,
+    })
+  },
+
+
+  //显示视频封面问题
+  videoPlay: function (e) {
+    var _index = e.currentTarget.id
+    this.setData({
+      _index: _index
+    })
+    //停止正在播放的视频
+    var videoContextPrev = wx.createVideoContext(this.data._index)
+    videoContextPrev.stop();
+    setTimeout(function () {
+      //将点击视频进行播放
+      var videoContext = wx.createVideoContext(_index)
+      videoContext.play();
+    }, 500)
   },
 
   //防止弹窗穿透
   stopPageScroll() {
     return
   },
+
+  //向上级索要名额
+  tochatNumber:function(e){
+    var that = this
+    app.util.request({
+      'url': 'entry/wxapp/startChat',
+      //'cachetime': '30',
+      'data': { t_uid: that.data.pInfo.pid, t_card_id: that.data.pInfo.card_id, card_id: that.data.my_card_id, form_id: e.detail.formId },
+      success(res) {
+
+        app.config.cardTrack(that.data.card_id, 5, 'praise')
+
+        wx.navigateTo({
+          url: '../chat/chat?chat_id=' + res.data.data + '&from=overt&ask_for_num=1'
+        })
+
+      }
+    })
+  },
+
 
   
   // 创建名片滑块宽度变小
@@ -521,35 +603,53 @@ Page({
   toCreateCard: function (e) {
 
     if (typeof e.detail.formId != 'undefined') app.formIds.push(e.detail.formId)
-    
-    if (this.data.my_userCards[0].no_perfect == 1){
+
+    var pInfo = this.data.pInfo
+    if (pInfo.agent_limit == 0) {
+      this.setData({
+        showAskForMask: true  //打开索要名片版弹框
+      })
+    } else {
       wx.navigateTo({
         url: '../basic/basic?card_id=' + this.data.my_userCards[0].id
       })
-      return
     }
 
-    app.util.request({
-      'url': 'entry/wxapp/isCanCreate',
-      success(res) {
-        //console.log(res)
-        if (res.data.message === 'ok') {
-          wx.navigateTo({
-            url: '../basic/basic'
-          })
-        } else {
-          var uInfo = res.data.data
-          console.log(uInfo)
-          wx.navigateTo({
-            url: '../../pagess/payment/payment?umoney=' + uInfo.money + '&cardnum=' + uInfo.card_num
-          })
-        }
+    
+   // if (this.data.my_userCards[0].no_perfect == 1){
+    //   wx.navigateTo({
+    //     url: '../basic/basic?card_id=' + this.data.my_userCards[0].id
+    //   })
+    //   return
+    // }
 
-      }
-    })
+    // app.util.request({
+    //   'url': 'entry/wxapp/isCanCreate',
+    //   success(res) {
+    //     //console.log(res)
+    //     if (res.data.message === 'ok') {
+    //       wx.navigateTo({
+    //         url: '../basic/basic'
+    //       })
+    //     } else {
+    //       var uInfo = res.data.data
+    //       console.log(uInfo)
+    //       wx.navigateTo({
+    //         url: '../../pagess/payment/payment?umoney=' + uInfo.money + '&cardnum=' + uInfo.card_num
+    //       })
+    //     }
+
+    //   }
+    // })
 
   },
   
+  //关闭索要弹框
+  hideAskForMask: function () {
+    this.setData({
+      showAskForMask: false
+    })
+  },
 
 
   //从名片组中移除
@@ -827,6 +927,21 @@ Page({
 
   },
 
+  // 上级信息
+  getPInfo:function(){
+    var that = this
+    app.util.request({
+      url: 'entry/wxapp/getPcardNums',
+      success: function (res) {
+        var pInfo = res.data.data
+        that.setData({
+          pInfo: pInfo
+        })
+        
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -869,6 +984,7 @@ Page({
         that.setData({ uid: response.memberInfo.uid })
 
         //that.getChatNum()
+        
 
         if (typeof options.scene !== 'undefined') {
 
@@ -880,10 +996,6 @@ Page({
             from_act: param[2]
           })
 
-          console.log('card_id--扫码进入', that.data.card_id)
-          console.log('agent_id--扫码进入', that.data.agent_id)
-          console.log('from_act--扫码进入', that.data.from_act)
-         
         }else{
 
             that.setData({ card_id: options.card_id })
@@ -909,14 +1021,10 @@ Page({
                 that.setData({ from_act: options.from_act })
             } 
 
-
-          console.log('card_id--非扫码进入', that.data.card_id)
-          console.log('agent_id--非扫码进入', that.data.agent_id)
-          console.log('from_act--非扫码进入', that.data.from_act)
-
         }
 
         that.freshCurrentPage(false, 1)
+        that.getPInfo() //上级信息
 
         that.getChatNum()
        
@@ -1078,6 +1186,22 @@ Page({
 
   },
 
+  //获取产品信息
+  getCardGoods:function(){
+    var that = this;
+    app.util.request({
+      'url': 'entry/wxapp/getCardStore',
+      'method': 'post',
+      'data': { card_id: that.data.card_id },
+      success(res) {
+
+        var data = res.data.data
+
+        that.setData({ goodsList: data.goods })
+      }
+    })
+  },
+
   //刷新当前页面
   freshCurrentPage: function (cb, watch){
     var that = this
@@ -1110,7 +1234,9 @@ Page({
 
           //console.log(res)
           typeof cb == "function" && cb()
-          that.setData({ card: res.data.data, from_act: '' })
+          var cards_industry = []
+          cards_industry = res.data.data.industry.split(',')
+          that.setData({ card: res.data.data, from_act: '', cards_industry: cards_industry})
 
 
           // 新增代码start
@@ -1233,6 +1359,9 @@ Page({
         }
 
     });
+
+    that.getCardGoods() //获取产品信息
+    that.getPInfo() //上级信息
 
   },
 
@@ -1435,11 +1564,12 @@ Page({
       //var title = '这是 "' + this.data.card.name + '" 的' + (app_name ? app_name : '名片') +'，请惠存'
       
       var title = '您好，这是 "' + this.data.card.name + '" 的名片，请惠存'
-      var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other&agent_id=' + this.data.agent_id
+      var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=other&agent_id=' + this.data.card.uid
       var imgUrl = ''
 
       app.config.cardTrack(this.data.card_id, 4, 'praise')
       console.log('分享路径path:', path)
+      
     }
     
     return {

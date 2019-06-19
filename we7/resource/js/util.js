@@ -410,7 +410,8 @@ util.getUserInfo = function (cb) {
           }
         });
       },
-      fail: function () {
+      fail: function (res) {
+        console.log('login-fail:',res)
         wx.showModal({
           title: '获取信息失败',
           content: '请允许授权以便为您提供给服务',

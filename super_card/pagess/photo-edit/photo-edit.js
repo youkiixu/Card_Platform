@@ -26,6 +26,22 @@ Page({
       tisFresh: false,
 
       sort: '',
+
+     showMask:false,
+     hiddenMask:true,
+     
+  },
+
+  //关闭购买弹框
+  boxClose: function () {
+    this.setData({
+      hiddenMask: true
+    })
+  },
+
+  //防止弹窗穿透
+  stopPageScroll() {
+    return
   },
 
   changePic: function (e){
@@ -111,6 +127,8 @@ Page({
  */
   delCardPic: function () {
     var that = this
+
+    that.setData({ showMask: true })
     $wuxDialog.confirm({
       title: '',
       content: '您确定要删除该图片吗？',
@@ -129,6 +147,8 @@ Page({
           'data': data,
           success(res) {
 
+            that.setData({ showMask: false })
+
             app.freshIndex = true
             var pages = getCurrentPages();
             var prevPage = pages[pages.length - 2]; // 上一级页
@@ -136,6 +156,7 @@ Page({
 
             var tprevPage = pages[pages.length - 3]; // 上上一级页
             tprevPage.setData({ isFresh: true })
+            
 
             wx.showToast({
               title: res.data.message,
@@ -154,6 +175,7 @@ Page({
 
       },
       onCancel(e) {
+        that.setData({ showMask: false })
 
       },
     })
@@ -168,6 +190,8 @@ Page({
   updatePicSort: function () {
     //console.log($wuxDialog)
     var that = this
+
+    that.setData({ showMask: true })
 
     $wuxDialog.prompt({
       title: '',
@@ -201,10 +225,14 @@ Page({
             prevPage.setData({ isFresh: true })
 
             //console.log(res)
-            that.setData({ sort: sort })
+            that.setData({ sort: sort, showMask: false})
           }
 
         })
+
+      },
+      onCancel(e) {
+        that.setData({ showMask: false })
 
       },
     })
@@ -218,6 +246,7 @@ Page({
   updatePicName: function () {
     //console.log($wuxDialog)
     var that = this
+    that.setData({ showMask: true })
 
     $wuxDialog.prompt({
       title: '',
@@ -249,10 +278,14 @@ Page({
             prevPage.setData({ isFresh: true })
 
             //console.log(res)
-            that.setData({ pic_name: name })
+            that.setData({ pic_name: name, showMask: false})
           }
 
         })
+
+      },
+      onCancel(e) {
+        that.setData({ showMask: false })
 
       },
     })
@@ -265,11 +298,18 @@ Page({
  * 修改图片描述
  */
 
+  setPicDesc:function(){
+    this.setData({
+      hiddenMask: false
+    })
+  },
+
   recordfollow: function (e) {
     this.data.pic_intro = e.detail.value
   },
 
   updatePicDesc: function (e) {
+    
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
       app.formIds.push(e.detail.formId)
@@ -289,15 +329,22 @@ Page({
       'method': 'POST',
       'data': data,
       success(res) {
+        var pic_intro = res.data.data.intro
         wx.showToast({
           title: res.data.message,
           icon: 'success',
           duration: 2000
         })
+
         app.freshIndex = true
         var pages = getCurrentPages();
         var prevPage = pages[pages.length - 2]; // 上一级页
         prevPage.setData({ isFresh: true })
+
+        that.setData({
+          pic_intro: pic_intro,
+          hiddenMask: true
+        })
 
       }
 

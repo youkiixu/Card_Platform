@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.0",
+	"libVersion": "2.7.0",
 	"appid": "wxb307788ee3f14239",
 	"projectname": "super_card_platform",
 	"debugOptions": {
@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 28,
 			"list": [
 				{
 					"id": -1,
@@ -174,6 +174,69 @@
 					"id": -1,
 					"name": "开通页面",
 					"pathName": "super_card/pages/opt-version/opt-version",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "转发语设置",
+					"pathName": "super_card/pagess/forwarding_title/forwarding_title",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "图片编辑",
+					"pathName": "super_card/pages/photo-edit/photo-edit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现页面",
+					"pathName": "super_card/pagess/cash/cash",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "视频上传",
+					"pathName": "super_card/pages/video/video",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "设置商城",
+					"pathName": "super_card/pagess/mall-manage/mall-manage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "编辑商品详情",
+					"pathName": "super_card/pagess/mall-manage/edit-goods",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "签到任务",
+					"pathName": "super_card/pagess/signtask/signtask",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "基本信息",
+					"pathName": "super_card/pages/basic/basic",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "super_card/pages/home/home",
 					"scene": null
 				}
 			]

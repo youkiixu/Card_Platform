@@ -18,6 +18,12 @@
     <view class='banner-tips'>商品图片尺寸推荐：750*500</view>
   </view>
   <view class='shop-infomation'>
+
+    <view class='si-act' bindtap='showTypeSelect'>
+      <input class='si-name' disabled='true' type='text' data-field="typeVal" value="{{ typeVal }}" placeholder='请选择商品分类'></input>
+      <text class='iconfont icon-fankuiyijian'></text>
+    </view>
+
     <view class='si-act'>
       <input class='si-name' maxlength='10' data-field="goods_name" value="{{ goods_name }}" bindblur='setGoodsInfo' bindconfirm='setGoodsInfo' bindinput='setGoodsInfo' placeholder='输入商品名称'></input>
       <text class='iconfont icon-fankuiyijian'></text>

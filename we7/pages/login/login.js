@@ -4,6 +4,7 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     toPage: false,
+    app_logo:'https://yun.s280.com/attachment/images/2/2019/01/K4zLsWX43wEK937PPeX5K45el59477.jpg',
   },
   onLoad: function (options) {
 

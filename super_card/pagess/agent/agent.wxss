@@ -287,13 +287,27 @@
 .iscash-tip{
   font-size:26rpx;
 }
-.iscash-r{
+/* .iscash-r{
   font-size:26rpx;
   line-height: 26rpx;
   background-color: #cccccc;
   color: #fff;
   border-radius: 60rpx;
   padding:16rpx 30rpx;
+} */
+.iscash-out{
+  width: 130rpx;
+  font-size:26rpx;
+  line-height:26rpx;
+  color:#fff;
+  border-radius:60rpx;
+  padding:16rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.iscash-rule{
+  font-size:26rpx;
+  color: #000;
 }
 .menu-info{
   display:flex;
@@ -488,9 +502,18 @@
 }
 .memberCode_icon{
   display: flex;
-  flex: 1;
+  flex: 1.2;
   font-size: 28rpx;
   align-items: center;
+}
+.memberCode_icon2{
+  flex: 3;
+  align-items: center;
+  justify-content: center;
+}
+.memberCode_icon2 text{
+  margin-left: 10rpx;
+  color: #4951df;
 }
 .memberCode_num{
   display: flex;
@@ -498,18 +521,21 @@
   color: #828282;
   font-size: 28rpx;
 }
+.memberCode_num2{
+  justify-content: flex-end;
+}
 .member_num{
  flex: 1;
 }
 .bug_num{
- width: 60rpx;
- height: 60rpx;
- line-height: 55rpx;
+ width: 70rpx;
+ height: 70rpx;
+ line-height: 70rpx;
  margin: 40rpx 12rpx;
- font-size: 50rpx;
+ font-size: 24rpx;
  background-color:#e9a944;
  color:#fff;
- border-radius:30rpx;
+ border-radius:50%;
  text-align: center;
 }
 .agentCode{
@@ -618,16 +644,28 @@
   line-height: 50rpx;
   color: red;
 }
+.choice_boxBottom{
+  display: flex;
+  display: -webkit-flex;
+  padding: 0 60rpx;
+  margin-top: 15rpx;
+}
+.buyMemBtnForm{
+  flex: 1;
+}
+.buyMemBtnProfit{
+  margin-left: 30rpx;
+}
 .buyMemBtn{
-  width: 455rpx;
-  height: 75rpx;
-  line-height: 75rpx;
+  /* width: 455rpx; */
+  height: 65rpx;
+  line-height: 65rpx;
   margin: 10rpx auto;
   color: #fff;
   background-color:#e9a944;
-  font-size: 36rpx;
+  font-size: 32rpx;
   text-align: center;
-  border-radius:15rpx;
+  border-radius:20rpx;
 }
 
 .recommendCustomer{
@@ -636,7 +674,7 @@
   line-height: 100rpx;
   text-align: center;
   margin-top: 20rpx;
-  font-size: 34rpx;
+  font-size: 28rpx;
   color: #000;
 }
 
@@ -692,3 +730,4 @@
   align-items: center;
   -webkit-align-items: center;
 }
+

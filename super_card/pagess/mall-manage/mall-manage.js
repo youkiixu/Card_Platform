@@ -1,4 +1,5 @@
 // super_card/pages/mall-manage/mall-manage.js
+import { $wuxDialog } from '../../components/wux'
 var app = getApp()
 Page({
 
@@ -37,9 +38,180 @@ Page({
 
     marketingGroup:false,//判断是否加入营销群组，共用群主商城
 
+    category:[],
+
 
 
   },
+
+
+  //新增商品分类
+  addProductCate: function () {
+    var that = this
+    if (that.data.category.length >= 6){
+      wx.showModal({
+        title: '系统提示',
+        content: '最多可创建6个分类',
+        showCancel: false,
+        confirmColor: '#f90',
+        confirmText: '知道了',
+        success: function (res) {
+          return
+        }
+      });
+    }else{
+      $wuxDialog.prompt({
+        title: '',
+        content: '分类名称为',
+        fieldtype: 'text',
+        password: false,
+        defaultText: that.data.pic_name,
+        placeholder: '0~8字符',
+        maxlength: 8,
+        onConfirm(e) {
+          var name = that.data.$wux.dialog.prompt.response
+          var data = {
+            card_id: that.data.card_id,
+            name: name
+          }
+          app.util.request({
+            'url': 'entry/wxapp/setGoodsCate',
+            //'cachetime': '30',
+            'method': 'POST',
+            'data': data,
+            success(res) {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'success',
+                duration: 2000
+              })
+              that.setData({
+                category: res.data.data
+              })
+            }
+          })
+
+        },
+        onCancel(e) {
+
+        },
+      })
+
+    }
+    
+  },
+
+  // 获取商品分类
+  getGoodsCateList: function () {
+    var that = this;
+    app.util.request({
+      'url': 'entry/wxapp/getGoodsCate',
+      'method': 'POST',
+      'data': { card_id: that.data.card_id },
+      success(res) {
+        that.setData({
+          category: res.data.data
+        })
+      }
+    })
+  },
+
+  //修改商品分类名称
+  editProductCate: function (e) {
+    var that = this
+    
+    var index = e.currentTarget.dataset.edit
+    var id = that.data.category[index].id
+    $wuxDialog.prompt({
+      title: '',
+      content: '分类名称为',
+      fieldtype: 'text',
+      password: false,
+      defaultText: that.data.pic_name,
+      placeholder: '0~8字符',
+      maxlength: 8,
+      onConfirm(e) {
+        var name = that.data.$wux.dialog.prompt.response
+        var data = {
+          card_id: that.data.card_id,
+          name: name,
+          id:id
+        }
+        app.util.request({
+          'url': 'entry/wxapp/setGoodsCate',
+          //'cachetime': '30',
+          'method': 'POST',
+          'data': data,
+          success(res) {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success',
+              duration: 2000
+            })
+            that.setData({
+              category: res.data.data
+            })
+          }
+
+        })
+
+      },
+      onCancel(e) {
+
+      },
+    })
+
+  },
+
+  //删除商品分类名称
+  deleteProductCate: function (e) {
+    var that = this
+
+    var index = e.currentTarget.dataset.dele
+    var id = that.data.category[index].id
+    console.log('id', id)
+    $wuxDialog.confirm({
+      title: '',
+      content: '您确定要删除该分类吗？',
+      onConfirm(e) {
+
+        var data = {
+          card_id: that.data.card_id,
+          id: id
+        }
+
+        app.util.request({
+          'url': 'entry/wxapp/delGoodsCate',
+          //'cachetime': '30',
+          'method': 'POST',
+          'data': data,
+          success(res) {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success',
+              duration: 2000
+            })
+
+            that.data.category.splice(index, 1) //移除数组中指定的元素
+
+            that.setData({ category: that.data.category })
+
+          }
+        })
+
+      },
+      onCancel(e) {
+        
+
+      },
+    })
+
+  },
+
+
+
+
+
 
   toPreviewStore: function () {
     wx.navigateTo({
@@ -454,10 +626,10 @@ Page({
     if (isVip == 0 && proGroup == 0) {  
       wx.showModal({
         title: '系统提示',
-        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        content: iosPay ? '您还不是展示版会员，请升级' : '不可服务',
         cancelText:'返回',
         confirmColor: '#f90',
-        confirmText: iosPay ? '去开通' : '知道了',
+        confirmText: iosPay ? '去升级' : '知道了',
         success: function (res) {
           if (res.confirm) {
             iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()         
@@ -473,6 +645,8 @@ Page({
 
     //获取商城信息
     that.getStoreInfo()
+
+    that.getGoodsCateList() //获取商品分类
   },
 
   getUserInfo:function (){

@@ -36,12 +36,16 @@
 
 
 
-  <view class='fr-word'>
-    <textarea placeholder='请输入图片描述（0~100个字符）' placeholder-class='fr-textarea' value="{{ pic_intro }}" bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' maxlength="100"></textarea>
-  </view>
+  
+  <block wx:if="{{ pic_intro }}">
+    <view class='fr-word' >
+      <!-- 给需要显示的文本加上 <text></text> 标签 - 小程序中的换行( \n ) 只有在<text></text>标签中才有效。 white-space: pre-wrap表示正常显示多空格 -->
+      <text style='white-space: pre-wrap'>{{ pic_intro }}</text>
+    </view>
+  </block>
   <view class='btn-submit'>
-    <form report-submit='true' bindsubmit="updatePicDesc">
-      <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>保存描述</button>
+    <form report-submit='true' bindsubmit="setPicDesc">
+      <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>{{pic_intro ? '修改描述':'添加描述'}}</button>
       </form>
   </view>
 
@@ -67,20 +71,21 @@
 
 
 
-
-
-
-
-<!-- <view  catchtouchmove='stopPageScroll' catchtouchmove='{{true}}'>
-      <view class="wux-dialog__bd">
-        <view wx:if="{{ isChat === false }}" class='frame-word'>
-            <view class='frame-word-tit'>图片描述</view>
-            <textarea  bindblur='setComeBackMsg' bindconfirm='setComeBackMsg' show-confirm-bar="{{false}}" fixed="true" auto-height='true' class='frame-word-info' type='text' name="type" maxlength='50' placeholder="50字以内" value="{{ comeBackMsg }}"></textarea >      
+ <!-- 黑色透明弹层start -->
+     <view class='mask' hidden="{{hiddenMask}}" bindtap="boxClose" catchtouchmove='stopPageScroll' catchtouchmove='{{true}}'>
+      <!-- catchtap阻止事件冒泡 -->
+      <view class='choice_box' catchtap="catchMao">
+      
+        <view class='mask-word'>
+          <textarea placeholder='请输入图片描述'  value="{{ pic_intro }}" bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' type='text' maxlength="-1" catchtouchmove="true" fixed="true" show-confirm-bar="{{false}}"></textarea>
         </view>
+
+        <view class='mask-bottom'>
+          <form report-submit='true' bindsubmit="updatePicDesc">
+            <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>保存</button>
+          </form>
+       </view>
+
       </view>
-      <view class="wux-dialog__ft">
-              <view class="wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--default"  bindtap="cancelCardSelect">取消</view>
-        <form class='wux-form-qd' report-submit='true' bindsubmit="{{ isChat === false ? 'confirmCardSelect' :  'confirmCardChat' }}"><button class='wux-dialog__btn wux-dialog__btn--default wux-dialog__btn--primary' style="color:{{ themeColor }};" form-type='submit'>确定</button></form>
-      </view>
-</view> -->
+    </view>
 

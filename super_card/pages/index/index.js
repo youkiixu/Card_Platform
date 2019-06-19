@@ -53,7 +53,6 @@ Page({
 
     msgNum: 0,
 
-    // arrvideo:[],//存放视频信息
     videoInfo: [], //存放视频信息
 
     VqqId: [],
@@ -68,21 +67,21 @@ Page({
     imgShow: 1,
 
     funcBtnArr: [
-      { func: 'toShowCardQr', 'img': false, 'txt': '名片码', icon: 'icon-saoma', 'bgcolor': '#629ef8' },
-      { func: 'showFmpShare', 'img': false, 'txt': '发名片', icon: 'icon-zhongxinfasong', 'bgcolor': '#8d6ff0' },
-      { func: 'toWallpaperPage', 'img': false, 'txt': '每日海报', icon: 'icon-tupianweijihuo', 'bgcolor': '#eb9470' },
+      // { func: 'toShowCardQr', 'img': false, 'txt': '名片码', icon: 'icon-saoma', 'bgcolor': '#629ef8' },
+      // { func: 'showFmpShare', 'img': false, 'txt': '发名片', icon: 'icon-zhongxinfasong', 'bgcolor': '#8d6ff0' },
+      // { func: 'toWallpaperPage', 'img': false, 'txt': '每日海报', icon: 'icon-tupianweijihuo', 'bgcolor': '#eb9470' },
       { func: 'goRadar', 'img': false, 'txt': 'AI雷达', icon: 'icon-winfo-icon-quyusaomiao', 'bgcolor': '#6dbce6' },
-      { func: 'modifyCard', 'img': false, 'txt': '修改名片', icon: 'icon-fankuiyijian', 'bgcolor': '#58c187' },
-      { func: 'toManageMall', 'img': false, 'txt': '商城管理', icon: 'icon-jifenshangcheng', 'bgcolor': '#6cbae5' },
-      { func: 'toPostDynamic', 'img': false, 'txt': '发布动态', icon: 'icon-pengyouquan', 'bgcolor': '#f4b665'},
-      { func: 'toEditWebsite', 'img': false, 'txt': '官网编辑', icon: 'icon-wangzhanshezhi', 'bgcolor': '#ab8df8' },
+      // { func: 'modifyCard', 'img': false, 'txt': '修改名片', icon: 'icon-fankuiyijian', 'bgcolor': '#58c187' },
+      { func: 'toPostDynamic', 'img': false, 'txt': '发布动态', icon: 'icon-pengyouquan', 'bgcolor': '#f4b665' },
+      { func: 'toManageMall', 'img': false, 'txt': '商城管理', icon: 'icon-jifenshangcheng', 'bgcolor': '#6cbae5', 'circle':false},
+      { func: 'toEditWebsite', 'img': false, 'txt': '官网编辑', icon: 'icon-wangzhanshezhi', 'bgcolor': '#ab8df8', 'circle': false},
     ],
 
     hideSwitchCard : true,
     hideSwitchStyle: true,
 
-    // shownc: false,
-    shownc: true,
+    shownc: false,
+    // shownc: true,
     plate_id: '',
 
     cardStyle: 1,
@@ -107,10 +106,10 @@ Page({
     groupT_id: 0,
     group_id: 0,
     noOpenAll: false,//都未开通5人或者10人VIP
-    openFiveVip: false,//是否开通5人VIP
+    openHundredVip: false,//是否开通百人VIP
     openTenVip: false,//是否开通10人VIP
-    noOpenGroup:false,//都未创建5人或者10人营销组
-    buildFiveGroup:false,//是否建立5人营销组
+    noOpenGroup:false,//都未创建百人或者10人营销组
+    buildHundredGroup:false,//是否建立百人营销组
     buildTenGroup: false,//是否建立10人营销组
     openType: 4,
     choiceF:false,
@@ -119,6 +118,76 @@ Page({
     agent_id: '' ,
     cards:{},
 
+    forward_title:'',
+
+    proGroup:0,//判断是否加入了推广组
+
+    videoThumb:'http://yun.s280.com/attachment/20190517092205.jpg', //视频封面图
+
+    cards_industry:[],
+    checkMoreDown:true,
+    checkMoreUp:false,
+    showMoreCardInfo:false,
+    hiddenMask:true,
+
+    pInfo:'',//上级信息
+    showAskForMask:false, //索要弹框
+
+  },
+
+
+  //下拉查看更多名片信息
+  checkMoreDown:function(){
+    this.setData({
+      checkMoreDown: false,
+      checkMoreUp: true,
+      showMoreCardInfo: true,
+    })
+  },
+  //上拉收起更多名片信息
+  checkMoreUp: function () {
+    this.setData({
+      checkMoreDown: true,
+      checkMoreUp: false,
+      showMoreCardInfo:false,
+    })
+  },
+
+  // 立即试用打开弹框
+  tryNow:function(){
+    this.setData({
+      hiddenMask: false
+    })
+  },
+
+  //关闭弹框
+  boxClose: function () {
+    this.setData({
+      hiddenMask: true
+    })
+  },
+  // 开始试用
+  confirmTryVIP:function(e){
+    var that = this
+    var form_Id = e.detail.formId
+    console.log('form_Id:', form_Id)
+  },
+
+
+  //显示视频封面问题
+  videoPlay: function (e) {
+    var _index = e.currentTarget.id
+    this.setData({
+      _index: _index
+    })
+    //停止正在播放的视频
+    var videoContextPrev = wx.createVideoContext(this.data._index)
+    videoContextPrev.stop();
+    setTimeout(function () {
+      //将点击视频进行播放
+      var videoContext = wx.createVideoContext(_index)
+      videoContext.play();
+    }, 500)
   },
 
   //打开弹框
@@ -129,15 +198,22 @@ Page({
     })
   },
 
-//跳到新建五人推广组页面
-  toModifyFive: function (e) {
+  //跳到签到页面
+  signtask:function(){
+    wx.navigateTo({
+      url: '../../pagess/signtask/signtask',
+    })
+  },
+
+//跳到新建10人推广组页面
+  toModifyTen: function (e) {
     wx.reLaunch({
       url: '../../pagess/group-modify/group-modify?type_id=7'
     })
   },
 
-  //跳到新建十人推广组页面
-  toModifyTen: function (e) {
+  //跳到新建百人推广组页面 ，目前未开通
+  toModifyHundred: function (e) {
     wx.reLaunch({
       url: '../../pagess/group-modify/group-modify?type_id=8'
     })
@@ -218,8 +294,22 @@ Page({
 
 
   toPerfectCard:function (){
-    wx.navigateTo({
-      url: '../basic/basic?card_id=' + this.data.card_id
+    var pInfo = this.data.pInfo
+    if (pInfo.agent_limit == 0){
+      this.setData({
+        showAskForMask: true  //打开索要名片版弹框
+      })
+    }else{
+      wx.navigateTo({
+        url: '../basic/basic?card_id=' + this.data.card_id
+      })
+    }
+  },
+
+  //关闭索要弹框
+  hideAskForMask: function () {
+    this.setData({
+      showAskForMask: false
     })
   },
 
@@ -682,6 +772,14 @@ Page({
     
   },
 
+  //跳到转发语设置页面
+  forwardingTitle: function () {
+    wx.navigateTo({
+      url: '../../pagess/forwarding_title/forwarding_title?card_id=' + this.data.card_id
+    })
+
+  },
+
   // 一键回到顶部
   goTop: function (e) {
     if (wx.pageScrollTo) {
@@ -834,7 +932,7 @@ Page({
           var listLen = data.length;
           var ids = ['custom', '0'];
           var names = ['创建自定义背景', '白色(默认)'];
-          var urls = ['custom', ''];
+          var urls = ['custom', 'http://yun.s280.com/attachment/bg.jpg'];
           var colors = ['custom', ''];
           var music = ['custom', ''];
           for (var i = 0; i < listLen; i++) {
@@ -851,6 +949,7 @@ Page({
             textColorSelectV: colors,
             bgMusicSelectV: music,
           });
+          
           //console.log(names)
           //展示用户所有名片
           if(that.data.card_id > 0)
@@ -864,6 +963,7 @@ Page({
       })
 
       that.getUInfo() //获取用户信息接口数据
+      that.getPInfo() //上级信息
 
     });
 
@@ -1025,6 +1125,7 @@ Page({
           proGroup = 1 //表示加入了推广组，并拥有推广组赋有的权限功能
         }
         wx.setStorageSync('proGroup', proGroup);
+        that.setData({ proGroup: proGroup })
         //判断是否拥有推广组的权限新增代码--end
 
 
@@ -1039,13 +1140,16 @@ Page({
         
         var cards_data = res.data.data
         var cards = {}
+        var cards_industry = []
         for (var i = 0; i < cards_data.length; i++){
           if (cards_data[i].is_default == 1){
             cards = cards_data[i]
+            cards_industry = cards_data[i].industry.split(',')
           }
         }
 
-        that.setData({ cardLists: res.data.data, cards: cards })
+        that.setData({ cardLists: res.data.data, cards: cards, cards_industry: cards_industry })
+        
 
         if (that.data.cardLists.length < 1){
           wx.hideShareMenu()
@@ -1123,7 +1227,8 @@ Page({
 
         that.toggleCardBgPickerV()
 
-   
+        //获取分享标题
+        that.getShareTitle()
 
       }
 
@@ -1165,40 +1270,116 @@ Page({
       success: function (res) {
         var getUserInfo = res.data.data;
         var uid = getUserInfo.id;
+        
         wx.setStorageSync('getUserInfo', getUserInfo);
 
+        
+
         //五人十人VIP判断
+        // var isVip = getUserInfo.vip;
+        // var had_sell_group = getUserInfo.had_sell_group;
+        // var sell_group_id = getUserInfo.sell_group_id;
+
+        // var noOpenAll = false//都未开通5人或者10人VIP
+        // var openFiveVip = false//是否开通5人VIP
+        // var openTenVip = false//是否开通10人VIP
+
+        // var buildFiveGroup = false//是否创建5人VIP推广组
+        // var buildTenGroup = false//是否创建10人VIP推广组
+
+        // noOpenAll = (isVip != 2 && isVip != 3) ? true : false //5人VIP和10人VIP都未开通
+        // openFiveVip = isVip == 2 ? true : false //开通了5人VIP
+        // openTenVip = isVip == 3 ? true : false //开通了10人VIP
+
+        // buildFiveGroup = (isVip == 2 && had_sell_group == true) ? true : false //创建了5人VIP推广组
+        // buildTenGroup = (isVip == 3 && had_sell_group == true) ? true : false  //创建了10人VIP推广组
+
+        //十人百人VIP判断，百人现在暂时未开放
         var isVip = getUserInfo.vip;
         var had_sell_group = getUserInfo.had_sell_group;
         var sell_group_id = getUserInfo.sell_group_id;
 
-        var noOpenAll = false//都未开通5人或者10人VIP
-        var openFiveVip = false//是否开通5人VIP
+        var noOpenAll = false//都未开通10人或者百人VIP
         var openTenVip = false//是否开通10人VIP
+        var openHundredVip = false//是否开通百人VIP
 
-        var buildFiveGroup = false//是否创建5人VIP推广组
         var buildTenGroup = false//是否创建10人VIP推广组
+        var buildHundredGroup = false//是否创建百人VIP推广组
 
-        noOpenAll = (isVip != 2 && isVip != 3) ? true : false //5人VIP和10人VIP都未开通
-        openFiveVip = isVip == 2 ? true : false //开通了5人VIP
-        openTenVip = isVip == 3 ? true : false //开通了10人VIP
+        noOpenAll = (isVip != 2 && isVip != 3) ? true : false //百人VIP和10人VIP都未开通
+        openTenVip = isVip == 2 ? true : false //开通了10人VIP
+        openHundredVip = isVip == 3 ? true : false //开通了百人VIP
 
-        buildFiveGroup = (isVip == 2 && had_sell_group == true) ? true : false //创建了5人VIP推广组
-        buildTenGroup = (isVip == 3 && had_sell_group == true) ? true : false  //创建了10人VIP推广组
-
+        buildTenGroup = (isVip == 2 && had_sell_group == true) ? true : false  //创建了10人VIP推广组
+        buildHundredGroup = (isVip == 3 && had_sell_group == true) ? true : false //创建了百人VIP推广组
+        
         that.setData({
           isVip: isVip,
           uid: uid,
           noOpenAll: noOpenAll,
-          openFiveVip: openFiveVip,
+          openHundredVip: openHundredVip,
           openTenVip: openTenVip,
-          buildFiveGroup: buildFiveGroup,
+          buildHundredGroup: buildHundredGroup,
           buildTenGroup: buildTenGroup,
           group_id: sell_group_id
         })
+        
        
       }
     });
+  },
+
+  // 上级信息
+  getPInfo: function () {
+    var that = this
+    app.util.request({
+      url: 'entry/wxapp/getPcardNums',
+      success: function (res) {
+        var pInfo = res.data.data
+        that.setData({
+          pInfo: pInfo
+        })
+        console.log('pInfo', that.data.pInfo)
+      }
+    })
+  },
+
+  //向上级索要名额
+  tochatNumber: function (e) {
+    var that = this
+    app.util.request({
+      'url': 'entry/wxapp/startChat',
+      //'cachetime': '30',
+      'data': { t_uid: that.data.pInfo.pid, t_card_id: that.data.pInfo.card_id, card_id: that.data.card_id, form_id: e.detail.formId },
+      success(res) {
+
+        app.config.cardTrack(that.data.card_id, 5, 'praise')
+
+        wx.navigateTo({
+          url: '../chat/chat?chat_id=' + res.data.data + '&from=overt&ask_for_num=1'
+        })
+
+      }
+    })
+  },
+
+  
+
+  /**
+   * 获取分享标题
+   */
+  getShareTitle:function(){
+    var that = this
+    app.util.request({
+      'url': 'entry/wxapp/getShareTitle',
+      //'cachetime': '30',
+      'method': 'POST',
+      'data': { card_id: that.data.card_id },
+      success(res) {
+        var share_title = res.data.data.share_title
+        that.setData({ forward_title: share_title })
+      }
+    })
   },
 
 
@@ -1265,7 +1446,7 @@ Page({
           var listLen = data.length;
           var ids = ['custom', '0'];
           var names = ['创建自定义背景', '白色(默认)'];
-          var urls = ['custom', ''];
+          var urls = ['custom', 'http://yun.s280.com/attachment/bg.jpg'];
           var colors = ['custom', ''];
           var music = ['custom', ''];
           for (var i = 0; i < listLen; i++) {
@@ -1326,8 +1507,12 @@ Page({
           })
         }
       })
+      
+      that.getChatNum()
 
       that.getUInfo() //获取用户信息接口数据
+      that.getPInfo() //上级信息
+
 
     });
 
@@ -1360,8 +1545,10 @@ Page({
    */
   onShow: function () {
 
-  
-    if(app.freshIndex === true) this.freshCurrCard()
+    if(app.freshIndex === true){
+      this.hideFmpShare()
+      this.freshCurrCard()
+    } 
 
     if (this.data.cardLists.length < 1) {
       wx.hideShareMenu()
@@ -1373,8 +1560,7 @@ Page({
         app.config.setUserComeback()
       }
     }
-
-    this.getChatNum()
+    //  this.getChatNum()
   },
 
   //播放欢迎语
@@ -1526,7 +1712,9 @@ Page({
       var item_forward_title = app.config.getConf('item_forward_title')
       var item_forward_pic = app.config.getConf('item_forward_pic')
 
-      var title = item_forward_title ? item_forward_title : '您好，这是我的名片，请惠存'
+      // var title = item_forward_title ? item_forward_title : '您好，这是我的名片，请惠存'
+
+      var title = this.data.forward_title ? this.data.forward_title : '您好，这是我的名片，请惠存'
       var path = '/super_card/pages/overt/overt?card_id=' + this.data.card_id + '&from_act=share&agent_id=' + this.data.uid
       var imgUrl = item_forward_pic ? item_forward_pic : ''
 
@@ -1603,160 +1791,91 @@ Page({
           break;
           case 1:
             console.log('更多信息')
-            if (isVip == 0 && proGroup == 0) {
-              wx.showModal({
-                title: '系统提示',
-                content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-                cancelText: '返回',
-                confirmColor: '#f90',
-                confirmText: iosPay ? '去开通' : '知道了',
-                success: function (res) {
-                  if (res.confirm) {
-                    iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
-                  } else if (res.cancel) {
-                    wx.navigateBack()
-                  }
-                }
-              });
-              return
-            } else {
-              wx.navigateTo({
-                url: '../more-info/more-info?card_id=' + that.data.card_id
-              })
-            } 
+            wx.navigateTo({
+              url: '../more-info/more-info?card_id=' + that.data.card_id
+            })
+            // if (isVip == 0 && proGroup == 0) {
+            //   wx.showModal({
+            //     title: '系统提示',
+            //     content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+            //     cancelText: '返回',
+            //     confirmColor: '#f90',
+            //     confirmText: iosPay ? '去开通' : '知道了',
+            //     success: function (res) {
+            //       if (res.confirm) {
+            //         iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+            //       } else if (res.cancel) {
+            //         wx.navigateBack()
+            //       }
+            //     }
+            //   });
+            //   return
+            // } else {
+            //   wx.navigateTo({
+            //     url: '../more-info/more-info?card_id=' + that.data.card_id
+            //   })
+            // } 
           break;
           case 2:
             console.log('图片')
-            if (isVip == 0 && proGroup == 0) {
-              wx.showModal({
-                title: '系统提示',
-                content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-                cancelText: '返回',
-                confirmColor: '#f90',
-                confirmText: iosPay ? '去开通' : '知道了',
-                success: function (res) {
-                  if (res.confirm) {
-                    iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
-                  } else if (res.cancel) {
-                    wx.navigateBack()
-                  }
-                }
-              });
-              return
-            }else{
-              wx.navigateTo({
-                url: '../album/album?card_id=' + that.data.card_id
-              })
-            } 
+            wx.navigateTo({
+              url: '../../pagess/album/album?card_id=' + that.data.card_id
+            }) 
           break;
 
           case 3:
-            if (isVip == 0 && proGroup == 0) {
-              wx.showModal({
-                title: '系统提示',
-                content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-                cancelText: '返回',
-                confirmColor: '#f90',
-                confirmText: iosPay ? '去开通' : '知道了',
-                success: function (res) {
-                  if (res.confirm) {
-                    iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
-                  } else if (res.cancel) {
-                    wx.navigateBack()
-                  }
-                }
-              });
-              return
-            } else {
-              app.util.request({
-                'url': 'entry/wxapp/isCanUploadAudio',
-                'method': 'post',
-                'data': { card_id: that.data.card_id },
-                success(res) {
-                  //console.log(res)
-                  if (res.data.message === 'ok') {
-                    wx.navigateTo({
-                      url: '../sound-recording/sound-recording?card_id=' + that.data.card_id
-                    })
-                  } else {
-                    var uInfo = res.data.data
-                    console.log(uInfo)
+            app.util.request({
+              'url': 'entry/wxapp/isCanUploadAudio',
+              'method': 'post',
+              'data': { card_id: that.data.card_id },
+              success(res) {
+                //console.log(res)
+                if (res.data.message === 'ok') {
+                  wx.navigateTo({
+                    url: '../sound-recording/sound-recording?card_id=' + that.data.card_id
+                  })
+                } else {
+                  var uInfo = res.data.data
+                  console.log(uInfo)
 
-                    wx.navigateTo({
-                      url: '../../pagess/payment/payment-audio?umoney=' + (uInfo == null ? 0 : uInfo.money) + '&card_id=' + that.data.card_id
-                    })
+                  wx.navigateTo({
+                    url: '../../pagess/payment/payment-audio?umoney=' + (uInfo == null ? 0 : uInfo.money) + '&card_id=' + that.data.card_id
+                  })
 
-                  }
                 }
-              })
-            }    
+              }
+            })
           break;
           
           case 4:
             console.log('视频')
-            if (isVip == 0 && proGroup == 0) {
-              wx.showModal({
-                title: '系统提示',
-                content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-                cancelText: '返回',
-                confirmColor: '#f90',
-                confirmText: iosPay ? '去开通' : '知道了',
-                success: function (res) {
-                  if (res.confirm) {
-                    iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
-                  } else if (res.cancel) {
-                    wx.navigateBack()
-                  }
-                }
-              });
-              return
-            } else {
-              app.util.request({
-                'url': 'entry/wxapp/isCanUploadVideo',
-                'method': 'post',
-                'data': { card_id: that.data.card_id },
-                success(res) {
-                  if (res.data.message === 'ok') {
-                    wx.navigateTo({
-                      url: '../video/video?card_id=' + that.data.card_id
-                    })
-                  } else {
+            app.util.request({
+              'url': 'entry/wxapp/isCanUploadVideo',
+              'method': 'post',
+              'data': { card_id: that.data.card_id },
+              success(res) {
+                if (res.data.message === 'ok') {
+                  wx.navigateTo({
+                    url: '../video/video?card_id=' + that.data.card_id
+                  })
+                } else {
 
-                    var uInfo = res.data.data
-                    console.log(uInfo)
-                    wx.navigateTo({
-                      url: '../../pagess/payment/payment-video?umoney=' + (uInfo == null ? 0 : uInfo.money) + '&card_id=' + that.data.card_id
-                    })
+                  var uInfo = res.data.data
+                  console.log(uInfo)
+                  wx.navigateTo({
+                    url: '../../pagess/payment/payment-video?umoney=' + (uInfo == null ? 0 : uInfo.money) + '&card_id=' + that.data.card_id
+                  })
 
-                  }
                 }
-              })
-            }  
+              }
+            })  
             break;
 
           case 5:
             console.log('隐私设置')
-            if (isVip == 0 && proGroup == 0) {
-              wx.showModal({
-                title: '系统提示',
-                content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-                cancelText: '返回',
-                confirmColor: '#f90',
-                confirmText: iosPay ? '去开通' : '知道了',
-                success: function (res) {
-                  if (res.confirm) {
-                    iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
-                  } else if (res.cancel) {
-                    wx.navigateBack()
-                  }
-                }
-              });
-              return
-            } else {
-              wx.navigateTo({
-                url: '../secret-fit/secret-fit?card_id=' + that.data.card_id
-              })
-            }    
+            wx.navigateTo({
+              url: '../secret-fit/secret-fit?card_id=' + that.data.card_id
+            })   
           break;
         }
       },
@@ -1788,10 +1907,10 @@ Page({
     if (that.data.isVip == 0 && length >= 1) {
       wx.showModal({
         title: '系统提示',
-        content: iosPay ? '您还不是会员，最多只能创建' + length + '张名片' : '不可服务',
+        content: iosPay ? '您还不是展示版会员，最多只能创建' + length + '张名片' : '不可服务',
         cancelText: '返回',
         confirmColor: '#f90',
-        confirmText: iosPay ? '去开通' : '知道了',
+        confirmText: iosPay ? '去升级' : '知道了',
         success: function (res) {
           if (res.confirm) {
             iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()

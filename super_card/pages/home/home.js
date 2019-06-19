@@ -101,7 +101,7 @@ Page({
     if (this.data.uInfo.vip == 0) {
       wx.showModal({
         title: '系统提示',
-        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        content: iosPay ? '您还不是展示版会员，请先开通展示版会员' : '不可服务',
         cancelText: '返回',
         confirmColor: '#f90',
         confirmText: iosPay ? '去开通' : '知道了',
@@ -332,8 +332,11 @@ Page({
           //console.log(res)
           var uInfo = res.data.data.uInfo
 
-          var vip_last_time = Date.parse(uInfo.vip_last_time) > Date.parse('2029-1-1') ? '永久' : uInfo.vip_last_time//日期之前的比较要转换成时间戳才能做比较
-          
+          //注意：苹果手机不支持以“-”分割的时间形式，如2030-01-01，故必须进行格式转换。安卓手机支持“-”或者“/”分割的时间形式；日期之间的比较要转换成时间戳才能做比较
+          var t = uInfo.vip_last_time
+          var time = t.replace(/-/g, "/")
+          var vip_last_time = Date.parse(time) > Date.parse('2029/1/1') ? '永久' : uInfo.vip_last_time
+                  
           var isAdmin = uInfo.admin == 1 ? true : false
 
           var vipSet = res.data.data.vipSet

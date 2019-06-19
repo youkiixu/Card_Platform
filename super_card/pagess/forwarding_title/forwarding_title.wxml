@@ -1,0 +1,19 @@
+<view class="container">
+  <view class='top-content'>
+    <view class='top-icon'>
+      <text class='fmp-pyq iconfont icon-tubiao15' style='color:#fe9605;font-size:200rpx;'></text>
+    </view>
+    <view class='top-txt'>一个亮眼的名片转发标题，能让您的名片更受关注哦！</view>
+  </view>
+
+  <view class='fr-word'>
+    <textarea placeholder='您好，这是我的名片，请惠存' value="{{ forwarding_title }}" bindinput='recordfollow' bindblur='recordfollow' bindconfirm='recordfollow' type='text' maxlength="-1"  fixed="true" show-confirm-bar="{{false}}" ></textarea>
+  </view>
+
+   <view class='btn-submit'>
+    <form report-submit='true' bindsubmit="saveTitle">
+      <button class='btn-block btn-blue' form-type='submit' style='background:{{ themeColor }};'>保存</button>
+      </form>
+  </view>
+
+</view>

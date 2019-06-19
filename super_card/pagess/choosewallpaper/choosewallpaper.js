@@ -100,39 +100,49 @@ Page({
     //判断是否加入了推广组 proGroup == 0,则表示未加入
     var proGroup = wx.getStorageSync('proGroup');
 
-    if (isVip == 0 && proGroup == 0) {
-      wx.showModal({
-        title: '系统提示',
-        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-        cancelText: '返回',
-        confirmColor: '#f90',
-        confirmText: iosPay ? '去开通' : '知道了',
-        success: function (res) {
-          if (res.confirm) {
-            iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()
-          } else if (res.cancel) {
-            return
-          }
-        }
-      });
-      return
-    } 
-
+    // if (isVip == 0 && proGroup == 0) {
+    //   wx.showModal({
+    //     title: '系统提示',
+    //     content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+    //     cancelText: '返回',
+    //     confirmColor: '#f90',
+    //     confirmText: iosPay ? '去开通' : '知道了',
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()
+    //       } else if (res.cancel) {
+    //         return
+    //       }
+    //     }
+    //   });
+    //   return
+    // } 
 
     var length = that.data.allInfo.length
-    if ((isVip > 0 || proGroup == 1) && length >= 10) {
-      wx.showModal({
-        title: '系统提示',
-        content: '您最多只能自定义10张海报，如还需要自定义海报，可删除其他不需要的海报',
-        showCancel: false,
-        confirmColor: '#f90',
-        confirmText: '知道了',
-        success(res) {
-          return;
-        }
-      });
-      return
-    }   
+    wx.showModal({
+      title: '系统提示',
+      content: '您最多只能自定义10张海报，如还需要自定义海报，可删除其他不需要的海报',
+      showCancel: false,
+      confirmColor: '#f90',
+      confirmText: '知道了',
+      success(res) {
+        return;
+      }
+    });
+    
+    // if ((isVip > 0 || proGroup == 1) && length >= 10) {
+    //   wx.showModal({
+    //     title: '系统提示',
+    //     content: '您最多只能自定义10张海报，如还需要自定义海报，可删除其他不需要的海报',
+    //     showCancel: false,
+    //     confirmColor: '#f90',
+    //     confirmText: '知道了',
+    //     success(res) {
+    //       return;
+    //     }
+    //   });
+    //   return
+    // }   
     
     wx.chooseImage({
       count: 1, // 默认9

@@ -31,13 +31,15 @@ Page({
     temp:[],
     showVcodeInput: false,
     showWxPhoneBtn: true,
-    mobileInputHolder: '手机号 请点击微信获取',
+    mobileInputHolder: '填写手机号或点击获取',
     mobileInputDisable: true,
     sendBtnDisabled: false,
     sendBtnText: '发送验证码',
     showMobileTypeArrow: true,
 
-    errtips:''
+    errtips:'',
+    pCardInfo:'',
+    pCardInfo_industry: [],
   },
 
   //返回首页
@@ -47,6 +49,39 @@ Page({
     });
   },
 
+  //跳转到上级名片页
+  toOvertPage: function () {
+    wx.navigateTo({
+      url: '../overt/overt?card_id=' + this.data.pCardInfo.id,
+    })
+  },
+
+  //拨打名片手机号
+  callMobile: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: this.data.pCardInfo.mobile
+    })
+  },
+
+
+  // 获取上级名片信息
+  getPCardInfo:function(){
+    var that = this
+    app.util.request({
+      url: 'entry/wxapp/getPCardInfo',
+      success: function (res) {
+        var pCardInfo = res.data.data
+        var pCardInfo_industry = []
+        pCardInfo_industry = pCardInfo.industry.split(',')
+        
+        that.setData({
+          pCardInfo: pCardInfo,
+          pCardInfo_industry: pCardInfo_industry
+        })
+        console.log('pCardInfo', that.data.pCardInfo)
+      }
+    })
+  },
 
 
   //设置用户输入的短信验证码
@@ -235,12 +270,12 @@ Page({
 
   //切换行业类型选项状态
   toggleIndustryItem: function (e){
-
      var index = e.target.dataset.index
      
      var item = this.data.industryList[index]
 
      var choosenIndex = this.inArray(item.name, this.data.industry)
+     
      if(choosenIndex === false){
        
        if (this.data.industry.length > 2) {
@@ -431,14 +466,14 @@ Page({
       return false
     }
 
-    if (e.detail.value.company.length < 4) {
-      wx.showToast({
-        title: '公司名称不能少于4个字',
-        icon: 'none',
-        duration: 2000
-      })
-      return false
-    }
+    // if (e.detail.value.company.length < 4) {
+    //   wx.showToast({
+    //     title: '公司名称不能少于4个字',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    //   return false
+    // }
 
     /*if (e.detail.value.title.length == 0) {
       this.setData({ errtips: '职务' })
@@ -647,7 +682,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options', options)
     var that = this
+
+    that.getPCardInfo()//上级卡片信息
+
     if(app.config.getConf('wx_mobile_switch') == 1)
       app.util.getUserInfo(function (res) {
         that.initPage(options)
@@ -675,7 +714,6 @@ Page({
         'data': { 'card_id': that.data.card_id },
         success(res) {
           console.log('加载名片信息：',res)
-          console.log(res)
           var card = res.data.data
           var industry = card.industry.split(',')
           var industryList = card.industryLists

@@ -10,7 +10,7 @@
 
 <view  wx:if="{{canIUse}}" class='sqinfo'>
   <view class='top'>
-    <image class='img' src='/super_card/resource/images/logo.png'></image>
+    <image class='img' src='{{ app_logo }}'></image>
     <view class='sq-words'>商桥智能名片登录</view>
   </view>
 

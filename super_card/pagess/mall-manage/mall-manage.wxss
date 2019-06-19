@@ -367,3 +367,59 @@ checkbox .wx-checkbox-input{
   display:-webkit-flex;
   -webkit-flex-wrap:wrap;
 }
+
+/* 商品分类 */
+.productCate{
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background: #fff;
+}
+.productCate-top{
+  display: flex;
+  display: -webkit-flex;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  border-bottom: 2rpx solid #eee;
+}
+.productCate-topLeft{
+  color: #333;
+  flex: 1;
+}
+.productCate-topRight{
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 15rpx;
+  text-align: center;
+  background:#00a1e9;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 5rpx;
+}
+
+.cateList-item{
+  height: 70rpx;
+  line-height: 70rpx;
+  display: flex;
+  display: -webkit-flex;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  border-bottom: 2rpx solid #eee;
+}
+.cateList-item-name{
+  flex: 1;
+}
+.cateList-item-edit,.cateList-item-dele{
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-top: 10rpx;
+  padding: 0 15rpx;
+  text-align: center;
+  background:#00a1e9;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 5rpx;
+}
+.cateList-item-dele{
+  margin-left: 20rpx;
+}

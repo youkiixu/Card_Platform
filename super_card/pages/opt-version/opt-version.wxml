@@ -28,7 +28,7 @@
         </view>
       </view>
       <view class='superior-right'>
-        <view class='superior-badge'><text class='iconfont icon-huiyuan'></text>专享服务商</view>
+        <view class='superior-badge'><text class='iconfont icon-huiyuan'></text>专属服务商</view>
         <navigator url="../overt/overt?card_id={{ pInfo.id }}">
           <view class='superior-more'>了解更多<text class='iconfont icon-jiantou' style='font-size: 24rpx;'></text></view>
         </navigator>
@@ -62,7 +62,8 @@
               <view class='buttom-info'>
                 <text>——</text>
                 <!-- <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text> -->
-                <text style="color:{{ themeColorV }};">{{ item.price }}元/年</text>
+                <text wx:if="{{ pInfo != ''}}">——————</text>
+                <text wx:if="{{ pInfo == ''}}" style="color:#f90;margin:0 10rpx;font-size:30rpx;">{{ item.price }}元/年</text>
                 <text>——</text>
               </view>
 
@@ -109,6 +110,17 @@
         <button form-type='submit' disabled='{{ btnDis }}' class='ov-b-right' style='background-color:{{ themeColor }};'>{{ uInfo.vip > 0 ? (uInfo.vip > 2 ? '已经开通' : '立即升级') : '立即开通' }}</button>
       </form>
     </view>
+
+     <!-- <view class='ov-bottom' wx:if="{{ pInfo != ''}}">
+       <view class='ov-b-left'>
+        <view class='ov-b-left-text'>马上联系开通</view>
+      </view>
+      <view class='ov-b-right2'>
+        <view class='ov-b-right-phone' catchtap='callMobile'>拨打电话</view>
+        <view class='ov-b-right-chat' catchtap='startChat'>在线沟通</view>
+      </view>
+    </view> -->
+
   </view>
 
   <!-- 选择年限 -->

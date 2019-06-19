@@ -45,10 +45,10 @@
       </view>
 
 
-      <!-- <view class='topd-m'>
+      <view class='topd-m'>
         <view class='topd-t'>到期时间</view>
-        <view class='topd-b'>{{ uInfo.vip_last_time }}</view>
-      </view> -->
+        <view class='topd-b'>{{ agent_last_time }}</view>
+      </view>
    
     </view>
     <view class="waveWrapperInner bgTop"> 
@@ -65,7 +65,15 @@
       <view class='iscash-money'>{{ uInfo.agent_balance }}</view>
       <view class='iscash-tip'>可提现收益(元)</view>
     </view>
-    <view class='iscash-r' bindtap='toCashPage' style='background-color:#4752e8;'>收益提现</view>
+    <view class='iscash-r'>
+      <view class='iscash-rule' bindtap='toProPage' data-t="withdrawal_rule_explain">
+        <text>提现规则与说明</text>
+        <text class="cl iconfont icon-question"style="color:#00a1e9;"></text>
+      </view>
+      <view class='iscash-out' bindtap='toCashPage' style='background-color:#4752e8;'>收益提现</view>
+    </view>
+    
+
   </view>
 
   <view class='holiday-wishes-img' bindtap='getAgentQrcode' wx:if="{{ center_pic }}">
@@ -79,23 +87,9 @@
           </view>
         </block>
     </view>
-    <!-- 生成会员码start -->
-    <view class='memberCode' wx:if="{{ activeCategoryId == 1 }}">
-      <view class='memberCode_icon'  bindtap="toSpreadPage" data-qrtype='1'>
-          <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
-          <view >
-              <text class="member-text">生成会员码</text>
-          </view>
-      </view>
-      <view class='memberCode_num'>
-        <view class='member_num'>会员人数<text>{{uInfo.team_num}}/{{uInfo.agent_limit}}</text></view>
-        <view class='bug_num' bindtap="memberShowMask" data-type='1'>+</view>
-      </view>
-    </view>
-  <!-- 生成会员码end -->
-
-   <!-- 5人推广码start -->
-    <view class='memberCode' wx:if="{{ activeCategoryId == 2 }}">
+  
+   <!-- 5人推广码start 已废除 -->
+    <!-- <view class='memberCode' wx:if="{{ activeCategoryId == 2 }}">
       <view class='memberCode_icon'  bindtap="toFiveSpreadPage" data-qrtype='3'>
           <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
           <view >
@@ -104,42 +98,68 @@
       </view>
       <view class='memberCode_num'>
         <view class='member_num'>会员人数<text>{{uInfo.five_team_num}}/{{uInfo.five_peo_limit}}</text></view>
-        <view class='bug_num' bindtap="memberShowMask" data-type='3'>+</view>
+        <view class='bug_num' bindtap="memberShowMask" data-type='3'>购买</view>
       </view>
-    </view>
+    </view> -->
   <!-- 5人推广码end -->
 
-   <!-- 10人推广码start -->
-    <view class='memberCode memberCodeTen' wx:if="{{ activeCategoryId == 2 }}">
-      <view class='memberCode_icon'  bindtap="toTenSpreadPage" data-qrtype='4'>
+   <!-- 名片版次数start -->
+    <view class='memberCode' wx:if="{{ activeCategoryId == 1 }}">
+      <view class='memberCode_icon memberCode_icon2'>
+        剩余开通次数 <text>{{uInfo.agent_limit}}</text> 
+      </view>
+      <view class='memberCode_num memberCode_num2'>
+        <view class='bug_num' bindtap="memberShowMask" data-type='0'>购买</view>
+      </view>
+    </view>
+  <!-- 名片版次数end -->
+
+  <!-- 生成个人展示版码start -->
+  <view class='memberCode' wx:if="{{ activeCategoryId == 2 }}">
+      <view class='memberCode_icon'  bindtap="toSpreadPage" data-qrtype='1'>
           <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
           <view >
-              <text class="member-text">生成10人推广码</text>
+              <text class="member-text">生成个人展示版码</text>
+          </view>
+      </view>
+      <view class='memberCode_num'>
+        <view class='member_num'>会员人数<text>{{uInfo.team_num}}/{{uInfo.show_peo_limit}}</text></view>
+        <view class='bug_num' bindtap="memberShowMask" data-type='1'>购买</view>
+      </view>
+    </view>
+    <!-- 生成个人展示版码end -->
+
+   <!-- 10人展示版码start -->
+    <view class='memberCode memberCodeTen' wx:if="{{ activeCategoryId == 2 }}">
+      <view class='memberCode_icon'  bindtap="toTenSpreadPage" data-qrtype='3'>
+          <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
+          <view >
+              <text class="member-text">生成10人展示版码</text>
           </view>
       </view>
       <view class='memberCode_num'>
         <view class='member_num'>会员人数<text>{{uInfo.ten_team_num}}/{{uInfo.ten_peo_limit}}</text></view>
-        <view class='bug_num' bindtap="memberShowMask" data-type='4'>+</view>
+        <view class='bug_num' bindtap="memberShowMask" data-type='3'>购买</view>
       </view>
     </view>
-  <!-- 10人推广码end -->
+  <!-- 10人展示版码end -->
 
-  <!-- 生成代理码（服务商码）start -->
+  <!-- 生成推广商码start -->
   <view class='memberCode' wx:if="{{ activeCategoryId == 3 }}">
     <view class='memberCode_icon'  bindtap="toSpreadPageAgent" data-qrtype='2'>
         <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
         <view >
-            <text class="member-text">生成服务商码</text>
+            <text class="member-text">生成推广商码</text>
         </view>
     </view>
     <view class='memberCode_num'>
-      <view class='member_num'>服务商人数<text>{{uInfo.high_team_num}}/{{uInfo.high_agent_limit}}</text></view>
-       <view class='bug_num' bindtap="memberShowMask" data-type='2'>+</view>
+      <view class='member_num'>推广商人数<text>{{uInfo.high_team_num}}/{{uInfo.high_agent_limit}}</text></view>
+       <view class='bug_num' bindtap="memberShowMask" data-type='2'>购买</view>
     </view>
   </view>
-  <!-- 生成代理码（服务商码）end -->
+  <!-- 生成推广商码end -->
 
-    <!-- 生成渠道商码start" //字段未改-->
+    <!-- 生成渠道商码start-->
     <view class='memberCode' wx:if="{{ activeCategoryId == 4 }}">
       <view class='memberCode_icon'  bindtap="toSpreadPageChannel" data-qrtype='5'>
           <text class="iconfont icon-erweima2" style="font-size:29px;margin-right:20rpx;margin-left:75rpx;"></text>
@@ -149,7 +169,7 @@
       </view>
       <view class='memberCode_num'>
         <view class='member_num'>渠道商人数<text>{{uInfo.channel_team_num}}/{{uInfo.channel_agent_limit}}</text></view>
-        <view class='bug_num' bindtap="memberShowMask" data-type='5'>+</view>
+        <view class='bug_num' bindtap="memberShowMask" data-type='5'>购买</view>
       </view>
     </view>
     <!-- 生成渠道商码end -->
@@ -164,8 +184,8 @@
       <!-- catchtap阻止事件冒泡 -->
       <view class='choice_box' catchtap="catchMao">
         <view class='choice_boxTop'>
-          <!-- <view class='boxTop_title'>{{ qrType == 1 ? '会员码':'代理码' }}</view> -->
-          <view class='boxTop_title'>{{ qrType == 2 ? '服务商码' : (qrType == 1 ? '会员码' : (qrType == 3 ? '5人推广码' : (qrType == 4 ? '10人推广码' : '渠道商码' ))) }}</view>
+          <!-- <view class='boxTop_title'>{{ qrType == 2 ? '服务商码' : (qrType == 1 ? '展示版码' : (qrType == 3 ? '5人推广码' : (qrType == 4 ? '10人展示版码' : '渠道商码' ))) }}</view> -->
+          <view class='boxTop_title'>{{ qrType == 2 ? '推广商码' : (qrType == 1 ? '个人展示版码' : (qrType == 0 ? '名片版次数' : (qrType == 3 ? '10人展示版码' : '渠道商码' ))) }}</view>
           
           <!-- <view class='boxTop_close' bindtap="boxClose">X</view> -->
         </view>
@@ -181,12 +201,15 @@
           </view>  
         </view>
 
-        <!-- <view class='price'>{{ qrType == 1 ? memberPrice : agentPrice }}</view> -->
-        <view class='price'>{{ qrType == 2 ? agentPrice : (qrType == 1 ? memberPrice : (qrType == 3 ? fivePrice : (qrType == 4 ? tenPrice : channelPrice ) )) }}</view>
+        <!-- <view class='price'>{{ qrType == 2 ? agentPrice : (qrType == 1 ? memberPrice : (qrType == 3 ? fivePrice : (qrType == 4 ? tenPrice : channelPrice ) )) }}</view> -->
+        <view class='price'>{{ qrType == 2 ? agentPrice : (qrType == 1 ? memberPrice : (qrType == 0 ? cardPrice : (qrType == 3 ? tenPrice : channelPrice ) )) }}</view>
 
         <view class="choice_boxBottom">
-          <form report-submit='true' bindsubmit="confirmPay">
-          <button form-type='submit' class='buyMemBtn'>购买</button>
+          <form report-submit='true' bindsubmit="confirmPay" class='buyMemBtnForm'>
+            <button form-type='submit' class='buyMemBtn'>微信支付</button>
+          </form>
+          <form report-submit='true' bindsubmit="confirmProfit" class='buyMemBtnForm buyMemBtnProfit'>
+            <button form-type='submit' class='buyMemBtn'>收益支付</button>
           </form>
         </view>
         
@@ -195,7 +218,7 @@
     <!-- 黑色透明弹层end -->
 
 
-    <view class='recommendCustomer' bindtap="toRecommend">（商机推送）推荐小程序客户赚佣金</view>
+    <view class='recommendCustomer' bindtap="toRecommend">有客户做小程序？马上推送给总部赚佣金</view>
 
 
 

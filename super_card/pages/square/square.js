@@ -446,8 +446,8 @@ Page({
                   confirmColor: '#f90',
                   confirmText: '去创建',
                   success: function (res) {
-                    wx.redirectTo({
-                      url: '../basic/basic',
+                    wx.switchTab({
+                      url: '../index/index',
                     })
                   }
                 });
@@ -519,8 +519,8 @@ Page({
                   confirmColor: '#f90',
                   confirmText: '去创建',
                   success: function (res) {
-                    wx.redirectTo({
-                      url: '../basic/basic',
+                    wx.switchTab({
+                      url: '../index/index',
                     })
                   }
                 });
@@ -809,23 +809,23 @@ Page({
     //判断是否加入了推广组 proGroup == 0,则表示未加入
     var proGroup = wx.getStorageSync('proGroup');
 
-    if (isVip == 0 && proGroup == 0) {
-      wx.showModal({
-        title: '系统提示',
-        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
-        cancelText: '返回',
-        confirmColor: '#f90',
-        confirmText: iosPay ? '去开通' : '知道了',
-        success: function (res) {
-          if (res.confirm) {
-            iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
-          } else if (res.cancel) {
-            wx.navigateBack()
-          }
-        }
-      });
-      return
-    }
+    // if (isVip == 0 && proGroup == 0) {
+    //   wx.showModal({
+    //     title: '系统提示',
+    //     content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+    //     cancelText: '返回',
+    //     confirmColor: '#f90',
+    //     confirmText: iosPay ? '去开通' : '知道了',
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         iosPay ? wx.navigateTo({ url: '../opt-version/opt-version' }) : wx.navigateBack()
+    //       } else if (res.cancel) {
+    //         wx.navigateBack()
+    //       }
+    //     }
+    //   });
+    //   return
+    // }
 
     if (typeof e.detail.formId != 'undefined') {
       console.log(e.detail.formId)
@@ -848,9 +848,9 @@ Page({
           confirmColor: '#f90',
           confirmText: '去创建',
           success: function (res) {
-            wx.navigateTo
+            wx.switchTab
             ({
-              url: '../basic/basic',
+              url: '../index/index',
             })
           }
         });

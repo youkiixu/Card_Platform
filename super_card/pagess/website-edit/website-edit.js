@@ -25,7 +25,6 @@ Page({
 
     type: '',
     index: 0,
-    marketingGroup: false,//判断是否加入营销群组，共用群主官网
   },
 
   createCardWebsite: function (e){
@@ -609,10 +608,10 @@ Page({
     if (isVip == 0 && proGroup == 0) {
       wx.showModal({
         title: '系统提示',
-        content: iosPay ? '您还不是会员，请先开通会员' : '不可服务',
+        content: iosPay ? '您还不是展示版会员，请升级' : '不可服务',
         cancelText: '返回',
         confirmColor: '#f90',
-        confirmText: iosPay ? '去开通' : '知道了',
+        confirmText: iosPay ? '去升级' : '知道了',
         success: function (res) {
           if (res.confirm) {
             iosPay ? wx.redirectTo({ url: '../../pages/opt-version/opt-version' }) : wx.navigateBack()
@@ -627,21 +626,6 @@ Page({
 
     //获取官网信息
     that.getWebSite()
-  //  console.log('marketingGroup2222', that.data.marketingGroup)
-    // //判断是否共用群主官网
-    // if (that.data.marketingGroup == true) {
-    //   wx.showModal({
-    //     title: '系统提示',
-    //     content: '您已加入营销群组，共用群主官网',
-    //     showCancel: false,
-    //     confirmColor: '#f90',
-    //     confirmText: '知道了',
-    //     success: function (res) {
-    //       wx.navigateBack()
-    //     }
-    //   });
-    //   return
-    // }
 
   },
 

@@ -35,8 +35,17 @@
       </view>
     </view>
 
-    <view class='dh-info'>
+    <!-- <view class='dh-info'>
       <view class='dh-act' style='color:{{ themeColorV }};border-color:{{ themeColorV }};'>全部商品</view>
+    </view> -->
+
+    <!-- 商品标题分类 -->
+    <view class='dh-info'>
+       <scroll-view class="type-navbar" scroll-x="true">
+            <view class="type-box" wx:for="{{ category }}">
+                 <view class="dh-act {{activeCategoryId == item.id ? 'category_active' : ''}}" data-id="{{item.id}}" bindtap="tabClick">{{item.name}}</view>
+            </view>
+        </scroll-view>
     </view>
 
   </view>
@@ -45,13 +54,13 @@
     <block wx:for="{{ goodsList }}" wx:key="gl" wx:for-index="gldx" wx:for-item="goods">
       <block wx:if="{{ preview === false }}">
       <view bindtap='toDetail'>
-          <navigator url='../../pages/overt/mall-details?card_id={{ card_id }}&goods_id={{ goods.id }}'> 
-      <view class='ms-act'>
-          <image lazy-load="true" class='act-img' src='{{ goods.goods_pics[0] }}' mode='aspectFill'></image>
-          <view class='act-name'>{{ goods.goods_name }}</view>
-          <view class='act-price' style='color:{{ themeColor }};'>￥{{ goods.goods_price }}</view>
-        </view>
-      </navigator>
+        <navigator url='../../pages/overt/mall-details?card_id={{ card_id }}&goods_id={{ goods.id }}'> 
+          <view class='ms-act'>
+            <image lazy-load="true" class='act-img' src='{{ goods.goods_pics[0] }}' mode='aspectFill'></image>
+            <view class='act-name'>{{ goods.goods_name }}</view>
+            <view class='act-price' style='color:{{ themeColor }};'>￥{{ goods.goods_price }}</view>
+          </view>
+        </navigator>
       </view>
     
       </block>

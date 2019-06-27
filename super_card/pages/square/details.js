@@ -221,7 +221,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('options', options)
     var that = this
 
     //获取当前用户ID
@@ -341,7 +341,7 @@ Page({
 
     var title = square_forward_title ? square_forward_title : that.data.info.content
     var imageUrl = square_forward_pic ? square_forward_pic : ''
-    var path = 'super_card/pages/square/square?sid=' + that.data.sid + '&from_act=share'
+    var path = 'super_card/pages/square/details?sid=' + that.data.sid + '&from_act=share'
 
     return {
       title: title,

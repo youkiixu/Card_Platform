@@ -101,8 +101,8 @@
   margin-bottom:0;
 }
 .coin{
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   display: -webkit-flex;
@@ -117,8 +117,8 @@
   
 }
 .coin2 definition{
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
 }
 .definition{
   /* display: inline-block; */
@@ -157,8 +157,8 @@
   padding-right:30rpx;
 }
 .coin2 input{
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   padding-right:30rpx;
   align-items:center;
   height:inherit;
@@ -290,6 +290,7 @@ button::after{
   margin-left:15rpx;
   padding:0 15rpx;
   height:35rpx;
+  line-height: 35rpx;
   text-align:center;
   color:#fff;
   background-color: rgba(0, 0, 0, 0.6);
@@ -330,7 +331,7 @@ button::after{
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   align-content: center;
 }

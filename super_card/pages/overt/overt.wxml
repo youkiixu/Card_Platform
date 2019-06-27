@@ -454,21 +454,20 @@
                 </view>
               </view>
 
-              <!-- 新潮款语音 -->
+              <!-- 新潮款语音start -->
               <view class='video-se' wx:if="{{ card.audio !== false && card.style == 3 }}">
                 <view class='video-se-left'>
                   <image src='{{ card.picture }}'></image>
                 </view>
                 <view class='video-se-right' bindtap='{{ playAudio === true ? "stopAudioAct" : "playAudioAct"}}'>
-                  <view class='video-ser-top'>
-                    <view class='video-ser-name'>{{ card.audio.name }}</view>
-                    <view class='video-ser-time'>{{ recordingSec }}s</view>
-                  </view>
-                  <view class='video-se-img'>
-                    <text wx:if= class='iconfont {{ playAudio === true ? "icon-tingzhi" : "icon-sanjiao"}}'></text>
+                  <image class='audio-ztbf' src='/super_card/resource/images/adio-{{ playAudio === true ? "bf.gif" : "zt.png"}}'></image>
+                  <view class='par-time3'>
+                    <text class='par-time-dian3'>{{ recordingSec }}</text>
+                    <text>s</text>
                   </view>
                 </view>
               </view>
+              <!-- 新潮款语音end -->
 
             </view>
             
@@ -761,7 +760,7 @@
               <view class='product-item'>
                <navigator url='../../pages/overt/mall-details?card_id={{ card_id }}&goods_id={{ item.id }}'>
                   <view class='product-itemInner'>
-                    <image class="product-itemImg" src='{{item.goods_pics}}'></image>
+                    <image class="product-itemImg" src='{{item.goods_pics[0]}}'></image>
                     <view class='product-itemTxt'>
                       <view class='product-name'>{{item.goods_name}}</view>
                       <view class='product-price'>￥{{item.goods_price}}</view>

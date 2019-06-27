@@ -19,7 +19,8 @@ page{
 }
 
 .all-style-container{
-  background: linear-gradient(to right, #00a1e9 , #5ec9f9); 
+  /* background: linear-gradient(to right, #00a1e9 , #5ec9f9);  */
+  background: linear-gradient(to top left, #5ec9f9 , #00a1e9); 
   border-bottom-left-radius: 50rpx;
   padding-bottom:20rpx;
   overflow: hidden;
@@ -949,6 +950,7 @@ new-card-all3{
   margin-left: 15rpx;
   padding: 0 15rpx;
   height: 35rpx;
+  line-height: 35rpx;
   text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);
@@ -1341,58 +1343,28 @@ width: 50px;height: 50px;line-height: 100px;display: block;text-align: center;ba
   overflow: hidden;
 }
 .video-se-right{
-  flex:1;
+   flex:1;
   -webkit-flex:1;
-  background-color: #ffffff;
-  display:flex;
-  flex-flow:column;
-  justify-content:center;
-  display:-webkit-flex;
-  -webkit-flex-flow:column;
-  -webkit-justify-content:center;
-  border-radius: 30rpx;
-  margin-left: 25rpx;
-  padding: 0 30rpx 0 80rpx;
-  box-sizing: border-box;
-  position:relative;
-}
-.video-ser-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
   display:-webkit-flex;
   -webkit-align-items:center;
   -webkit-justify-content:space-between;
+  background-color:#ffffff;
+  border-radius:30rpx;
+  margin-left:25rpx;
+  padding: 8rpx 20rpx;
+  box-sizing:border-box;
 }
-.video-ser-time{
-  color:#888888;
-  font-size:30rpx;
+.par-time3{
+  margin-right:20rpx;
+  color:#b2b2b2;
+  font-size: 28rpx;
 }
-.video-ser-name{
-  color:#888888;
-  font-size:24rpx;
+.par-time-dian3{
+  color:red;
 }
-.video-se-img{
-  position:absolute;
-  width:30rpx;
-  height:30rpx;
-  border-radius:50%;
-  background-color:rgba(0,0,0,.3);
-  left:30rpx;
-  border:1px solid #fff;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  display:-webkit-flex;
-  -webkit-align-items:center;
-  -webkit-justify-content:center;
-}
-.video-se-img text{
-  font-size: 20rpx;
-  line-height: 30rpx;
-}
-
 .per-card-big{
   display:flex;
   display:-webkit-flex;
@@ -1779,6 +1751,7 @@ filter:none;
   margin-left: 15rpx;
   padding: 0 15rpx;
   height: 35rpx;
+  line-height: 35rpx;
   text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);
@@ -1950,14 +1923,14 @@ filter:none;
   margin-top: 25rpx;
 }
 .scroll-view{
-  height: 230rpx;
+  height: 270rpx;
   width:100%;
   white-space:nowrap;
 }
 .product-item{
   display:inline-block;
-  width:145rpx;
-  margin-left:20rpx;
+  width:185rpx;
+  margin-left:35rpx;
   overflow:hidden;
 }
 .product-item:first-child{
@@ -1968,8 +1941,8 @@ filter:none;
   height: 100%;
 }
 .product-itemImg{
-  height:145rpx;
-  width:145rpx;
+  height:185rpx;
+  width:185rpx;
   display:block;
   overflow:hidden;
   text-align: center;
@@ -2199,3 +2172,4 @@ filter:none;
   right: 250rpx;
   top: 50rpx;
 }
+

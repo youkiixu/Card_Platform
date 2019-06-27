@@ -29,7 +29,7 @@
                 <block wx:for="{{pCardInfo.goods}}">
                   <view class='product-item'>
                     <navigator url='../overt/mall-details?card_id={{ pCardInfo.id }}&goods_id={{ item.id }}'>
-                      <image class="product-itemImg" src='{{item.goods_pics}}'></image>
+                      <image class="product-itemImg" src='{{item.goods_pics[0]}}'></image>
                     </navigator>
                   </view>
                 </block>

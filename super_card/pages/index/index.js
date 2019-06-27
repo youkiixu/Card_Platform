@@ -1438,6 +1438,8 @@ Page({
 
       app.UID = response.memberInfo.uid
       that.setData({ uid : response.memberInfo.uid })
+      that.getChatNum()
+
       app.util.request({
         'url': 'entry/wxapp/bgLists',
         //'cachetime': '30',
@@ -1508,7 +1510,7 @@ Page({
         }
       })
       
-      that.getChatNum()
+      // that.getChatNum()
 
       that.getUInfo() //获取用户信息接口数据
       that.getPInfo() //上级信息

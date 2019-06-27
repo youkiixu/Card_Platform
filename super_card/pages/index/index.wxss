@@ -23,7 +23,8 @@ page{
   padding-top:20rpx;
 }
 .all-style-container{
-  background: linear-gradient(to right, #00a1e9 , #5ec9f9); 
+  /* background: linear-gradient(to right, #00a1e9 , #5ec9f9);  */
+  background: linear-gradient(to top left, #5ec9f9 , #00a1e9); 
   border-bottom-left-radius: 50rpx;
   padding-bottom:20rpx;
   overflow: hidden;
@@ -195,7 +196,6 @@ line-height:38rpx;
   flex-wrap:wrap;
   /* background-color: #00a1e9; */
   overflow:hidden;
-  padding: 0 50rpx;
   box-sizing: border-box;
   margin-top: 15rpx;
 }
@@ -1337,6 +1337,7 @@ new-card-all3{
   margin-left: 15rpx;
   padding: 0 15rpx;
   height: 35rpx;
+  line-height: 35rpx;
   text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);
@@ -2255,6 +2256,7 @@ background-color:#fff;
   margin-left: 15rpx;
   padding: 0 15rpx;
   height: 35rpx;
+  line-height: 35rpx;
   text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);

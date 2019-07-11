@@ -17,11 +17,15 @@ Page({
       card_id : 0,
       card: {},
       qrcode : '',
+      urlTypeList: [],
 
       picCode:'',
 
       animationData: "",
       showModalStatus: false,
+
+      showChangeModalStatus: false,
+      changeType: "1",
 
       diff:'8cm',
 
@@ -36,14 +40,18 @@ Page({
    this.setData({ diff: diff })
   },
 
+  showAnimationObj: function () {
+    return wx.createAnimation({
+        duration: 500,         //动画持续时间500ms
+        timingFunction: "ease",//动画以低速开始，然后加快，在结束前变慢
+        delay: 0               //动画延迟时间0ms
+      })
+  },
+
   // 显示遮罩层  
   showModal: function () {
     //创建一个动画实例animation。调用实例的方法来描述动画。
-    var animation = wx.createAnimation({
-      duration: 500,         //动画持续时间500ms
-      timingFunction: "ease",//动画以低速开始，然后加快，在结束前变慢
-      delay: 0               //动画延迟时间0ms
-    })
+    var animation = this.showAnimationObj()
     this.animation = animation
     //调用动画操作方法后要调用 step() 来表示一组动画完成
     animation.translateY(animationShowHeight).step()//     在Y轴向上偏移300
@@ -58,9 +66,45 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 1)
-
   },
 
+  changeTypeEvent: function(e) {
+    var that = this;
+    var type = e.currentTarget.dataset.val
+    this.setData({
+        changeType: type,
+        showChangeModalStatus: false
+    },function() {
+        that.getCardQr()
+    })
+    
+  },
+
+  showChangeModal: function() {
+      if(this.data.urlTypeList.length) {
+        this.setData({
+            showChangeModalStatus: true //显示遮罩层
+          })
+      } else {
+        this.getUrlType()
+      }
+    
+  },
+
+  getUrlType: function() {
+    var that = this
+    app.util.request({
+        'url': 'entry/wxapp/getUrlType',
+        'method': 'POST',
+        'data': { card_id: that.data.card_id},
+        success(res) {
+            that.setData({
+                urlTypeList: res.data.data,
+                showChangeModalStatus: true,
+            })
+        }
+      })
+  },
 
   getExPic:function (){
     var that = this
@@ -70,7 +114,6 @@ Page({
         page: 'qrcode',
       },
       success: function (res) {
-        console.log(res)
         var data = res.data.data
         var expics = []
         for(var x in that.data.exPicsT)
@@ -80,14 +123,17 @@ Page({
     })
   },
 
+  hideAnimationObj : function() {
+    return wx.createAnimation({
+        duration: 500,
+        timingFunction: "ease",
+        delay: 0
+      })
+  },
+
   // 隐藏遮罩层  
   hideModal: function () {
-
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: "ease",
-      delay: 0
-    })
+    var animation = this.hideAnimationObj()
     this.animation = animation;
     animation.translateY(animationShowHeight).step()
     this.setData({
@@ -102,12 +148,17 @@ Page({
     }.bind(this), 200)
 
   },
+  
+  hideChangeModal: function() {
+    this.setData({
+        showChangeModalStatus: false
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     console.log('options', options)
       if(options.card_id < 1){
         wx.navigateBack()
         return
@@ -142,17 +193,19 @@ Page({
       that.getCardQr()
   },
 
-  //获取名片小程序码
-  getCardQr: function () {
+  
 
+  //获取名片小程序码
+  getCardQr: function (init) {
+      console.log(init);
+      
     var that = this
     app.util.request({
       'url': 'entry/wxapp/getCardQrcode',
       'method': 'POST',
-      'data': { card_id: that.data.card_id },
+      'data': { card_id: that.data.card_id , url_type:that.data.changeType},
       success(res) {
         app.freshIndex = true
-        console.log(res)
         that.setData({ qrcode: res.data.data })
 
       }
@@ -171,35 +224,25 @@ Page({
 
   //保存名片小程序码到相册
   saveQrcodeToPhotosAlbum: function (e) {
-
+    console.log(this.data.changeType)
     var that = this
     that.setData({ confirmBtnDisabled: true })
     app.util.request({
       'url': 'entry/wxapp/getDiffCardQrcode',
       'method': 'POST',
-      'data': { card_id: that.data.card_id,  diff: that.data.diff},
+      'data': { card_id: that.data.card_id,  diff: that.data.diff , url_type:that.data.changeType},
       success(res) {
-
         wx.showLoading({
           title: '加载中',
         })
         wx.downloadFile({
           url: res.data.data,
           success: function (res) {
-            console.log(res)
-
-
             wx.hideLoading()
             that.setData({ confirmBtnDisabled: false })
-
-            //console.log(res)
             wx.saveImageToPhotosAlbum({
               filePath: res.tempFilePath,
               success: function (res) {
-                //console.log(res)
-
-
-
                 wx.showToast({
                   title: '保存成功',
                   icon: 'success'

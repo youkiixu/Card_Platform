@@ -6,6 +6,7 @@
       <text style="color:{{ themeColor }};">的专属名片小程序码</text>
     </view>
     <image class='top-img' src='{{ picCode }}' bindtap='previewQrcode'></image>
+    <text class='change-btn' bindtap="showChangeModal">更换小程序码</text>
     <image class='top-img-solid' mode='widthFix' src='/super_card/resource/images/conserve.png'></image>
     <view class='trg'>
       <text>此名片码可印刷在</text>
@@ -53,6 +54,11 @@
           <button class='btn-block btn-blue' style='background:{{ themeColor }};' disabled='{{ confirmBtnDisabled }}' bindtap='saveQrcodeToPhotosAlbum'>确认</button>
         </view>
       </view>
+  </view>
+
+  <view class='mask' bindtap="hideChangeModal" wx:if="{{showChangeModalStatus}}"></view>
+  <view class='con-change' wx:if="{{showChangeModalStatus}}">
+    <text wx:for="{{urlTypeList}}" class="change-text {{ changeType == item ? ' on' : ''}}" bindtap="changeTypeEvent" data-val="{{item}}">{{item == "1" ? '名片首页' : (item == '2' ? '个人商城' : '个人官网' )}}</text>
   </view>
 
 </view>

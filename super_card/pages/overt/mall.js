@@ -7,6 +7,7 @@ Page({
    */
   data: {
     card_id: 0,
+    agent_id: 0,
 
     uid:0,
 
@@ -31,8 +32,14 @@ Page({
   onLoad: function (options) {
     console.log('options', options)
     var that = this
-
-
+    if(options.scene) {
+        var scene = options.scene.split('_');
+        options = Object.assign(this.options , {
+            card_id: scene[0],
+            agent_id: scene[1]
+        })
+    }
+    
     //获取当前用户ID
     app.util.getUserInfo(function (response) {
 
@@ -41,15 +48,22 @@ Page({
       if (typeof options.card_id != 'undefined') {
         
 
-        that.setData({ card_id: options.card_id })
+        that.setData({ card_id: options.card_id  , agent_id: options.agent_id})
         app.util.footer(that, that.data.card_id);
 
         app.config.cardTrack(that.data.card_id, 1, 'view')
-
+        var par = {
+            card_id: that.data.card_id 
+        }
+        if(that.data.agent_id) {
+            par = Object.assign(par , {
+                agent_id: that.data.agent_id
+            })
+        }
         app.util.request({
           'url': 'entry/wxapp/getCardStore',
           'method': 'post',
-          'data': { card_id: that.data.card_id },
+          'data': par,
           success(res) {
 
             var data = res.data.data
@@ -59,7 +73,7 @@ Page({
             wx.setNavigationBarTitle({
               //title: that.data.storeInfo.store_name + ' - ' + app.config.getConf('app_name')
               title: '商城'
-            })
+            }) 
 
           }
         })

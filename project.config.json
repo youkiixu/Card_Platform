@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "wxb307788ee3f14239",
-	"projectname": "super_card_platform",
+	"projectname": "super_card",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 28,
+			"current": 29,
 			"list": [
 				{
 					"id": -1,
@@ -237,6 +237,14 @@
 					"id": -1,
 					"name": "个人中心",
 					"pathName": "super_card/pages/home/home",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 29,
+					"name": "分享二维码",
+					"pathName": "super_card/pages/conserve-card/conserve-card",
+					"query": "card_id =\"42\"",
 					"scene": null
 				}
 			]

@@ -161,5 +161,34 @@ swiper-item image{
 .hide{
   display: none !important;
 }
+.change-btn {
+    background:#ebbb2a;
+    color:#000;
+    border-radius:10px;
+    padding:0 8px;
+    margin-top:15rpx;
+    font-size:12px;
+}
 
-
+.con-change {
+    position: fixed;
+    width: 300rpx;
+    padding: 20rpx;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50% , -50%);
+    background: #fff;
+    border-radius: 30rpx;
+    height: 300rpx;
+}
+.change-text {
+    width: 100%;
+    display: block;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+}
+.con-change .on {
+    color: #00a1e9;
+    
+}

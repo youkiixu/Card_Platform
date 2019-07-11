@@ -329,6 +329,7 @@ radio{
   color: #949494;
   margin-left: 10rpx;
   margin-top:20rpx;
+  /* width: 400rpx; */
 }
 .wall-dk text{
   font-size: 60rpx;

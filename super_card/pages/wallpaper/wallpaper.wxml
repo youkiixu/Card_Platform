@@ -30,8 +30,8 @@
       <view>{{ year }}</view>
     </view>
     <view class='wall-next'>
-      <text class='iconfont icon-shuaxin' bindtap='changeBackdrop' style='color:{{ themeColorV }};'></text>
-      <view class='wall-change' bindtap='changeBackdrop' style='color:{{ themeColorV }};'>换一张</view>
+      <text class='iconfont icon-shuaxin' bindtap='changeBackdrop' style='color:{{ themeColorV }};z-index: 999;'></text>
+      <view class='wall-change' bindtap='changeBackdrop' style='color:{{ themeColorV }};z-index: 999;'>换一张</view>
       <view class='paper-bot'>
         <image class='wall-tx' src='{{ card.picture }}'></image>
         <view class='wall-name'>{{ card.name }}</view>
